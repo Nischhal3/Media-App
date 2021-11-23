@@ -52,3 +52,140 @@
 img {
   width: 100%;
 }
+
+.greeting {
+  text-align: center;
+}
+
+.greeting h1 {
+  padding: 20px;
+}
+
+.greeting h1 span {
+  color: #d5b07a;
+}
+
+.greeting p {
+  margin: 0 auto;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.greeting button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  background: #d5b07a;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.blackLine {
+  margin: 20px 0;
+  border: 1px solid #6c6363;
+}
+
+.artworks h2 {
+  color: #ab6909;
+  text-align: center;
+  padding-top: 20px;
+}
+
+#artworksContent {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px 0;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.artwork {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.artwork img {
+  border-radius: 5px;
+}
+
+.artwork p {
+  padding: 15px 0;
+  font-size: 16px;
+}
+
+.button {
+  cursor: pointer;
+  color: #ab6909;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button i {
+  color: black;
+  text-align: center;
+  margin-left: 5px;
+  margin-top: 1px;
+}
+
+.yellowLine {
+  margin: 20px 0;
+  border: 1px solid #d5b07a;
+}
+
+.about {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about h2 {
+  font-weight: bolder;
+  padding: 20px 0;
+}
+
+.characteristic {
+  font-size: 20px;
+  padding: 20px;
+}
+
+.aboutText {
+  line-height: 1.6;
+}
+
+.contact {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.contactContainer {
+  padding: 20px 0 40px;
+  display: flex;
+  align-items: center;
+}
+
+.contactInfo {
+  font-size: 18px;
+  flex-grow: 3;
+}
+
+.media {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  font-size: 25px;
+}
+
+.media i {
+  cursor: pointer;
+}
+
+.terms {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
