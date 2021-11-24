@@ -25,8 +25,12 @@
       <p class="signup-p">Join the artists community.</p>
       <form id="signup-form" action="http://localhost:3000/auth/register" method="post">
         <section>
-          <label for="name">Name</label> <br>
-          <input class="form" type="text" name="name" required>
+          <label for="first-name">First Name</label> <br>
+          <input class="form" type="text" name="firstname" required>
+        </section>
+        <section>
+          <label for="last-name">Last Name</label> <br>
+          <input class="form" type="text" name="lastname" required>
         </section>
         <section>
           <label for="email">Email</label> <br>
@@ -34,10 +38,6 @@
         </section>
         <section>
           <label for="password">Password</label> <br>
-          <input class="form" type="password" name="password" required>
-        </section>
-        <section>
-          <label for="password">Enter password again</label> <br>
           <input class="form" type="password" name="password" required>
         </section>
         <button class="button">Sign up</button>

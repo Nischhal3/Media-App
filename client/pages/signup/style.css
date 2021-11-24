@@ -32,7 +32,7 @@ img {
 
 h1 {
   font-size: 36px;
-  margin: 10% 0 5% 10%;
+  margin: 10% 0 0 10% ;
 }
 
 .signup-p {
@@ -59,7 +59,7 @@ h1 {
 .button {
   text-align:  center;
   align-self: center;
-  margin: 10% 0 20% 0;
+  margin: 5% 0 20% 0;
   border-radius: 10px;
   width: 35%;
   height: 35px;
