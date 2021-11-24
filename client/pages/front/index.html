@@ -7,16 +7,99 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&family=Noto+Sans&display=swap"
       rel="stylesheet"
     />
+    <script
+      src="https://kit.fontawesome.com/635b5f77f3.js"
+      crossorigin="anonymous"
+    ></script>
     <link href="./style.css" rel="stylesheet" />
     <title>Front page</title>
   </head>
   <body>
     <div class="container">
-      <img src="../../assets/image 4.svg" />
+      <div class="header">
+        <p style="flex-grow: 5">Nord Artive</p>
+        <div class="headerContent">
+          <div class="search">
+            <p class="searchText">Search</p>
+            <a href="../collection/"><i class="fas fa-search"></i></a>
+          </div>
+          <div class="login">
+            <p class="loginText">Login</p>
+            <a href="../login/"><i class="far fa-user"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="bodyContent">
+        <img src="../../assets/front-image.svg" />
+        <div class="imgOverlay">
+          <p class="imgName">Vincent van Gogh “The Starry Night”</p>
+          <p class="imgDetail">
+            The painting shows the outside view of his window, when he was being
+            held in a mental institution, Saint-Rémy-de-Provence. The picture
+            represents his perspective of the outside world, and captures his
+            anxiety towards nighttime, in the form of visual art.
+          </p>
+          <a href="../login/">Log in to see more details</a>
+        </div>
+        <div class="greeting">
+          <h1>Welcome to <span class="appName">NordArtive</span></h1>
+          <p>Showcase your work.</p>
+          <p class="text">Find new inspiration, hand-picked just for you.</p>
+          <a href="../collection/">Go to collections</a>
+        </div>
+        <hr class="blackLine" />
+        <div class="artworks">
+          <h2>ARTWORKS</h2>
+          <div id="artworksContent"></div>
+        </div>
+        <hr class="yellowLine" />
+      </div>
+      <div class="about">
+        <h2>abouts.</h2>
+        <p>Nord Artive</p>
+        <p class="characteristic">Node, Art, Creativity.</p>
+        <p class="aboutText">
+          NodeArtive exhibition is a platform operating internationally in the
+          artistic field. We envisions a future where everyone is moved by art
+          every day. To get there, we’re expanding the art market to support
+          more artists and art around the world. As the leading marketplace to
+          discover, buy, and sell fine art, NodeArtive believes that the process
+          of buying art should be as brilliant as art itself. That’s why we’re
+          dedicated to making a joyful, welcoming experience that connects
+          collectors with the artists and artworks they love.
+        </p>
+      </div>
+      <hr class="yellowLine" />
+      <div class="contact">
+        <h2>contact.</h2>
+        <div class="contactContainer">
+          <div class="contactInfo">
+            <p>T. +358 39 52 40 867 | nodeartive@exhibition.art</p>
+          </div>
+          <div class="media">
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-facebook-square"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-whatsapp"></i>
+          </div>
+        </div>
+        <div class="terms">
+          <p>Terms of Use</p>
+          <p>
+            &copy;
+            <script>
+              document.write(new Date().getUTCFullYear());
+            </script>
+            NodeArtive exhibition
+          </p>
+          <p>Privacy</p>
+        </div>
+      </div>
     </div>
+
     <script src="./index.js"></script>
   </body>
 </html>
