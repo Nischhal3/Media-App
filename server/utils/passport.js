@@ -10,11 +10,12 @@ const ExtractJWT = passportJWT.ExtractJwt;
 
 // local strategy for username password login
 passport.use(new Strategy({
-  emailField: 'email',
+  usernameField: 'username',
   passwordField: 'password'
 },
-  async (email, password, done) => {
-    const params = [email];
+  async (username, password, done) => {
+    const params = [username];
+    console.log("params", params);
     try {
       const [user] = await getUserLogin(params);
       console.log('Local strategy', user);
