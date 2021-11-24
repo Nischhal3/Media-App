@@ -48,9 +48,6 @@ passport.use(new Strategy({
   passReqToCallback: true // allows us to pass back the entire request to the callback
 },
   async (req, email, password, done) => {
-
-    // find a user whose email is the same as the forms email
-    // we are checking to see if the user trying to login already exists
     try {
       const existUser = await getUserByEmail(email);
       const firstName = req.body.firstname;
