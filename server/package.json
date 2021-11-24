@@ -4,6 +4,7 @@
   "description": "School Project",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,6 +28,7 @@
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.15",
     "passport": "^0.5.0",
+    "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"
   }
 }
