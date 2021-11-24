@@ -25,7 +25,7 @@ passport.use(new Strategy({
         return done(null, false, { message: 'Incorrect email or password.' });
       } else {
         delete user.password;
-        return done(null, {...user}, { message: 'Logged In Successfully' }); 
+        return done(null, { ...user }, { message: 'Logged In Successfully' });
       }
     } catch (err) {
       console.log('err done', err.message);
