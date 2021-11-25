@@ -11,11 +11,13 @@ const passport = require('./utils/passport');
 
 const authRoute = require('./routes/authRoute.js');
 const userRoute = require('./routes/userRoute');
+const imageRoute = require("./routes/imageRoute");
 
 app.use(passport.initialize());
 
 app.use('/auth', authRoute);
 app.use('/', passport.authenticate('jwt', {session: false}), userRoute);
+app.use("/",passport.authenticate("jwt",{session:false}), imageRoute)
 
 app.use((req, res, next) => {
 	const err = httpError('Not found', 404);
