@@ -41,6 +41,10 @@ router
   .route("/images/:imageId")
   .get(get_image)
   .delete(delete_image)
-  .put(update_image);
+  .put(
+    body("image_title").notEmpty(),
+    body("image_description").notEmpty(),
+    update_image
+  );
 
 module.exports = router;

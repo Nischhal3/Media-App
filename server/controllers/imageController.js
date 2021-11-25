@@ -5,7 +5,9 @@ const {
   getImage,
   insertImage,
   deleteImage,
+  updateImage,
 } = require("../models/imageModel");
+
 const { httpError } = require("../utils/error");
 const { validationResult } = require("express-validator");
 
@@ -57,11 +59,19 @@ const delete_image = async (req, res, next) => {
 const update_image = async (req, res,next) => {
   req.body.id = req.params.imageId;
   const user_id = req.user.user_id;
-  console.log("Image ID:",req.params.id);
+  console.log("Image ID:",req.params.imageId);
   console.log("User ID:", user_id);
   console.log("Update post: ", req.body);
 
-  const update = await update_image(user_id, req.body, next);
+  const errors = validationResult(req);
+  if(!errors.isEmpty()){
+    console.log("Image update validation:",errors.array());
+    const err = httpError("Updating data not valid", 400);
+    next(err);
+    return;
+  }
+
+  const update = await updateImage(user_id, req.body, next);
   res.json({ message: `Image update: ${update}` });
 };
 
