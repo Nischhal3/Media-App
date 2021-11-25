@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: row;
 	justify-content: center;
-	align-items: stretch; 
+	align-items: center; 
 }
 
 .box1 {
@@ -86,10 +86,22 @@ h1 {
   font-size: 18px;
 }
 
+
 .terms-policy {
+  width: 80%;
   margin-left: 10%;
   color: #AFADAD;
   font-weight: 100;
   font-size: 16px;
 }
 
+@media only screen and (max-width: 425px) {
+  .box1 {
+    width: 0%;
+    margin: 0;
+  }
+
+  .box2 {
+    width: 100%;
+  }
+}
