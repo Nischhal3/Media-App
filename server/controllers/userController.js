@@ -11,19 +11,16 @@ const user_list_get = async (req, res) => {
 
 const user_get = async (req, res) => {
 	const user_retrieved = await userModel.getUser(req.params.id);
-	console.log('user_get_id', req.params.id)
 	res.json(user_retrieved);
 };
 
 const user_create_post = (req, res, next) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		console.log("error:", errors.array());
 		const err = httpError('Data not valid', 400);
 		next(err);
 	} else {
 		const user_created = userModel.addUser(req.body);
-		console.log(req.body);
 		res.json(user_created);
 	};
 }
@@ -31,13 +28,10 @@ const user_create_post = (req, res, next) => {
 const user_update_put = (req, res, next) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		console.log("error:", errors.array());
 		const err = httpError('Data not valid', 400);
 		next(err);
 	} else {
 		const user_updated = userModel.updateUser(req.body, req.user);
-		console.log('req.body in user put', req.body);
-		console.log('req user in user put', req.user);
 		res.json({ message: "user modified", user_updated });
 	}
 };
