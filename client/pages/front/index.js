@@ -39,10 +39,3 @@ artworks.forEach((artwork) => {
 
   artworksContent.appendChild(singleArtwork);
 });
-
-const goToLogIn = document.querySelector('.imgOverlay button');
-goToLogIn.addEventListener('click', () => {
-  document.location('../login/');
-});
-
-console.log(goToLogIn);
