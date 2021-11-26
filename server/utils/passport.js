@@ -14,7 +14,7 @@ passport.use(new Strategy({
 },
   async (username, password, done) => {
     const params = [username];
-    console.log("params", params);
+
     try {
       const [user] = await getUserLogin(params);
       console.log('Local strategy', user);
@@ -37,7 +37,6 @@ passport.use(new JWTStrategy({
   secretOrKey: process.env.JWT_SECRET
 },
   async function (jwtPayload, done) {
-    console.log('jwt', jwtPayload);
     return done(null, jwtPayload);
   }
 ));
@@ -52,7 +51,7 @@ passport.use(new Strategy({
       const existUser = await getUserByEmail(email);
       const firstName = req.body.firstname;
       const lastName = req.body.lastname;
-      console.log("name in sign up", firstName, lastName);
+
       // check to see if theres already a user with that email
       if (existUser) {
         return done(null, false, { message: 'Email already exists.' });
@@ -67,7 +66,6 @@ passport.use(new Strategy({
           addUser(user);
           return done(null, { user }, { message: 'Sign up Successfully' });
         } else {
-          console.log("Error sign up");
           return done(null, false,  { message: 'Enter again.' })
         }
       }
