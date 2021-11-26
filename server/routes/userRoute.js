@@ -16,14 +16,12 @@ router.route('/user')
 		body('email').isEmail(), 
 		body('passwd').matches('(?=.*[A-Z]).{8,}'), 
 		userController.user_update_put)
-	.delete((req, res) => {
-		res.send('With this endpoint you can delete users.')
-	});
+	;
 
 router.get('/token', userController.checkToken);
 
 router.route('/user/:id')
 	.get(userController.user_get)
-
+	.delete(userController.user_delete)
 
 module.exports = router

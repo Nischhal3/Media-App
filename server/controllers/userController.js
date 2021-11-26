@@ -42,6 +42,12 @@ const user_update_put = (req, res, next) => {
 	}
 };
 
+const user_delete = (req, res) => {
+	console.log(req.params.id);
+	const user_deleted = userModel.deleteUser(req.params.id);
+	res.json({ message: "user deleted" });
+};
+
 const checkToken = (req, res, next) => {
 	if (!req.user) {
 		next(new Error('token not valid'));
@@ -51,5 +57,5 @@ const checkToken = (req, res, next) => {
 };
 
 module.exports = {
-	user_list_get, user_get, user_create_post, user_update_put, checkToken
+	user_list_get, user_get, user_create_post, user_update_put, checkToken, user_delete
 };

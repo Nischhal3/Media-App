@@ -13,7 +13,7 @@ const getAllUsers = async () => {
 
 const getUser = async (id) => {
   try {
-    const [rows] = await promisePool.execute('SELECT * FROM user_db WHERE user_id = ?', [id]);
+    const [rows] = await promisePool.execute('SELECT * FROM user_db WHERE user_id = ?', id);
     console.log('get by id', rows);
     return rows[0];
   } catch (e) {
@@ -46,6 +46,17 @@ const updateUser = async (body, user) => {
   }
 };
 
+const deleteUser = async (id) => {
+  if (user.role === 0) {
+    try {
+      const [rows] = await promisePool.execute('DELETE FROM user_db WHERE user_id = ?', id);
+      return rows;
+    } catch (e) {
+      console.error('error', e.message);
+    }
+  }
+};
+
 const getUserLogin = async (params) => {
   try {
     console.log(params);
@@ -57,5 +68,5 @@ const getUserLogin = async (params) => {
 };
 
 module.exports = {
-  getAllUsers, getUser, addUser, getUserLogin, updateUser,
+  getAllUsers, getUser, addUser, getUserLogin, updateUser, deleteUser
 };
