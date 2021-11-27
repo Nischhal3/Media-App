@@ -37,11 +37,11 @@ const post_image = async (req, res, next) => {
     return;
   }
 
-  const image = req.body;
-  console.log("Post request", image);
+  const user_id = req.user.user_id;
+  console.log("Post done by userID", user_id);
   //image.file = req.file.image_file;
   //console.log("Filename", image.file);
-  const id = await insertImage(image);
+  const id = await insertImage(user_id, req.body);
   res.json({ message: `Image added with id: ${id}` });
 };
 
@@ -55,17 +55,16 @@ const delete_image = async (req, res, next) => {
   res.json({ message: `Image deleted ${deleted}` });
 };
 
-//TODO : Not workng Ask teacher
-const update_image = async (req, res,next) => {
+const update_image = async (req, res, next) => {
   req.body.id = req.params.imageId;
   const user_id = req.user.user_id;
-  console.log("Image ID:",req.params.imageId);
+  console.log("Image ID:", req.params.imageId);
   console.log("User ID:", user_id);
   console.log("Update post: ", req.body);
 
   const errors = validationResult(req);
-  if(!errors.isEmpty()){
-    console.log("Image update validation:",errors.array());
+  if (!errors.isEmpty()) {
+    console.log("Image update validation:", errors.array());
     const err = httpError("Updating data not valid", 400);
     next(err);
     return;
@@ -74,7 +73,6 @@ const update_image = async (req, res,next) => {
   const update = await updateImage(user_id, req.body, next);
   res.json({ message: `Image update: ${update}` });
 };
-
 
 module.exports = {
   get_image_list,

@@ -33,16 +33,17 @@ const getImage = async (imageId, next) => {
   }
 };
 
-const insertImage = async (image, next) => {
+const insertImage = async (user_id, image, next) => {
   try {
     const [rows] = await promisePool.query(
-      "INSERT INTO image_db ( user_id, collection_id, image_title, image_description, image_file) VALUES (?,?,?,?,?)",
+      "INSERT INTO image_db ( user_id, collection_id, image_title, image_description, image_file, image_price) VALUES (?,?,?,?,?,?)",
       [
-        image.user_id,
-        image.collection_id,
+        user_id,
+        1,
         image.image_title,
         image.image_description,
         image.image_file,
+        image.image_price,
       ]
     );
     console.log("Insert image", rows);
@@ -74,26 +75,9 @@ const deleteImage = async (imageId, user_id, role, next) => {
 };
 
 const updateImage = async (user_id, image, next) => {
-  // Needed ?
-  /* if (image.role === 0) {
-    (sql =
-      "UPDATE image_db SET image_title = ?,image_description = ?, user_id = ? WHERE image_id = ?"),
-      (params = [
-        image.image_title,
-        image.image_description,
-        image.user_id,
-        image.image_id,
-      ]);
-    }
-     */
-    let sql =
-      "UPDATE image_db SET image_title = ?, image_description = ? WHERE image_id = ? AND user_id = ? ";
-    let params = [
-      image.image_title,
-      image.image_description,
-      image.id,
-      user_id,
-    ];
+  let sql =
+    "UPDATE image_db SET image_title = ?, image_description = ? WHERE image_id = ? AND user_id = ? ";
+  let params = [image.image_title, image.image_description, image.id, user_id];
   try {
     const [rows] = await promisePool.execute(sql, params);
     console.log("Update image ", rows);
@@ -103,7 +87,6 @@ const updateImage = async (user_id, image, next) => {
     const err = httpError("Sql error:", 500);
     next(err);
   }
-
 };
 
 module.exports = {
