@@ -2,6 +2,9 @@
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const { httpError } = require('../utils/error');
+const { validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
+const { addUser } = require('../models/userModel');
 
 const login = (req, res, next) => {
   passport.authenticate('local', { session: false }, (err, user, info) => {
@@ -21,6 +24,41 @@ const login = (req, res, next) => {
   })(req, res, next);
 };
 
+const user_create_post = async (req, res, next) => {
+  // Extract the validation errors from a request.
+  const errors = validationResult(req); // TODO require validationResult, see userController
+
+  if (!errors.isEmpty()) {
+    console.log('user create error', errors);
+    res.send(errors.array());
+  } else {
+    // generate salt to hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+    const params = [
+      req.body.firstname,
+      req.body.lastname,
+      req.body.email,
+      hashedPassword,
+    ];
+
+    const result = await addUser(params);
+    if (result) {
+      res.json({ message: `User added`, result });
+    } else {
+      res.status(400).json({ error: 'register error' });
+    }
+  }
+};
+
+const logout = (req, res) => {
+  req.logout();
+  res.json({ message: 'logout' });
+};
+
+
+
 module.exports = {
-  login
+  login, user_create_post, logout
 };

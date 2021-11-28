@@ -20,12 +20,18 @@ const getUser = async (id) => {
   }
 };
 
-const addUser = (user) => pool.execute(
-  'INSERT INTO user_db VALUES (?, ?, ?, ?, ?)', [user.first_name, user.last_name, user.email, user.passwd, 1],
-  function (err, results) {
-    console.log(results);
+const addUser = async (user) => {
+  console.log("adduser", user);
+  try {
+    const [rows] = await promisePool.execute(
+      'INSERT INTO user_db (user_id, first_name, last_name, email, password, role) VALUES (?, ?, ?, ?, ?, ?)',
+      [0, user[0], user[1], user[2], user[3], 1]);
+    console.log('model insert user', rows);
+    return rows
+  } catch (e) {
+    console.error('model insert user', e.message);
   }
-);
+};
 
 const updateUser = async (body, user) => {
   if (user.role === 0) {
