@@ -26,7 +26,7 @@ const login = (req, res, next) => {
 
 const user_create_post = async (req, res, next) => {
   // Extract the validation errors from a request.
-  const errors = validationResult(req); // TODO require validationResult, see userController
+  const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     console.log('user create error', errors);

@@ -10,7 +10,7 @@ const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 
 const bcrypt = require('bcryptjs');
-// local strategy for username password login
+
 passport.use(new Strategy({
 	usernameField: 'email',
 	passwordField: 'password'
