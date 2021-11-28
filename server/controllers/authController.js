@@ -44,8 +44,8 @@ const user_create_post = async (req, res, next) => {
     ];
 
     const result = await addUser(params);
-    if (result) {
-      res.json({ message: `User added`, result });
+    if (result.insertId) {
+      res.json({ message: `User added`, user_id: result.insertId });
     } else {
       res.status(400).json({ error: 'register error' });
     }
