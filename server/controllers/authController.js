@@ -32,23 +32,26 @@ const user_create_post = async (req, res, next) => {
     console.log('user create error', errors);
     res.send(errors.array());
   } else {
+
     // generate salt to hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-    const params = [
+    const user = [
       req.body.firstname,
       req.body.lastname,
       req.body.email,
       hashedPassword,
     ];
-
-    const result = await addUser(params);
+    const token = jwt.sign(JSON.stringify(user), process.env.JWT_SECRET);
+    const result = await addUser(user);
     if (result.insertId) {
-      res.json({ message: `User added`, user_id: result.insertId });
+      res.json({ message: `User added`, token });
     } else {
       res.status(400).json({ error: 'register error' });
     }
+    
+
   }
 };
 
