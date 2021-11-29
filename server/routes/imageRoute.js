@@ -28,10 +28,9 @@ router
   .route("/images")
   .get(get_image_list)
   .post(
-    //upload.single("image"),
+    upload.single("image"),
     body("image_title").notEmpty(),
     body("image_description").notEmpty(),
-    body("image_file").notEmpty(),
     body("image_price").isNumeric(),
     post_image
   );

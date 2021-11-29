@@ -7,7 +7,7 @@ const httpError = require("../utils/error");
 const getAllImages = async () => {
   try {
     const [rows] = await promisePool.query(
-      "SELECT user_db.first_name, user_db.last_name,image_id, image_title, image_description, image_file FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id"
+      "SELECT user_db.first_name, user_db.last_name,image_id, image_title, image_description, image_file, image_price FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id"
     );
     console.log("Get all images", rows);
     return rows;
@@ -42,7 +42,7 @@ const insertImage = async (user_id, image, next) => {
         1,
         image.image_title,
         image.image_description,
-        image.image_file,
+        image.file,
         image.image_price,
       ]
     );

@@ -35,13 +35,22 @@ const post_image = async (req, res, next) => {
     const err = httpError("image post data not valid", errors.array());
     next(err);
     return;
-  }
+  } 
 
+  console.log("Posting images", req.file);
+  if(!req.file){
+    const err = httpError("Invalid file", 400);
+    next(err);
+    return;
+  }
+  
   const user_id = req.user.user_id;
   console.log("Post done by userID", user_id);
-  //image.file = req.file.image_file;
-  //console.log("Filename", image.file);
-  const id = await insertImage(user_id, req.body);
+  const image = req.body;
+  image.file = req.file.filename;
+  console.log("Image post", image);
+  
+  const id = await insertImage(user_id, image);
   res.json({ message: `Image added with id: ${id}` });
 };
 
