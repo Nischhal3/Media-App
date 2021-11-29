@@ -6,7 +6,7 @@ const signupForm = document.querySelector('#signup-form');
 
 signupForm.addEventListener('submit', async (evt) => {
 	evt.preventDefault();
-	const data = serializeJson(addUserForm);
+	const data = serializeJson(signupForm);
 	const fetchOptions = {
 	  method: 'POST',
 	  headers: {
