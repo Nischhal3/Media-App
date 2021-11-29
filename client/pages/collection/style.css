@@ -92,7 +92,7 @@
   background-color: #D5B07A;
   border: 2px solid #D5B07A;
   color: white;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: lighter;
 }
 
@@ -127,4 +127,65 @@
   width: 50%;
   margin-left: 5%;
   border: 1px solid #d5b07a;
+}
+
+
+@media only screen and (max-width: 425px) {
+  h1, .menu-text {
+    display: none;
+  }
+  .menu a {
+    float: right;
+  } 
+  .collections{
+    margin: 0;
+    width: 100%;
+  }
+  .collections h2 {
+    align-self: flex-start;
+    font-size: 18px;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+
+  .black-line {
+    align-self: flex-start;
+    margin-left: 20px;
+    width: 38%;
+  }
+
+  .collections p {
+    width: 90%;
+    float: center;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+
+  .search {
+    width: 100%;
+    margin: 0;
+    margin-top: 5%;
+    text-align: center;
+  }
+  
+  #search-collection {
+    width: 65%;
+  }
+
+  .button {
+    width: 20%;
+    margin-left: 2%;
+    font-size: 11px;
+    font-weight: lighter;
+  }
+  #collectionContent {
+    flex-direction: column;
+  }
+  .single-collection {
+    width: 95%;
+    align-self: center;
+    margin-bottom: 10px;
+  }
+
 }
