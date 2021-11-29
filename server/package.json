@@ -2,7 +2,7 @@
   "name": "media-app",
   "version": "1.0.0",
   "description": "School Project",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,12 +13,13 @@
   "author": "Nischhal, Giang, Amy",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Nischhal3/media-app/issues"
+    "url": "https://github.com/Nischhal3/NordArtive/issues"
   },
-  "homepage": "https://github.com/Nischhal3/media-app#readme",
+  "homepage": "https://github.com/Nischhal3/NordArtive#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
+    "exif": "^0.6.0",
     "express": "^4.17.1",
     "express-validator": "^6.13.0",
     "jsonwebtoken": "^8.5.1",
