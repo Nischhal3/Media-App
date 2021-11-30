@@ -122,6 +122,18 @@ h1 {
   border-radius: 50%;
 }
 
+.line {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 50%;
+  background: black;
+  border-radius: 9px;
+  opacity: 1;
+  right: 0;
+  align-self: center;
+}
+
 .nav-links {
   position: absolute;
   right: -100%;
@@ -151,19 +163,6 @@ h1 {
   color: white;
   text-transform: uppercase;
   font-size: 18px;
-}
-
-.line {
-  display: block;
-  position: absolute;
-  height: 3px;
-  left: 15px;
-  width: 50%;
-  background: black;
-  border-radius: 9px;
-  opacity: 1;
-  right: 0;
-  align-self: center;
 }
 
 .hamburger div:nth-child(1) {
