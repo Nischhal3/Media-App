@@ -1,4 +1,4 @@
-# NordArtive
+# NodeArtive
 
 ## Note:
 
@@ -13,3 +13,9 @@
 - multer
 - dotenv
 - express-validator
+- npm i mysql2
+- npm install express-validator
+- npm i passport passport-local
+- npm i exif
+
+## TODO

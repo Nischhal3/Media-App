@@ -1,4 +1,5 @@
 'use strict';
+
 const userModel = require('../models/userModel');
 const { httpError } = require('../utils/error');
 const { validationResult } = require('express-validator');
@@ -41,3 +42,4 @@ const checkToken = (req, res, next) => {
 module.exports = {
 	user_list_get, user_get, user_update_put, checkToken, user_delete
 };
+

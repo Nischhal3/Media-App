@@ -8,8 +8,8 @@
   height: 100vh;
   display: flex;
   flex-direction: row;
-	justify-content: center;
-	align-items: center; 
+  justify-content: center;
+  align-items: center;
 }
 
 .box1 {
@@ -41,13 +41,13 @@ h1 {
 
 .sign-up {
   text-decoration: none;
-  color:#AB6909; 
+  color: #ab6909;
 }
 
 #login-form {
   width: 80%;
   margin: 0 auto;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
 }
@@ -56,7 +56,7 @@ h1 {
   width: 100%;
   padding: 8px 0;
   border-radius: 10px;
-  border: 2px solid #AB6909;
+  border: 2px solid #ab6909;
   margin-bottom: 10%;
 }
 
@@ -65,7 +65,7 @@ h1 {
   padding: 8px 0;
   margin-bottom: 5%;
   border-radius: 10px;
-  border: 2px solid #AB6909;
+  border: 2px solid #ab6909;
 }
 
 .forgot-password {
@@ -74,25 +74,104 @@ h1 {
 }
 
 .button {
-  text-align:  center;
+  text-align: center;
   align-self: center;
   margin: 10% 0 20% 0;
   border-radius: 10px;
   width: 35%;
   height: 35px;
-  background-color: #D5B07A;
-  border: 2px solid #D5B07A;
+  background-color: #d5b07a;
+  border: 2px solid #d5b07a;
   color: white;
   font-size: 18px;
 }
 
-
 .terms-policy {
   width: 80%;
   margin-left: 10%;
-  color: #AFADAD;
+  color: #afadad;
   font-weight: 100;
   font-size: 16px;
+}
+
+.hamburger {
+  width: 35px;
+  height: 30px;
+  position: absolute;
+  top: 10px;
+  right: 1%;
+  margin: 5px auto;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.nav-links {
+  position: absolute;
+  right: -100%;
+  top: 0;
+  flex-direction: column;
+  justify-content: space-around;
+  list-style-type: none;
+  width: 50%;
+  height: 300px;
+  background: #d5b07a;
+}
+
+.open {
+  display: flex;
+  animation: slideFromRight 1s ease;
+  right: 0;
+}
+
+.close {
+  display: flex;
+  animation: slideFromLeft 1s ease;
+  right: -100%;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.line {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: black;
+  border-radius: 9px;
+  opacity: 1;
+  right: 0;
+}
+
+.hamburger div:nth-child(1) {
+  top: 0px;
+}
+
+.hamburger div:nth-child(2) {
+  top: 10px;
+}
+
+.hamburger div:nth-child(3) {
+  top: 20px;
+}
+
+.hamburgerOpen div:nth-child(1) {
+  transform: rotate(45deg);
+  top: 10px;
+}
+
+.hamburgerOpen div:nth-child(2) {
+  width: 0%;
+  opacity: 0;
+}
+
+.hamburgerOpen div:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 10px;
 }
 
 @media only screen and (max-width: 425px) {
@@ -103,5 +182,31 @@ h1 {
 
   .box2 {
     width: 100%;
+  }
+
+  .hamburger {
+    right: 3%;
+  }
+}
+
+@keyframes slideFromRight {
+  0% {
+    right: -100%;
+    opacity: 0;
+  }
+  100% {
+    right: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromLeft {
+  0% {
+    right: 0;
+    opacity: 1;
+  }
+  100% {
+    right: -100%;
+    opacity: 0;
   }
 }
