@@ -1,4 +1,4 @@
-"user strict";
+'user strict';
 
 const {
   getAllImages,
@@ -6,10 +6,10 @@ const {
   insertImage,
   deleteImage,
   updateImage,
-} = require("../models/imageModel");
+} = require('../models/imageModel');
 
-const { httpError } = require("../utils/error");
-const { validationResult } = require("express-validator");
+const { httpError } = require('../utils/error');
+const { validationResult } = require('express-validator');
 
 const get_image_list = async (req, res) => {
   const images = await getAllImages();
@@ -18,38 +18,38 @@ const get_image_list = async (req, res) => {
 
 const get_image = async (req, res, next) => {
   const image = await getImage(req.params.imageId, next, next);
-  console.log("Image by id", image);
+  console.log('Image by id', image);
   if (image) {
     res.json(image);
     return;
   }
 
-  const err = httpError("Image not found", 400);
+  const err = httpError('Image not found', 400);
   next(err);
 };
 
 const post_image = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log("Post image validation: ", errors.array());
-    const err = httpError("image post data not valid", errors.array());
-    next(err);
-    return;
-  } 
-
-  console.log("Posting images", req.file);
-  if(!req.file){
-    const err = httpError("Invalid file", 400);
+    console.log('Post image validation: ', errors.array());
+    const err = httpError('image post data not valid', errors.array());
     next(err);
     return;
   }
-  
+
+  console.log('Posting images', req.file);
+  if (!req.file) {
+    const err = httpError('Invalid file', 400);
+    next(err);
+    return;
+  }
+
   const user_id = req.user.user_id;
-  console.log("Post done by userID", user_id);
+  console.log('Post done by userID', user_id);
   const image = req.body;
   image.file = req.file.filename;
-  console.log("Image post", image);
-  
+  console.log('Image post', image);
+
   const id = await insertImage(user_id, image);
   res.json({ message: `Image added with id: ${id}` });
 };
@@ -58,8 +58,8 @@ const delete_image = async (req, res, next) => {
   const image_id = req.params.imageId;
   const user_id = req.user.user_id;
   const role = req.user.role;
-  console.log("Image id", image_id);
-  console.log("Id ", role);
+  console.log('Image id', image_id);
+  console.log('Id ', role);
   const deleted = await deleteImage(image_id, user_id, role, next);
   res.json({ message: `Image deleted ${deleted}` });
 };
@@ -67,14 +67,14 @@ const delete_image = async (req, res, next) => {
 const update_image = async (req, res, next) => {
   req.body.id = req.params.imageId;
   const user_id = req.user.user_id;
-  console.log("Image ID:", req.params.imageId);
-  console.log("User ID:", user_id);
-  console.log("Update post: ", req.body);
+  console.log('Image ID:', req.params.imageId);
+  console.log('User ID:', user_id);
+  console.log('Update post: ', req.body);
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log("Image update validation:", errors.array());
-    const err = httpError("Updating data not valid", 400);
+    console.log('Image update validation:', errors.array());
+    const err = httpError('Updating data not valid', 400);
     next(err);
     return;
   }
