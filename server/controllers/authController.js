@@ -4,7 +4,7 @@ const passport = require('passport');
 const { httpError } = require('../utils/error');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
-const { addUser } = require('../models/userModel');
+const { addUser, getUserByEmail } = require('../models/userModel');
 
 const login = (req, res, next) => {
   passport.authenticate('local', { session: false }, (err, user, info) => {
@@ -32,26 +32,31 @@ const user_create_post = async (req, res, next) => {
     console.log('user create error', errors);
     res.send(errors.array());
   } else {
-
-    // generate salt to hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
-    const user = [
-      req.body.firstname,
-      req.body.lastname,
-      req.body.email,
-      hashedPassword,
-    ];
-    const token = jwt.sign(JSON.stringify(user), process.env.JWT_SECRET);
-    const result = await addUser(user);
-    if (result.insertId) {
-      res.json({ message: `User added`, token });
-    } else {
-      res.status(400).json({ error: 'register error' });
-    }
+    const email = await getUserByEmail(req.body.email);
+    const arr = Array.from(email);
     
+    if (!(arr.length === 0)){
+      next(httpError('Email already taken', 400));
+      return;
+    } else {
+      // generate salt to hash password
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
+      const user = [
+        req.body.firstname,
+        req.body.lastname,
+        req.body.email,
+        hashedPassword,
+      ];
+      const token = jwt.sign(JSON.stringify(user), process.env.JWT_SECRET);
+      const result = await addUser(user);
+      if (result.insertId) {
+        res.json({ message: `User added`, token });
+      } else {
+        res.status(400).json({ error: 'register error' });
+      }
+    }
   }
 };
 
