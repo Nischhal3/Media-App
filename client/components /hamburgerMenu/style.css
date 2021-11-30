@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 nav {
   height: 10vh;
   position: relative;
@@ -20,24 +24,18 @@ nav {
 } */
 
 .hamburger {
+  width: 35px;
+  height: 30px;
   position: absolute;
-  cursor: pointer;
   right: 1%;
-  top: 50%;
-  transform: translate(0, -50%);
+  margin: 5px auto;
+  cursor: pointer;
   z-index: 1;
-}
-
-.line {
-  width: 30px;
-  height: 3px;
-  background: black;
-  margin: 5px;
 }
 
 .nav-links {
   position: absolute;
-  right: 0;
+  right: -100%;
   top: 25%;
   flex-direction: column;
   justify-content: space-around;
@@ -45,11 +43,18 @@ nav {
   width: 50%;
   height: 300px;
   background: #d5b07a;
-  display: none;
 }
 
 .open {
   display: flex;
+  animation: slideFromRight 1s ease;
+  right: 0;
+}
+
+.close {
+  display: flex;
+  animation: slideFromLeft 1s ease;
+  right: -100%;
 }
 
 .nav-links li a {
@@ -57,4 +62,66 @@ nav {
   color: white;
   text-transform: uppercase;
   font-size: 18px;
+}
+
+.line {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: black;
+  border-radius: 9px;
+  opacity: 1;
+  right: 0;
+}
+
+.hamburger div:nth-child(1) {
+  top: 30px;
+}
+
+.hamburger div:nth-child(2) {
+  top: 40px;
+}
+
+.hamburger div:nth-child(3) {
+  top: 50px;
+}
+
+.hamburgerOpen div:nth-child(1) {
+  transform: rotate(45deg);
+  top: 39px;
+  left: 8px;
+}
+
+.hamburgerOpen div:nth-child(2) {
+  width: 0%;
+  opacity: 0;
+}
+
+.hamburgerOpen div:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 39px;
+  left: 8px;
+}
+
+@keyframes slideFromRight {
+  0% {
+    right: -100%;
+    opacity: 0;
+  }
+  100% {
+    right: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromLeft {
+  0% {
+    right: 0;
+    opacity: 1;
+  }
+  100% {
+    right: -100%;
+    opacity: 0;
+  }
 }
