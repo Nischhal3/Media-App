@@ -1,5 +1,5 @@
 'use strict';
-'use strict';
+
 const { getUserLogin } = require('../models/userModel');
 
 const passport = require('passport');

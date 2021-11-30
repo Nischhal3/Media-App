@@ -1,5 +1,4 @@
 'use strict';
-'use strict';
 const express = require('express');
 const { body } = require('express-validator');
 const router = express.Router()
@@ -11,8 +10,7 @@ router.route('/user')
 		body('name').isLength({ min: 3 }),
 		body('email').isEmail(), 
 		body('passwd').matches('(?=.*[A-Z]).{8,}'), 
-		userController.user_update_put)
-	;
+		userController.user_update_put);
 
 router.get('/token', userController.checkToken);
 
