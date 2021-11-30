@@ -13,18 +13,15 @@ const getAllUsers = async () => {
 
 const getUser = async (id) => {
   try {
-    const [rows] = await promisePool.execute(
-      'SELECT * FROM user_db WHERE user_id = ?',
-      id
-    );
+    const [rows] = await promisePool.execute('SELECT * FROM user_db WHERE user_id = ?', [id]);
+    console.log('get by id', rows);
     return rows[0];
   } catch (e) {
-    console.error(e.message);
+    console.error(e.message)
   }
 };
 
 const addUser = async (user) => {
-  console.log('adduser', user);
   try {
     const [rows] = await promisePool.execute(
       'INSERT INTO user_db (user_id, first_name, last_name, email, password, role) VALUES (?, ?, ?, ?, ?, ?)',

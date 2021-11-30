@@ -1,11 +1,7 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-<<<<<<< HEAD
-const { login } = require('../controllers/authController');
 
-router.post('/login', login);
-=======
 const { body, sanitizeBody } = require('express-validator');
 const authController = require('../controllers/authController');;
 
@@ -22,6 +18,5 @@ router.post('/register',
 	],
 	authController.user_create_post
 );
->>>>>>> main
 
 module.exports = router;

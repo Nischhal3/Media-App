@@ -2,6 +2,7 @@
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const { httpError } = require('../utils/error');
+
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const { addUser } = require('../models/userModel');
