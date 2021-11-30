@@ -1,4 +1,8 @@
 'use strict';
+<<<<<<< HEAD
+=======
+'use strict';
+>>>>>>> main
 const express = require('express');
 const { body } = require('express-validator');
 const router = express.Router()
@@ -6,11 +10,14 @@ const userController = require('../controllers/userController');
 
 router.route('/user')
 	.get(userController.user_list_get)
+<<<<<<< HEAD
 	.post(
 		body('name').isLength({ min: 3 }),
 	 	body('email').isEmail(), 
 	 	body('passwd').matches('(?=.*[A-Z]).{8,}'), 
 		userController.user_create_post)
+=======
+>>>>>>> main
 	.put(
 		body('name').isLength({ min: 3 }),
 		body('email').isEmail(), 

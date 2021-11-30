@@ -13,31 +13,47 @@ const getAllUsers = async () => {
 
 const getUser = async (id) => {
   try {
-    const [rows] = await promisePool.execute('SELECT * FROM user_db WHERE user_id = ?', id);
+    const [rows] = await promisePool.execute(
+      'SELECT * FROM user_db WHERE user_id = ?',
+      id
+    );
     return rows[0];
   } catch (e) {
-    console.error(e.message)
+    console.error(e.message);
   }
 };
 
-const addUser = (user) => pool.execute(
-  'INSERT INTO user_db VALUES (?, ?, ?, ?, ?)', [user.first_name, user.last_name, user.email, user.passwd, 1],
-  function (err, results) {
-    console.log(results);
+const addUser = async (user) => {
+  console.log('adduser', user);
+  try {
+    const [rows] = await promisePool.execute(
+      'INSERT INTO user_db (user_id, first_name, last_name, email, password, role) VALUES (?, ?, ?, ?, ?, ?)',
+      [0, user[0], user[1], user[2], user[3], 1]
+    );
+    console.log('model insert user', rows);
+    return rows;
+  } catch (e) {
+    console.error('model insert user', e.message);
   }
-);
+};
 
 const updateUser = async (body, user) => {
   if (user.role === 0) {
     try {
-      const [rows] = await promisePool.execute('UPDATE user_db SET first_name = ?, last_name = ?, email = ?, password= ? WHERE user_id = ?', [body.first_name, body.last_name, body.email, body.passwd, body.user_id]);
+      const [rows] = await promisePool.execute(
+        'UPDATE user_db SET first_name = ?, last_name = ?, email = ?, password= ? WHERE user_id = ?',
+        [body.first_name, body.last_name, body.email, body.passwd, body.user_id]
+      );
       return rows;
     } catch (e) {
       console.error('error', e.message);
     }
   } else {
     try {
-      const [rows] = await promisePool.execute('UPDATE user_db SET first_name = ?, last_name = ?, email = ?, password = ? WHERE user_id = ?', [body.first_name, body.last_name, body.email, body.passwd, user.user_id]);
+      const [rows] = await promisePool.execute(
+        'UPDATE user_db SET first_name = ?, last_name = ?, email = ?, password = ? WHERE user_id = ?',
+        [body.first_name, body.last_name, body.email, body.passwd, user.user_id]
+      );
       return rows;
     } catch (e) {
       console.error('error', e.message);
@@ -48,7 +64,10 @@ const updateUser = async (body, user) => {
 const deleteUser = async (id) => {
   if (user.role === 0) {
     try {
-      const [rows] = await promisePool.execute('DELETE FROM user_db WHERE user_id = ?', id);
+      const [rows] = await promisePool.execute(
+        'DELETE FROM user_db WHERE user_id = ?',
+        id
+      );
       return rows;
     } catch (e) {
       console.error('error', e.message);
@@ -58,7 +77,10 @@ const deleteUser = async (id) => {
 
 const getUserLogin = async (params) => {
   try {
-    const [rows] = await promisePool.execute('SELECT * FROM user_db WHERE email = ?', params);
+    const [rows] = await promisePool.execute(
+      'SELECT * FROM user_db WHERE email = ?',
+      params
+    );
     return rows;
   } catch (e) {
     console.log('error', e.message);
@@ -66,5 +88,10 @@ const getUserLogin = async (params) => {
 };
 
 module.exports = {
-  getAllUsers, getUser, addUser, getUserLogin, updateUser, deleteUser
+  getAllUsers,
+  getUser,
+  addUser,
+  getUserLogin,
+  updateUser,
+  deleteUser,
 };
