@@ -1,4 +1,4 @@
-# NordArtive
+# NodeArtive
 
 ## Note:
 
