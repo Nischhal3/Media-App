@@ -1,10 +1,10 @@
 (async () => {
 	'use strict';
-	const url = 'http://localhost:3000'; // change url when uploading to server
+	const url = 'http://localhost:3000'; 
 
 	// check sessionStorage
 	if (!sessionStorage.getItem('token') || !sessionStorage.getItem('user')) {
-		location.href = './login/index.html';
+		location.href = '../login/index.html';
 		return;
 	}
 	// check if token valid
@@ -16,7 +16,7 @@
 		};
 		const response = await fetch(url + '/user/token', fetchOptions);
 		if (!response.ok) {
-			location.href = './login/index.html';
+			location.href = '../login/index.html';
 		} else {
 			const json = await response.json();
 			sessionStorage.setItem('user', JSON.stringify(json.user));

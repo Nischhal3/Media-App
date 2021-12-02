@@ -1,6 +1,6 @@
 'use strict';
 
-const { getUserByEmail } = require('../models/userModel');
+const { getUserLogIn } = require('../models/userModel');
 
 const passport = require('passport');
 const passportJWT = require("passport-jwt");
@@ -18,7 +18,7 @@ passport.use(new Strategy({
 	async (email, password, done) => {
 		const params = [email];
 		try {
-			const [user] = await getUserByEmail(params);
+			const [user] = await getUserLogIn(params);
 			console.log('Local strategy', user);
 			if (!user) {
 				return done(null, false, { message: 'Incorrect email or password.' });

@@ -71,6 +71,15 @@ const getUserByEmail = async (params) => {
   }
 };
 
+const getUserLogIn = async (params) => {
+  try {
+    const [rows] = await promisePool.execute('SELECT * FROM user_db WHERE email = ?', params);
+    return rows;
+  } catch (e) {
+    console.log('error', e.message);
+  }
+};
+
 module.exports = {
-  getAllUsers, getUser, addUser, getUserByEmail, updateUser, deleteUser
+  getAllUsers, getUser, addUser, getUserByEmail, updateUser, deleteUser, getUserLogIn
 };
