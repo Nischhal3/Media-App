@@ -3,8 +3,11 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+const cors = require('cors');
+app.use(cors());
+
+app.use(express.urlencoded( {extended: true }));
+app.use(express.json())
 
 const { httpError } = require('./utils/error');
 const passport = require('./utils/passport');

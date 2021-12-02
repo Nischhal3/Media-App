@@ -6,7 +6,7 @@ const signupForm = document.querySelector('#signup-form');
 
 signupForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
-  const data = serializeJson(addUserForm);
+  const data = serializeJson(signupForm);
   const fetchOptions = {
     method: 'POST',
     headers: {
@@ -16,7 +16,14 @@ signupForm.addEventListener('submit', async (evt) => {
   };
   const response = await fetch(url + '/auth/register', fetchOptions);
   const json = await response.json();
-  alert(json.message);
+  if (!json.token) {
+    alert(json.message);
+  } else {
+    // save token
+    sessionStorage.setItem('token', json.token);
+    sessionStorage.setItem('user', JSON.stringify(json.user));
+    location.href = '../front/index.html';
+  }
 });
 
 const hamburger = document.querySelector('.hamburger');
