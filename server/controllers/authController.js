@@ -29,7 +29,6 @@ const signup = async (req, res, next) => {
   // Extract the validation errors from a request.
   const errors = validationResult(req);
 
-  //tested
   if (!errors.isEmpty()) {
     res.json(errors.array());
     return;
@@ -38,7 +37,6 @@ const signup = async (req, res, next) => {
   const email = await getUserByEmail(req.body.email);
   const arr = Array.from(email);
 
-  //tested
   if (!(arr.length === 0)) {
     next(badRequestError('Email already taken'));
     return;

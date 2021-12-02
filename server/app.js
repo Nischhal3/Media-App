@@ -25,10 +25,10 @@ app.use('/auth', authRoute);
 app.use('/', passport.authenticate('jwt', { session: false }), userRoute);
 app.use('/', passport.authenticate('jwt', { session: false }), imageRoute);
 
-app.use((req, res, next) => {
-  const err = httpError('Not found', 404);
-  next(err);
-});
+// app.use((req, res, next) => {
+//   const err = httpError('Not found', 404);
+//   next(err);
+// });
 
 //error handler
 app.use((err, req, res, next) => {
