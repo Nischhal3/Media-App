@@ -1,11 +1,7 @@
 'use strict';
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const {
-  httpError,
-  internalServerError,
-  badRequestError,
-} = require('../utils/error');
+const { internalServerError, badRequestError } = require('../utils/error');
 
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');

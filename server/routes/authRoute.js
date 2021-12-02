@@ -3,10 +3,10 @@ const express = require('express');
 const router = express.Router();
 
 const { body, sanitizeBody } = require('express-validator');
-const authController = require('../controllers/authController');
+const { login, signup, logout } = require('../controllers/authController');
 
-router.post('/login', authController.login);
-router.get('/logout', authController.logout);
+router.post('/login', login);
+router.get('/logout', logout);
 router.post(
   '/register',
   [
@@ -20,7 +20,7 @@ router.post(
     sanitizeBody('fistname').escape(),
     sanitizeBody('lastname').escape(),
   ],
-  authController.signup
+  signup
 );
 
 module.exports = router;
