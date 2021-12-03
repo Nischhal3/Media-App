@@ -17,7 +17,7 @@ const get_image_list = async (req, res) => {
 };
 
 const get_image = async (req, res, next) => {
-  const image = await getImage(req.params.imageId, next, next);
+  const image = await getImage(req.params.imageId, next);
   console.log('Image by id', image);
   if (image) {
     res.json(image);
