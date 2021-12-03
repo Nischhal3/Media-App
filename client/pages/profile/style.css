@@ -1,4 +1,134 @@
 * {
+  box-sizing: border-box;
   font-family: 'Josefin Sans', sans-serif;
   margin: 0;
+  font-size: 18px;
+}
+
+.header{
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-left: 40px;
+}
+
+.title{
+  flex: 1;
+  flex-grow: 5;
+  font-family: 'Meddon', 'cursive';
+}
+
+.icons{
+  flex: 1;
+  display: flex;
+  justify-content: right;
+}
+
+.icons .fa{
+  margin: 10px;
+  font-size: 25px;
+}
+
+.fa-plus, .fa-bars{
+  background-color: #9E7F10;
+  padding: 9.5px;
+  color: black;
+  height: 40px;
+  border-radius: 50%;
+  width: 40px;
+}
+
+
+.user-profile{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.user-image{
+  flex: .3;
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+}
+
+.user-info{
+  margin-top: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.user-image img{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.user-name{
+  padding: 10px;
+  margin-top: 50px;
+}
+
+.edit-profile{
+  margin-left:500px;
+  width: 10%;
+  height: 30px;
+  background-color: #d5b07a;
+  border: 2px solid #d5b07a;
+  color: white;
+  font-size: 18px;
+}
+
+.user-intro{
+  padding: 10px;
+}
+
+.black-line {
+  margin: 20px 0;
+  border: 1px solid #cababa;
+}
+
+.tabs{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style-type: none;
+}
+
+.tab{
+  cursor: pointer;
+  margin: 10px;
+}
+
+[data-tab-content]{
+  display: none;
+}
+
+.active[data-tab-content]{
+  display: block;
+}
+.tab:hover{
+  background-color: #d5b07a;
+}
+
+.tab.active{
+  background-color: lightgray;
+}
+.fa{
+  opacity: .5;
+  margin-top: 3px;
+  font-size: 15px;
+}
+
+#collection{
+  flex-direction: row;
+  text-align: center;
+}
+
+#collection img{
+  margin: 20px;
 }
