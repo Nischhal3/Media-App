@@ -1,10 +1,27 @@
 'user strict';
-const httpError = (message, status) => {
-	const err = new Error(message);
-	err.status = status;
-	return err;
+
+const httpError = (status, message) => {
+  const err = new Error(message);
+  err.status = status;
+  return err;
 };
 
+const errorCode = {
+  400: 'Bad request',
+  500: 'Internal Server Error',
+  401: 'Unauthorized',
+  403: 'Unauthenticated',
+};
+
+const badRequestError = (message) => httpError(400, message ?? errorCode[400]);
+const internalServerError = () => httpError(500, errorCode[500]);
+const unauthorizedError = () => httpError(401, errorCode[401]);
+const unauthenticatedError = () => httpError(403, errorCode[403]);
+
 module.exports = {
-	httpError,
+  httpError,
+  badRequestError,
+  internalServerError,
+  unauthorizedError,
+  unauthorizedError,
 };

@@ -16,14 +16,24 @@ signupForm.addEventListener('submit', async (evt) => {
   };
   const response = await fetch(url + '/auth/register', fetchOptions);
   const json = await response.json();
-  if (!json.token) {
-    alert(json.message);
-  } else {
+  console.log(json);
+  if (json.token && json.user) {
     // save token
     sessionStorage.setItem('token', json.token);
     sessionStorage.setItem('user', JSON.stringify(json.user));
     location.href = '../front/index.html';
+    return;
   }
+
+  if (json.length > 0) {
+    let errors = '';
+    json.forEach((err) => (errors += `${err.msg}\n`));
+    alert(errors);
+    return false;
+  }
+
+  alert(json.message);
+  return false;
 });
 
 const hamburger = document.querySelector('.hamburger');
@@ -39,4 +49,5 @@ hamburger.addEventListener('click', () => {
     navLinks.classList.add('open');
     hamburger.classList.add('hamburgerOpen');
   }
+  return;
 });
