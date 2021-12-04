@@ -29,3 +29,16 @@ closeMenuButton.addEventListener('click', () => {
   navLinks.classList.add('close');
   navLinks.classList.remove('open');
 });
+
+//open add post overlay
+const add = document.querySelector('.add');
+const addPostOverlay = document.querySelector('.overlay');
+const closeOverlay = document.querySelector('.overlay i');
+
+add.addEventListener('click', () => {
+  addPostOverlay.classList.add('overlay-open');
+});
+
+closeOverlay.addEventListener('click', () => {
+  addPostOverlay.classList.remove('overlay-open');
+});

@@ -4,6 +4,10 @@
   margin: 0;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .header {
   width: 90%;
   margin: auto;
@@ -140,6 +144,60 @@
 
 #collection img {
   margin: 20px;
+}
+
+.overlay {
+  position: absolute;
+  top: 30%;
+  left: 25%;
+  width: 50%;
+  flex-direction: column;
+  z-index: 1;
+  border: 1px solid #ab6909;
+  display: none;
+}
+
+.overlay-open {
+  display: flex;
+}
+
+.overlay i {
+  align-self: flex-end;
+  margin: 1%;
+  cursor: pointer;
+}
+
+.overlay-container {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-container img {
+  width: 40%;
+  margin: 0 20px;
+}
+
+form {
+  width: 100%;
+  margin-right: 10%;
+}
+
+.overlay-info {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#title,
+#date,
+#description,
+#collection-select {
+  border: 1px solid #ab6909;
+  border-radius: 5px;
+  width: 100%;
+  padding: 5px;
 }
 
 .nav-links {
