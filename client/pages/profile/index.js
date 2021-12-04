@@ -1,3 +1,13 @@
+'use strict';
+
+const token = sessionStorage.getItem('token');
+const user = sessionStorage.getItem('user');
+
+if (!token && !user) {
+  console.log('here');
+  location.href = '../login/index.html';
+}
+
 //Tabs selection
 const tabs = document.querySelectorAll('[ data-tab-target]');
 const tabContents = document.querySelectorAll('[data-tab-content]');
