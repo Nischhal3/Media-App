@@ -19,6 +19,11 @@ body {
   justify-content: space-between;
 }
 
+.header h2 {
+  flex-grow: 5;
+  font-family: 'Meddon', cursive;
+}
+
 .headerContent {
   display: flex;
   flex-grow: 1;
@@ -105,6 +110,8 @@ img {
   margin: 0 auto;
   font-size: 20px;
   line-height: 1.6;
+  font-style: italic;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 .greetingBtns {
@@ -127,6 +134,7 @@ img {
   cursor: pointer;
   border-radius: 5px;
   text-decoration: none;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 .blackLine {
@@ -195,9 +203,14 @@ img {
   padding: 20px 0;
 }
 
+.about h1 {
+  font-family: 'Meddon', cursive;
+  color: #ab6909;
+}
+
 .characteristic {
   font-size: 20px;
-  padding: 20px;
+  padding: 10px 0 20px;
 }
 
 .aboutText {
