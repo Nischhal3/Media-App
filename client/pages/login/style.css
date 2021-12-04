@@ -185,7 +185,31 @@ h1 {
   }
 
   .hamburger {
+    width: 20px;
+    height: 20px;
     right: 3%;
+  }
+
+  .hamburger div:nth-child(1) {
+    top: 0px;
+  }
+
+  .hamburger div:nth-child(2) {
+    top: 7px;
+  }
+
+  .hamburger div:nth-child(3) {
+    top: 14px;
+  }
+
+  .hamburgerOpen div:nth-child(1) {
+    transform: rotate(45deg);
+    top: 7px;
+  }
+
+  .hamburgerOpen div:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 7px;
   }
 }
 
