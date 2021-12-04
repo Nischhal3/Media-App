@@ -44,27 +44,53 @@ const collections = [
   },
 ];
 
+const url = 'http://localhost:3000'; // change url when uploading to server
+
 const collectionContent = document.getElementById('collectionContent');
 
-collections.forEach((collection) => {
-  const singleCollection = document.createElement('div');
-  const img = document.createElement('img');
-  const title = document.createElement('p');
-  const line = document.createElement('hr');
-  const description = document.createElement('p');
+const createCollectionCards = (collection) => {
+  console.log('from card', collection);
 
-  img.src = collection.image;
-  title.innerHTML = collection.title;
-  description.innerHTML = collection.description;
+  collection.forEach((item) => {
+    console.log(item.collection_id);
 
-  singleCollection.appendChild(img);
-  singleCollection.appendChild(title);
-  singleCollection.appendChild(line);
-  singleCollection.appendChild(description);
-  singleCollection.className = 'single-collection';
+    const singleCollection = document.createElement('div');
+    const img = document.createElement('img');
+    const title = document.createElement('p');
+    const line = document.createElement('hr');
+    const description = document.createElement('p');
 
-  collectionContent.appendChild(singleCollection);
-});
+    //img.src = item.collection_image  TODO;
+    title.innerHTML = item.collection_title;
+    description.innerHTML = item.collection_description;
+
+
+    //singleCollection.appendChild(img)  TODO;
+    singleCollection.appendChild(title);
+    singleCollection.appendChild(line);
+    singleCollection.appendChild(description);
+    singleCollection.className = 'single-collection';
+
+    collectionContent.appendChild(singleCollection);
+  });
+};
+
+const getCollection = async () => {
+  try {
+    const fetchOptions = {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+    const response = await fetch(url + '/collection', fetchOptions);
+    const collection = await response.json();
+    createCollectionCards(collection);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+getCollection();
 
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');

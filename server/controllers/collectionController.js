@@ -8,8 +8,8 @@ const {
 } = require('../models/collectionModel');
 
 const get_collection_list = async (req, res) => {
-  const images = await getAllCollection();
-  res.json(images);
+  const collection = await getAllCollection();
+  res.json(collection);
 };
 
 const get_collection = async (req, res, next) => {
