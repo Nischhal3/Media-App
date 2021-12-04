@@ -7,57 +7,64 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&family=Meddon&family=Noto+Sans&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="./style.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/635b5f77f3.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Profile page</title>
   </head>
   <body>
-    <div class="container">
+    <div>
       <div class="header">
-        <div class="title">
-          <h1>Node Artive</h1>
-        </div>
-          <div class="icons">
-            <i class="fa fa-plus"></i> <span> <i class="fa fa-bars"></i></span>
+        <h2>Node Artive</h2>
+        <div class="icons">
+          <button class="add"><i class="fas fa-plus"></i></button>
+          <button class="menu"><i class="fas fa-bars"></i></button>
+          <ul class="nav-links">
+            <i class="fas fa-times close-menu"></i>
+            <li><a href="../../pages/front/">Home</a></li>
+            <li><a href="../../pages/profile/">Profile</a></li>
+            <li><a href="../../pages/collection/">Collections</a></li>
+            <li><a>Log out</a></li>
+          </ul>
         </div>
       </div>
       <div class="user-profile">
-        <div class="user-image">
-          <img src="../../assets/mona.jpeg" alt="">
-        </div>
+        <img src="../../assets/mona.jpeg" alt="profile picture" />
         <div class="user-info">
-          <p class="user-name">Luade monet
-            <button class="edit-profile">edit profile</button>
-          </p>
-          <p class="user-intro">French painter how was the initiator, leader and 
-            unswerving advocate of Impleressionist style.
+          <div class="info-header">
+            <p>Luade monet</p>
+            <button>edit profile</button>
+          </div>
+          <p class="user-intro">
+            French painter how was the initiator, leader and unswerving advocate
+            of Impleressionist style.
           </p>
         </div>
       </div>
-      <hr class="black-line">
+      <hr class="grey-line" />
       <ul class="tabs">
-        <li data-tab-target="#video" class="tab"> 
+        <li data-tab-target="#video" class="tab">
           videos <span><i class="fa fa-youtube-play"></i></span>
         </li>
-        <li  data-tab-target="#collection" class="active tab">
-          Collection <i class="fa fa-folder-open-o"></i>
+        <li data-tab-target="#artwork" class="active tab">
+          artwork <i class="fa fa-folder-open-o"></i>
         </li>
-        <li  data-tab-target="#library" class="tab"> 
-          Library  <i class="fa fa-bookmark-o"></i>
+        <li data-tab-target="#library" class="tab">
+          library <i class="fa fa-bookmark-o"></i>
         </li>
       </ul>
       <div class="tab-content">
-        <div id="video" data-tab-content> 
+        <div id="video" data-tab-content>
           <h1>video</h1>
           <p>Page for videos</p>
         </div>
         <div id="collection" data-tab-content class="active">
-            <img src="../../assets/artwork1.svg" alt="artwork">
-            <img src="../../assets/artwork2.svg" alt="artwork">
-            <img src="../../assets/artwork3.svg" alt="artwork">
+          <!-- data from backend -->
         </div>
         <div id="library" data-tab-content>
           <h1>Library</h1>
