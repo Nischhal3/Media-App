@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .container {
   height: 100vh;
 }
@@ -21,10 +25,11 @@
   padding: 20px 0;
 }
 
-.search {
+.search,
+.login {
   display: flex;
   flex-grow: 1;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .searchText,
@@ -43,10 +48,8 @@
   color: black;
 }
 
-.login {
-  display: flex;
-  flex-grow: 1;
-  justify-content: flex-end;
+.disappear {
+  display: none;
 }
 
 img {
@@ -102,6 +105,13 @@ img {
   margin: 0 auto;
   font-size: 20px;
   line-height: 1.6;
+}
+
+.greetingBtns {
+  display: flex;
+  width: 40%;
+  margin: 0 auto;
+  justify-content: space-around;
 }
 
 .text {
@@ -226,4 +236,122 @@ img {
   display: flex;
   justify-content: space-between;
   padding-bottom: 20px;
+}
+
+.hamburger {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 18px;
+  right: 5%;
+  margin: 0 auto;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.nav-links {
+  position: absolute;
+  right: -100%;
+  top: 0;
+  flex-direction: column;
+  justify-content: space-around;
+  list-style-type: none;
+  width: 40%;
+  height: 300px;
+  background: #d5b07a;
+  z-index: 1;
+}
+
+.open {
+  display: flex;
+  animation: slideFromRight 1s ease;
+  right: 0;
+}
+
+.close {
+  display: flex;
+  animation: slideFromLeft 1s ease;
+  right: -100%;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.line {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: black;
+  border-radius: 9px;
+  opacity: 1;
+  right: 0;
+}
+
+.hamburger div:nth-child(1) {
+  top: 0px;
+}
+
+.hamburger div:nth-child(2) {
+  top: 7px;
+}
+
+.hamburger div:nth-child(3) {
+  top: 14px;
+}
+
+.hamburgerOpen div:nth-child(1) {
+  transform: rotate(45deg);
+  top: 7px;
+}
+
+.hamburgerOpen div:nth-child(2) {
+  width: 0%;
+  opacity: 0;
+}
+
+.hamburgerOpen div:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 7px;
+}
+
+@media only screen and (max-width: 425px) {
+  .box1 {
+    width: 0%;
+    margin: 0;
+  }
+
+  .box2 {
+    width: 100%;
+  }
+
+  .hamburger {
+    right: 3%;
+  }
+}
+
+@keyframes slideFromRight {
+  0% {
+    right: -100%;
+    opacity: 0;
+  }
+  100% {
+    right: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromLeft {
+  0% {
+    right: 0;
+    opacity: 1;
+  }
+  100% {
+    right: -100%;
+    opacity: 0;
+  }
 }
