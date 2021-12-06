@@ -5,6 +5,7 @@ const {
   getAllCollection,
   getCollection,
   getImageInCollection,
+  updateCollection,
 } = require('../models/collectionModel');
 
 const get_collection_list = async (req, res) => {
@@ -18,6 +19,7 @@ const get_collection = async (req, res, next) => {
   const collection = await getCollection(req.params.title, next);
   //console.log('Collection bny id', collection);
 
+  console.log("collection length",collection.length);
   if (collection.length === 0) {
     const err = httpError('Collection not found', 400);
     next(err);
@@ -50,8 +52,25 @@ const get_imageIn_collection = async (req, res, next) => {
   next(err);
 };
 
+const update_collection = async(req,res,next)=>{
+  if (!req.file) {
+    const err = httpError('Invalid file', 400);
+    next(err);
+    return;
+  }
+  console.log('Posting images', req.file.filename);
+  console.log('Params',req.params.title);
+
+  const image = req.file.filename;
+  const title = req.params.title;
+
+  const update = await updateCollection(image, title,next);
+  res.json({ message: `Image update: ${update}` });
+
+}
 module.exports = {
   get_collection_list,
   get_collection,
   get_imageIn_collection,
+  update_collection,
 };
