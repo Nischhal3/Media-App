@@ -17,16 +17,16 @@ const passport = require('./utils/passport');
 const authRoute = require('./routes/authRoute.js');
 const userRoute = require('./routes/userRoute');
 const imageRoute = require('./routes/imageRoute');
-const collectionRoute = require('./routes/collectionRoute')
+const collectionRoute = require('./routes/collectionRoute');
 
 app.use(passport.initialize());
 app.use(express.static('uploads'));
 app.use('/thumbnails', express.static('thumbnails'));
 
 app.use('/auth', authRoute);
+app.use('/', collectionRoute);
 app.use('/', passport.authenticate('jwt', { session: false }), userRoute);
 app.use('/', passport.authenticate('jwt', { session: false }), imageRoute);
-app.use('/', passport.authenticate('jwt', { session: false }), collectionRoute);
 
 // app.use((req, res, next) => {
 //   const err = httpError('Not found', 404);
