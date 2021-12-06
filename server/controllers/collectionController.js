@@ -55,18 +55,12 @@ const update_collection = async (req, res, next) => {
     next(err);
     return;
   }
-
+  console.log('image for collection', req.file);
   try {
-    const thumb = await makeThumbnail(req.file.path, req.file.filename);
-    const image = req.file.filename;
-    const title = req.params.title;
-
-    const update = await updateCollection(image, title, next);
-    if (thumb) {
-      res.json({ message: `Image update: ${update}` });
-    }
+    const update = await updateCollection(req.file, req.params.id, next);
+    res.json({ message: `Image update: ${update}` });
   } catch (error) {
-    const err = httpError('Error uploading cat', 400);
+    const err = httpError('Error uploading image', 400);
     next(err);
     return;
   }

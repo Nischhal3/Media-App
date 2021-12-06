@@ -7,11 +7,11 @@ const createCollectionCards = (collection) => {
   collection.forEach((item) => {
     const singleCollection = document.createElement('div');
     const img = document.createElement('img');
-    const title = document.createElement('p');
+    const title = document.createElement('h4');
     const line = document.createElement('hr');
     const description = document.createElement('p');
 
-    img.src = url + '/thumbnails/' + item.image;
+    img.src = url + '/' + item.image;
     img.alt = item.collection_title;
     title.innerHTML = item.collection_title;
     description.innerHTML = item.collection_description;

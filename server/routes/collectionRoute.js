@@ -12,22 +12,17 @@ const {
   update_collection,
 } = require('../controllers/collectionController');
 
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype.includes('image')) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
 
-const upload = multer({ dest: './uploads/', fileFilter });
+const upload = multer({ dest: './uploads/' });
 
 router.route('/collection').get(get_collection_list);
 
 router
   .route('/collection/:title')
-  .get(get_collection)
-  .put(upload.single('image'), body('image'), update_collection);
+  .get(get_collection);
+
+router.route('/collection/:id')
+  .put(upload.single('image'), update_collection);
 
 router.get('/collection/:title/:imageId', get_imageIn_collection);
 

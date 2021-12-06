@@ -42,11 +42,11 @@ const getImageInCollection = async (collection_title, id, next) => {
   }
 };
 
-const updateCollection = async (image, title, next) => {
+const updateCollection = async (image, id, next) => {
   try {
     const [rows] = await promisePool.query(
-      'UPDATE collection_db SET image = ? WHERE collection_title = ?',
-      [image, title]
+      'UPDATE collection_db SET image = ? WHERE collection_id = ?',
+      [image.filename, id]
     );
     return rows.affectedRows === 1;
   } catch (error) {
