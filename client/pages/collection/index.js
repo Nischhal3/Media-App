@@ -60,12 +60,12 @@ const createCollectionCards = (collection) => {
     const line = document.createElement('hr');
     const description = document.createElement('p');
 
-    //img.src = item.collection_image  TODO;
+    img.src =  url + '/thumbnails/' + item.collection_image;
     title.innerHTML = item.collection_title;
     description.innerHTML = item.collection_description;
 
 
-    //singleCollection.appendChild(img)  TODO;
+    singleCollection.appendChild(img);
     singleCollection.appendChild(title);
     singleCollection.appendChild(line);
     singleCollection.appendChild(description);

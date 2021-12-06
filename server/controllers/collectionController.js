@@ -7,6 +7,7 @@ const {
   getImageInCollection,
   updateCollection,
 } = require('../models/collectionModel');
+const makeThumbnail = require('../utils/resize');
 
 const get_collection_list = async (req, res) => {
   const collection = await getAllCollection();
@@ -19,7 +20,7 @@ const get_collection = async (req, res, next) => {
   const collection = await getCollection(req.params.title, next);
   //console.log('Collection bny id', collection);
 
-  console.log("collection length",collection.length);
+  console.log('collection length', collection.length);
   if (collection.length === 0) {
     const err = httpError('Collection not found', 400);
     next(err);
@@ -52,22 +53,31 @@ const get_imageIn_collection = async (req, res, next) => {
   next(err);
 };
 
-const update_collection = async(req,res,next)=>{
+const update_collection = async (req, res, next) => {
   if (!req.file) {
     const err = httpError('Invalid file', 400);
     next(err);
     return;
   }
-  console.log('Posting images', req.file.filename);
-  console.log('Params',req.params.title);
 
-  const image = req.file.filename;
-  const title = req.params.title;
+  try {
+    console.log('Params', req.params.title);
+    console.log('Posting images', req.file.filename);
+    const thumb = await makeThumbnail(req.file.path, req.file.filename);
 
-  const update = await updateCollection(image, title,next);
-  res.json({ message: `Image update: ${update}` });
-
-}
+    const image = req.file.filename;
+    const title = req.params.title;
+    const update = await updateCollection(image, title, next);
+    if (thumb) {
+    res.json({ message: `Image update: ${update}` });
+    }
+  } catch (error) {
+    console.log('Collection update with thumbnail', e.message);
+    const err = httpError('Error uploading cat', 400);
+    next(err);
+    return;
+  }
+};
 module.exports = {
   get_collection_list,
   get_collection,

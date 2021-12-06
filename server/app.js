@@ -21,6 +21,7 @@ const collectionRoute = require('./routes/collectionRoute')
 
 app.use(passport.initialize());
 app.use(express.static('uploads'));
+app.use('/thumbnails', express.static('thumbnails'));
 
 app.use('/auth', authRoute);
 app.use('/', passport.authenticate('jwt', { session: false }), userRoute);
