@@ -18,58 +18,57 @@
     <title>Profile page</title>
   </head>
   <body>
-    <div">
-      <div class="header">
-        <h2>Node Artive</h2>
-        <div class="icons">
-          <button class="add"><i class="fas fa-plus"></i></button>
-          <button class="menu"><i class="fas fa-bars"></i></button>
-          <ul class="nav-links">
-            <i class="fas fa-times close-menu"></i>
-            <li><a href="../../pages/front/">Home</a></li>
-            <li><a href="../../pages/profile/">Profile</a></li>
-            <li><a href="../../pages/collection/">Collections</a></li>
-            <li><a>Log out</a></li>
-          </ul>
-        </div>
+    <div class="header">
+      <h2>Node Artive</h2>
+      <div class="icons">
+        <button class="add"><i class="fas fa-plus"></i></button>
+        <button class="menu"><i class="fas fa-bars"></i></button>
+        <ul class="nav-links">
+          <i class="fas fa-times close-menu"></i>
+          <li><a href="../../pages/front/">Home</a></li>
+          <li><a href="../../pages/profile/">Profile</a></li>
+          <li><a href="../../pages/collection/">Collections</a></li>
+          <li><a>Log out</a></li>
+        </ul>
       </div>
-      <div class="user-profile">
-        <img src="../../assets/mona.jpeg" alt="profile picture" />
-        <div class="user-info">
-          <div class="info-header">
-            <p>Luade monet</p>
-            <button>edit profile</button>
-          </div>
-          <p class="user-intro">
-            French painter how was the initiator, leader and unswerving advocate
-            of Impleressionist style.
-          </p>
+    </div>
+    <div class="user-profile">
+      <img src="../../assets/mona.jpeg" alt="profile picture" />
+      <div class="user-info">
+        <div class="info-header">
+          <p>Luade monet</p>
+          <button>edit profile</button>
+          <i class="fas fa-pen edit"></i>
         </div>
+        <p class="user-intro">
+          French painter how was the initiator, leader and unswerving advocate
+          of Impleressionist style.
+        </p>
       </div>
-      <hr class="grey-line" />
-      <ul class="tabs">
-        <li data-tab-target="#video" class="tab">
-          videos <span><i class="fa fa-youtube-play"></i></span>
-        </li>
-        <li data-tab-target="#artwork" class="active tab">
-          artwork <i class="fa fa-folder-open-o"></i>
-        </li>
-        <li data-tab-target="#library" class="tab">
-          library <i class="fa fa-bookmark-o"></i>
-        </li>
-      </ul>
-      <div class="tab-content">
-        <div id="video" data-tab-content>
-          <h1>video</h1>
-          <p>Page for videos</p>
-        </div>
-        <div id="collection" data-tab-content class="active">
-          <!-- data from backend -->
-        </div>
-        <div id="library" data-tab-content>
-          <h1>Library</h1>
-          <p>Page for library</p>
-        </div>
+    </div>
+    <hr class="grey-line" />
+    <ul class="tabs">
+      <li data-tab-target="#video" class="tab">
+        videos <span><i class="fa fa-youtube-play"></i></span>
+      </li>
+      <li data-tab-target="#artwork" class="active tab">
+        artwork <i class="fa fa-folder-open-o"></i>
+      </li>
+      <li data-tab-target="#library" class="tab">
+        library <i class="fa fa-bookmark-o"></i>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div id="video" data-tab-content>
+        <h1>video</h1>
+        <p>Page for videos</p>
+      </div>
+      <div id="collection" data-tab-content class="active">
+        <!-- data from backend -->
+      </div>
+      <div id="library" data-tab-content>
+        <h1>Library</h1>
+        <p>Page for library</p>
       </div>
     </div>
     <div class="overlay">
@@ -117,22 +116,17 @@
           required
         /><br />
         <label for="password">new password</label>
+        <input type="text" id="newPassword" name="newPassword" required /><br />
+        <label for="password">enter paassword again</label>
         <input
-        type="text"
-        id="newPassword"
-        name="newPassword"
-        required
-      /><br />
-      <label for="password">enter paassword again</label>
-        <input
-        type="text"
-        id="retypePassword"
-        name="retypePassword"
-        required
-      /><br />
-      <button class="update">Update</button>
-      </form> 
-    </div> 
+          type="text"
+          id="retypePassword"
+          name="retypePassword"
+          required
+        /><br />
+        <button class="update">Update</button>
+      </form>
+    </div>
     <script src="./index.js"></script>
   </body>
 </html>
