@@ -60,7 +60,8 @@ const createCollectionCards = (collection) => {
     const line = document.createElement('hr');
     const description = document.createElement('p');
 
-    img.src =  url + '/thumbnails/' + item.collection_image;
+    img.src =  url + '/thumbnails/' + item.image;
+    img.alt = item.collection_title;
     title.innerHTML = item.collection_title;
     description.innerHTML = item.collection_description;
 
