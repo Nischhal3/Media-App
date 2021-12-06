@@ -101,6 +101,38 @@
         </form>
       </div>
     </div>
+    <div class="updateProfileOverlay">
+      <i class="fas fa-times"></i>
+      <h3>Update Proflie</h3>
+      <form class="update-info">
+        <label for="username">username</label>
+        <input type="text" id="username" name="username" required /><br />
+        <label for="email">email</label>
+        <input type="email" id="email" name="email" required /><br />
+        <label for="description">description</label>
+        <input
+          type="text"
+          id="updateDescription"
+          name="updateDescription"
+          required
+        /><br />
+        <label for="password">new password</label>
+        <input
+        type="text"
+        id="newPassword"
+        name="newPassword"
+        required
+      /><br />
+      <label for="password">enter paassword again</label>
+        <input
+        type="text"
+        id="retypePassword"
+        name="retypePassword"
+        required
+      /><br />
+      <button class="update">Update</button>
+      </form> 
+    </div> 
     <script src="./index.js"></script>
   </body>
 </html>

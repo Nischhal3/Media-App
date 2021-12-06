@@ -157,10 +157,6 @@ body {
   display: none;
 }
 
-.overlay-open {
-  display: flex;
-}
-
 .overlay i {
   align-self: flex-end;
   margin: 1%;
@@ -193,11 +189,71 @@ form {
 #title,
 #date,
 #description,
-#collection-select {
+#collection-select,
+#username,
+#email,
+#updateDescription,
+#newPassword,
+#retypePassword {
   border: 1px solid #ab6909;
   border-radius: 5px;
   width: 100%;
   padding: 5px;
+}
+
+.updateProfileOverlay {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  width: 20%;
+  flex-direction: column;
+  z-index: 1;
+  border: 1px solid #ab6909;
+  background: white;
+  display: none;
+}
+
+.updateProfileOverlay i {
+  align-self: flex-end;
+  margin: 1%;
+  cursor: pointer;
+}
+
+.updateProfileOverlay h3 {
+  color: black;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.updateProfileOverlay form {
+  padding: 10%;
+}
+
+#username,
+#email,
+#updateDescription,
+#newPassword,
+#retypePassword {
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+
+.updateProfileOverlay button {
+  width: 50%;
+  background: #d5b07a;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+  margin: 0 auto;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-open {
+  display: flex;
 }
 
 .nav-links {
