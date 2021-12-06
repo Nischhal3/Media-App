@@ -72,15 +72,20 @@ const searchFunction = (collection) => {
   searchButton.addEventListener('click', () => {
     searchCollection.innerHTML = "";
     const input = document.getElementById('search-collection').value;
+    let array = [];
     for (let i = 0; i < collection.length; i++) {
       const titles = (collection[i].collection_title).toLowerCase();
       if (titles.includes(input)) {
         createSearchCards(collection[i]);
         collectionContent.style.display = "none";
         searchCollection.style.display = "flex";
+        array.push(collection[i]);
       }
-      if (titles.includes(input) === false) {
-        
+      if (array.length == 0) {
+        collectionContent.style.display = "none";
+        textNotFound.innerHTML = "Sorry we do not have any collection like that!";
+      } else {
+        textNotFound.style.display = "none";
       }
     }
   });

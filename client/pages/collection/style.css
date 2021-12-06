@@ -119,6 +119,12 @@
   border: 1px solid #d5b07a;
 }
 
+#not-found {
+  text-align: center;
+  float: center;
+  margin-top: 20%;
+}
+
 .hamburger {
   width: 35px;
   height: 30px;
