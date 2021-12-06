@@ -83,6 +83,7 @@ const searchFunction = (collection) => {
       }
       if (array.length == 0) {
         collectionContent.style.display = "none";
+        textNotFound.style.display = "block";
         textNotFound.innerHTML = "Sorry we do not have any collection like that!";
       } else {
         textNotFound.style.display = "none";
