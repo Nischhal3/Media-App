@@ -40,19 +40,15 @@ body {
     margin-right: 30px;
 }
 
-.login a:visited {
-    color: black;
-}
-
 .hamburger {
     width: 35px;
     height: 30px;
     position: absolute;
     top: 10px;
-    right: 1%;
+    right: 3%;
     margin: 5px auto;
     cursor: pointer;
-    z-index: 1;
+    z-index: 2;
 }
 
 .nav-links {
@@ -65,6 +61,7 @@ body {
     width: 50%;
     height: 300px;
     background: #d5b07a;
+    z-index: 1;
 }
 
 .open {
@@ -77,6 +74,7 @@ body {
     display: flex;
     animation: slideFromLeft 1s ease;
     right: -100%;
+    z-index: 2;
 }
 
 .nav-links li a {
@@ -134,6 +132,7 @@ body {
     justify-content: space-evenly;
     text-align: center;
     flex-wrap: wrap;
+    z-index: 0;
 }
 
 .single-image {
@@ -141,46 +140,104 @@ body {
     position: relative;
     width: 30%;
     border: 1px solid black;
-    box-shadow: 5px 5px #d4d4d4;
+    box-shadow: 5px 5px #d4d4d4; 
+    z-index: 0;
 }
 
 .single-image img {
-    opacity: 1;
     width: 100%;
     height: 100%;
-    transition: .5s ease;
+    position: relative;
     backface-visibility: hidden;
 }
 
-.overlay {
-    transition: .5s ease;
+.overlay{
     opacity: 0;
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(250, 238, 238, 0.6);
+	color: #fff;
+	-moz-transition: all 0.5s ease-in-out 0s;
+	-webkit-transition: all 0.5s ease-in-out 0s;
+	-ms-transition: all 0.5s ease-in-out 0s;
+	transition: all 0.5s ease-in-out 0s;
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 0;
 }
 
-.single-image:hover img {
-    opacity: 0.3;
-}
-
-.single-image:hover .overlay {
+.overlay:hover {
     opacity: 1;
 }
 
 .overlay .text {
     color: black;
-    font-size: 18px;
+    font-size: 20px;
+    margin-top: 5%;
 }
 
 .overlay .icons {
+    color: black;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    transform: translate(0%, 800%);
+    padding: 0 5% 5% 5%;
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 425px) {
+    .login{
+        display: none;
+    }
+
+    #images {
+        margin-top: 30%;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        flex-wrap: nowrap;
+    }
+
+    .single-image {
+        width: 95%;
+        align-self: center;
+    }
+
+    .hamburger {
+        width: 20px;
+        height: 20px;
+        right: 3%;
+    }
+    
+    .hamburger div:nth-child(1) {
+        top: 0px;
+    }
+    
+    .hamburger div:nth-child(2) {
+        top: 7px;
+    }
+    
+    .hamburger div:nth-child(3) {
+        top: 14px;
+    }
+    
+    .hamburgerOpen div:nth-child(1) {
+        transform: rotate(45deg);
+        top: 7px;
+    }
+    
+    .hamburgerOpen div:nth-child(3) {
+        transform: rotate(-45deg);
+        top: 7px;
+    }
+
 }
 
 @keyframes slideFromRight {
@@ -192,9 +249,9 @@ body {
       right: 0;
       opacity: 1;
     }
-  }
+}
   
-  @keyframes slideFromLeft {
+@keyframes slideFromLeft {
     0% {
       right: 0;
       opacity: 1;
@@ -203,4 +260,4 @@ body {
       right: -100%;
       opacity: 0;
     }
-  }
+}
