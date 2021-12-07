@@ -52,7 +52,7 @@ const createImageCard = (images) => {
 
         //redirect to single image page with id
         singleImage.addEventListener('click', () => {
-            location.href = `singleImage.html?id=${item.image_id}`;
+        location.href = `singleImage.html?id=${item.image_id}`;
         });
     });
 
