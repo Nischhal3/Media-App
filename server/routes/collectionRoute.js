@@ -18,7 +18,7 @@ const upload = multer({ dest: './uploads/' });
 router.route('/collection').get(get_collection_list);
 
 router
-  .route('/collection/:title')
+  .route('/collection/:id')
   .get(get_collection);
 
 router.route('/collection/:id')

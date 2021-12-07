@@ -16,7 +16,7 @@ const get_collection_list = async (req, res) => {
 };
 
 const get_collection = async (req, res, next) => {
-  const collection = await getCollection(req.params.title, next);
+  const collection = await getCollection(req.params.id, next);
 
   //TODO remove later console log
   //console.log('collection length', collection.length);

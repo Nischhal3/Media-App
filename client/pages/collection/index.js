@@ -26,6 +26,11 @@ const createCollectionCards = (collection) => {
     singleCollection.className = 'single-collection';
 
     collectionContent.appendChild(singleCollection);
+
+    //redirect to page2 with id
+    img.addEventListener('click', () => {
+    location.href = `page2.html?id=${item.collection_id}`;
+    });
   });
 };
 
