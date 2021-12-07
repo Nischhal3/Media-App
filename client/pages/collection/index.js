@@ -27,9 +27,9 @@ const createCollectionCards = (collection) => {
 
     collectionContent.appendChild(singleCollection);
 
-    //redirect to page2 with id
+    //redirect to single collection page with id
     img.addEventListener('click', () => {
-    location.href = `singleCollection.html?id=${item.collection_id}`;
+      location.href = `singleCollection.html?id=${item.collection_id}`;
     });
   });
 };
@@ -54,6 +54,9 @@ const createSearchCards = (item) => {
   singleCollection.className = 'single-collection';
 
   searchCollection.appendChild(singleCollection);
+  img.addEventListener('click', () => {
+    location.href = `singleCollection.html?id=${item.collection_id}`;
+  });
 };
 
 

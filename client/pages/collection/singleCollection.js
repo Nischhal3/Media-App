@@ -7,7 +7,7 @@ const getQParam = (param) => {
     return urlParams.get(param);
 };
 
-const getImageByCollection = async(id) => {
+const getImageByCollection = async (id) => {
     const response = await fetch(url + '/image/' + id);
     const images = await response.json();
     console.log(images);
@@ -49,7 +49,13 @@ const createImageCard = (images) => {
         iconSave.className = "far fa-bookmark";
 
         imageList.appendChild(singleImage);
+
+        //redirect to single image page with id
+        singleImage.addEventListener('click', () => {
+            location.href = `singleImage.html?id=${item.image_id}`;
+        });
     });
+
 };
 
 const token = sessionStorage.getItem('token');
@@ -58,7 +64,7 @@ const userData = user && JSON.parse(user);
 const userName = document.querySelector('loginText');
 
 if (token && user) {
-  userName.textContent = userData.first_name;
+    userName.textContent = userData.first_name;
 }
 
 const hamburger = document.querySelector('.hamburger');
