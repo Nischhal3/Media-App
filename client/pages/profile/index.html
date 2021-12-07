@@ -33,17 +33,16 @@
       </div>
     </div>
     <div class="user-profile">
-      <img src="../../assets/mona.jpeg" alt="profile picture" />
+      <div class="imgContainer">
+        <p id="name"></p>
+      </div>
       <div class="user-info">
         <div class="info-header">
-          <p>Luade monet</p>
+          <p></p>
           <button>edit profile</button>
           <i class="fas fa-pen edit"></i>
         </div>
-        <p class="user-intro">
-          French painter how was the initiator, leader and unswerving advocate
-          of Impleressionist style.
-        </p>
+        <p class="user-intro">No description yet.</p>
       </div>
     </div>
     <hr class="grey-line" />
@@ -103,9 +102,11 @@
     <div class="updateProfileOverlay">
       <i class="fas fa-times"></i>
       <h3>Update Proflie</h3>
-      <form class="update-info">
-        <label for="username">username</label>
-        <input type="text" id="username" name="username" required /><br />
+      <form class="update-info" id="updateInfoForm">
+        <label for="firstName">first name</label>
+        <input type="text" id="firstName" name="first_name" required /><br />
+        <label for="lastName">last name</label>
+        <input type="text" id="lastName" name="last_name" required /><br />
         <label for="email">email</label>
         <input type="email" id="email" name="email" required /><br />
         <label for="description">description</label>
@@ -116,17 +117,11 @@
           required
         /><br />
         <label for="password">new password</label>
-        <input type="text" id="newPassword" name="newPassword" required /><br />
-        <label for="password">enter paassword again</label>
-        <input
-          type="text"
-          id="retypePassword"
-          name="retypePassword"
-          required
-        /><br />
-        <button class="update">Update</button>
+        <input type="password" id="password" name="password" required /><br />
+        <button class="update" type="submit">Update</button>
       </form>
     </div>
+    <script src="../login/serialize.js"></script>
     <script src="./index.js"></script>
   </body>
 </html>
