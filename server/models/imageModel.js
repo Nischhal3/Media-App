@@ -33,13 +33,28 @@ const getImage = async (imageId, next) => {
   }
 };
 
+const getImageByCollectionId = async (id, next) => {
+  try {
+    const [rows] = await promisePool.query(
+      'SELECT collection_db.collection_id, user_db.first_name, user_db.last_name, image_title, image_file FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id INNER JOIN collection_db on collection_db.collection_id = image_db.collection_id WHERE image_db.collection_id = ?',
+      [id]
+    );
+    console.log('Get image by id', rows[0]);
+    return rows;
+  } catch (e) {
+    console.error('Get image by id', e.message);
+    const err = httpError('Sql error', 500);
+    next(err);
+  }
+};
+
 const insertImage = async (user_id, image, next) => {
   try {
     const [rows] = await promisePool.query(
       'INSERT INTO image_db ( user_id, collection_id, image_title, image_description, image_file, image_price) VALUES (?,?,?,?,?,?)',
       [
         user_id,
-        2,
+        4,
         image.image_title,
         image.image_description,
         image.file,
@@ -95,4 +110,5 @@ module.exports = {
   insertImage,
   deleteImage,
   updateImage,
+  getImageByCollectionId
 };

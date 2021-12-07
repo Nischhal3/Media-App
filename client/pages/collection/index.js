@@ -29,7 +29,7 @@ const createCollectionCards = (collection) => {
 
     //redirect to page2 with id
     img.addEventListener('click', () => {
-    location.href = `page2.html?id=${item.collection_id}`;
+    location.href = `singleCollection.html?id=${item.collection_id}`;
     });
   });
 };

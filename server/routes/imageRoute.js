@@ -9,11 +9,11 @@ const {
   post_image,
   delete_image,
   update_image,
+  get_image_collection,
 } = require('../controllers/imageController');
 const router = express.Router();
 
 //checking for image file
-
 const fileFilter = (req, file, cb) => {
   if (file.mimetype.includes('image')) {
     cb(null, true);
@@ -26,15 +26,23 @@ const upload = multer({ dest: './uploads/', fileFilter });
 
 router
   .route('/images')
-  .get(get_image_list)
-  .post(
-    upload.single('image'),
+  .get(get_image_list);
+// .post(
+//   upload.single('image'),
+//   body('image_title').notEmpty(),
+//   body('image_description').notEmpty(),
+//   body('image_price').isNumeric(),
+//   post_image
+// );
+
+router.route('/image/:id')
+  .get(get_image_collection)
+  .post(upload.single('image'),
     body('image_title').notEmpty(),
     body('image_description').notEmpty(),
     body('image_price').isNumeric(),
-    post_image
-  );
-
+    post_image);
+    
 router
   .route('/images/:imageId')
   .get(get_image)
