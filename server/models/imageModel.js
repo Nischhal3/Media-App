@@ -4,10 +4,10 @@ const pool = require('../database/db');
 const promisePool = pool.promise();
 const httpError = require('../utils/error');
 
-const getAllImages = async () => {
+const getAllImagesByUser = async (id) => {
   try {
     const [rows] = await promisePool.query(
-      'SELECT user_db.first_name, user_db.last_name,image_id, image_title, image_description, image_file, image_price FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id'
+      'SELECT * FROM image_db where user_id', [id]
     );
     console.log('Get all images', rows);
     return rows;
@@ -21,11 +21,26 @@ const getAllImages = async () => {
 const getImage = async (imageId, next) => {
   try {
     const [rows] = await promisePool.query(
-      'SELECT user_db.first_name, user_db.last_name, image_title, image_description, image_file FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id WHERE image_id = ?',
+      'SELECT collection_db.collection_id, user_db.first_name, user_db.last_name, image_title, image_description, image_file FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id INNER JOIN collection_db on collection_db.collection_id = image_db.collection_id WHERE image_id = ?',
       [imageId]
     );
     console.log('Get image by id', rows[0]);
     return rows[0];
+  } catch (e) {
+    console.error('Get image by id', e.message);
+    const err = httpError('Sql error', 500);
+    next(err);
+  }
+};
+
+const getImageByCollectionId = async (id, next) => {
+  try {
+    const [rows] = await promisePool.query(
+      'SELECT collection_db.collection_id, user_db.first_name, user_db.last_name, image_title, image_file FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id INNER JOIN collection_db on collection_db.collection_id = image_db.collection_id WHERE image_db.collection_id = ?',
+      [id]
+    );
+    console.log('Get image by id', rows[0]);
+    return rows;
   } catch (e) {
     console.error('Get image by id', e.message);
     const err = httpError('Sql error', 500);
@@ -39,7 +54,7 @@ const insertImage = async (user_id, image, next) => {
       'INSERT INTO image_db ( user_id, collection_id, image_title, image_description, image_file, image_price) VALUES (?,?,?,?,?,?)',
       [
         user_id,
-        1,
+        5,
         image.image_title,
         image.image_description,
         image.file,
@@ -90,9 +105,10 @@ const updateImage = async (user_id, image, next) => {
 };
 
 module.exports = {
-  getAllImages,
+  getAllImagesByUser,
   getImage,
   insertImage,
   deleteImage,
   updateImage,
+  getImageByCollectionId
 };

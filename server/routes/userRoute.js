@@ -4,7 +4,7 @@ const { body } = require('express-validator');
 const router = express.Router()
 const userController = require('../controllers/userController');
 
-router.route('/user')
+router.route('/')
 	.get(userController.user_list_get)
 	.put(
 		body('name').isLength({ min: 3 }),
@@ -14,7 +14,7 @@ router.route('/user')
 
 router.get('/token', userController.checkToken);
 
-router.route('/user/:id')
+router.route('/:id')
 	.get(userController.user_get)
 	.delete(userController.user_delete)
 

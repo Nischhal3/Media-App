@@ -96,10 +96,11 @@ img {
 
 .greeting {
   text-align: center;
+  padding: 20px 0;
 }
 
 .greeting h1 {
-  padding: 20px;
+  padding: 10px 0;
 }
 
 .greeting h1 span {
@@ -198,9 +199,11 @@ img {
   text-align: center;
 }
 
-.about h2 {
+.about h1 {
+  font-family: 'Meddon', 'cursive';
   font-weight: bolder;
-  padding: 20px 0;
+  padding: 10px 0;
+  color: #ab6909;
 }
 
 .about h1 {
@@ -232,6 +235,11 @@ img {
 .contactInfo {
   font-size: 18px;
   flex-grow: 3;
+}
+
+.contactInfoPhone,
+.termsPhone {
+  display: none;
 }
 
 .media {
