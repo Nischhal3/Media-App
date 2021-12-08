@@ -1,5 +1,5 @@
 {
-  "name": "NordArtive",
+  "name": "media-app",
   "version": "1.0.0",
   "description": "School Project",
   "main": "app.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nischhal3/NordArtive.git"
+    "url": "git+https://github.com/Nischhal3/media-app.git"
   },
   "author": "Nischhal, Giang, Amy",
   "license": "ISC",
