@@ -52,3 +52,20 @@ add.addEventListener('click', () => {
 closeOverlay.addEventListener('click', () => {
   addPostOverlay.classList.remove('overlay-open');
 });
+
+//button edit profile
+const updateProfileOverlay = document.querySelector('.updateProfileOverlay');
+const editProfile = document.querySelector('.info-header button');
+const editProfilePhone = document.querySelector('.info-header i');
+const closeUpdateOverlay = document.querySelector('.updateProfileOverlay i');
+editProfile.addEventListener('click', () => {
+  updateProfileOverlay.classList.add('overlay-open');
+});
+
+closeUpdateOverlay.addEventListener('click', () => {
+  updateProfileOverlay.classList.remove('overlay-open');
+});
+
+editProfilePhone.addEventListener('click', () => {
+  updateProfileOverlay.classList.add('overlay-open');
+});
