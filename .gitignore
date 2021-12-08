@@ -490,6 +490,6 @@ Temporary Items
 # ignore content of uploads folder
 server/uploads/*
 # except one (empty) file to have the folder in version control
-!uploads/.gitkeep
+server/!uploads/.gitkeep
 
 # End of https://www.toptal.com/developers/gitignore/api/macos
