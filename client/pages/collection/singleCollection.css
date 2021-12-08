@@ -19,12 +19,13 @@ body {
     justify-content: space-between;
 }
 
-.header h2 {
+.header h1 {
     flex-grow: 5;
     font-family: 'Meddon', 'cursive';
 }
 
 .login {
+    margin-right: 50px;
     display: flex;
     flex-grow: 1;
     justify-content: flex-start;
@@ -32,11 +33,17 @@ body {
 
 .loginText {
     margin-right: 10px;
+    font-size: 20px;
 }
 
 .login a {
     color: black;
     text-decoration: none;
+    font-size: 20px;
+}
+
+.menu-text {
+    font-size: 20px;
     margin-right: 30px;
 }
 
@@ -122,12 +129,35 @@ body {
     top: 10px;
 }
 
+#path {
+    margin: 5% 0 0 5%;
+}
+
+.collection-path {
+    text-decoration: none;
+    color: black;
+    font-size: 24px;
+}
+
+.stupid {
+    margin-left: 10px;
+    font-size: 24px;
+    color: #AB6909;
+}
+
+.single-collection-path {
+    margin-left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
 #images {
     display: flex;
     flex-direction: row;
     width: 90%;
     margin: 0 auto;
-    margin-top: 5%;
     padding: 20px 0;
     justify-content: space-around;
     text-align: center;
@@ -196,6 +226,13 @@ body {
     .login{
         display: none;
     }
+    body {
+        overflow-x: hidden;
+    }
+
+    #path {
+        margin-top: 10%;
+    }
 
     #images {
         display: flex;
@@ -203,30 +240,25 @@ body {
         height: 100%;
         flex-wrap: nowrap;
     }
-
     .single-image {
         width: 95%;
-        margin-top: 20%;
+        margin-bottom: 10%;
         align-self: center;
     }
-
     .overlay{
         opacity: 1;
         height: 20%;
         display: block;
     }
-
     .overlay .text {
         margin-top: 4%;
         font-size: 16px;
     }
-
     .overlay .icons{
        margin-top: 60%;
        padding: 0;
        padding-bottom: 20%;
     }
-
     .hamburger {
         width: 20px;
         height: 20px;
