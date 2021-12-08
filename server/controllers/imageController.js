@@ -14,7 +14,7 @@ const { validationResult } = require('express-validator');
 const makeThumbnail = require('../utils/resize');
 
 
-const get_image_user = async (req, res) => {
+const get_image_user = async (req, res, next) => {
   const images = await getAllImagesByUser(req.params.id, next);
   if (images) {
     res.json(images);
