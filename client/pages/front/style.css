@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .container {
   height: 100vh;
 }
@@ -12,18 +16,20 @@
   margin: auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .headerContent {
   display: flex;
   flex-grow: 1;
   padding: 20px 0;
+  margin-right: 5%;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .search {
   display: flex;
-  flex-grow: 1;
   justify-content: flex-end;
 }
 
@@ -45,7 +51,6 @@
 
 .login {
   display: flex;
-  flex-grow: 1;
   justify-content: flex-end;
 }
 
@@ -226,4 +231,88 @@ img {
   display: flex;
   justify-content: space-between;
   padding-bottom: 20px;
+}
+
+.menu {
+  position: absolute;
+  right: 5%;
+  top: 1%;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.nav-links {
+  position: absolute;
+  right: -100%;
+  top: 0;
+  flex-direction: column;
+  justify-content: space-around;
+  list-style-type: none;
+  width: 30%;
+  height: 300px;
+  background: #d5b07a;
+  z-index: 1;
+}
+
+.open {
+  display: flex;
+  animation: slideFromRight 1s ease;
+  right: 0;
+}
+
+.close {
+  display: flex;
+  animation: slideFromLeft 1s ease;
+  right: -100%;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.close-menu {
+  position: absolute;
+  top: 20px;
+  right: 5%;
+  cursor: pointer;
+}
+
+.line {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: black;
+  border-radius: 9px;
+  opacity: 1;
+  right: 0;
+}
+
+@keyframes slideFromRight {
+  0% {
+    right: -100%;
+    opacity: 0;
+  }
+  100% {
+    right: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromLeft {
+  0% {
+    right: 0;
+    opacity: 1;
+  }
+  100% {
+    right: -100%;
+    opacity: 0;
+  }
 }

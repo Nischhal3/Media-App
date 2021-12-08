@@ -40,9 +40,22 @@ artworks.forEach((artwork) => {
   artworksContent.appendChild(singleArtwork);
 });
 
-const goToLogIn = document.querySelector('.imgOverlay button');
+const goToLogIn = document.querySelector('.imgOverlay a');
 goToLogIn.addEventListener('click', () => {
   document.location('../login/');
 });
 
-console.log(goToLogIn);
+//toggle menu
+const menu = document.querySelector('.menu');
+const navLinks = document.querySelector('.nav-links');
+const closeMenuButton = document.querySelector('.close-menu');
+
+menu.addEventListener('click', () => {
+  navLinks.classList.add('open');
+  navLinks.classList.remove('close');
+});
+
+closeMenuButton.addEventListener('click', () => {
+  navLinks.classList.add('close');
+  navLinks.classList.remove('open');
+});
