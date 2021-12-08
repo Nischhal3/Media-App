@@ -45,12 +45,16 @@ artworks.forEach((artwork) => {
   artworksContent.appendChild(singleArtwork);
 });
 
+<<<<<<< HEAD
 //handle link to login on image overlay and link to contact artist if users logged in
+=======
+>>>>>>> 9046364 (fix hamburger menu in front page, login, sign up and collection page)
 const goToLogIn = document.querySelector('.imgOverlay a');
 goToLogIn.addEventListener('click', () => {
   document.location('../login/index.html');
 });
 
+<<<<<<< HEAD
 if (token && user) {
   goToLogIn.textContent = 'Contact Artist';
   //will need to display artist contact?
@@ -114,3 +118,19 @@ if (token && user) {
   greeting.appendChild(buttonGroup);
   buttonGroup.className = 'greetingBtns';
 }
+=======
+//toggle menu
+const menu = document.querySelector('.menu');
+const navLinks = document.querySelector('.nav-links');
+const closeMenuButton = document.querySelector('.close-menu');
+
+menu.addEventListener('click', () => {
+  navLinks.classList.add('open');
+  navLinks.classList.remove('close');
+});
+
+closeMenuButton.addEventListener('click', () => {
+  navLinks.classList.add('close');
+  navLinks.classList.remove('open');
+});
+>>>>>>> 9046364 (fix hamburger menu in front page, login, sign up and collection page)

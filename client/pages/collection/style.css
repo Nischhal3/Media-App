@@ -80,7 +80,8 @@ body {
   cursor: pointer;
 }
 
-#collectionContent, #collection {
+#collectionContent,
+#collection {
   display: flex;
   flex-direction: row;
   width: 90%;
@@ -104,8 +105,8 @@ body {
 .single-collection img {
   cursor: pointer;
 }
-.single-collection h4  {
-  color: #AB6909;
+.single-collection h4 {
+  color: #ab6909;
   text-transform: uppercase;
   text-align: left;
   margin: 5% 0 2% 5%;
@@ -124,21 +125,16 @@ body {
   border: 1px solid #d5b07a;
 }
 
-#not-found {
-  text-align: center;
-  float: center;
-  margin-top: 20%;
-}
-
-.hamburger {
-  width: 35px;
-  height: 30px;
+.hamburgerMenu {
   position: absolute;
-  top: 10px;
-  right: 1%;
-  margin: 5px auto;
+  right: 5%;
+  top: 1%;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
   cursor: pointer;
-  z-index: 1;
+  font-size: 26px;
 }
 
 .nav-links {
@@ -148,9 +144,10 @@ body {
   flex-direction: column;
   justify-content: space-around;
   list-style-type: none;
-  width: 50%;
+  width: 30%;
   height: 300px;
   background: #d5b07a;
+  z-index: 1;
 }
 
 .open {
@@ -172,6 +169,13 @@ body {
   font-size: 18px;
 }
 
+.close-menu {
+  position: absolute;
+  top: 20px;
+  right: 5%;
+  cursor: pointer;
+}
+
 .line {
   display: block;
   position: absolute;
@@ -183,31 +187,26 @@ body {
   right: 0;
 }
 
-.hamburger div:nth-child(1) {
-  top: 0px;
+@keyframes slideFromRight {
+  0% {
+    right: -100%;
+    opacity: 0;
+  }
+  100% {
+    right: 0;
+    opacity: 1;
+  }
 }
 
-.hamburger div:nth-child(2) {
-  top: 10px;
-}
-
-.hamburger div:nth-child(3) {
-  top: 20px;
-}
-
-.hamburgerOpen div:nth-child(1) {
-  transform: rotate(45deg);
-  top: 10px;
-}
-
-.hamburgerOpen div:nth-child(2) {
-  width: 0%;
-  opacity: 0;
-}
-
-.hamburgerOpen div:nth-child(3) {
-  transform: rotate(-45deg);
-  top: 10px;
+@keyframes slideFromLeft {
+  0% {
+    right: 0;
+    opacity: 1;
+  }
+  100% {
+    right: -100%;
+    opacity: 0;
+  }
 }
 
 @media only screen and (max-width: 425px) {
@@ -269,32 +268,8 @@ body {
     margin-bottom: 10px;
   }
 
-  .hamburger {
-    width: 20px;
-    height: 20px;
-    right: 3%;
-  }
-
-  .hamburger div:nth-child(1) {
-    top: 0px;
-  }
-
-  .hamburger div:nth-child(2) {
-    top: 7px;
-  }
-
-  .hamburger div:nth-child(3) {
-    top: 14px;
-  }
-
-  .hamburgerOpen div:nth-child(1) {
-    transform: rotate(45deg);
-    top: 7px;
-  }
-
-  .hamburgerOpen div:nth-child(3) {
-    transform: rotate(-45deg);
-    top: 7px;
+  .nav-links {
+    width: 40%;
   }
 }
 
