@@ -20,7 +20,7 @@ const get_image_list = async (req, res) => {
 };
 
 const get_image = async (req, res, next) => {
-  const image = await getImage(req.params.imageId, next);
+  const image = await getImage(req.params.id, next);
   console.log('Image by id', image);
   if (image) {
     res.json(image);
@@ -62,8 +62,7 @@ const post_image = async (req, res, next) => {
   }
   try {
     const thumb = await makeThumbnail(req.file.path, req.file.filename);
-    //const user_id = req.user.user_id;
-    const user_id = req.params.id;
+    const user_id = req.user.user_id;
     console.log('Post done by userID', user_id);
     const image = req.body;
     image.file = req.file.filename;

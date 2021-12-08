@@ -15,15 +15,15 @@ const {
 
 const upload = multer({ dest: './uploads/' });
 
-router.route('/collection').get(get_collection_list);
+router.route('/').get(get_collection_list);
 
 router
-  .route('/collection/:id')
+  .route('/:id')
   .get(get_collection);
 
-router.route('/collection/:id')
+router.route('/:id')
   .put(upload.single('image'), update_collection);
 
-router.get('/collection/:title/:imageId', get_imageIn_collection);
+router.get('/:title/:imageId', get_imageIn_collection);
 
 module.exports = router;

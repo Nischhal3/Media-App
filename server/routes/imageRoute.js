@@ -25,26 +25,16 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ dest: './uploads/', fileFilter });
 
 router
-  .route('/images')
-  .get(get_image_list);
-// .post(
-//   upload.single('image'),
-//   body('image_title').notEmpty(),
-//   body('image_description').notEmpty(),
-//   body('image_price').isNumeric(),
-//   post_image
-// );
-
-router.route('/image/:id')
-  .get(get_image_collection)
+  .route('/')
+  .get(get_image_list)
   .post(upload.single('image'),
     body('image_title').notEmpty(),
     body('image_description').notEmpty(),
     body('image_price').isNumeric(),
     post_image);
-    
-router
-  .route('/images/:imageId')
+
+router.route('/:id')
+  .get(get_image_collection)
   .get(get_image)
   .delete(delete_image)
   .put(
