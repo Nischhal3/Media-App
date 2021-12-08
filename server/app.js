@@ -19,13 +19,14 @@ const userRoute = require('./routes/userRoute');
 const imageRoute = require('./routes/imageRoute');
 const collectionRoute = require('./routes/collectionRoute');
 
-app.use(passport.initialize());
 app.use(express.static('uploads'));
 app.use('/thumbnails', express.static('thumbnails'));
+app.use(passport.initialize());
 
-app.use('/auth', authRoute);
+
 app.use('/', collectionRoute);
 app.use('/', imageRoute);
+app.use('/auth', authRoute);
 app.use('/', passport.authenticate('jwt', { session: false }), userRoute);
 
 // app.use((req, res, next) => {
