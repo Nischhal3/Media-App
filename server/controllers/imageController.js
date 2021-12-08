@@ -1,7 +1,7 @@
 'user strict';
 
 const {
-  getAllImages,
+  getAllImagesByUser,
   getImage,
   insertImage,
   deleteImage,
@@ -14,19 +14,12 @@ const { validationResult } = require('express-validator');
 const makeThumbnail = require('../utils/resize');
 
 
-const get_image_list = async (req, res) => {
-  const images = await getAllImages();
-  res.json(images);
-};
-
-const get_image = async (req, res, next) => {
-  const image = await getImage(req.params.id, next);
-  console.log('Image by id', image);
-  if (image) {
-    res.json(image);
+const get_image_user = async (req, res) => {
+  const images = await getAllImagesByUser(req.params.id, next);
+  if (images) {
+    res.json(images);
     return;
   }
-
   const err = httpError('Image not found', 400);
   next(err);
 };
@@ -38,7 +31,6 @@ const get_image_collection = async (req, res, next) => {
     res.json(image);
     return;
   }
-
   const err = httpError('Image not found', 400);
   next(err);
 };
@@ -110,8 +102,7 @@ const update_image = async (req, res, next) => {
 };
 
 module.exports = {
-  get_image_list,
-  get_image,
+  get_image_user,
   post_image,
   delete_image,
   update_image,

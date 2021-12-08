@@ -8,10 +8,17 @@ const getQParam = (param) => {
 };
 
 const getImageByCollection = async (id) => {
-    const response = await fetch(url + '/image/' + id);
-    const images = await response.json();
-    console.log(images);
-    createImageCard(images);
+    try {
+        const fetchOptions = {
+            method: 'GET',
+        };
+        const response = await fetch(url + '/image/collection/' + id);
+        const images = await response.json();
+        console.log(images);
+        createImageCard(images);
+    } catch (e) {
+        console.log(e.message);
+    }
 };
 
 getImageByCollection(getQParam('id'));
@@ -52,7 +59,7 @@ const createImageCard = (images) => {
 
         //redirect to single image page with id
         singleImage.addEventListener('click', () => {
-        location.href = `singleImage.html?id=${item.image_id}`;
+            location.href = `singleImage.html?id=${item.image_id}`;
         });
     });
 

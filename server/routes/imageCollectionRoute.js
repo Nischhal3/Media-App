@@ -1,14 +1,8 @@
 'use strict';
 
 const express = require('express');
-const { body } = require('express-validator');
 const multer = require('multer');
 const {
-  get_image_list,
-  get_image,
-  post_image,
-  delete_image,
-  update_image,
   get_image_collection,
 } = require('../controllers/imageController');
 const router = express.Router();
@@ -24,23 +18,7 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ dest: './uploads/', fileFilter });
 
-router
-  .route('/')
-  .get(get_image_list)
-  .post(upload.single('image'),
-    body('image_title').notEmpty(),
-    body('image_description').notEmpty(),
-    body('image_price').isNumeric(),
-    post_image);
-
 router.route('/:id')
   .get(get_image_collection)
-  .get(get_image)
-  .delete(delete_image)
-  .put(
-    body('image_title').notEmpty(),
-    body('image_description').notEmpty(),
-    update_image
-  );
 
 module.exports = router;
