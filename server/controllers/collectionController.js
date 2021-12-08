@@ -1,13 +1,10 @@
 'user strict';
 
 const { httpError } = require('../utils/error');
-const makeThumbnail = require('../utils/resize');
 
 const {
   getAllCollection,
   getCollection,
-  getImageInCollection,
-  updateCollection,
 } = require('../models/collectionModel');
 
 const get_collection_list = async (req, res) => {

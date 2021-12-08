@@ -152,3 +152,37 @@ body {
     opacity: 0;
   }
 }
+
+#path {
+  margin: 5% 0 0 5%;
+}
+
+.collection-path {
+  text-decoration: none;
+  color: black;
+  font-size: 24px;
+}
+
+.stupid {
+  margin-left: 10px;
+  font-size: 24px;
+  color: #ab6909;
+}
+
+.single-collection-path {
+  margin-left: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.image-path {
+  margin-left: 10px;
+  font-size: 24px;
+  color: black;
+}
+
+#image-content {
+  margin: 20px 0 0 50px;
+}

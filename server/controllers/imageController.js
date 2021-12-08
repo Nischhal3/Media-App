@@ -13,7 +13,6 @@ const { httpError } = require('../utils/error');
 const { validationResult } = require('express-validator');
 const makeThumbnail = require('../utils/resize');
 
-
 const get_image_user = async (req, res, next) => {
   const images = await getAllImagesByUser(req.params.id, next);
   if (images) {
@@ -35,7 +34,16 @@ const get_image_collection = async (req, res, next) => {
   next(err);
 };
 
-
+const get_image = async (req, res, next) => {
+  const image = await getImage(req.params.id, next);
+  console.log('Image by id', image);
+  if (image) {
+    res.json(image);
+    return;
+  }
+  const err = httpError('Image not found', 400);
+  next(err);
+};
 
 const post_image = async (req, res, next) => {
   const errors = validationResult(req);
@@ -63,7 +71,6 @@ const post_image = async (req, res, next) => {
     if (thumb) {
       res.json({ message: `Image added with id: ${id}` });
     }
-
   } catch (error) {
     console.log('Add image with thumbnail error', e.message);
     const err = httpError('Error posting image', 400);
@@ -106,5 +113,6 @@ module.exports = {
   post_image,
   delete_image,
   update_image,
-  get_image_collection
+  get_image_collection,
+  get_image,
 };

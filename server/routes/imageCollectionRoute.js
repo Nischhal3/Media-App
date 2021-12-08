@@ -4,6 +4,7 @@ const express = require('express');
 const multer = require('multer');
 const {
   get_image_collection,
+  get_image,
 } = require('../controllers/imageController');
 const router = express.Router();
 
@@ -18,7 +19,8 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ dest: './uploads/', fileFilter });
 
-router.route('/:id')
-  .get(get_image_collection)
+router.route('/:id').get(get_image_collection);
+
+router.route('/image/:id').get(get_image);
 
 module.exports = router;
