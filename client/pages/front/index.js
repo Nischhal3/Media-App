@@ -1,5 +1,10 @@
 'use strict';
 
+const token = sessionStorage.getItem('token');
+const user = sessionStorage.getItem('user');
+const userData = user && JSON.parse(user);
+
+//display the fixed artworks
 const artworks = [
   {
     id: 1,
@@ -42,10 +47,36 @@ artworks.forEach((artwork) => {
 
 const goToLogIn = document.querySelector('.imgOverlay a');
 goToLogIn.addEventListener('click', () => {
-  document.location('../login/');
+  document.location('../login/index.html');
 });
 
-//toggle menu
+if (token && user) {
+  goToLogIn.textContent = 'Contact Artist';
+  //will need to display artist contact?
+  goToLogIn.addEventListener('click', () => {
+    document.location('../collection/index.html');
+  });
+}
+
+//display items for front page header
+const headerContent = document.querySelector('.headerContent');
+const loginText = document.querySelector('.loginText');
+
+const hamburgerMenu = ` <button class="menu"><i class="fas fa-bars"></i></button>
+<ul class="nav-links">
+  <i class="fas fa-times close-menu"></i>
+  <li><a href="../../pages/front/index.html">Home</a></li>
+  <li><a href="../../pages/profile/index.html">Profile</a></li>
+  <li><a href="../../pages/collection/index.html">Collections</a></li>
+  <li><a>Log out</a></li>
+</ul>`;
+
+if (token && user) {
+  loginText.innerHTML = userData.first_name;
+  headerContent.innerHTML += hamburgerMenu;
+  headerContent.className = 'headerContentLoggedIn';
+}
+
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
@@ -59,3 +90,22 @@ closeMenuButton.addEventListener('click', () => {
   navLinks.classList.add('close');
   navLinks.classList.remove('open');
 });
+
+//button of greeting parts
+const greeting = document.querySelector('.greeting');
+const greetingButton = document.querySelector('.greeting a');
+
+if (token && user) {
+  greetingButton.className = 'disappear';
+  const buttonGroup = document.createElement('div');
+  const gotToCollection = document.createElement('a');
+  const shareYourArtwork = document.createElement('a');
+  gotToCollection.href = '../collection/index.html';
+  gotToCollection.textContent = 'Go to collections';
+  shareYourArtwork.href = '../profile/index.html';
+  shareYourArtwork.textContent = 'Share Your Artwork';
+  buttonGroup.appendChild(gotToCollection);
+  buttonGroup.appendChild(shareYourArtwork);
+  greeting.appendChild(buttonGroup);
+  buttonGroup.className = 'greetingBtns';
+}

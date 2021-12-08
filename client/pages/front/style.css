@@ -19,16 +19,30 @@ body {
   justify-content: space-around;
 }
 
-.headerContent {
+.header h2 {
+  flex-grow: 5;
+  font-family: 'Meddon', cursive;
+}
+
+.headerContentLoggedIn {
+  margin-right: 5%;
   display: flex;
   flex-grow: 1;
   padding: 20px 0;
-  margin-right: 5%;
   justify-content: space-around;
   align-items: center;
 }
 
-.search {
+.headerContent {
+  display: flex;
+  flex-grow: 0.5;
+  padding: 20px 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search,
+.login {
   display: flex;
   justify-content: flex-end;
 }
@@ -47,11 +61,6 @@ body {
 .search a:visited,
 .login a:visited {
   color: black;
-}
-
-.login {
-  display: flex;
-  justify-content: flex-end;
 }
 
 img {
@@ -91,12 +100,17 @@ img {
   text-decoration: none;
 }
 
+.disappear {
+  display: none;
+}
+
 .greeting {
   text-align: center;
+  padding: 20px 0;
 }
 
 .greeting h1 {
-  padding: 20px;
+  padding: 10px 0;
 }
 
 .greeting h1 span {
@@ -107,6 +121,15 @@ img {
   margin: 0 auto;
   font-size: 20px;
   line-height: 1.6;
+  font-style: italic;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.greetingBtns {
+  display: flex;
+  width: 30%;
+  margin: 0 auto;
+  justify-content: space-around;
 }
 
 .text {
@@ -122,6 +145,7 @@ img {
   cursor: pointer;
   border-radius: 5px;
   text-decoration: none;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 .blackLine {
@@ -185,14 +209,21 @@ img {
   text-align: center;
 }
 
-.about h2 {
+.about h1 {
+  font-family: 'Meddon', 'cursive';
   font-weight: bolder;
-  padding: 20px 0;
+  padding: 10px 0;
+  color: #ab6909;
+}
+
+.about h1 {
+  font-family: 'Meddon', cursive;
+  color: #ab6909;
 }
 
 .characteristic {
   font-size: 20px;
-  padding: 20px;
+  padding: 10px 0 20px;
 }
 
 .aboutText {
@@ -214,6 +245,11 @@ img {
 .contactInfo {
   font-size: 18px;
   flex-grow: 3;
+}
+
+.contactInfoPhone,
+.termsPhone {
+  display: none;
 }
 
 .media {

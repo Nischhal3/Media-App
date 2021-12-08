@@ -11,24 +11,23 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const { httpError } = require('./utils/error');
 const passport = require('./utils/passport');
 
 const authRoute = require('./routes/authRoute.js');
 const userRoute = require('./routes/userRoute');
-const imageRoute = require('./routes/imageRoute');
+const imageCollectionRoute = require('./routes/imageCollectionRoute');
+const collectionRoute = require('./routes/collectionRoute');
+const imageUserRoute = require('./routes/imageUserRoute');
 
 app.use(passport.initialize());
 app.use(express.static('uploads'));
+app.use('/thumbnails', express.static('thumbnails'));
 
 app.use('/auth', authRoute);
-app.use('/', passport.authenticate('jwt', { session: false }), userRoute);
-app.use('/', passport.authenticate('jwt', { session: false }), imageRoute);
-
-// app.use((req, res, next) => {
-//   const err = httpError('Not found', 404);
-//   next(err);
-// });
+app.use('/collection', collectionRoute);
+app.use('/image/collection', imageCollectionRoute);
+app.use('/image/user', passport.authenticate('jwt', { session: false }), imageUserRoute);
+app.use('/user', passport.authenticate('jwt', { session: false }), userRoute);
 
 //error handler
 app.use((err, req, res, next) => {
