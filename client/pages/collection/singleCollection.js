@@ -21,8 +21,42 @@ const getImageByCollection = async (id) => {
     }
 };
 
+const getOneCollection = async(id) => {
+    try {
+        const fetchOptions = {
+            method: 'GET',
+        };
+        const response = await fetch(url + '/collection/' + id);
+        const collection = await response.json();
+        console.log("one collection", collection.collection_title);
+        createPath(getQParam('id'), collection.collection_title);
+    } catch (e) {
+        console.log(e.message);
+    } 
+}
+
 getImageByCollection(getQParam('id'));
-console.log(getQParam('id'));
+getOneCollection(getQParam('id'));
+
+const path = document.getElementById('path')
+const createPath = (id, title) =>  {
+    const collectionPath = document.createElement('a');
+    collectionPath.href = "index.html";
+    collectionPath.className = "collection-path";
+    collectionPath.innerHTML = "Collections";
+    const singleCollectionPath = document.createElement('a');
+    singleCollectionPath.innerHTML = title;
+    singleCollectionPath.href = `singleCollection.html?id=${id}`
+    singleCollectionPath.className = "single-collection-path";
+    const stupid = document.createElement('span');
+    stupid.innerHTML = " > ";
+    stupid.className = "stupid";
+
+    path.append(collectionPath);
+    path.append(stupid);
+    path.append(singleCollectionPath);
+};
+
 
 const imageList = document.getElementById('images');
 const createImageCard = (images) => {
