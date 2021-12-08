@@ -1,12 +1,31 @@
 'use strict';
 
+const url = 'http://localhost:3000'; // change url when uploading to server
+
 const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
 
+console.log('user', user);
 if (!token && !user) {
   console.log('here');
   location.href = '../login/index.html';
 }
+
+const getImageByUser = async (id) => {
+  try {
+    const fetchOptions = {
+      method: 'GET',
+    };
+    const response = await fetch(url + '/image/user/' + id);
+    const images = await response.json();
+    console.log(images);
+    createImageCard(images);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+console.log("id",getImageByUser(user.user_id))
 
 //Tabs selection
 const tabs = document.querySelectorAll('[ data-tab-target]');
