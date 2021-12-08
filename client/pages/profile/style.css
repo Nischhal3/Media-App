@@ -73,6 +73,10 @@ body {
   justify-content: space-between;
 }
 
+.info-header i {
+  display: none;
+}
+
 .info-header p {
   font-family: 'Meddon', 'cursive';
   font-size: 18px;
@@ -154,11 +158,8 @@ body {
   flex-direction: column;
   z-index: 1;
   border: 1px solid #ab6909;
+  background: white;
   display: none;
-}
-
-.overlay-open {
-  display: flex;
 }
 
 .overlay i {
@@ -193,11 +194,71 @@ form {
 #title,
 #date,
 #description,
-#collection-select {
+#collection-select,
+#username,
+#email,
+#updateDescription,
+#newPassword,
+#retypePassword {
   border: 1px solid #ab6909;
   border-radius: 5px;
   width: 100%;
   padding: 5px;
+}
+
+.updateProfileOverlay {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  width: 20%;
+  flex-direction: column;
+  z-index: 1;
+  border: 1px solid #ab6909;
+  background: white;
+  display: none;
+}
+
+.updateProfileOverlay i {
+  align-self: flex-end;
+  margin: 1%;
+  cursor: pointer;
+}
+
+.updateProfileOverlay h3 {
+  color: black;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.updateProfileOverlay form {
+  padding: 10%;
+}
+
+#username,
+#email,
+#updateDescription,
+#newPassword,
+#retypePassword {
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+
+.updateProfileOverlay button {
+  width: 50%;
+  background: #d5b07a;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+  margin: 0 auto;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-open {
+  display: flex;
 }
 
 .nav-links {
@@ -289,5 +350,81 @@ form {
   100% {
     right: -100%;
     opacity: 0;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .header {
+    margin: 1% auto;
+  }
+
+  .header h2 {
+    font-size: 20px;
+  }
+
+  .icons button {
+    height: 30px;
+  }
+
+  .user-profile {
+    width: 80%;
+    flex-direction: column;
+  }
+
+  .user-profile img {
+    width: 50%;
+    margin-right: 0;
+    align-self: center;
+  }
+
+  .info-header {
+    justify-content: center;
+  }
+
+  .info-header button {
+    display: none;
+  }
+
+  .info-header i {
+    display: flex;
+    margin-left: 5%;
+  }
+
+  .user-intro {
+    text-align: center;
+  }
+
+  .tabs {
+    padding: 0;
+  }
+
+  .overlay {
+    width: 70%;
+    left: 15%;
+    top: 10%;
+  }
+
+  .overlay-container {
+    flex-direction: column;
+  }
+
+  .overlay-container img {
+    width: 80%;
+  }
+
+  .overlay-container form {
+    margin-right: 0;
+    width: 80%;
+  }
+
+  .updateProfileOverlay {
+    width: 70%;
+    top: 10%;
+    left: 15%;
+  }
+
+  .updateProfileOverlay i,
+  .overlay i {
+    margin-right: 2%;
   }
 }
