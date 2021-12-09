@@ -35,6 +35,7 @@ body {
 
 .collections h2 {
   color: #ab6909;
+  cursor: pointer;
 }
 
 .black-line {
@@ -57,7 +58,7 @@ body {
 
 #search-collection {
   width: 60%;
-  padding: 10px 0;
+  padding: 10px 0 10px 5px;
   border-radius: 5px;
   border: 2px solid #ab6909;
 }

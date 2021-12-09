@@ -4,7 +4,13 @@ const url = 'http://localhost:3000'; // change url when uploading to server
 const collectionContent = document.getElementById('collectionContent');
 const textNotFound = document.getElementById('not-found');
 const searchCollection = document.getElementById('collection');
+const searchInput = document.getElementById('search-collection');
+const searchButton = document.getElementById('search-button');
+const h2 = document.getElementById('to-collections');
 
+h2.addEventListener('click', () => {
+  location.href = 'index.html';
+});
 
 const createCollectionCards = (collection) => {
   collection.forEach((item) => {
@@ -29,7 +35,7 @@ const createCollectionCards = (collection) => {
 
     //redirect to single collection page with id
     singleCollection.addEventListener('click', () => {
-    location.href = `singleCollection.html?id=${item.collection_id}`;
+      location.href = `singleCollection.html?id=${item.collection_id}`;
     });
   });
 };
@@ -55,7 +61,7 @@ const createSearchCards = (item) => {
 
   searchCollection.appendChild(singleCollection);
   singleCollection.addEventListener('click', () => {
-  location.href = `singleCollection.html?id=${item.collection_id}`;
+    location.href = `singleCollection.html?id=${item.collection_id}`;
   });
 };
 
@@ -76,7 +82,7 @@ const getCollection = async () => {
 getCollection();
 
 const searchFunction = (collection) => {
-  const searchButton = document.getElementById('search-button');
+  handleEnter();
   searchButton.addEventListener('click', () => {
     searchCollection.innerHTML = "";
     const input = document.getElementById('search-collection').value;
@@ -97,8 +103,18 @@ const searchFunction = (collection) => {
         textNotFound.style.display = "none";
       }
     }
+    searchInput.value = "";
   });
 };
+
+const handleEnter = () => {
+ searchInput.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   searchButton.click();
+  }
+});
+}
 
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
