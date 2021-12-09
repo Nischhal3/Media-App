@@ -7,13 +7,121 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&family=Meddon&family=Noto+Sans&display=swap"
       rel="stylesheet"
     />
     <link href="./style.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/635b5f77f3.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Profile page</title>
   </head>
   <body>
+    <div class="header">
+      <h2>Node Artive</h2>
+      <div class="icons">
+        <button class="add"><i class="fas fa-plus"></i></button>
+        <button class="menu"><i class="fas fa-bars"></i></button>
+        <ul class="nav-links">
+          <i class="fas fa-times close-menu"></i>
+          <li><a href="../../pages/front/">Home</a></li>
+          <li><a href="../../pages/profile/">Profile</a></li>
+          <li><a href="../../pages/collection/">Collections</a></li>
+          <li><a>Log out</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="user-profile">
+      <div class="imgContainer">
+        <p id="name"></p>
+      </div>
+      <div class="user-info">
+        <div class="info-header">
+          <p></p>
+          <button>edit profile</button>
+          <i class="fas fa-pen edit"></i>
+        </div>
+        <p class="user-intro">No description yet.</p>
+      </div>
+    </div>
+    <hr class="grey-line" />
+    <ul class="tabs">
+      <li data-tab-target="#video" class="tab">
+        videos <span><i class="fa fa-youtube-play"></i></span>
+      </li>
+      <li data-tab-target="#artwork" class="active tab">
+        artwork <i class="fa fa-folder-open-o"></i>
+      </li>
+      <li data-tab-target="#library" class="tab">
+        library <i class="fa fa-bookmark-o"></i>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div id="video" data-tab-content>
+        <h1>video</h1>
+        <p>Page for videos</p>
+      </div>
+      <div id="collection" data-tab-content class="active">
+        <!-- data from backend -->
+      </div>
+      <div id="library" data-tab-content>
+        <h1>Library</h1>
+        <p>Page for library</p>
+      </div>
+    </div>
+    <div class="overlay">
+      <i class="fas fa-times"></i>
+      <div class="overlay-container">
+        <img src="../../assets/add-post.png" alt="add post picture" />
+        <form class="overlay-info">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" required /><br />
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required /><br />
+          <label for="description">Description:</label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            required
+          /><br />
+          <label for="collection-select">Choose a collection:</label>
+          <select name="collection-select" id="collection-select">
+            <option value="saab">test</option>
+            <option value="opel">test1</option>
+            <!-- fetch from backend all the collections -->
+            <!-- <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="opel">Opel</option>
+            <option value="audi">Audi</option> -->
+          </select>
+        </form>
+      </div>
+    </div>
+    <div class="updateProfileOverlay">
+      <i class="fas fa-times"></i>
+      <h3>Update Proflie</h3>
+      <form class="update-info" id="updateInfoForm">
+        <label for="firstName">first name</label>
+        <input type="text" id="firstName" name="first_name" required /><br />
+        <label for="lastName">last name</label>
+        <input type="text" id="lastName" name="last_name" required /><br />
+        <label for="email">email</label>
+        <input type="email" id="email" name="email" required /><br />
+        <label for="description">description</label>
+        <input
+          type="text"
+          id="updateDescription"
+          name="updateDescription"
+          required
+        /><br />
+        <label for="password">new password</label>
+        <input type="password" id="password" name="password" required /><br />
+        <button class="update" type="submit">Update</button>
+      </form>
+    </div>
+    <script src="../login/serialize.js"></script>
     <script src="./index.js"></script>
   </body>
 </html>

@@ -470,7 +470,7 @@ Icon
 
 # Thumbnails
 ._*
-
+server/thumbnails/*
 # Files that might appear in the root of a volume
 .DocumentRevisions-V100
 .fseventsd
@@ -488,8 +488,8 @@ Temporary Items
 .apdisk
 
 # ignore content of uploads folder
-uploads/*
+server/uploads/*
 # except one (empty) file to have the folder in version control
-!uploads/.gitkeep
+!server/uploads/.gitkeep
 
 # End of https://www.toptal.com/developers/gitignore/api/macos
