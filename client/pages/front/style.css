@@ -320,17 +320,6 @@ img {
   cursor: pointer;
 }
 
-.line {
-  display: block;
-  position: absolute;
-  height: 3px;
-  width: 100%;
-  background: black;
-  border-radius: 9px;
-  opacity: 1;
-  right: 0;
-}
-
 @keyframes slideFromRight {
   0% {
     right: -100%;
