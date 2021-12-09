@@ -52,10 +52,23 @@ body {
   justify-content: center;
 }
 
-.user-profile img {
-  width: 30%;
+.imgContainer {
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  margin-right: 20px;
+  background: #d5b07a;
+  margin-right: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#name {
+  margin-top: 5px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 36px;
 }
 
 .user-info {
@@ -93,7 +106,8 @@ body {
 }
 
 .user-intro {
-  padding: 20px 10px;
+  width: 100%;
+  padding-top: 20px;
   align-self: center;
   font-style: italic;
   line-height: 1.2;
@@ -195,11 +209,11 @@ form {
 #date,
 #description,
 #collection-select,
-#username,
+#firstName,
+#lastName,
 #email,
 #updateDescription,
-#newPassword,
-#retypePassword {
+#password {
   border: 1px solid #ab6909;
   border-radius: 5px;
   width: 100%;
@@ -234,11 +248,11 @@ form {
   padding: 10%;
 }
 
-#username,
+#firstName,
+#lastName,
 #email,
 #updateDescription,
-#newPassword,
-#retypePassword {
+#password {
   margin-top: 2px;
   margin-bottom: 20px;
 }
