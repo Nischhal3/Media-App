@@ -306,6 +306,13 @@ img {
   font-size: 18px;
 }
 
+.close-menu {
+  position: absolute;
+  top: 20px;
+  right: 5%;
+  cursor: pointer;
+}
+
 @keyframes slideFromRight {
   0% {
     right: -100%;
