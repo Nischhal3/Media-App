@@ -7,7 +7,9 @@ const httpError = require('../utils/error');
 const getAllImagesByUser = async (id) => {
   try {
     const [rows] = await promisePool.query(
-      'SELECT * FROM image_db where user_id = ?', [id]);
+      'SELECT * FROM image_db where user_id = ?',
+      [id]
+    );
     console.log('Get all images', rows);
     return rows;
   } catch (e) {
@@ -109,5 +111,5 @@ module.exports = {
   insertImage,
   deleteImage,
   updateImage,
-  getImageByCollectionId
+  getImageByCollectionId,
 };

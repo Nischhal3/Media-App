@@ -2,15 +2,6 @@
 const pool = require('../database/db');
 const promisePool = pool.promise();
 
-const getAllUsers = async () => {
-  try {
-    const [rows] = await promisePool.query('SELECT * FROM user_db');
-    return rows;
-  } catch (e) {
-    console.error('error', e.message);
-  }
-};
-
 const getUser = async (id) => {
   try {
     const [rows] = await promisePool.execute(
@@ -36,27 +27,22 @@ const addUser = async (user) => {
   }
 };
 
-const updateUser = async (body, user) => {
-  if (user.role === 0) {
-    try {
-      const [rows] = await promisePool.execute(
-        'UPDATE user_db SET first_name = ?, last_name = ?, email = ?, password= ? WHERE user_id = ?',
-        [body.first_name, body.last_name, body.email, body.passwd, body.user_id]
-      );
-      return rows;
-    } catch (e) {
-      console.error('error', e.message);
-    }
-  } else {
-    try {
-      const [rows] = await promisePool.execute(
-        'UPDATE user_db SET first_name = ?, last_name = ?, email = ?, password = ? WHERE user_id = ?',
-        [body.first_name, body.last_name, body.email, body.passwd, user.user_id]
-      );
-      return rows;
-    } catch (e) {
-      console.error('error', e.message);
-    }
+const updateUser = async (user, userId) => {
+  try {
+    const [rows] = await promisePool.execute(
+      'UPDATE user_db SET first_name = ?, last_name = ?, user_description = ?, email = ?, password = ? WHERE user_id = ?',
+      [
+        user.first_name,
+        user.last_name,
+        user.updateDescription,
+        user.email,
+        user.password,
+        userId,
+      ]
+    );
+    return rows.affectedRows === 1;
+  } catch (e) {
+    console.error('error', e.message);
   }
 };
 
@@ -100,7 +86,6 @@ const getUserLogIn = async (params) => {
 };
 
 module.exports = {
-  getAllUsers,
   getUser,
   addUser,
   getUserByEmail,

@@ -29,6 +29,7 @@ body {
   display: flex;
   flex-grow: 1;
   padding: 20px 0;
+  margin-right: 5%;
   justify-content: space-around;
   align-items: center;
 }
