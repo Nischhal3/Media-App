@@ -28,7 +28,6 @@ router.route('/:id')
   .post(upload.single('image'),
     body('image_title').notEmpty(),
     body('image_description').notEmpty(),
-    body('image_price').isNumeric(),
     post_image)
   .put(
     body('image_title').notEmpty(),

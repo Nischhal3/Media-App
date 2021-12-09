@@ -6,7 +6,6 @@ const makeThumbnail = require('../utils/resize');
 const {
   getAllCollection,
   getCollection,
-  getImageInCollection,
   updateCollection,
 } = require('../models/collectionModel');
 
@@ -30,7 +29,26 @@ const get_collection = async (req, res, next) => {
   next(err);
 };
 
+//this is to add picture of collection to server using postman after deploy
+const update_collection = async (req, res, next) => {
+  if (!req.file) {
+    const err = httpError('Invalid file', 400);
+    next(err);
+    return;
+  }
+  console.log('image for collection', req.file);
+  try {
+    const update = await updateCollection(req.file, req.params.id, next);
+    res.json({ message: `Image update: ${update}` });
+  } catch (error) {
+    const err = httpError('Error uploading image', 400);
+    next(err);
+    return;
+  }
+};
+
 module.exports = {
   get_collection_list,
   get_collection,
+  update_collection
 };
