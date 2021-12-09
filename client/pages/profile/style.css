@@ -150,14 +150,32 @@ body {
   border-top: 2px solid black;
 }
 
- #artwork.active {
+/* #artwork.active {
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 10px;
-}
+} */
 #artwork.active > div {
   padding: 20px;
   text-align: center;
+}
+
+#artwork.active {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px 0;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.single-image img {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 1px solid black;
+  box-shadow: 5px 5px #d4d4d4;
 }
 
 .fa {
@@ -383,8 +401,8 @@ form {
     margin: 1% auto;
   }
 
-  .header h2 {
-    font-size: 20px;
+  .header h1 {
+    font-size: 24px;
   }
 
   .icons button {
@@ -393,7 +411,7 @@ form {
 
   .user-profile {
     width: 80%;
-    flex-direction: column;
+    margin-top: 5%;
   }
 
   .user-profile img {
@@ -421,6 +439,21 @@ form {
 
   .tabs {
     padding: 0;
+  }
+
+  #artwork.active {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+  }
+  
+  .single-image img {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    box-shadow: 5px 5px #d4d4d4;
   }
 
   .overlay {
