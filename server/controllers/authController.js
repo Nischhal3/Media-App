@@ -46,15 +46,16 @@ const signup = async (req, res, next) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-  const user = [
-    req.body.firstname,
-    req.body.lastname,
-    req.body.email,
+  const user = {
+    first_name: req.body.firstname,
+    last_name: req.body.lastname,
+    email: req.body.email,
     hashedPassword,
-  ];
+  };
 
   const token = jwt.sign(JSON.stringify(user), process.env.JWT_SECRET);
   const result = await addUser(user);
+  await delete user.hashedPassword;
   if (result.insertId) {
     res.json({ token, user });
     return;

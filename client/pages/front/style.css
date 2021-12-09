@@ -24,7 +24,8 @@ body {
   font-family: 'Meddon', cursive;
 }
 
-.headerContent {
+.headerContentLoggedIn {
+  margin-right: 5%;
   display: flex;
   flex-grow: 1;
   padding: 20px 0;
@@ -33,11 +34,18 @@ body {
   align-items: center;
 }
 
+.headerContent {
+  display: flex;
+  flex-grow: 0.5;
+  padding: 20px 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .search,
 .login {
   display: flex;
-  flex-grow: 1;
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 
 .searchText,
@@ -54,10 +62,6 @@ body {
 .search a:visited,
 .login a:visited {
   color: black;
-}
-
-.disappear {
-  display: none;
 }
 
 img {
@@ -97,6 +101,10 @@ img {
   text-decoration: none;
 }
 
+.disappear {
+  display: none;
+}
+
 .greeting {
   text-align: center;
   padding: 20px 0;
@@ -120,7 +128,7 @@ img {
 
 .greetingBtns {
   display: flex;
-  width: 40%;
+  width: 30%;
   margin: 0 auto;
   justify-content: space-around;
 }

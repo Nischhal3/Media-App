@@ -45,7 +45,6 @@ artworks.forEach((artwork) => {
   artworksContent.appendChild(singleArtwork);
 });
 
-//handle link to login on image overlay and link to contact artist if users logged in
 const goToLogIn = document.querySelector('.imgOverlay a');
 goToLogIn.addEventListener('click', () => {
   document.location('../login/index.html');
