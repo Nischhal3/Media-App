@@ -118,6 +118,14 @@ body {
   border: 1px solid #e7e7e7;
 }
 
+[data-tab-content] {
+  display: none;
+}
+
+.active[data-tab-content] {
+  display: block;
+}
+
 .tabs {
   display: flex;
   flex-direction: row;
@@ -141,12 +149,14 @@ body {
   border-top: 2px solid black;
 }
 
-[data-tab-content] {
-  display: none;
+ #artwork.active {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
 }
-
-.active[data-tab-content] {
-  display: block;
+#artwork.active > div {
+  padding: 20px;
+  text-align: center;
 }
 
 .fa {

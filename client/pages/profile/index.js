@@ -15,20 +15,58 @@ if (!token && !user) {
 const tabs = document.querySelectorAll('[ data-tab-target]');
 const tabContents = document.querySelectorAll('[data-tab-content]');
 
-tabs.forEach((tab) => {
-  tab.addEventListener('click', () => {
+tabs.forEach(tab =>{
+  tab.addEventListener('click', ()=>{
     const target = document.querySelector(tab.dataset.tabTarget);
-    tabContents.forEach((tabContent) => {
+    tabContents.forEach(tabContent =>{
       tabContent.classList.remove('active');
-    });
-    tabs.forEach((tab) => {
+    })
+    tabs.forEach(tab =>{
       tab.classList.remove('active');
-    });
-    target.classList.add('active');
+    })
     tab.classList.add('active');
-  });
-});
+    target.classList.add('active');
+  })
+})
 
+const getImageByUser = async (id) => {
+  try {
+    const fetchOptions = {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+    const response = await fetch(url + '/image/user/' + id, fetchOptions);
+    const images = await response.json();
+    console.log(images);
+    createImageCard(images);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+getImageByUser(userData.user_id);
+
+const imageList = document.getElementById('artwork');
+const createImageCard = (images) => {
+  images.forEach((item) => {
+    console.log('item', item.image_file);
+    const singleImage = document.createElement('div');
+    const img = document.createElement('img');
+    img.src = url + '/thumbnails/' + item.image_file;
+    img.alt = item.image_title;
+    singleImage.appendChild(img);
+
+    imageList.appendChild(singleImage);
+
+    //redirect to single image page with id
+    singleImage.addEventListener('click', () => {
+      location.href = `singleImage.html?id=${item.image_id}`;
+    }); 
+  });
+}; 
+ 
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
