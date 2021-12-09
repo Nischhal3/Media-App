@@ -150,7 +150,7 @@ body {
   border-top: 2px solid black;
 }
 
- #artwork.active {
+#artwork.active {
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 10px;
@@ -379,11 +379,16 @@ form {
 }
 
 @media only screen and (max-width: 425px) {
+  .wrapper {
+    position: relative;
+    overflow-x: hidden;
+  }
+
   .header {
     margin: 1% auto;
   }
 
-  .header h2 {
+  .header h1 {
     font-size: 20px;
   }
 

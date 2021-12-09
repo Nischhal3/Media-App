@@ -17,51 +17,52 @@
     ></script>
     <title>Log in page</title>
   </head>
+  <div class="wrapper">
+    <body>
+      <div class="container">
+        <div class="box1">
+          <img src="../../assets/login-signup.png" />
+        </div>
+        <div class="box2">
+          <button class="menu"><i class="fas fa-bars"></i></button>
+          <ul class="nav-links">
+            <i class="fas fa-times close-menu"></i>
+            <li><a href="../../pages/front/index.html">Home</a></li>
+            <li><a href="../../pages/profile/index.html">Profile</a></li>
+            <li><a href="../../pages/collection/index.html">Collections</a></li>
+          </ul>
+          <h1>Sign in</h1>
+          <p class="login-p">
+            Join the artists community.
+            <a class="sign-up" href="../signup/index.html">Sign up</a>
+          </p>
+          <form
+            id="login-form"
+            action="http://localhost:3000/auth/login"
+            method="post"
+          >
+            <section>
+              <label for="email">Email</label> <br />
+              <input id="email" type="email" name="email" required />
+            </section>
 
-  <body>
-    <div class="container">
-      <div class="box1">
-        <img src="../../assets/login-signup.png" />
+            <section>
+              <label for="password">Password</label> <br />
+              <input id="password" type="password" name="password" required />
+              <br />
+              <a class="forgot-password" href="">Forgot password?</a>
+            </section>
+            <button class="button">Log in</button>
+          </form>
+          <p class="terms-policy">
+            By clicking Log In, I confirm that I have read and agree to the
+            NodeArtive Terms of Service, Privacy Policy, and to receive emails
+            and updates.
+          </p>
+        </div>
       </div>
-      <div class="box2">
-        <button class="menu"><i class="fas fa-bars"></i></button>
-        <ul class="nav-links">
-          <i class="fas fa-times close-menu"></i>
-          <li><a href="../../pages/front/index.html">Home</a></li>
-          <li><a href="../../pages/profile/index.html">Profile</a></li>
-          <li><a href="../../pages/collection/index.html">Collections</a></li>
-        </ul>
-        <h1>Sign in</h1>
-        <p class="login-p">
-          Join the artists community.
-          <a class="sign-up" href="../signup/index.html">Sign up</a>
-        </p>
-        <form
-          id="login-form"
-          action="http://localhost:3000/auth/login"
-          method="post"
-        >
-          <section>
-            <label for="email">Email</label> <br />
-            <input id="email" type="email" name="email" required />
-          </section>
-
-          <section>
-            <label for="password">Password</label> <br />
-            <input id="password" type="password" name="password" required />
-            <br />
-            <a class="forgot-password" href="">Forgot password?</a>
-          </section>
-          <button class="button">Log in</button>
-        </form>
-        <p class="terms-policy">
-          By clicking Log In, I confirm that I have read and agree to the
-          NodeArtive Terms of Service, Privacy Policy, and to receive emails and
-          updates.
-        </p>
-      </div>
-    </div>
-    <script src="./serialize.js"></script>
-    <script src="./index.js"></script>
-  </body>
+      <script src="./serialize.js"></script>
+      <script src="./index.js"></script>
+    </body>
+  </div>
 </html>

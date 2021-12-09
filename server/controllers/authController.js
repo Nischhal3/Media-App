@@ -57,6 +57,7 @@ const signup = async (req, res, next) => {
   const result = await addUser(user);
   await delete user.hashedPassword;
   if (result.insertId) {
+    user.user_id = result.insertId;
     res.json({ token, user });
     return;
   }
