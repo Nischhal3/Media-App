@@ -7,6 +7,11 @@ const searchCollection = document.getElementById('collection');
 const searchInput = document.getElementById('search-collection');
 const searchButton = document.getElementById('search-button');
 const h2 = document.getElementById('to-collections');
+const appName = document.getElementById('app-name');
+
+appName.addEventListener('click', () => {
+  location.href = '../front/index.html';
+});
 
 h2.addEventListener('click', () => {
   location.href = 'index.html';

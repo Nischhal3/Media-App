@@ -1,5 +1,10 @@
 'use strict';
 const url = 'http://localhost:3000'; // change url when uploading to server
+const appName = document.getElementById('app-name');
+
+appName.addEventListener('click', () => {
+    location.href = '../front/index.html';
+});
 
 const getQParam = (param) => {
     const queryString = window.location.search;
@@ -21,7 +26,7 @@ const getImageByCollection = async (id) => {
     }
 };
 
-const getOneCollection = async(id) => {
+const getOneCollection = async (id) => {
     try {
         const fetchOptions = {
             method: 'GET',
@@ -32,14 +37,14 @@ const getOneCollection = async(id) => {
         createPath(getQParam('id'), collection.collection_title);
     } catch (e) {
         console.log(e.message);
-    } 
+    }
 }
 
 getImageByCollection(getQParam('id'));
 getOneCollection(getQParam('id'));
 
 const path = document.getElementById('path')
-const createPath = (id, title) =>  {
+const createPath = (id, title) => {
     const collectionPath = document.createElement('a');
     collectionPath.href = "index.html";
     collectionPath.className = "collection-path";

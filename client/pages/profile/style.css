@@ -16,9 +16,10 @@ body {
   justify-content: space-between;
 }
 
-.header h2 {
+.header h1 {
   flex-grow: 5;
   font-family: 'Meddon', 'cursive';
+  cursor: pointer;
 }
 
 .icons {
