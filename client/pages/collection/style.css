@@ -127,6 +127,12 @@ body {
   border: 1px solid #d5b07a;
 }
 
+#not-found {
+  text-align: center;
+  float: center;
+  margin-top: 20%;
+}
+
 .hamburgerMenu {
   position: absolute;
   right: 5%;

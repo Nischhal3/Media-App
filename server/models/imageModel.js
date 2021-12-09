@@ -53,14 +53,14 @@ const getImageByCollectionId = async (id, next) => {
 const insertImage = async (user_id, image, next) => {
   try {
     const [rows] = await promisePool.query(
-      'INSERT INTO image_db ( user_id, collection_id, image_title, image_description, image_file) VALUES (?,?,?,?,?)',
+      'INSERT INTO image_db (user_id, collection_id, image_title, image_description, image_file, image_date) VALUES (?,?,?,?,?,?)',
       [
         user_id,
         5,
         image.image_title,
         image.image_description,
         image.file,
-        image.image_price,
+        image.image_date,
       ]
     );
     console.log('Insert image', rows);
