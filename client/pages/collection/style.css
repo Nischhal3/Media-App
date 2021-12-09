@@ -181,6 +181,11 @@ body {
 }
 
 @media only screen and (max-width: 425px) {
+  .wrapper {
+    position: relative;
+    overflow-x: hidden;
+  }
+
   h1,
   .menu-text {
     display: none;

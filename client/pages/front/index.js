@@ -46,23 +46,22 @@ artworks.forEach((artwork) => {
 });
 
 const goToLogIn = document.querySelector('.imgOverlay a');
-goToLogIn.addEventListener('click', () => {
-  document.location('../login/index.html');
-});
+
+if (!token && !user) {
+  goToLogIn.href = '../login/index.html';
+}
 
 if (token && user) {
   goToLogIn.textContent = 'Contact Artist';
   //will need to display artist contact?
-  goToLogIn.addEventListener('click', () => {
-    document.location('../collection/index.html');
-  });
+  goToLogIn.href = '../collection/singleCollection.html';
 }
 
 //display items for front page header
 const headerContent = document.querySelector('.headerContent');
 const loginText = document.querySelector('.loginText');
 
-const hamburgerMenu = ` <button class="menu"><i class="fas fa-bars"></i></button>
+const hamburgerMenu = `<button class="menu"><i class="fas fa-bars"></i></button>
 <ul class="nav-links">
   <i class="fas fa-times close-menu"></i>
   <li><a href="../../pages/front/index.html">Home</a></li>
@@ -81,15 +80,17 @@ const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
 
-menu.addEventListener('click', () => {
-  navLinks.classList.add('open');
-  navLinks.classList.remove('close');
-});
+menu &&
+  menu.addEventListener('click', () => {
+    navLinks.classList.add('open');
+    navLinks.classList.remove('close');
+  });
 
-closeMenuButton.addEventListener('click', () => {
-  navLinks.classList.add('close');
-  navLinks.classList.remove('open');
-});
+closeMenuButton &&
+  closeMenuButton.addEventListener('click', () => {
+    navLinks.classList.add('close');
+    navLinks.classList.remove('open');
+  });
 
 //button of greeting parts
 const greeting = document.querySelector('.greeting');

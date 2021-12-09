@@ -102,7 +102,7 @@ const createImageCard = (images) => {
   });
 };
 
-const userName = document.querySelector('loginText');
+const userName = document.querySelector('.loginText');
 
 if (token && user) {
   userName.textContent = userData.first_name;

@@ -19,7 +19,7 @@ body {
   justify-content: space-around;
 }
 
-.header h2 {
+.header h1 {
   flex-grow: 5;
   font-family: 'Meddon', cursive;
 }
@@ -273,7 +273,6 @@ img {
 .menu {
   position: absolute;
   right: 5%;
-  top: 1%;
   width: 40px;
   height: 40px;
   border: none;
@@ -340,5 +339,141 @@ img {
   100% {
     right: -100%;
     opacity: 0;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .wrapper {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .headerContentLoggedIn {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
+    top: 12px;
+  }
+
+  .headerContent {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex;
+    width: 40%;
+  }
+
+  .imgOverlay {
+    width: 90%;
+    left: 5%;
+    top: 29%;
+    padding: 10px;
+    border: 1px solid black;
+  }
+
+  .imgName {
+    font-size: 16px;
+    padding: 0;
+  }
+
+  .imgDetail,
+  .imgOverlay a {
+    display: none;
+  }
+
+  .greeting {
+    margin-top: 20px;
+    padding-bottom: 0;
+  }
+
+  .greeting h1,
+  .appName,
+  .artworks h2,
+  .about h2,
+  .contact h2 {
+    font-size: 24px;
+  }
+
+  .greetingBtns {
+    flex-direction: column;
+    width: 70%;
+  }
+
+  .greetingBtns a {
+    margin-bottom: 20px;
+  }
+
+  .artworks h2 {
+    padding-top: 10px;
+  }
+
+  .greeting p {
+    font-size: 14px;
+  }
+
+  #artworksContent {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+  .artwork {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .yellowLine {
+    margin-top: 0;
+  }
+
+  .about {
+    width: 80%;
+  }
+
+  .about h1 {
+    font-size: 20px;
+  }
+
+  .characteristic {
+    font-size: 16px;
+  }
+
+  .aboutText {
+    font-size: 14px;
+  }
+
+  .contactContainer {
+    padding: 10px 0 20px;
+  }
+
+  .contactInfo,
+  .terms {
+    display: none;
+  }
+
+  .contactInfoPhone,
+  .termsPhone {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .media {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .contactInfoPhone p {
+    line-height: 1.6;
+  }
+
+  .media i {
+    line-height: 1.5;
+    font-size: 20px;
   }
 }
