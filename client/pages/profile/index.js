@@ -125,6 +125,7 @@ updateInfoForm.addEventListener('submit', async () => {
   }
 });
 
+//get all collections for options in uploading artwork
 const select = document.getElementById('collection-select');
 (async function getAllCollections() {
   try {
