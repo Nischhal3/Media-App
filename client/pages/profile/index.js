@@ -11,6 +11,12 @@ if (!token && !user) {
   location.href = '../login/index.html';
 }
 
+const appName = document.getElementById('app-name');
+
+appName.addEventListener('click', () => {
+  location.href = '../front/index.html';
+});
+
 //Tabs selection
 const tabs = document.querySelectorAll('[ data-tab-target]');
 const tabContents = document.querySelectorAll('[data-tab-content]');

@@ -7,6 +7,19 @@ const user = sessionStorage.getItem('user');
 const collectionContent = document.getElementById('collectionContent');
 const textNotFound = document.getElementById('not-found');
 const searchCollection = document.getElementById('collection');
+const searchInput = document.getElementById('search-collection');
+const searchButton = document.getElementById('search-button');
+const h2 = document.getElementById('to-collections');
+const appName = document.getElementById('app-name');
+
+
+appName.addEventListener('click', () => {
+  location.href = '../front/index.html';
+});
+
+h2.addEventListener('click', () => {
+  location.href = 'index.html';
+});
 
 const createCollectionCards = (collection) => {
   collection.forEach((item) => {
@@ -76,7 +89,7 @@ const getCollection = async () => {
 getCollection();
 
 const searchFunction = (collection) => {
-  const searchButton = document.getElementById('search-button');
+  handleEnter();
   searchButton.addEventListener('click', () => {
     searchCollection.innerHTML = '';
     const input = document.getElementById('search-collection').value;
@@ -98,10 +111,19 @@ const searchFunction = (collection) => {
         textNotFound.style.display = 'none';
       }
     }
+    searchInput.value = "";
   });
 };
 
-//toggle menu
+const handleEnter = () => {
+ searchInput.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   searchButton.click();
+  }
+});
+}
+
 const menu = document.querySelector('.hamburgerMenu');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
