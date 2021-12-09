@@ -45,7 +45,6 @@ artworks.forEach((artwork) => {
   artworksContent.appendChild(singleArtwork);
 });
 
-//handle link to login on image overlay and link to contact artist if users logged in
 const goToLogIn = document.querySelector('.imgOverlay a');
 goToLogIn.addEventListener('click', () => {
   document.location('../login/index.html');
@@ -63,38 +62,34 @@ if (token && user) {
 const headerContent = document.querySelector('.headerContent');
 const loginText = document.querySelector('.loginText');
 
-const hamburgerMenu = `<div class="hamburger">
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"></div>
-</div>
+const hamburgerMenu = ` <button class="menu"><i class="fas fa-bars"></i></button>
 <ul class="nav-links">
-<li><a href="../../pages/front/index.html">Home</a></li>
-<li><a href="../../pages/profile/index.html">Profile</a></li>
-<li><a href="../../pages/collection/index.html">Collections</a></li>
-<li><a>Log out</a></li>
+  <i class="fas fa-times close-menu"></i>
+  <li><a href="../../pages/front/index.html">Home</a></li>
+  <li><a href="../../pages/profile/index.html">Profile</a></li>
+  <li><a href="../../pages/collection/index.html">Collections</a></li>
+  <li><a>Log out</a></li>
 </ul>`;
 
 if (token && user) {
   loginText.innerHTML = userData.first_name;
   headerContent.innerHTML += hamburgerMenu;
+  headerContent.className = 'headerContentLoggedIn';
 }
 
-const hamburger = document.querySelector('.hamburger');
+const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
+const closeMenuButton = document.querySelector('.close-menu');
 
-hamburger &&
-  hamburger.addEventListener('click', () => {
-    if (navLinks.classList.contains('open')) {
-      navLinks.classList.remove('open');
-      navLinks.classList.add('close');
-      hamburger.classList.remove('hamburgerOpen');
-    } else {
-      navLinks.classList.remove('close');
-      navLinks.classList.add('open');
-      hamburger.classList.add('hamburgerOpen');
-    }
-  });
+menu.addEventListener('click', () => {
+  navLinks.classList.add('open');
+  navLinks.classList.remove('close');
+});
+
+closeMenuButton.addEventListener('click', () => {
+  navLinks.classList.add('close');
+  navLinks.classList.remove('open');
+});
 
 //button of greeting parts
 const greeting = document.querySelector('.greeting');

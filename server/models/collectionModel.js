@@ -16,7 +16,9 @@ const getAllCollection = async () => {
 const getCollection = async (id, next) => {
   try {
     const [rows] = await promisePool.query(
-      'SELECT * FROM collection_db WHERE collection_id = ?',[id]);
+      'SELECT * FROM collection_db WHERE collection_id = ?',
+      [id]
+    );
     return rows[0];
   } catch (e) {
     console.error('Get collection by id', e.message);

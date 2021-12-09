@@ -1,6 +1,9 @@
 'use strict';
 const url = 'http://localhost:3000'; // change url when uploading to server
 
+const token = sessionStorage.getItem('token');
+const user = sessionStorage.getItem('user');
+
 const collectionContent = document.getElementById('collectionContent');
 const textNotFound = document.getElementById('not-found');
 const searchCollection = document.getElementById('collection');
@@ -8,6 +11,7 @@ const searchInput = document.getElementById('search-collection');
 const searchButton = document.getElementById('search-button');
 const h2 = document.getElementById('to-collections');
 const appName = document.getElementById('app-name');
+
 
 appName.addEventListener('click', () => {
   location.href = '../front/index.html';
@@ -45,7 +49,6 @@ const createCollectionCards = (collection) => {
   });
 };
 
-
 const createSearchCards = (item) => {
   const singleCollection = document.createElement('div');
   const img = document.createElement('img');
@@ -70,7 +73,6 @@ const createSearchCards = (item) => {
   });
 };
 
-
 const getCollection = async () => {
   try {
     const fetchOptions = {
@@ -89,23 +91,24 @@ getCollection();
 const searchFunction = (collection) => {
   handleEnter();
   searchButton.addEventListener('click', () => {
-    searchCollection.innerHTML = "";
+    searchCollection.innerHTML = '';
     const input = document.getElementById('search-collection').value;
     let array = [];
     for (let i = 0; i < collection.length; i++) {
-      const titles = (collection[i].collection_title).toLowerCase();
+      const titles = collection[i].collection_title.toLowerCase();
       if (titles.includes(input)) {
         createSearchCards(collection[i]);
-        collectionContent.style.display = "none";
-        searchCollection.style.display = "flex";
+        collectionContent.style.display = 'none';
+        searchCollection.style.display = 'flex';
         array.push(collection[i]);
       }
       if (array.length == 0) {
-        collectionContent.style.display = "none";
-        textNotFound.style.display = "block";
-        textNotFound.innerHTML = "Sorry we do not have any collection like that!";
+        collectionContent.style.display = 'none';
+        textNotFound.style.display = 'block';
+        textNotFound.innerHTML =
+          'Sorry we do not have any collection like that!';
       } else {
-        textNotFound.style.display = "none";
+        textNotFound.style.display = 'none';
       }
     }
     searchInput.value = "";
@@ -121,17 +124,21 @@ const handleEnter = () => {
 });
 }
 
-const hamburger = document.querySelector('.hamburger');
+const menu = document.querySelector('.hamburgerMenu');
 const navLinks = document.querySelector('.nav-links');
+const closeMenuButton = document.querySelector('.close-menu');
+const logout = document.querySelector('#logout');
 
-hamburger.addEventListener('click', () => {
-  if (navLinks.classList.contains('open')) {
-    navLinks.classList.remove('open');
-    navLinks.classList.add('close');
-    hamburger.classList.remove('hamburgerOpen');
-  } else {
-    navLinks.classList.remove('close');
-    navLinks.classList.add('open');
-    hamburger.classList.add('hamburgerOpen');
-  }
+if (!token || !user) {
+  logout.className = 'noUser';
+}
+
+menu.addEventListener('click', () => {
+  navLinks.classList.add('open');
+  navLinks.classList.remove('close');
+});
+
+closeMenuButton.addEventListener('click', () => {
+  navLinks.classList.add('close');
+  navLinks.classList.remove('open');
 });
