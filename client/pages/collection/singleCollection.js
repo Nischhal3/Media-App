@@ -1,5 +1,10 @@
 'use strict';
 const url = 'http://localhost:3000'; // change url when uploading to server
+const appName = document.getElementById('app-name');
+
+appName.addEventListener('click', () => {
+    location.href = '../front/index.html';
+});
 
 const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
@@ -26,39 +31,38 @@ const getImageByCollection = async (id) => {
 };
 
 const getOneCollection = async (id) => {
-  try {
-    const fetchOptions = {
-      method: 'GET',
-    };
-    const response = await fetch(url + '/collection/' + id);
-    const collection = await response.json();
-    console.log('one collection', collection.collection_title);
-    createPath(getQParam('id'), collection.collection_title);
-  } catch (e) {
-    console.log(e.message);
-  }
-};
+    try {
+        const fetchOptions = {
+            method: 'GET',
+        };
+        const response = await fetch(url + '/collection/' + id);
+        const collection = await response.json();
+        createPath(getQParam('id'), collection.collection_title);
+    } catch (e) {
+        console.log(e.message);
+    }
+}
 
 getImageByCollection(getQParam('id'));
 getOneCollection(getQParam('id'));
 
-const path = document.getElementById('path');
+const path = document.getElementById('path')
 const createPath = (id, title) => {
-  const collectionPath = document.createElement('a');
-  collectionPath.href = 'index.html';
-  collectionPath.className = 'collection-path';
-  collectionPath.innerHTML = 'Collections';
-  const singleCollectionPath = document.createElement('a');
-  singleCollectionPath.innerHTML = title;
-  singleCollectionPath.href = `singleCollection.html?id=${id}`;
-  singleCollectionPath.className = 'single-collection-path';
-  const stupid = document.createElement('span');
-  stupid.innerHTML = ' > ';
-  stupid.className = 'stupid';
+    const collectionPath = document.createElement('a');
+    collectionPath.href = "index.html";
+    collectionPath.className = "collection-path";
+    collectionPath.innerHTML = "Collections";
+    const singleCollectionPath = document.createElement('a');
+    singleCollectionPath.innerHTML = title;
+    singleCollectionPath.href = `singleCollection.html?id=${id}`
+    singleCollectionPath.className = "single-collection-path";
+    const rightArrow = document.createElement('span');
+    rightArrow.innerHTML = " > ";
+    rightArrow.className = "stupid";
 
-  path.append(collectionPath);
-  path.append(stupid);
-  path.append(singleCollectionPath);
+    path.append(collectionPath);
+    path.append(rightArrow);
+    path.append(singleCollectionPath);
 };
 
 const imageList = document.getElementById('images');
