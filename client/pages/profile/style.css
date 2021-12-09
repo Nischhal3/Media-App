@@ -149,6 +149,16 @@ body {
   border-top: 2px solid black;
 }
 
+ #artwork.active {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+#artwork.active > div {
+  padding: 20px;
+  text-align: center;
+}
+
 .fa {
   opacity: 0.5;
   margin-top: 3px;

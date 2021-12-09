@@ -54,7 +54,6 @@ const createImageCard = (images) => {
     console.log('item', item.image_file);
     const singleImage = document.createElement('div');
     const img = document.createElement('img');
-    let title = document.createElement('p');
     img.src = url + '/thumbnails/' + item.image_file;
     img.alt = item.image_title;
     singleImage.appendChild(img);
