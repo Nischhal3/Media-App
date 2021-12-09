@@ -210,8 +210,20 @@ body {
     overflow-x: hidden;
   }
 
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .menu-text {
+    display: none;
+  }
+
   #path {
     margin-top: 10%;
+  }
+
+  .collection-path, .stupid, .single-collection-path {
+    font-size: 20px;
   }
 
   #images {
@@ -219,6 +231,7 @@ body {
     flex-direction: column;
     height: 100%;
     flex-wrap: nowrap;
+    justify-content: flex-start;
   }
   .single-image {
     width: 95%;

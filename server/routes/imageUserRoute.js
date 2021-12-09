@@ -47,7 +47,7 @@ router
     upload.single('image'),
     body('image_title').notEmpty(),
     body('image_description').notEmpty(),
-    body('image_price').isNumeric(),
+    body('image_date').isDate(),
     add_image
   );
 

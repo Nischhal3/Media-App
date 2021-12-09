@@ -62,8 +62,9 @@ const createImageCard = (images) => {
     const img = document.createElement('img');
     img.src = url + '/thumbnails/' + item.image_file;
     img.alt = item.image_title;
+    singleImage.className = "single-image";
+    
     singleImage.appendChild(img);
-
     imageList.appendChild(singleImage);
 
     //redirect to single image page with id
