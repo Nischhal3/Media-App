@@ -5,7 +5,7 @@ const url = 'http://localhost:3000';
 const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
 const userData = user && JSON.parse(user);
-
+console.log(userData)
 if (!token && !user) {
   console.log('here');
   location.href = '../login/index.html';
@@ -86,6 +86,7 @@ editProfilePhone.addEventListener('click', () => {
       fetchOptions
     );
     const user = await response.json();
+    console.log(user);
     const userName = document.querySelector('.info-header p');
     const userIntro = document.querySelector('.user-intro');
     const imageName = document.getElementById('name');
@@ -124,28 +125,29 @@ updateInfoForm.addEventListener('submit', async () => {
   }
 });
 
-//get all collections to display in the select option(not yet ready, wait for collection route ready)
-// const select = document.querySelector('.collection-select');
+const select = document.getElementById('collection-select');
+(async function getAllCollections() {
+  try {
+    const fetchOptions = {
+      method: 'GET',
+    };
+    const response = await fetch(url + '/collection', fetchOptions);
+    const collections = await response.json();
+    console.log(collections);
+    optionCreated(collections);
 
-// (async function getAllCollections() {
-//   try {
-//     const fetchOptions = {
-//       method: 'GET',
-//     };
-//     const response = await fetch(url + '/collection', fetchOptions);
-//     const collections = await response.json();
-//     console.log(collections);
-//     // select.appendChild(
-//     //   collections.map((collection) => {
-//     //     return (
-//     //       <option
-//     //         key={collection.collection_id}
-//     //         value={collection.collection_title}
-//     //       />
-//     //     );
-//     //   })
-//     // );
-//   } catch (e) {
-//     alert(e.message);
-//   }
-// })();
+  } catch (e) {
+    alert(e.message);
+  }
+})();
+
+const optionCreated = (collections) => {
+  collections.forEach((item) => {
+    const option = document.createElement('option');
+    option.key = item.collection_id;
+    option.value = item.collection_title;
+    option.innerHTML = item.collection_title;
+
+    select.appendChild(option);
+  });
+}

@@ -7,7 +7,7 @@ const userController = require('../controllers/userController');
 router.get('/token', userController.checkToken);
 
 router
-  .route('/user/:id')
+  .route('/:id')
   .get(userController.user_get)
   .delete(userController.user_delete)
   .put(
