@@ -5,35 +5,35 @@ const url = 'http://localhost:3000';
 const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
 const userData = user && JSON.parse(user);
-console.log(userData)
+
 if (!token && !user) {
-  console.log('here');
   location.href = '../login/index.html';
 }
 
 const appName = document.getElementById('app-name');
 
-appName.addEventListener('click', () => {
-  location.href = '../front/index.html';
-});
+appName &&
+  appName.addEventListener('click', () => {
+    location.href = '../front/index.html';
+  });
 
 //Tabs selection
 const tabs = document.querySelectorAll('[ data-tab-target]');
 const tabContents = document.querySelectorAll('[data-tab-content]');
 
-tabs.forEach(tab =>{
-  tab.addEventListener('click', ()=>{
+tabs.forEach((tab) => {
+  tab.addEventListener('click', () => {
     const target = document.querySelector(tab.dataset.tabTarget);
-    tabContents.forEach(tabContent =>{
+    tabContents.forEach((tabContent) => {
       tabContent.classList.remove('active');
-    })
-    tabs.forEach(tab =>{
+    });
+    tabs.forEach((tab) => {
       tab.classList.remove('active');
-    })
+    });
     tab.classList.add('active');
     target.classList.add('active');
-  })
-})
+  });
+});
 
 const getImageByUser = async (id) => {
   try {
@@ -69,10 +69,10 @@ const createImageCard = (images) => {
     //redirect to single image page with id
     singleImage.addEventListener('click', () => {
       location.href = `singleImage.html?id=${item.image_id}`;
-    }); 
+    });
   });
-}; 
- 
+};
+
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
@@ -130,7 +130,7 @@ editProfilePhone.addEventListener('click', () => {
       fetchOptions
     );
     const user = await response.json();
-    console.log(user);
+    sessionStorage.setItem('user', JSON.stringify(user));
     const userName = document.querySelector('.info-header p');
     const userIntro = document.querySelector('.user-intro');
     const imageName = document.getElementById('name');
@@ -180,7 +180,6 @@ const select = document.getElementById('collection-select');
     const collections = await response.json();
     console.log(collections);
     optionCreated(collections);
-
   } catch (e) {
     alert(e.message);
   }
@@ -195,4 +194,4 @@ const optionCreated = (collections) => {
 
     select.appendChild(option);
   });
-}
+};

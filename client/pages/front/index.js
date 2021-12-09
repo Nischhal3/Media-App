@@ -110,3 +110,18 @@ if (token && user) {
   greeting.appendChild(buttonGroup);
   buttonGroup.className = 'greetingBtns';
 }
+
+//handle redirect login button on header
+const loginDiv = document.querySelector('.login');
+loginDiv.addEventListener('click', () => {
+  if (token && user) {
+    location.href = '../profile/index.html';
+  } else {
+    location.href = '../login/index.html';
+  }
+});
+
+const searchDiv = document.querySelector('.search');
+searchDiv.addEventListener('click', () => {
+  location.href = '../collection/index.html';
+});
