@@ -163,7 +163,7 @@ body {
 #artwork.active {
   display: flex;
   flex-direction: row;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   padding: 20px 0;
   justify-content: space-evenly;
