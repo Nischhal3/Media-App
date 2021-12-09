@@ -12,14 +12,15 @@ const searchButton = document.getElementById('search-button');
 const h2 = document.getElementById('to-collections');
 const appName = document.getElementById('app-name');
 
+appName &&
+  appName.addEventListener('click', () => {
+    location.href = '../front/index.html';
+  });
 
-appName.addEventListener('click', () => {
-  location.href = '../front/index.html';
-});
-
-h2.addEventListener('click', () => {
-  location.href = 'index.html';
-});
+h2 &&
+  h2.addEventListener('click', () => {
+    location.href = 'index.html';
+  });
 
 const createCollectionCards = (collection) => {
   collection.forEach((item) => {
@@ -111,18 +112,18 @@ const searchFunction = (collection) => {
         textNotFound.style.display = 'none';
       }
     }
-    searchInput.value = "";
+    searchInput.value = '';
   });
 };
 
 const handleEnter = () => {
- searchInput.addEventListener("keyup", function(event) {
-  if (event.keyCode === 13) {
-   event.preventDefault();
-   searchButton.click();
-  }
-});
-}
+  searchInput.addEventListener('keyup', function (event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      searchButton.click();
+    }
+  });
+};
 
 const menu = document.querySelector('.hamburgerMenu');
 const navLinks = document.querySelector('.nav-links');

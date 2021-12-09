@@ -392,6 +392,11 @@ form {
 }
 
 @media only screen and (max-width: 425px) {
+  .wrapper {
+    position: relative;
+    overflow-x: hidden;
+  }
+
   .header {
     margin: 1% auto;
   }
