@@ -62,8 +62,8 @@ const createImageCard = (images) => {
     const img = document.createElement('img');
     img.src = url + '/thumbnails/' + item.image_file;
     img.alt = item.image_title;
-    singleImage.className = "single-image";
-    
+    singleImage.className = 'single-image';
+
     singleImage.appendChild(img);
     imageList.appendChild(singleImage);
 
@@ -150,6 +150,11 @@ const updateInfoForm = document.querySelector('#updateInfoForm');
 
 updateInfoForm.addEventListener('submit', async () => {
   const data = serializeJson(updateInfoForm);
+  for (const [prop, value] of Object.entries(data)) {
+    if (value === '') {
+      delete data[prop];
+    }
+  }
   const fetchOptions = {
     method: 'PUT',
     headers: {
