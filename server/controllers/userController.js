@@ -11,7 +11,6 @@ const user_get = async (req, res) => {
 
 const user_update_put = (req, res, next) => {
   const userId = req.params.id;
-  console.log('here', req.body);
   const user_updated = userModel.updateUser(req.body, userId);
   if (user_updated) {
     res.json({ message: 'Update successfully' });
