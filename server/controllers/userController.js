@@ -2,7 +2,6 @@
 
 const userModel = require('../models/userModel');
 const { badRequestError } = require('../utils/error');
-const { validationResult } = require('express-validator');
 
 const user_get = async (req, res) => {
   const user_retrieved = await userModel.getUser(req.params.id);
@@ -11,21 +10,15 @@ const user_get = async (req, res) => {
 };
 
 const user_update_put = (req, res, next) => {
-  console.log('here');
-  const errors = validationResult(req);
-  console.log(errors);
-  if (!errors.isEmpty()) {
-    next(badRequestError('Data not valid'));
-  } else {
-    const userId = req.params.id;
-    const user_updated = userModel.updateUser(req.body, userId);
-    if (user_updated) {
-      res.json({ message: 'Update successfully' });
-      return;
-    }
-    res.json({ message: 'Error updating user' });
+  const userId = req.params.id;
+  console.log('here', req.body);
+  const user_updated = userModel.updateUser(req.body, userId);
+  if (user_updated) {
+    res.json({ message: 'Update successfully' });
     return;
   }
+  next(badRequestError('Error updating user'));
+  return;
 };
 
 const user_delete = (req, res) => {

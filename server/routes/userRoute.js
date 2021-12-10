@@ -10,12 +10,6 @@ router
   .route('/:id')
   .get(userController.user_get)
   .delete(userController.user_delete)
-  .put(
-    body('first_name').isLength({ min: 3 }),
-    body('last_name').isLength({ min: 3 }),
-    body('email').isEmail(),
-    body('password').matches('(?=.*[A-Z]).{8,}'),
-    userController.user_update_put
-  );
+  .put(userController.user_update_put);
 
 module.exports = router;
