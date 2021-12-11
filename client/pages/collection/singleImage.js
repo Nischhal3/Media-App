@@ -63,8 +63,10 @@ const createPath = (id, collectionTitle, imageTitle) => {
 
 const imageContent = document.getElementById('image-content');
 const createImageCard = (image) => {
+  const imageDiv = document.getElementById('image');
+  const infoDiv = document.getElementById('info');
+
   const img = document.createElement('img');
-  const infoDiv = document.createElement('div');
   const imageTitle = document.createElement('h2');
   const imageDate = document.createElement('p');
   const imageDescription = document.createElement('p');
@@ -72,6 +74,7 @@ const createImageCard = (image) => {
   
   img.src = url + "/" + image.image_file;
   img.alt = image.image_title;
+  
   imageTitle.innerHTML = image.image_title;
   imageDate.innerHTML = image.image_date.slice(0, 10);
   imageDescription.innerHTML = image.image_description;
@@ -82,14 +85,12 @@ const createImageCard = (image) => {
   imageDate.className = "date";
   imageDescription.className = 'image-description';
   artist.className = 'artist';
-  infoDiv.className = "info";
 
+  imageDiv.appendChild(img);
   infoDiv.appendChild(imageTitle);
   infoDiv.appendChild(artist);
   infoDiv.appendChild(imageDate);
   infoDiv.appendChild(imageDescription);
-  imageContent.appendChild(img);
-  imageContent.appendChild(infoDiv);
 };
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
