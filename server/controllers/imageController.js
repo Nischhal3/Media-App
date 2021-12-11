@@ -13,7 +13,6 @@ const { httpError } = require('../utils/error');
 const { validationResult } = require('express-validator');
 const makeThumbnail = require('../utils/resize');
 
-
 const get_image_user = async (req, res, next) => {
   const images = await getAllImagesByUser(req.params.id, next);
   if (images) {
@@ -26,7 +25,6 @@ const get_image_user = async (req, res, next) => {
 
 const get_image_collection = async (req, res, next) => {
   const image = await getImageByCollectionId(req.params.id, next);
-  console.log('Image by collection_id', image);
   if (image) {
     res.json(image);
     return;
@@ -44,9 +42,6 @@ const post_image = async (req, res, next) => {
     return;
   }
 
-  console.log("body", req.body);
-  
-  console.log('Posting images', req.file);
   if (!req.file) {
     const err = httpError('Invalid file', 400);
     next(err);
@@ -55,17 +50,13 @@ const post_image = async (req, res, next) => {
   try {
     const thumb = await makeThumbnail(req.file.path, req.file.filename);
     const user_id = req.user.user_id;
-    console.log('Post done by userID', user_id);
     const image = req.body;
     image.file = req.file.filename;
     const id = await insertImage(user_id, image);
-    console.log('Image post', image);
     if (thumb) {
       res.json({ message: `Image added with id: ${id}` });
     }
-
   } catch (error) {
-    console.log('Add image with thumbnail error', e.message);
     const err = httpError('Error posting image', 400);
     next(err);
     return;
@@ -118,7 +109,7 @@ const add_image = async (req, res, next) => {
   }
   try {
     const thumb = await makeThumbnail(req.file.path, req.file.filename);
-    console.log("user id", req.user.user_id);
+    console.log('user id', req.user.user_id);
     const user_id = req.user.user_id;
     console.log('Post done by userID', user_id);
     const image = req.body;
@@ -128,7 +119,6 @@ const add_image = async (req, res, next) => {
     if (thumb) {
       res.json({ message: `Image added with id: ${id}` });
     }
-
   } catch (error) {
     console.log('Add image with thumbnail error', e.message);
     const err = httpError('Error posting image', 400);

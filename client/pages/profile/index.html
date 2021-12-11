@@ -74,30 +74,34 @@
     <div class="overlay">
       <i class="fas fa-times"></i>
       <div class="overlay-container">
-        <img src="../../assets/add-post.png" alt="add post picture" />
-        <form  class="overlay-info"  id="post-artwork" enctype="multipart/form-data">
-          <input type="file" required name="image" accept="image/*" placeholder="Choose file">
-          <label for="title">Title:</label>
-          <input type="text" id="title" name="title" required /><br />
-          <label for="date">Date:</label>
-          <input type="date" id="date" name="date" required /><br />
-          <label for="description">Description:</label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            required
-          /><br />
-          <label for="collection-select">Choose a collection:</label>
-          <select name="collection" id="collection-select">
-            <option value="saab">---</option>
-            <!-- fetch from backend all the collections -->
-            <!-- <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="opel">Opel</option>
-            <option value="audi">Audi</option> -->
-          </select>
-          <input  name="submit" type="submit" value="Submit">
+        <form  class="overlay-image"  id="post-artwork" enctype="multipart/form-data">
+          <label>
+            <input type="file" required name="image" accept="image/*" placeholder="Choose file" id='imagePosting'>
+            <img src="../../assets/add-post.png" alt="add post picture"/>
+          </label>
+          <div class="formContent">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required /><br />
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required /><br />
+            <label for="description">Description:</label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              required
+            /><br />
+            <label for="collection-select">Choose a collection:</label>
+            <select name="collection" id="collection-select">
+              <option value="saab">---</option>
+              <!-- fetch from backend all the collections -->
+              <!-- <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="opel">Opel</option>
+              <option value="audi">Audi</option> -->
+            </select>
+            <input  name="submit" type="submit" value="Submit">
+          </div>
         </form>
       </div>
     </div>

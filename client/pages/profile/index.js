@@ -45,7 +45,6 @@ const getImageByUser = async (id) => {
     };
     const response = await fetch(url + '/image/user/' + id, fetchOptions);
     const images = await response.json();
-    console.log(images);
     createImageCard(images);
   } catch (e) {
     console.log(e.message);
@@ -57,7 +56,6 @@ getImageByUser(userData.user_id);
 const imageList = document.getElementById('artwork');
 const createImageCard = (images) => {
   images.forEach((item) => {
-    console.log('item', item.image_file);
     const singleImage = document.createElement('div');
     const img = document.createElement('img');
     img.src = url + '/thumbnails/' + item.image_file;
@@ -179,7 +177,6 @@ const select = document.getElementById('collection-select');
     };
     const response = await fetch(url + '/collection', fetchOptions);
     const collections = await response.json();
-    console.log(collections);
     optionCreated(collections);
   } catch (e) {
     alert(e.message);
@@ -198,11 +195,10 @@ const optionCreated = (collections) => {
 };
 
 const postArtwork = document.querySelector('#post-artwork');
-postArtwork.addEventListener('submit', async(e) => {
+postArtwork.addEventListener('submit', async (e) => {
+  postArtwork.toggleAttribute();
   e.preventDefault();
-  console.log('button pressed');
   const data = new FormData(postArtwork);
-  console.log(data);
 
   const fetchOptions = {
     method: 'POST',
@@ -211,8 +207,6 @@ postArtwork.addEventListener('submit', async(e) => {
     },
     body: data,
   };
-  console.log(fetchOptions);
-  const response = await fetch(url + `/image/user/${userData.user_id}`, fetchOptions);
-  const json = await response.json();
-  console.log("json",json);
+
+  await fetch(url + `/image/user/${userData.user_id}`, fetchOptions);
 });

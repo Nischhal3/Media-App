@@ -31,8 +31,9 @@ router
     upload.single('image'),
     body('title').notEmpty(),
     body('description').notEmpty(),
-    post_image)
-
+    body('date').isDate(),
+    post_image
+  )
   .put(
     body('image_title').notEmpty(),
     body('image_description').notEmpty(),
