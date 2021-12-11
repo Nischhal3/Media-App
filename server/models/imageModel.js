@@ -56,11 +56,11 @@ const insertImage = async (user_id, image, next) => {
       'INSERT INTO image_db (user_id, collection_id, image_title, image_description, image_file, image_date) VALUES (?,?,?,?,?,?)',
       [
         user_id,
-        5,
-        image.image_title,
-        image.image_description,
+        image.collection,
+        image.title,
+        image.description,
         image.file,
-        image.image_date,
+        image.date,
       ]
     );
     console.log('Insert image', rows);

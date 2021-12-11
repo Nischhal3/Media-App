@@ -35,8 +35,6 @@ const get_image_collection = async (req, res, next) => {
   next(err);
 };
 
-
-
 const post_image = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -46,6 +44,8 @@ const post_image = async (req, res, next) => {
     return;
   }
 
+  console.log("body", req.body);
+  
   console.log('Posting images', req.file);
   if (!req.file) {
     const err = httpError('Invalid file', 400);
@@ -111,7 +111,6 @@ const add_image = async (req, res, next) => {
     return;
   }
 
-  console.log('Posting images', req.file);
   if (!req.file) {
     const err = httpError('Invalid file', 400);
     next(err);
