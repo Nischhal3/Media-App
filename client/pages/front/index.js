@@ -7,7 +7,7 @@ const userData = user && JSON.parse(user);
 
 //display the fixed artworks
 
-(async function getImageByCollection(id) {
+(async function getImageByCollection() {
   try {
     const fetchOptions = {
       method: 'GET',
