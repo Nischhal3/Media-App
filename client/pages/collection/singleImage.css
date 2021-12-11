@@ -19,7 +19,8 @@ body {
   justify-content: space-between;
 }
 
-.header h1 {
+#app-name {
+  cursor: pointer;
   flex-grow: 5;
   font-family: 'Meddon', 'cursive';
 }
@@ -134,22 +135,22 @@ body {
 #image-content {
   display: flex;
   flex-direction: row;
-  padding: 2% 0 5% 1%;
+  padding: 2% 0 5% 0;
 }
 
 #image {
   width: 60%;
-  
 }
 
 #image img {
-  width: 95%;
+  width: 100%;
   height: 100%;
   border: 4px solid #ab6909;
 }
 
-.info {
-  width: 100%;
+#info-content {
+  margin-left: 3%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content:flex-start;
@@ -185,7 +186,8 @@ body {
 
 #reaction {
   margin-top: 15%;
-  display: block;
+  display: flex;
+  flex-direction: row;
   font-size: 26px;
 }
 
@@ -198,6 +200,7 @@ body {
 }
 
 #ellipsis {
+  align-self: flex-end;
   margin-left: 70%;
 }
 
@@ -211,11 +214,13 @@ body {
 
 #avatar {
   font-size: 40px;
-  margin-right: 2%;
+  margin: 0;
+  padding: 0;
 }
 
 #comment-input {
-  width: 90%;
+  width: 78%;
+  margin-left: 10px;
   padding: 10px 0 5px 10px;
   border-radius: 10px;
   border: 2px solid #ab6909;
@@ -275,4 +280,75 @@ body {
 
 #image-content {
   margin: 20px 0 0 50px;
+}
+
+@media only screen and (max-width: 425px) {
+  #app-name {
+    font-size: 24px;
+  }
+
+  .userName {
+    display: none;
+  }
+  
+  #image-content {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    margin: 0;
+    margin-top: 5%;
+  }
+
+  #image {
+    width: 90%;
+    align-self: center;
+  }
+
+  #image img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .collection-path, .stupid, .single-collection-path, .image-path{
+    font-size: 20px;
+    margin-left: 5px;
+  }
+
+  #path {
+    width: 70%;
+  }
+
+  #info-content {
+    width: 90%;
+    margin-left: 0;
+    align-self: center;
+    justify-content: center;
+  }
+
+  #info {
+    display: none;
+  }
+
+  #reaction {
+    margin-top: 5%;
+    font-size: 24px;
+    padding-left: 0;
+  }
+
+  #ellipsis {
+    margin-left: 68%;
+  }
+  #comment {
+    margin-top: 5%;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  #comment-input {
+    width: 85%;
+  }
+
+  #avatar {
+    font-size: 30px;
+  }
 }

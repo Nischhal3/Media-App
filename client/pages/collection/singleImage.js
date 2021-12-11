@@ -44,20 +44,20 @@ const createPath = (id, collectionTitle, imageTitle) => {
   singleCollectionPath.innerHTML = collectionTitle;
   singleCollectionPath.href = `singleCollection.html?id=${id}`;
   singleCollectionPath.className = 'single-collection-path';
-  const stupid = document.createElement('span');
-  const stupid2 = document.createElement('span');
-  stupid2.innerHTML = ' > ';
-  stupid2.className = 'stupid';
-  stupid.innerHTML = ' > ';
-  stupid.className = 'stupid';
+  const rightArrow = document.createElement('span');
+  const rightArrow2 = document.createElement('span');
+  rightArrow2.innerHTML = '> ';
+  rightArrow2.className = 'stupid';
+  rightArrow.innerHTML = '> ';
+  rightArrow.className = 'stupid';
   const imagePath = document.createElement('a');
   imagePath.innerHTML = imageTitle;
   imagePath.className = 'image-path';
 
   path.append(collectionPath);
-  path.append(stupid);
+  path.append(rightArrow);
   path.append(singleCollectionPath);
-  path.append(stupid2);
+  path.append(rightArrow2);
   path.append(imagePath);
 };
 
