@@ -62,8 +62,8 @@ const createImageCard = (images) => {
     const img = document.createElement('img');
     img.src = url + '/thumbnails/' + item.image_file;
     img.alt = item.image_title;
-    singleImage.className = "single-image";
-    
+    singleImage.className = 'single-image';
+
     singleImage.appendChild(img);
     imageList.appendChild(singleImage);
 
@@ -189,10 +189,30 @@ const select = document.getElementById('collection-select');
 const optionCreated = (collections) => {
   collections.forEach((item) => {
     const option = document.createElement('option');
-    option.key = item.collection_id;
-    option.value = item.collection_title;
+    option.value = item.collection_id;
+    option.key = item.collection_title;
     option.innerHTML = item.collection_title;
 
     select.appendChild(option);
   });
 };
+
+const postArtwork = document.querySelector('#post-artwork');
+postArtwork.addEventListener('submit', async(e) => {
+  e.preventDefault();
+  console.log('button pressed');
+  const data = new FormData(postArtwork);
+  console.log(data);
+
+  const fetchOptions = {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+    body: data,
+  };
+  console.log(fetchOptions);
+  const response = await fetch(url + `/image/user/${userData.user_id}`, fetchOptions);
+  const json = await response.json();
+  console.log("json",json);
+});
