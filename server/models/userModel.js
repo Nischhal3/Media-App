@@ -1,5 +1,6 @@
 'use strict';
 const pool = require('../database/db');
+const bcrypt = require('bcryptjs');
 const promisePool = pool.promise();
 
 const getUser = async (id) => {
@@ -28,15 +29,28 @@ const addUser = async (user) => {
 };
 
 const updateUser = async (user, userId) => {
+  let isEqual;
+  let newHashedPassword;
+  const existingUser = await getUser(userId);
+
+  if (user.password) {
+    const salt = await bcrypt.genSalt(10);
+    newHashedPassword = await bcrypt.hash(user.password, salt);
+    isEqual = await bcrypt.compare(existingUser.password, newHashedPassword);
+  }
+
   try {
     const [rows] = await promisePool.execute(
-      'UPDATE user_db SET first_name = ?, last_name = ?, user_description = ?, email = ?, password = ? WHERE user_id = ?',
+      'UPDATE user_db SET first_name = ?, last_name = ?, user_description = ?, password = ? WHERE user_id = ?',
       [
-        user.first_name,
-        user.last_name,
-        user.updateDescription,
-        user.email,
-        user.password,
+        user.first_name ?? existingUser.first_name,
+        user.last_name ?? existingUser.last_name,
+        user.updateDescription ?? existingUser.user_description,
+        user.password
+          ? isEqual
+            ? existingUser.password
+            : newHashedPassword
+          : existingUser.password,
         userId,
       ]
     );

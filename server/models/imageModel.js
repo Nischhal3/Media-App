@@ -10,7 +10,6 @@ const getAllImagesByUser = async (id) => {
       'SELECT * FROM image_db where user_id = ?',
       [id]
     );
-    console.log('Get all images', rows);
     return rows;
   } catch (e) {
     console.error('Get all images', e.message);

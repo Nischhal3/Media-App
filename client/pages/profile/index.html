@@ -90,11 +90,6 @@
           <label for="collection-select">Choose a collection:</label>
           <select name="collection-select" id="collection-select">
             <option value="saab">---</option>
-            <!-- fetch from backend all the collections -->
-            <!-- <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="opel">Opel</option>
-            <option value="audi">Audi</option> -->
           </select>
         </form>
       </div>
@@ -104,20 +99,17 @@
       <h3>Update Proflie</h3>
       <form class="update-info" id="updateInfoForm">
         <label for="firstName">first name</label>
-        <input type="text" id="firstName" name="first_name" required /><br />
+        <input type="text" id="firstName" name="first_name" autocomplete="name" /><br />
         <label for="lastName">last name</label>
-        <input type="text" id="lastName" name="last_name" required /><br />
-        <label for="email">email</label>
-        <input type="email" id="email" name="email" required /><br />
+        <input type="text" id="lastName" name="last_name" autocomplete="name" /><br />
         <label for="description">description</label>
         <input
           type="text"
           id="updateDescription"
           name="updateDescription"
-          required
         /><br />
         <label for="password">new password</label>
-        <input type="password" id="password" name="password" required /><br />
+        <input type="password" id="password" name="password"/><br />
         <button class="update" type="submit">Update</button>
       </form>
     </div>
