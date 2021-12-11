@@ -193,6 +193,10 @@ body {
   font-size: 20px;
 }
 
+#logout {
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 425px) {
   .wrapper {
     position: relative;
