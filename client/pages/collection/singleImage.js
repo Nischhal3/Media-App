@@ -64,25 +64,32 @@ const createPath = (id, collectionTitle, imageTitle) => {
 const imageContent = document.getElementById('image-content');
 const createImageCard = (image) => {
   const img = document.createElement('img');
+  const infoDiv = document.createElement('div');
   const imageTitle = document.createElement('h2');
+  const imageDate = document.createElement('p');
   const imageDescription = document.createElement('p');
   const artist = document.createElement('h4');
-
-  img.src = url + image.image_file;
+  
+  img.src = url + "/" + image.image_file;
   img.alt = image.image_title;
   imageTitle.innerHTML = image.image_title;
+  imageDate.innerHTML = image.image_date.slice(0, 10);
   imageDescription.innerHTML = image.image_description;
   artist.innerHTML = 'Artist: ' + image.first_name + ' ' + image.last_name;
 
   img.className = 'single-image';
   imageTitle.className = 'image-title';
+  imageDate.className = "date";
   imageDescription.className = 'image-description';
   artist.className = 'artist';
+  infoDiv.className = "info";
 
+  infoDiv.appendChild(imageTitle);
+  infoDiv.appendChild(artist);
+  infoDiv.appendChild(imageDate);
+  infoDiv.appendChild(imageDescription);
   imageContent.appendChild(img);
-  imageContent.appendChild(imageTitle);
-  imageContent.appendChild(artist);
-  imageContent.appendChild(imageDescription);
+  imageContent.appendChild(infoDiv);
 };
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');

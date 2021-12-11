@@ -151,4 +151,5 @@ module.exports = {
   update_image,
   get_image_collection,
   add_image,
+  get_image,
 };

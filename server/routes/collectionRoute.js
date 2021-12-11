@@ -15,6 +15,5 @@ router.route('/').get(get_collection_list);
 
 router.route('/:id')
   .get(get_collection)
-  .put(upload.single('image'), update_collection);
 
 module.exports = router;
