@@ -12,13 +12,11 @@ const searchButton = document.getElementById('search-button');
 const h2 = document.getElementById('to-collections');
 const appName = document.getElementById('app-name');
 
-appName &&
-  appName.addEventListener('click', () => {
+appName.addEventListener('click', () => {
     location.href = '../front/index.html';
   });
 
-h2 &&
-  h2.addEventListener('click', () => {
+h2.addEventListener('click', () => {
     location.href = 'index.html';
   });
 

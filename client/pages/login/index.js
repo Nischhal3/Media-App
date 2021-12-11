@@ -19,15 +19,15 @@ loginForm.addEventListener('submit', async (evt) => {
   const response = await fetch(url + '/auth/login', fetchOptions);
   const json = await response.json();
 
-  if (!json.user) {
-    alert(json.message);
-    return false;
-  } else {
+  if (json.user) {
     // save token
     sessionStorage.setItem('token', json.token);
     sessionStorage.setItem('user', JSON.stringify(json.user));
     location.href = '../front/index.html';
+    return;
   }
+
+  alert(json.message);
 });
 
 const menu = document.querySelector('.menu');

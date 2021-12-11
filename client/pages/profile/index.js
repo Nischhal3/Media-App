@@ -12,8 +12,7 @@ if (!token && !user) {
 
 const appName = document.getElementById('app-name');
 
-appName &&
-  appName.addEventListener('click', () => {
+appName.addEventListener('click', () => {
     location.href = '../front/index.html';
   });
 
@@ -155,6 +154,11 @@ const updateInfoForm = document.querySelector('#updateInfoForm');
 
 updateInfoForm.addEventListener('submit', async () => {
   const data = serializeJson(updateInfoForm);
+  for (const [prop, value] of Object.entries(data)) {
+    if (value === '') {
+      delete data[prop];
+    }
+  }
   const fetchOptions = {
     method: 'PUT',
     headers: {

@@ -58,22 +58,12 @@ if (token && user) {
 }
 
 //display items for front page header
-const headerContent = document.querySelector('.headerContent');
 const loginText = document.querySelector('.loginText');
-
-const hamburgerMenu = `<button class="menu"><i class="fas fa-bars"></i></button>
-<ul class="nav-links">
-  <i class="fas fa-times close-menu"></i>
-  <li><a href="../../pages/front/index.html">Home</a></li>
-  <li><a href="../../pages/profile/index.html">Profile</a></li>
-  <li><a href="../../pages/collection/index.html">Collections</a></li>
-  <li><a>Log out</a></li>
-</ul>`;
+const logout = document.querySelector('#logout');
 
 if (token && user) {
   loginText.innerHTML = userData.first_name;
-  headerContent.innerHTML += hamburgerMenu;
-  headerContent.className = 'headerContentLoggedIn';
+  logout.classList.remove('disappear');
 }
 
 const menu = document.querySelector('.menu');
