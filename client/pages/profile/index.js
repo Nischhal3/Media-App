@@ -12,8 +12,7 @@ if (!token && !user) {
 
 const appName = document.getElementById('app-name');
 
-appName &&
-  appName.addEventListener('click', () => {
+appName.addEventListener('click', () => {
     location.href = '../front/index.html';
   });
 
