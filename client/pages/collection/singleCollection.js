@@ -24,7 +24,6 @@ const getImageByCollection = async (id) => {
     };
     const response = await fetch(url + '/image/collection/' + id);
     const images = await response.json();
-    console.log(images);
     createImageCard(images);
   } catch (e) {
     console.log(e.message);
