@@ -45,55 +45,41 @@ artworks.forEach((artwork) => {
   artworksContent.appendChild(singleArtwork);
 });
 
-//handle link to login on image overlay and link to contact artist if users logged in
 const goToLogIn = document.querySelector('.imgOverlay a');
-goToLogIn.addEventListener('click', () => {
-  document.location('../login/index.html');
-});
+
+if (!token && !user) {
+  goToLogIn.href = '../login/index.html';
+}
 
 if (token && user) {
   goToLogIn.textContent = 'Contact Artist';
   //will need to display artist contact?
-  goToLogIn.addEventListener('click', () => {
-    document.location('../collection/index.html');
-  });
+  goToLogIn.href = '../collection/singleCollection.html';
 }
 
 //display items for front page header
-const headerContent = document.querySelector('.headerContent');
 const loginText = document.querySelector('.loginText');
-
-const hamburgerMenu = `<div class="hamburger">
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"></div>
-</div>
-<ul class="nav-links">
-<li><a href="../../pages/front/index.html">Home</a></li>
-<li><a href="../../pages/profile/index.html">Profile</a></li>
-<li><a href="../../pages/collection/index.html">Collections</a></li>
-<li><a>Log out</a></li>
-</ul>`;
+const logout = document.querySelector('#logout');
 
 if (token && user) {
   loginText.innerHTML = userData.first_name;
-  headerContent.innerHTML += hamburgerMenu;
+  logout.classList.remove('disappear');
 }
 
-const hamburger = document.querySelector('.hamburger');
+const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
+const closeMenuButton = document.querySelector('.close-menu');
 
-hamburger &&
-  hamburger.addEventListener('click', () => {
-    if (navLinks.classList.contains('open')) {
-      navLinks.classList.remove('open');
-      navLinks.classList.add('close');
-      hamburger.classList.remove('hamburgerOpen');
-    } else {
-      navLinks.classList.remove('close');
-      navLinks.classList.add('open');
-      hamburger.classList.add('hamburgerOpen');
-    }
+menu &&
+  menu.addEventListener('click', () => {
+    navLinks.classList.add('open');
+    navLinks.classList.remove('close');
+  });
+
+closeMenuButton &&
+  closeMenuButton.addEventListener('click', () => {
+    navLinks.classList.add('close');
+    navLinks.classList.remove('open');
   });
 
 //button of greeting parts
@@ -114,3 +100,18 @@ if (token && user) {
   greeting.appendChild(buttonGroup);
   buttonGroup.className = 'greetingBtns';
 }
+
+//handle redirect login button on header
+const loginDiv = document.querySelector('.login');
+loginDiv.addEventListener('click', () => {
+  if (token && user) {
+    location.href = '../profile/index.html';
+  } else {
+    location.href = '../login/index.html';
+  }
+});
+
+const searchDiv = document.querySelector('.search');
+searchDiv.addEventListener('click', () => {
+  location.href = '../collection/index.html';
+});

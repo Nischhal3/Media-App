@@ -1,48 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&family=Meddon&family=Noto+Sans&display=swap"
-        rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/635b5f77f3.js" crossorigin="anonymous"></script>
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&family=Meddon&family=Noto+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/635b5f77f3.js"
+      crossorigin="anonymous"
+    ></script>
     <link href="singleCollection.css" rel="stylesheet" />
     <title>Single Collection page</title>
-</head>
-
-<body>
-    <div class="container">
+  </head>
+  <div class="wrapper">
+    <body>
+      <div class="container">
         <div class="header">
-            <h1>Node Artive</h1>
-            <div class="headerContent">
-                <div class="login">
-                    <p class="loginText">Login</p>
-                    <a href="../login/index.html"><i class="far fa-user"></i></a>
-                </div>
+          <h1 id="app-name">Node Artive</h1>
+          <div class="headerContent">
+            <div class="login">
+              <p class="loginText">Login</p>
+              <a><i class="far fa-user"></i></a>
             </div>
-            <div class="menu-text">Menu</div>
-            <div class="hamburger">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="../../pages/front/index.html">Home</a></li>
-                <li><a href="../../pages/profile/index.html">Profile</a></li>
-                <li><a href="../../pages/collection/index.html">Collections</a></li>
-                <li><a>Log out</a></li>
-            </ul>
+          </div>
+          <div class="menu-text">Menu</div>
+          <button class="menu"><i class="fas fa-bars"></i></button>
+          <ul class="nav-links">
+            <i class="fas fa-times close-menu"></i>
+            <li><a href="../../pages/front/index.html">Home</a></li>
+            <li><a href="../../pages/profile/index.html">Profile</a></li>
+            <li><a href="../../pages/collection/index.html">Collections</a></li>
+            <li id="logout"><a>Log out</a></li>
+          </ul>
         </div>
         <div id="path"></div>
-        
         <div id="images"></div>
-    </div>
-    <script src="singleCollection.js"></script>
-</body>
-
+      </div>
+      <script src="singleCollection.js"></script>
+    </body>
+  </div>
 </html>

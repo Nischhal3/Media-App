@@ -16,9 +16,10 @@ body {
   justify-content: space-between;
 }
 
-.header h2 {
+.header h1 {
   flex-grow: 5;
   font-family: 'Meddon', 'cursive';
+  cursor: pointer;
 }
 
 .icons {
@@ -52,10 +53,23 @@ body {
   justify-content: center;
 }
 
-.user-profile img {
-  width: 30%;
+.imgContainer {
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  margin-right: 20px;
+  background: #d5b07a;
+  margin-right: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#name {
+  margin-top: 5px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 36px;
 }
 
 .user-info {
@@ -71,6 +85,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.info-header i {
+  display: none;
 }
 
 .info-header p {
@@ -89,7 +107,8 @@ body {
 }
 
 .user-intro {
-  padding: 20px 10px;
+  width: 100%;
+  padding-top: 20px;
   align-self: center;
   font-style: italic;
   line-height: 1.2;
@@ -98,6 +117,14 @@ body {
 .grey-line {
   margin-top: 20px;
   border: 1px solid #e7e7e7;
+}
+
+[data-tab-content] {
+  display: none;
+}
+
+.active[data-tab-content] {
+  display: block;
 }
 
 .tabs {
@@ -123,12 +150,27 @@ body {
   border-top: 2px solid black;
 }
 
-[data-tab-content] {
-  display: none;
+#artwork.active > div {
+  padding: 20px;
+  text-align: center;
 }
 
-.active[data-tab-content] {
-  display: block;
+#artwork.active {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 0;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.single-image img {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 1px solid black;
+  box-shadow: 5px 5px #d4d4d4;
 }
 
 .fa {
@@ -154,11 +196,8 @@ body {
   flex-direction: column;
   z-index: 1;
   border: 1px solid #ab6909;
+  background: white;
   display: none;
-}
-
-.overlay-open {
-  display: flex;
 }
 
 .overlay i {
@@ -193,11 +232,71 @@ form {
 #title,
 #date,
 #description,
-#collection-select {
+#collection-select,
+#firstName,
+#lastName,
+#email,
+#updateDescription,
+#password {
   border: 1px solid #ab6909;
   border-radius: 5px;
   width: 100%;
   padding: 5px;
+}
+
+.updateProfileOverlay {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  width: 20%;
+  flex-direction: column;
+  z-index: 1;
+  border: 1px solid #ab6909;
+  background: white;
+  display: none;
+}
+
+.updateProfileOverlay i {
+  align-self: flex-end;
+  margin: 1%;
+  cursor: pointer;
+}
+
+.updateProfileOverlay h3 {
+  color: black;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.updateProfileOverlay form {
+  padding: 10%;
+}
+
+#firstName,
+#lastName,
+#email,
+#updateDescription,
+#password {
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+
+.updateProfileOverlay button {
+  width: 50%;
+  background: #d5b07a;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+  margin: 0 auto;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-open {
+  display: flex;
 }
 
 .nav-links {
@@ -207,7 +306,7 @@ form {
   flex-direction: column;
   justify-content: space-around;
   list-style-type: none;
-  width: 50%;
+  width: 30%;
   height: 300px;
   background: #d5b07a;
   z-index: 1;
@@ -289,5 +388,101 @@ form {
   100% {
     right: -100%;
     opacity: 0;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .wrapper {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .header {
+    margin: 1% auto;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .icons button {
+    height: 30px;
+  }
+
+  .user-profile {
+    width: 80%;
+    margin-top: 5%;
+  }
+
+  .user-profile img {
+    width: 50%;
+    margin-right: 0;
+    align-self: center;
+  }
+
+  .info-header {
+    justify-content: center;
+  }
+
+  .info-header button {
+    display: none;
+  }
+
+  .info-header i {
+    display: flex;
+    margin-left: 5%;
+  }
+
+  .user-intro {
+    text-align: center;
+  }
+
+  .tabs {
+    padding: 0;
+  }
+
+  #artwork.active {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+  }
+
+  .single-image img {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    box-shadow: 5px 5px #d4d4d4;
+  }
+
+  .overlay {
+    width: 70%;
+    left: 15%;
+    top: 10%;
+  }
+
+  .overlay-container {
+    flex-direction: column;
+  }
+
+  .overlay-container img {
+    width: 80%;
+  }
+
+  .overlay-container form {
+    margin-right: 0;
+    width: 80%;
+  }
+
+  .updateProfileOverlay {
+    width: 70%;
+    top: 10%;
+    left: 15%;
+  }
+
+  .updateProfileOverlay i,
+  .overlay i {
+    margin-right: 2%;
   }
 }

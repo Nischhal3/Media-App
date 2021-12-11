@@ -17,103 +17,115 @@
     <link href="./style.css" rel="stylesheet" />
     <title>Front page</title>
   </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <h2>Node Artive</h2>
-        <div class="headerContent">
-          <div class="search">
-            <p class="searchText">Search</p>
-            <a href="../collection/index.html"><i class="fas fa-search"></i></a>
+  <div class="wrapper">
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1>Node Artive</h1>
+          <div class="headerContent">
+            <div class="search">
+              <p class="searchText">Search</p>
+              <a><i class="fas fa-search"></i></a>
+            </div>
+            <div class="login">
+              <p class="loginText">Login</p>
+              <a><i class="far fa-user"></i></a>
+            </div>
           </div>
-          <div class="login">
-            <p class="loginText">Login</p>
-            <a href="../login/index.html"><i class="far fa-user"></i></a>
-          </div>
+          <button class="menu"><i class="fas fa-bars"></i></button>
+          <ul class="nav-links">
+            <i class="fas fa-times close-menu"></i>
+            <li><a href="../../pages/front/index.html">Home</a></li>
+            <li><a href="../../pages/profile/index.html">Profile</a></li>
+            <li>
+              <a href="../../pages/collection/index.html">Collections</a>
+            </li>
+            <li class="disappear" id="logout"><a>Log out</a></li>
+          </ul>
         </div>
-      </div>
-      <div class="bodyContent">
-        <img src="../../assets/front-image.svg" />
-        <div class="imgOverlay">
-          <p class="imgName">Vincent van Gogh “The Starry Night”</p>
-          <p class="imgDetail">
-            The painting shows the outside view of his window, when he was being
-            held in a mental institution, Saint-Rémy-de-Provence. The picture
-            represents his perspective of the outside world, and captures his
-            anxiety towards nighttime, in the form of visual art.
+        <div class="bodyContent">
+          <img src="../../assets/front-image.svg" />
+          <div class="imgOverlay">
+            <p class="imgName">Vincent van Gogh “The Starry Night”</p>
+            <p class="imgDetail">
+              The painting shows the outside view of his window, when he was
+              being held in a mental institution, Saint-Rémy-de-Provence. The
+              picture represents his perspective of the outside world, and
+              captures his anxiety towards nighttime, in the form of visual art.
+            </p>
+            <a href="../login/index.html">Log in to see more details</a>
+          </div>
+          <div class="greeting">
+            <h1>Welcome to <span class="appName">NodeArtive</span></h1>
+            <p>Showcase your work.</p>
+            <p class="text">Find new inspiration, hand-picked just for you.</p>
+            <a href="../collection/index.html">Go to collections</a>
+          </div>
+          <hr class="blackLine" />
+          <div class="artworks">
+            <h2>ARTWORKS</h2>
+            <div id="artworksContent"></div>
+          </div>
+          <hr class="yellowLine" />
+        </div>
+        <div class="about">
+          <h2>abouts.</h2>
+          <h1>Node Artive</h1>
+          <p class="characteristic">Node, Art, Creativity.</p>
+          <p class="aboutText">
+            NodeArtive exhibition is a platform operating internationally in the
+            artistic field. We envisions a future where everyone is moved by art
+            every day. To get there, we’re expanding the art market to support
+            more artists and art around the world. As the leading marketplace to
+            discover, buy, and sell fine art, NodeArtive believes that the
+            process of buying art should be as brilliant as art itself. That’s
+            why we’re dedicated to making a joyful, welcoming experience that
+            connects collectors with the artists and artworks they love.
           </p>
-          <a href="../login/index.html">Log in to see more details</a>
-        </div>
-        <div class="greeting">
-          <h1>Welcome to <span class="appName">NodeArtive</span></h1>
-          <p>Showcase your work.</p>
-          <p class="text">Find new inspiration, hand-picked just for you.</p>
-          <a href="../collection/index.html">Go to collections</a>
-        </div>
-        <hr class="blackLine" />
-        <div class="artworks">
-          <h2>ARTWORKS</h2>
-          <div id="artworksContent"></div>
         </div>
         <hr class="yellowLine" />
-      </div>
-      <div class="about">
-        <h2>abouts.</h2>
-        <h1>Node Artive</h1>
-        <p class="characteristic">Node, Art, Creativity.</p>
-        <p class="aboutText">
-          NodeArtive exhibition is a platform operating internationally in the
-          artistic field. We envisions a future where everyone is moved by art
-          every day. To get there, we’re expanding the art market to support
-          more artists and art around the world. As the leading marketplace to
-          discover, buy, and sell fine art, NodeArtive believes that the process
-          of buying art should be as brilliant as art itself. That’s why we’re
-          dedicated to making a joyful, welcoming experience that connects
-          collectors with the artists and artworks they love.
-        </p>
-      </div>
-      <hr class="yellowLine" />
-      <div class="contact">
-        <h2>contact.</h2>
-        <div class="contactContainer">
-          <div class="contactInfo">
-            <p>T. +358 39 52 40 867 | nodeartive@exhibition.art</p>
+        <div class="contact">
+          <h2>contact.</h2>
+          <div class="contactContainer">
+            <div class="contactInfo">
+              <p>T. +358 39 52 40 867 | nodeartive@exhibition.art</p>
+            </div>
+            <div class="contactInfoPhone">
+              <p>T. +358 39 52 40 867</p>
+              <p>nodeartive@exhibition.art</p>
+              <div class="termsPhone">
+                <p>Terms of Use | Privacy</p>
+                <p>
+                  &copy;
+                  <script>
+                    document.write(new Date().getUTCFullYear());
+                  </script>
+                  NodeArtive exhibition
+                </p>
+              </div>
+            </div>
+            <div class="media">
+              <i class="fab fa-instagram"></i>
+              <i class="fab fa-facebook-square"></i>
+              <i class="fab fa-twitter"></i>
+              <i class="fab fa-whatsapp"></i>
+            </div>
           </div>
-          <div class="contactInfoPhone">
-            <p>T. +358 39 52 40 867</p>
-            <p>nodeartive@exhibition.art</p>
-          </div>
-          <div class="media">
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-facebook-square"></i>
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-whatsapp"></i>
+          <div class="terms">
+            <p>Terms of Use</p>
+            <p>
+              &copy;
+              <script>
+                document.write(new Date().getUTCFullYear());
+              </script>
+              NodeArtive exhibition
+            </p>
+            <p>Privacy</p>
           </div>
         </div>
-        <div class="terms">
-          <p>Terms of Use</p>
-          <p>
-            &copy;
-            <script>
-              document.write(new Date().getUTCFullYear());
-            </script>
-            NodeArtive exhibition
-          </p>
-          <p>Privacy</p>
-        </div>
-        <div class="termsPhone">
-          <p>Terms of Use | Privacy</p>
-          <p>
-            &copy;
-            <script>
-              document.write(new Date().getUTCFullYear());
-            </script>
-            NodeArtive exhibition
-          </p>
-        </div>
       </div>
-    </div>
 
-    <script src="./index.js"></script>
-  </body>
+      <script src="./index.js"></script>
+    </body>
+  </div>
 </html>

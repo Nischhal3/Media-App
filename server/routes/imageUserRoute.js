@@ -9,6 +9,7 @@ const {
   delete_image,
   update_image,
   get_image_user,
+  add_image,
 } = require('../controllers/imageController');
 const router = express.Router();
 
@@ -23,17 +24,31 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ dest: './uploads/', fileFilter });
 
-router.route('/:id')
+router
+  .route('/:id')
   .get(get_image_user)
-  .post(upload.single('image'),
+  .post(
+    upload.single('image'),
     body('image_title').notEmpty(),
     body('image_description').notEmpty(),
-    body('image_price').isNumeric(),
     post_image)
+
   .put(
     body('image_title').notEmpty(),
     body('image_description').notEmpty(),
-    update_image)
-  .delete(delete_image)
+    update_image
+  )
+  .delete(delete_image);
+
+//To upload images from postman: delete later
+router
+  .route('/')
+  .post(
+    upload.single('image'),
+    body('image_title').notEmpty(),
+    body('image_description').notEmpty(),
+    body('image_date').isDate(),
+    add_image
+  );
 
 module.exports = router;

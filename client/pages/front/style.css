@@ -16,25 +16,29 @@ body {
   margin: auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
-.header h2 {
+.header h1 {
   flex-grow: 5;
   font-family: 'Meddon', cursive;
 }
 
 .headerContent {
   display: flex;
-  flex-grow: 1;
+  margin-right: 8%;
+  flex-grow: 0.5;
   padding: 20px 0;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
 }
 
 .search,
 .login {
   display: flex;
-  flex-grow: 1;
-  justify-content: flex-start;
+  justify-content: flex-end;
+  cursor: pointer;
 }
 
 .searchText,
@@ -51,10 +55,6 @@ body {
 .search a:visited,
 .login a:visited {
   color: black;
-}
-
-.disappear {
-  display: none;
 }
 
 img {
@@ -94,6 +94,10 @@ img {
   text-decoration: none;
 }
 
+.disappear {
+  display: none;
+}
+
 .greeting {
   text-align: center;
   padding: 20px 0;
@@ -117,7 +121,7 @@ img {
 
 .greetingBtns {
   display: flex;
-  width: 40%;
+  width: 30%;
   margin: 0 auto;
   justify-content: space-around;
 }
@@ -259,15 +263,15 @@ img {
   padding-bottom: 20px;
 }
 
-.hamburger {
-  width: 20px;
-  height: 20px;
+.menu {
   position: absolute;
-  top: 18px;
   right: 5%;
-  margin: 0 auto;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
   cursor: pointer;
-  z-index: 2;
+  font-size: 28px;
 }
 
 .nav-links {
@@ -277,7 +281,7 @@ img {
   flex-direction: column;
   justify-content: space-around;
   list-style-type: none;
-  width: 40%;
+  width: 30%;
   height: 300px;
   background: #d5b07a;
   z-index: 1;
@@ -302,57 +306,11 @@ img {
   font-size: 18px;
 }
 
-.line {
-  display: block;
+.close-menu {
   position: absolute;
-  height: 3px;
-  width: 100%;
-  background: black;
-  border-radius: 9px;
-  opacity: 1;
-  right: 0;
-}
-
-.hamburger div:nth-child(1) {
-  top: 0px;
-}
-
-.hamburger div:nth-child(2) {
-  top: 7px;
-}
-
-.hamburger div:nth-child(3) {
-  top: 14px;
-}
-
-.hamburgerOpen div:nth-child(1) {
-  transform: rotate(45deg);
-  top: 7px;
-}
-
-.hamburgerOpen div:nth-child(2) {
-  width: 0%;
-  opacity: 0;
-}
-
-.hamburgerOpen div:nth-child(3) {
-  transform: rotate(-45deg);
-  top: 7px;
-}
-
-@media only screen and (max-width: 425px) {
-  .box1 {
-    width: 0%;
-    margin: 0;
-  }
-
-  .box2 {
-    width: 100%;
-  }
-
-  .hamburger {
-    right: 3%;
-  }
+  top: 20px;
+  right: 5%;
+  cursor: pointer;
 }
 
 @keyframes slideFromRight {
@@ -374,5 +332,137 @@ img {
   100% {
     right: -100%;
     opacity: 0;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .wrapper {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .menu {
+    display: flex;
+    top: 12px;
+  }
+
+  .headerContent {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex;
+    width: 40%;
+  }
+
+  .imgOverlay {
+    width: 90%;
+    left: 5%;
+    top: 29%;
+    padding: 10px;
+    border: 1px solid black;
+  }
+
+  .imgName {
+    font-size: 16px;
+    padding: 0;
+  }
+
+  .imgDetail,
+  .imgOverlay a {
+    display: none;
+  }
+
+  .greeting {
+    margin-top: 20px;
+    padding-bottom: 0;
+  }
+
+  .greeting h1,
+  .appName,
+  .artworks h2,
+  .about h2,
+  .contact h2 {
+    font-size: 24px;
+  }
+
+  .greetingBtns {
+    flex-direction: column;
+    width: 70%;
+  }
+
+  .greetingBtns a {
+    margin-bottom: 20px;
+  }
+
+  .artworks h2 {
+    padding-top: 10px;
+  }
+
+  .greeting p {
+    font-size: 14px;
+  }
+
+  #artworksContent {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+  .artwork {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .yellowLine {
+    margin-top: 0;
+  }
+
+  .about {
+    width: 80%;
+  }
+
+  .about h1 {
+    font-size: 20px;
+  }
+
+  .characteristic {
+    font-size: 16px;
+  }
+
+  .aboutText {
+    font-size: 14px;
+  }
+
+  .contactContainer {
+    padding: 10px 0 20px;
+  }
+
+  .contactInfo,
+  .terms {
+    display: none;
+  }
+
+  .contactInfoPhone,
+  .termsPhone {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .media {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .contactInfoPhone p {
+    line-height: 1.6;
+  }
+
+  .media i {
+    line-height: 1.5;
+    font-size: 20px;
   }
 }

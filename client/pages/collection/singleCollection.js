@@ -1,5 +1,14 @@
 'use strict';
 const url = 'http://localhost:3000'; // change url when uploading to server
+const appName = document.getElementById('app-name');
+
+appName.addEventListener('click', () => {
+    location.href = '../front/index.html';
+  });
+
+const token = sessionStorage.getItem('token');
+const user = sessionStorage.getItem('user');
+const userData = user && JSON.parse(user);
 
 const getQParam = (param) => {
   const queryString = window.location.search;
@@ -28,7 +37,6 @@ const getOneCollection = async (id) => {
     };
     const response = await fetch(url + '/collection/' + id);
     const collection = await response.json();
-    console.log('one collection', collection.collection_title);
     createPath(getQParam('id'), collection.collection_title);
   } catch (e) {
     console.log(e.message);
@@ -48,12 +56,12 @@ const createPath = (id, title) => {
   singleCollectionPath.innerHTML = title;
   singleCollectionPath.href = `singleCollection.html?id=${id}`;
   singleCollectionPath.className = 'single-collection-path';
-  const stupid = document.createElement('span');
-  stupid.innerHTML = ' > ';
-  stupid.className = 'stupid';
+  const rightArrow = document.createElement('span');
+  rightArrow.innerHTML = ' > ';
+  rightArrow.className = 'stupid';
 
   path.append(collectionPath);
-  path.append(stupid);
+  path.append(rightArrow);
   path.append(singleCollectionPath);
 };
 
@@ -95,30 +103,36 @@ const createImageCard = (images) => {
     singleImage.addEventListener('click', () => {
       location.href = `singleImage.html?id=${item.image_id}`;
     });
-    console.log(item.image_id);
   });
 };
 
-const token = sessionStorage.getItem('token');
-const user = sessionStorage.getItem('user');
-const userData = user && JSON.parse(user);
-const userName = document.querySelector('loginText');
+const userName = document.querySelector('.loginText');
 
 if (token && user) {
   userName.textContent = userData.first_name;
 }
 
-const hamburger = document.querySelector('.hamburger');
+const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
+const closeMenuButton = document.querySelector('.close-menu');
 
-hamburger.addEventListener('click', () => {
-  if (navLinks.classList.contains('open')) {
-    navLinks.classList.remove('open');
-    navLinks.classList.add('close');
-    hamburger.classList.remove('hamburgerOpen');
+//toggle menu
+menu.addEventListener('click', () => {
+  navLinks.classList.add('open');
+  navLinks.classList.remove('close');
+});
+
+closeMenuButton.addEventListener('click', () => {
+  navLinks.classList.add('close');
+  navLinks.classList.remove('open');
+});
+
+//redirect to profile page when there is user
+const loginDiv = document.querySelector('.login');
+loginDiv.addEventListener('click', () => {
+  if (token && user) {
+    location.href = '../profile/index.html';
   } else {
-    navLinks.classList.remove('close');
-    navLinks.classList.add('open');
-    hamburger.classList.add('hamburgerOpen');
+    location.href = '../login/index.html';
   }
 });

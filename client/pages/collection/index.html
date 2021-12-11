@@ -17,50 +17,49 @@
     <link href="./style.css" rel="stylesheet" />
     <title>Collection page</title>
   </head>
-
-  <body>
-    <div class="hamburger">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-    </div>
-    <ul class="nav-links">
-      <li><a href="../../pages/front/index.html">Home</a></li>
-      <li><a href="../../pages/profile/index.html">Profile</a></li>
-      <li><a href="../../pages/collection/index.html">Collections</a></li>
-      <li><a>Log out</a></li>
-    </ul>
-    <div class="container">
-      <div class="header">
-        <h1>Nord Artive</h1>
-      </div>
-      <div class="collections">
-        <h2>COLLECTIONS</h2>
-        <hr class="black-line" />
-        <p>
-          Dive into the collection of NodeArtive through our online gallery.
-          Each featured object provides basic information accompanied by an
-          image whenever available and as copyright allows. You can contact
-          artist of the collections to buy the artwork of your favourites.
-        </p>
-
-        <div class="search">
-          <input
-            id="search-collection"
-            type="text"
-            placeholder="Search..."
-            value=""
-            name="search-collection"
-          />
-          <button id="search-button">SEARCH <i class="fas fa-search"></i></button>
+  <div class="wrapper">
+    <body>
+      <button class="hamburgerMenu"><i class="fas fa-bars"></i></button>
+      <ul class="nav-links">
+        <i class="fas fa-times close-menu"></i>
+        <li><a href="../../pages/front/index.html">Home</a></li>
+        <li><a href="../../pages/profile/index.html">Profile</a></li>
+        <li><a href="../../pages/collection/index.html">Collections</a></li>
+        <li id="logout"><a>Log out</a></li>
+      </ul>
+      <div class="container">
+        <div class="header">
+          <h1 id="app-name">Node Artive</h1>
         </div>
+        <div class="collections">
+          <h2 id="to-collections">COLLECTIONS</h2>
+          <hr class="black-line" />
+          <p>
+            Dive into the collection of NodeArtive through our online gallery.
+            Each featured object provides basic information accompanied by an
+            image whenever available and as copyright allows. You can contact
+            artist of the collections to buy the artwork of your favourites.
+          </p>
+          <div class="search">
+            <input
+              id="search-collection"
+              type="text"
+              placeholder="Search..."
+              value=""
+              name="search-collection"
+            />
+            <button id="search-button">
+              SEARCH <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="collectionContent"></div>
+        <p id="not-found"></p>
+        <div id="collection"></div>
       </div>
 
-      <div id="collectionContent"></div>
-      <p id="not-found"></p>
-      <div id="collection"></div>
-    </div>
-
-    <script src="./index.js"></script>
-  </body>
+      <script src="./index.js"></script>
+    </body>
+  </div>
 </html>

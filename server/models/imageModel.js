@@ -10,7 +10,6 @@ const getAllImagesByUser = async (id) => {
       'SELECT * FROM image_db where user_id = ?',
       [id]
     );
-    console.log('Get all images', rows);
     return rows;
   } catch (e) {
     console.error('Get all images', e.message);
@@ -49,17 +48,18 @@ const getImageByCollectionId = async (id, next) => {
   }
 };
 
+//change collection_id after finishing frontend
 const insertImage = async (user_id, image, next) => {
   try {
     const [rows] = await promisePool.query(
-      'INSERT INTO image_db ( user_id, collection_id, image_title, image_description, image_file, image_price) VALUES (?,?,?,?,?,?)',
+      'INSERT INTO image_db (user_id, collection_id, image_title, image_description, image_file, image_date) VALUES (?,?,?,?,?,?)',
       [
         user_id,
         5,
         image.image_title,
         image.image_description,
         image.file,
-        image.image_price,
+        image.image_date,
       ]
     );
     console.log('Insert image', rows);
