@@ -205,7 +205,6 @@ const postArtwork = document.querySelector('#post-artwork');
 postArtwork.addEventListener('submit', async (e) => {
   e.preventDefault();
   const data = new FormData(postArtwork);
-  console.log(data);
 
   const fetchOptions = {
     method: 'POST',
