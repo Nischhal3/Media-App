@@ -313,6 +313,10 @@ img {
   cursor: pointer;
 }
 
+#logout {
+  cursor: pointer;
+}
+
 @keyframes slideFromRight {
   0% {
     right: -100%;
