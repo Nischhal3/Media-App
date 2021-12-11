@@ -200,3 +200,21 @@ const optionCreated = (collections) => {
     select.appendChild(option);
   });
 };
+
+const logOut = document.getElementById('logout');
+logOut.addEventListener('click', () => {
+  (async () => {
+    try {
+      const response = await fetch(url + '/auth/logout');
+      const json = await response.json();
+      console.log(json);
+      // remove token
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('user');
+      alert('You have logged out');
+      location.href = '../front/index.html';
+    } catch (e) {
+      console.log(e.message);
+    }
+  })();
+})
