@@ -200,7 +200,7 @@ body {
   display: none;
 }
 
-.overlay i {
+.closeIcon {
   align-self: flex-end;
   margin: 1%;
   cursor: pointer;
@@ -214,8 +214,8 @@ body {
 }
 
 .overlay-container img {
-  width: 80%;
-  margin-left: 20px;
+  width: 90%;
+  cursor: pointer;
 }
 
 .overlay-image {
@@ -224,12 +224,34 @@ body {
   display: flex;
 }
 
+.imageLabel {
+  flex: 1.2;
+  margin-left: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+  border: 5px solid #d5b07a;
+  border-style: dashed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #d5b07a;
+  font-size: 80px;
+}
+
 #imagePosting {
   display: none;
 }
 
-#formContent {
-  padding: 20px 0;
+#uploadImage {
+  padding-top: 10px;
+  font-size: 14px;
+  color: black;
+}
+
+.formContent {
+  flex: 2;
+  padding-bottom: 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -247,7 +269,7 @@ body {
   border: 1px solid #ab6909;
   border-radius: 5px;
   width: 100%;
-  padding: 5px;
+  padding: 10px;
 }
 
 .updateProfileOverlay {
@@ -287,11 +309,12 @@ body {
   margin-bottom: 20px;
 }
 
-.updateProfileOverlay button {
+.updateProfileOverlay button,
+.overlay-image button {
   width: 50%;
   background: #d5b07a;
   border: none;
-  padding: 5px;
+  padding: 8px;
   font-size: 16px;
   margin: 0 auto;
   cursor: pointer;
@@ -299,6 +322,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 5px;
+}
+
+.overlay-image button {
+  margin-top: 20px;
+  width: 100%;
 }
 
 .overlay-open {
@@ -488,7 +517,7 @@ body {
   }
 
   .updateProfileOverlay i,
-  .overlay i {
+  .closeIcon {
     margin-right: 2%;
   }
 }

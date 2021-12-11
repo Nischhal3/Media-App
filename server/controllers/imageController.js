@@ -52,6 +52,7 @@ const post_image = async (req, res, next) => {
     const user_id = req.user.user_id;
     const image = req.body;
     image.file = req.file.filename;
+    console.log(image);
     const id = await insertImage(user_id, image);
     if (thumb) {
       res.json({ message: `Image added with id: ${id}` });

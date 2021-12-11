@@ -72,12 +72,14 @@
       </div>
     </div>
     <div class="overlay">
-      <i class="fas fa-times"></i>
+      <i class="fas fa-times closeIcon"></i>
       <div class="overlay-container">
-        <form  class="overlay-image"  id="post-artwork" enctype="multipart/form-data">
-          <label>
-            <input type="file" required name="image" accept="image/*" placeholder="Choose file" id='imagePosting'>
-            <img src="../../assets/add-post.png" alt="add post picture"/>
+        <form  class="overlay-image" id="post-artwork" enctype="multipart/form-data">
+          <label class="imageLabel" for="imagePosting" >
+            <i class="fas fa-upload" ></i>
+            <!-- <img src="../../assets/add-post.png" alt="add post picture"/> -->
+            <input type="file" required name="image" accept="image/*" id='imagePosting'> 
+            <p id="uploadImage">No Image chosen</p>
           </label>
           <div class="formContent">
             <label for="title">Title:</label>
@@ -100,7 +102,7 @@
               <option value="opel">Opel</option>
               <option value="audi">Audi</option> -->
             </select>
-            <input  name="submit" type="submit" value="Submit">
+            <button type="submit" >Submit</button>
           </div>
         </form>
       </div>

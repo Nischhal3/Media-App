@@ -91,6 +91,13 @@ const add = document.querySelector('.add');
 const addPostOverlay = document.querySelector('.overlay');
 const closeOverlay = document.querySelector('.overlay i');
 
+//append file name into image box
+document.getElementById('imagePosting').onchange = function () {
+  const fileName = this.value.split('\\');
+  document.getElementById('uploadImage').textContent =
+    fileName[fileName.length - 1];
+};
+
 add.addEventListener('click', () => {
   addPostOverlay.classList.add('overlay-open');
 });
@@ -196,9 +203,9 @@ const optionCreated = (collections) => {
 
 const postArtwork = document.querySelector('#post-artwork');
 postArtwork.addEventListener('submit', async (e) => {
-  postArtwork.toggleAttribute();
   e.preventDefault();
   const data = new FormData(postArtwork);
+  console.log(data);
 
   const fetchOptions = {
     method: 'POST',
