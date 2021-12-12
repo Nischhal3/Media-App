@@ -12,7 +12,7 @@
   <link href="./singleImage.css" rel="stylesheet" />
   <title>Single Image</title>
 </head>
-
+<div class="wrapper">
 <body>
   <div class="container">
     <div class="header">
@@ -41,6 +41,11 @@
       <i class="far fa-heart"><span id="like">5</span></i>
       <i class="far fa-bookmark" id="save"></i>
       <i class="fas fa-ellipsis-h" id="ellipsis"></i>
+      <div id="options">
+        <i class="fas fa-times close-options"></i>
+        <button id="edit">Edit</button>
+        <button id="delete">Delete</button>
+      </div>
     </div>
     <div id="comment">
       <i class="far fa-user-circle" id="avatar"></i> 
@@ -53,5 +58,5 @@
 
   <script src="./singleImage.js"></script>
 </body>
-
+</div>
 </html>
