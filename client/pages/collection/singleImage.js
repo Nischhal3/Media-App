@@ -106,7 +106,7 @@ closeMenuButton.addEventListener('click', () => {
   navLinks.classList.remove('open');
 });
 
-//open add post overlay
+//open edit image overlay
 const editButton = document.getElementById('edit');
 const addPostOverlay = document.querySelector('.overlay');
 const closeOverlay = document.querySelector('.overlay i');
@@ -119,7 +119,7 @@ closeOverlay.addEventListener('click', () => {
   addPostOverlay.classList.remove('overlay-open');
 });
 
-//get all collections for options in uploading artwork
+//get all collections for options in updating artwork
 const select = document.getElementById('collection-select');
 (async function getAllCollections() {
   try {
