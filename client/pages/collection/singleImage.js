@@ -71,17 +71,17 @@ const createImageCard = (image) => {
   const imageDate = document.createElement('p');
   const imageDescription = document.createElement('p');
   const artist = document.createElement('h4');
-  
-  img.src = url + "/" + image.image_file;
+
+  img.src = url + '/' + image.image_file;
   img.alt = image.image_title;
-  
+
   imageTitle.innerHTML = image.image_title;
   imageDate.innerHTML = image.image_date.slice(0, 10);
   imageDescription.innerHTML = image.image_description;
   artist.innerHTML = 'Artist: ' + image.first_name + ' ' + image.last_name;
 
   imageTitle.className = 'image-title';
-  imageDate.className = "date";
+  imageDate.className = 'date';
   imageDescription.className = 'image-description';
   artist.className = 'artist';
 
@@ -90,7 +90,6 @@ const createImageCard = (image) => {
   infoDiv.appendChild(artist);
   infoDiv.appendChild(imageDate);
   infoDiv.appendChild(imageDescription);
-
 };
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
@@ -144,3 +143,27 @@ const optionCreated = (collections) => {
     select.appendChild(option);
   });
 };
+
+//handle normal user can only view comments, not add comments/edit/delete
+const comments = document.getElementById('comment');
+const edit = document.getElementById('edit');
+const deleteButton = document.getElementById('delete');
+if (!user || !token) {
+  comments.style.display = 'none';
+  edit.style.display = 'none';
+  deleteButton.style.display = 'none';
+}
+
+//get all comments in the begining
+const imageId = getQParam('id');
+async function getAllComments() {
+  try {
+    const response = await fetch(url + '/comments/image/' + imageId);
+    const allComments = await response.json();
+    console.log(allComments);
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+getAllComments();

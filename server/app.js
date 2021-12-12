@@ -18,6 +18,8 @@ const userRoute = require('./routes/userRoute');
 const imageCollectionRoute = require('./routes/imageCollectionRoute');
 const collectionRoute = require('./routes/collectionRoute');
 const imageUserRoute = require('./routes/imageUserRoute');
+const allCommentsRoute = require('./routes/allCommentsRoute');
+const commentRoute = require('./routes/commentRoute');
 
 app.use(passport.initialize());
 app.use(express.static('uploads'));
@@ -32,6 +34,12 @@ app.use(
   imageUserRoute
 );
 app.use('/user', passport.authenticate('jwt', { session: false }), userRoute);
+app.use('/comments/image', allCommentsRoute);
+app.use(
+  '/comment/user',
+  passport.authenticate('jwt', { session: false }),
+  commentRoute
+);
 
 //error handler
 app.use((err, req, res, next) => {
