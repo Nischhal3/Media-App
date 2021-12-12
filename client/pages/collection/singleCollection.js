@@ -116,6 +116,11 @@ if (token && user) {
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
+const logout = document.querySelector('#logout');
+
+if (!token || !user) {
+  logout.className = 'disappear';
+}
 
 //toggle menu
 menu.addEventListener('click', () => {
