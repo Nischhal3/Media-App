@@ -105,16 +105,3 @@ closeMenuButton.addEventListener('click', () => {
   navLinks.classList.add('close');
   navLinks.classList.remove('open');
 });
-
-const optionMenu = document.getElementById('ellipsis');
-const options = document.getElementById('options');
-const closeOptions = document.querySelector('.close-options')
-
-optionMenu.addEventListener('click', () => {
- options.style.display = "flex";
- options.style.flexDirection = "column";
-})
-
-closeOptions.addEventListener('click', () => {
-  options.style.display = "none";
- })
