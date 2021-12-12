@@ -177,7 +177,9 @@ async function getLikeOfUser() {
 }
 
 getAllLikes();
-getLikeOfUser();
+if (user && token) {
+  getLikeOfUser();
+}
 
 //Toggle like and display number of likes
 likeIcon.addEventListener('click', async (event) => {
