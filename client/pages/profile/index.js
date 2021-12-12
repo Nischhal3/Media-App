@@ -1,5 +1,5 @@
 'use strict';
-
+import logOut from '../logout.js';
 const url = 'http://localhost:3000';
 
 const token = sessionStorage.getItem('token');
@@ -13,8 +13,8 @@ if (!token && !user) {
 const appName = document.getElementById('app-name');
 
 appName.addEventListener('click', () => {
-    location.href = '../front/index.html';
-  });
+  location.href = '../front/index.html';
+});
 
 //Tabs selection
 const tabs = document.querySelectorAll('[ data-tab-target]');
@@ -219,4 +219,8 @@ postArtwork.addEventListener('submit', async (e) => {
   };
 
   await fetch(url + `/image/user/${userData.user_id}`, fetchOptions);
+});
+const logOutButton = document.getElementById('logout');
+logOutButton.addEventListener('click', () => {
+  logOut();
 });

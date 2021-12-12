@@ -21,7 +21,7 @@ const getAllImagesByUser = async (id) => {
 const getImage = async (imageId, next) => {
   try {
     const [rows] = await promisePool.query(
-      'SELECT collection_db.collection_id, user_db.first_name, user_db.last_name, image_title, image_description, image_file FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id INNER JOIN collection_db on collection_db.collection_id = image_db.collection_id WHERE image_id = ?',
+      'SELECT collection_db.collection_id, collection_db.collection_title, user_db.first_name, user_db.last_name, image_title, image_date, image_description, image_file FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id INNER JOIN collection_db on collection_db.collection_id = image_db.collection_id WHERE image_db.image_id = ?',
       [imageId]
     );
     console.log('Get image by id', rows[0]);
@@ -36,7 +36,7 @@ const getImage = async (imageId, next) => {
 const getImageByCollectionId = async (id, next) => {
   try {
     const [rows] = await promisePool.query(
-      'SELECT collection_db.collection_id, user_db.first_name, user_db.last_name, image_title, image_file FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id INNER JOIN collection_db on collection_db.collection_id = image_db.collection_id WHERE image_db.collection_id = ?',
+      'SELECT collection_db.collection_id, user_db.first_name, user_db.last_name, image_id, image_title, image_file FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id INNER JOIN collection_db on collection_db.collection_id = image_db.collection_id WHERE image_db.collection_id = ?',
       [id]
     );
     console.log('Get image by id', rows[0]);

@@ -404,6 +404,10 @@ body {
   top: 10px;
 }
 
+#logout {
+  cursor: pointer;
+}
+
 @keyframes slideFromRight {
   0% {
     right: -100%;

@@ -33,6 +33,17 @@ const get_image_collection = async (req, res, next) => {
   next(err);
 };
 
+const get_image = async (req, res, next) => {
+  const image = await getImage(req.params.id, next);
+  console.log('Image by id', image);
+  if (image) {
+    res.json(image);
+    return;
+  }
+  const err = httpError('Image not found', 400);
+  next(err);
+};
+
 const post_image = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -133,4 +144,5 @@ module.exports = {
   update_image,
   get_image_collection,
   add_image,
+  get_image,
 };
