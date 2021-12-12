@@ -1,7 +1,6 @@
 'user strict';
 
 const { httpError } = require('../utils/error');
-const makeThumbnail = require('../utils/resize');
 
 const {
   getAllCollection,
