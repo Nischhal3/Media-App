@@ -151,13 +151,7 @@ const likeCount = document.querySelector('#likeCount');
 
 async function getAllLikes() {
   try {
-    const fetchOptions = {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-      },
-    };
-    const response = await fetch(url + '/like/image/' + imageId, fetchOptions);
+    const response = await fetch(url + '/like/image/' + imageId);
     const allLikes = await response.json();
     updateHeartCount(allLikes.allLikes);
   } catch (error) {
@@ -165,7 +159,7 @@ async function getAllLikes() {
   }
 }
 
-//Get like of the user
+// Get like of the user
 async function getLikeOfUser() {
   try {
     const fetchOptions = {
@@ -188,46 +182,34 @@ getLikeOfUser();
 //Toggle like and display number of likes
 likeIcon.addEventListener('click', async (event) => {
   event.preventDefault();
-  if (likeIcon.className === 'far fa-heart') {
-    try {
-      const fetchOptions = {
-        method: 'POST',
-        headers: {
-          Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-        },
-      };
-      const response = await fetch(
-        url + '/like/image/' + imageId,
-        fetchOptions
-      );
+  if (!token || !user) {
+    alert('You have to log in to like this picture');
+    return false;
+  }
+  const fetchOptions =
+    likeIcon.className === 'far fa-heart'
+      ? {
+          method: 'POST',
+          headers: {
+            Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+          },
+        }
+      : {
+          method: 'DELETE',
+          headers: {
+            Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+          },
+        };
 
-      if (response.status === 200) {
-        getAllLikes();
-        getLikeOfUser();
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  } else {
-    try {
-      const fetchOptions = {
-        method: 'DELETE',
-        headers: {
-          Authorization: 'Bearer ' + sessionStorage.getItem('token'),
-        },
-      };
-      const response = await fetch(
-        url + '/like/image/' + imageId,
-        fetchOptions
-      );
+  try {
+    const response = await fetch(url + '/like/user/' + imageId, fetchOptions);
 
-      if (response.status === 200) {
-        getAllLikes();
-        getLikeOfUser();
-      }
-    } catch (error) {
-      alert(error.message);
+    if (response.status === 200) {
+      getAllLikes();
+      getLikeOfUser();
     }
+  } catch (error) {
+    alert(error.message);
   }
 });
 

@@ -12,12 +12,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const passport = require('./utils/passport');
-const unless = require('./utils/unless');
 const authRoute = require('./routes/authRoute.js');
 const userRoute = require('./routes/userRoute');
 const imageCollectionRoute = require('./routes/imageCollectionRoute');
 const collectionRoute = require('./routes/collectionRoute');
 const imageUserRoute = require('./routes/imageUserRoute');
+const allLikesRoute = require('./routes/allLikesRoute');
 const likeRoute = require('./routes/likeRoute');
 
 app.use(passport.initialize());
@@ -33,9 +33,9 @@ app.use(
   imageUserRoute
 );
 app.use('/user', passport.authenticate('jwt', { session: false }), userRoute);
+app.use('/like/image', allLikesRoute);
 app.use(
-  '/like',
-  unless('/image'),
+  '/like/user',
   passport.authenticate('jwt', { session: false }),
   likeRoute
 );

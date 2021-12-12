@@ -1,9 +1,9 @@
-const unless = (path, middleware) => {
+const unless = (path) => {
   return (req, res, next) => {
-    if (path === req.baseUrl) {
+    if (req.path.includes(path)) {
       return next();
     } else {
-      return middleware(req, res, next);
+      return passport.authenticate('jwt', { session: false });
     }
   };
 };
