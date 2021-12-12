@@ -80,7 +80,6 @@ const createImageCard = (image) => {
   imageDescription.innerHTML = image.image_description;
   artist.innerHTML = 'Artist: ' + image.first_name + ' ' + image.last_name;
 
-  img.className = 'single-image';
   imageTitle.className = 'image-title';
   imageDate.className = "date";
   imageDescription.className = 'image-description';
@@ -91,6 +90,7 @@ const createImageCard = (image) => {
   infoDiv.appendChild(artist);
   infoDiv.appendChild(imageDate);
   infoDiv.appendChild(imageDescription);
+
 };
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');

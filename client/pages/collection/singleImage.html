@@ -1,54 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&family=Meddon&family=Noto+Sans&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://kit.fontawesome.com/05261cf5d1.js" crossorigin="anonymous"></script>
-    <link href="./singleImage.css" rel="stylesheet" />
-    <title>Single Image</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <h1 id="app-name">Node Artive</h1>
-        <div class="userName">
-          <span>Log in</span>
-          <i class="far fa-user"></i>
-        </div>
-        <button class="menu"><i class="fas fa-bars"></i></button>
-        <ul class="nav-links">
-          <i class="fas fa-times close-menu"></i>
-          <li><a href="../../pages/front/index.html">Home</a></li>
-          <li><a href="../../pages/profile/index.html">Profile</a></li>
-          <li><a href="../../pages/collection/index.html">Collections</a></li>
-          <li><a>Log out</a></li>
-        </ul>
-      </div>
 
-      <div id="path"></div>
-      <div id="image-content">
-        <div id="image"></div>
-        <div id="info-content">
-          <div id="info"></div>
-          <div id="reaction">
-            <i class="far fa-heart"><span id="like">5</span></i>
-            <i class="far fa-bookmark" id="save"></i>
-            <i class="fas fa-ellipsis-h" id="ellipsis"></i>
-          </div>
-          <div id="comment">
-            <i class="far fa-user-circle" id="avatar"></i> 
-            <input id="comment-input" type="text" placeholder="Leave a comment..." name="comment-input">
-          </div>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&family=Meddon&family=Noto+Sans&display=swap"
+    rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/05261cf5d1.js" crossorigin="anonymous"></script>
+  <link href="./singleImage.css" rel="stylesheet" />
+  <title>Single Image</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 id="app-name">Node Artive</h1>
+      <div class="userName">
+        <span>Log in</span>
+        <i class="far fa-user"></i>
       </div>
-      
+      <button class="menu"><i class="fas fa-bars"></i></button>
+      <ul class="nav-links">
+        <i class="fas fa-times close-menu"></i>
+        <li><a href="../../pages/front/index.html">Home</a></li>
+        <li><a href="../../pages/profile/index.html">Profile</a></li>
+        <li><a href="../../pages/collection/index.html">Collections</a></li>
+        <li><a>Log out</a></li>
+      </ul>
     </div>
 
-    <script src="./singleImage.js"></script>
-  </body>
+    <div id="path"></div>
+    <div id="image-content">
+      <div id="image"></div>
+      <div id="info"></div>
+    </div>
+    <div id="reaction-content">
+    <div id="reaction">
+      <i class="far fa-heart"><span id="like">5</span></i>
+      <i class="far fa-bookmark" id="save"></i>
+      <i class="fas fa-ellipsis-h" id="ellipsis"></i>
+    </div>
+    <div id="comment">
+      <i class="far fa-user-circle" id="avatar"></i> 
+      <input id="comment-input" type="text" placeholder="Leave a comment..." name="comment-input">
+    </div>
+  </div>
+  </div>
+
+  </div>
+
+  <script src="./singleImage.js"></script>
+</body>
+
 </html>
