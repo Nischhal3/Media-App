@@ -163,5 +163,6 @@ updateImageForm.addEventListener('submit', async (e) => {
   const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
   const json = await response.json();
   alert(json.message);
+  location.reload();
 });
 
