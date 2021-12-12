@@ -91,11 +91,12 @@ const deleteImage = async (imageId, user_id, role, next) => {
 };
 
 const updateImage = async (user_id, image, next) => {
-  let sql =
-    'UPDATE image_db SET image_title = ?, image_description = ? WHERE image_id = ? AND user_id = ? ';
-  let params = [image.image_title, image.image_description, image.id, user_id];
+  console.log('update', user_id, image);
   try {
-    const [rows] = await promisePool.execute(sql, params);
+    const [rows] = await promisePool.query(
+      'UPDATE image_db SET image_title = ? , image_description = ?,  collection_id = ?, image_date = ? WHERE  image_id = ? AND  user_id =  ?',
+      [image.title, image.description, image.collection, image.date, image.id, user_id]
+    );
     console.log('Update image ', rows);
     return rows.affectedRows === 1;
   } catch (e) {
@@ -103,6 +104,7 @@ const updateImage = async (user_id, image, next) => {
     const err = httpError('Sql error:', 500);
     next(err);
   }
+
 };
 
 module.exports = {
