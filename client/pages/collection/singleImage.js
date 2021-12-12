@@ -105,3 +105,42 @@ closeMenuButton.addEventListener('click', () => {
   navLinks.classList.add('close');
   navLinks.classList.remove('open');
 });
+
+//open add post overlay
+const editButton = document.getElementById('edit');
+const addPostOverlay = document.querySelector('.overlay');
+const closeOverlay = document.querySelector('.overlay i');
+
+editButton.addEventListener('click', () => {
+  addPostOverlay.classList.add('overlay-open');
+});
+
+closeOverlay.addEventListener('click', () => {
+  addPostOverlay.classList.remove('overlay-open');
+});
+
+//get all collections for options in uploading artwork
+const select = document.getElementById('collection-select');
+(async function getAllCollections() {
+  try {
+    const fetchOptions = {
+      method: 'GET',
+    };
+    const response = await fetch(url + '/collection', fetchOptions);
+    const collections = await response.json();
+    optionCreated(collections);
+  } catch (e) {
+    alert(e.message);
+  }
+})();
+
+const optionCreated = (collections) => {
+  collections.forEach((item) => {
+    const option = document.createElement('option');
+    option.value = item.collection_id;
+    option.key = item.collection_title;
+    option.innerHTML = item.collection_title;
+
+    select.appendChild(option);
+  });
+};
