@@ -478,4 +478,10 @@ body {
   #edit-button, #delete-button {
     display: none;
   } 
+
+  .overlay {
+    width: 80%;
+    left: 10%;
+    top: 30%;
+  }
 }
