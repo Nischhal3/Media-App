@@ -71,17 +71,17 @@ const createImageCard = (image) => {
   const imageDate = document.createElement('p');
   const imageDescription = document.createElement('p');
   const artist = document.createElement('h4');
-  
-  img.src = url + "/" + image.image_file;
+
+  img.src = url + '/' + image.image_file;
   img.alt = image.image_title;
-  
+
   imageTitle.innerHTML = image.image_title;
   imageDate.innerHTML = image.image_date.slice(0, 10);
   imageDescription.innerHTML = image.image_description;
   artist.innerHTML = 'Artist: ' + image.first_name + ' ' + image.last_name;
 
   imageTitle.className = 'image-title';
-  imageDate.className = "date";
+  imageDate.className = 'date';
   imageDescription.className = 'image-description';
   artist.className = 'artist';
 
@@ -90,7 +90,6 @@ const createImageCard = (image) => {
   infoDiv.appendChild(artist);
   infoDiv.appendChild(imageDate);
   infoDiv.appendChild(imageDescription);
-
 };
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
@@ -144,3 +143,105 @@ const optionCreated = (collections) => {
     select.appendChild(option);
   });
 };
+
+//Get all the likes from the beginning
+const imageId = getQParam('id');
+const likeIcon = document.querySelector('#likeIcon');
+const likeCount = document.querySelector('#likeCount');
+
+async function getAllLikes() {
+  try {
+    const fetchOptions = {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+    const response = await fetch(url + '/like/image/' + imageId, fetchOptions);
+    const allLikes = await response.json();
+    updateHeartCount(allLikes.allLikes);
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+//Get like of the user
+async function getLikeOfUser() {
+  try {
+    const fetchOptions = {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+    const response = await fetch(url + '/like/user/' + imageId, fetchOptions);
+    const like = await response.json();
+    updateHeartIcon(like.like);
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+getAllLikes();
+getLikeOfUser();
+
+//Toggle like and display number of likes
+likeIcon.addEventListener('click', async (event) => {
+  event.preventDefault();
+  if (likeIcon.className === 'far fa-heart') {
+    try {
+      const fetchOptions = {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+        },
+      };
+      const response = await fetch(
+        url + '/like/image/' + imageId,
+        fetchOptions
+      );
+
+      if (response.status === 200) {
+        getAllLikes();
+        getLikeOfUser();
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  } else {
+    try {
+      const fetchOptions = {
+        method: 'DELETE',
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+        },
+      };
+      const response = await fetch(
+        url + '/like/image/' + imageId,
+        fetchOptions
+      );
+
+      if (response.status === 200) {
+        getAllLikes();
+        getLikeOfUser();
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+});
+
+//update UI of heart Icon
+function updateHeartIcon(userLike) {
+  if (userLike > 0) {
+    likeIcon.className = 'fas fa-heart';
+    likeIcon.style.color = 'red';
+  } else {
+    likeIcon.className = 'far fa-heart';
+    likeIcon.style.color = 'black';
+  }
+}
+
+function updateHeartCount(allLikes) {
+  likeCount.textContent = allLikes;
+}
