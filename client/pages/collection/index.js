@@ -1,4 +1,5 @@
 'use strict';
+import logOut from '../logout.js';
 const url = 'http://localhost:3000'; // change url when uploading to server
 
 const token = sessionStorage.getItem('token');
@@ -141,3 +142,8 @@ closeMenuButton.addEventListener('click', () => {
   navLinks.classList.add('close');
   navLinks.classList.remove('open');
 });
+
+const logOutButton = document.getElementById('logout');
+logOutButton.addEventListener('click', () => {
+  logOut();
+})

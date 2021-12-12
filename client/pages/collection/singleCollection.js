@@ -1,4 +1,5 @@
 'use strict';
+import logOut from '../logout.js';
 const url = 'http://localhost:3000'; // change url when uploading to server
 const appName = document.getElementById('app-name');
 
@@ -136,3 +137,8 @@ loginDiv.addEventListener('click', () => {
     location.href = '../login/index.html';
   }
 });
+
+const logOutButton = document.getElementById('logout');
+logOutButton.addEventListener('click', () => {
+  logOut();
+})

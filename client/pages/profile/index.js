@@ -1,5 +1,5 @@
 'use strict';
-
+import logOut from '../logout.js';
 const url = 'http://localhost:3000';
 
 const token = sessionStorage.getItem('token');
@@ -200,3 +200,8 @@ const optionCreated = (collections) => {
     select.appendChild(option);
   });
 };
+
+const logOutButton = document.getElementById('logout');
+logOutButton.addEventListener('click', () => {
+  logOut();
+})
