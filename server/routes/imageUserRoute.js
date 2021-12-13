@@ -9,7 +9,6 @@ const {
   delete_image,
   update_image,
   get_image_user,
-  add_image,
 } = require('../controllers/imageController');
 const router = express.Router();
 
@@ -35,21 +34,12 @@ router
     post_image
   )
   .put(
-    body('image_title').notEmpty(),
-    body('image_description').notEmpty(),
+    body('title').notEmpty(),
+    body('description').notEmpty(),
+    body('date').notEmpty(),
+    body('collection').notEmpty(),
     update_image
   )
   .delete(delete_image);
-
-//To upload images from postman: delete later
-router
-  .route('/')
-  .post(
-    upload.single('image'),
-    body('title').notEmpty(),
-    body('description').notEmpty(),
-    body('date'),
-    add_image
-  );
 
 module.exports = router;
