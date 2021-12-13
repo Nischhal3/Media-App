@@ -38,6 +38,14 @@ body {
   align-items: center;
 }
 
+.disappear {
+  display: none;
+}
+
+#logout {
+  cursor: pointer;
+}
+
 .userName i {
   font-size: 20px;
   margin-left: 5%;
@@ -163,7 +171,7 @@ body {
 
 .image-title {
   text-transform: uppercase;
-  color:#ab6909;
+  color: #ab6909;
   font-weight: bolder;
   font-size: 28px;
   font-style: italic;
@@ -171,12 +179,12 @@ body {
 
 .date {
   margin-top: 5%;
-  color:#8c8c8c;
+  color: #8c8c8c;
   font-size: 20px;
 }
 .artist {
   margin-top: 10%;
-  color:#6C6363;
+  color: #6c6363;
   font-size: 20px;
 }
 
@@ -185,7 +193,7 @@ body {
   font-size: 22px;
   font-style: italic;
   font-weight: lighter;
-  color:rgb(45, 44, 44)
+  color: rgb(45, 44, 44);
 }
 
 #reaction-content {
@@ -229,14 +237,15 @@ body {
   border: 2px solid #ab6909;
 }
 
-#edit-button, #delete-button {
+#edit-button,
+#delete-button {
   border: transparent;
   font-size: 18px;
   background: white;
-  padding: 0
-} 
+  padding: 0;
+}
 
-#edit{
+#edit {
   margin-left: 35%;
   margin-right: 2%;
   cursor: pointer;
@@ -272,7 +281,8 @@ body {
   flex-direction: column;
 }
 
-#title, #date,
+#title,
+#date,
 #description {
   border: 1px solid #ab6909;
   border-radius: 5px;
@@ -377,7 +387,6 @@ body {
 
   .menu {
     top: 1%;
-    right: 3%;
   }
 
   .container {
@@ -411,7 +420,8 @@ body {
     font-size: 20px;
   }
 
-  .artist, .date {
+  .artist,
+  .date {
     font-size: 16px;
   }
 
@@ -433,13 +443,16 @@ body {
     border: 2px solid #ab6909;
   }
 
-  .collection-path, .stupid, .single-collection-path, .image-path{
+  .collection-path,
+  .stupid,
+  .single-collection-path,
+  .image-path {
     font-size: 16px;
     margin-left: 5px;
   }
 
   #path {
-    width: 70%
+    width: 70%;
   }
 
   #reaction {
@@ -460,7 +473,6 @@ body {
     width: 90%;
     margin-top: 5%;
     margin-left: 5%;
-    
   }
 
   #comment-input {
@@ -475,13 +487,18 @@ body {
     margin-left: 62%;
   }
 
-  #edit-button, #delete-button {
+  #edit-button,
+  #delete-button {
     display: none;
-  } 
+  }
 
   .overlay {
     width: 80%;
     left: 10%;
     top: 30%;
+  }
+
+  .nav-links {
+    width: 40%;
   }
 }

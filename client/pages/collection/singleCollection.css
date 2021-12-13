@@ -262,6 +262,10 @@ body {
     padding: 0;
     padding-bottom: 20%;
   }
+
+  .nav-links {
+    width: 40%;
+  }
 }
 
 @keyframes slideFromRight {
