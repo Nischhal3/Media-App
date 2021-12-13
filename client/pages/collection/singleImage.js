@@ -27,7 +27,6 @@ const getImage = async (id) => {
     const image = await response.json();
     createPath(image.collection_id, image.collection_title, image.image_title);
     createImageCard(image);
-    console.log('image', image);
     getId(image.collection_id);
   } catch (e) {
     console.log(e.message);
@@ -35,7 +34,9 @@ const getImage = async (id) => {
 };
 getImage(getQParam('id'));
 
+//Stroing id for collection to use later after deleting image
 let collectionID;
+
 const path = document.getElementById('path');
 const createPath = (id, collectionTitle, imageTitle) => {
   collectionID = id;
@@ -174,7 +175,6 @@ deleteImage.addEventListener('click', async () => {
   if (confirm('Are you sure you want to delete this image?')) {
     // Save it!
     const imageId = getQParam('id');
-    console.log('data', collectionID);
     const fetchOptions = {
       method: 'DELETE',
       headers: {
@@ -182,7 +182,6 @@ deleteImage.addEventListener('click', async () => {
         Authorization: 'Bearer ' + token,
       },
     };
-    console.log(fetchOptions);
 
     const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
     const json = await response.json();
