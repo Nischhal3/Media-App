@@ -38,6 +38,14 @@ body {
   align-items: center;
 }
 
+.disappear {
+  display: none;
+}
+
+#logout {
+  cursor: pointer;
+}
+
 .userName i {
   font-size: 20px;
   margin-left: 5%;

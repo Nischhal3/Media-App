@@ -1,4 +1,6 @@
 'use strict';
+
+import logOut from '../logout.js';
 const url = 'http://localhost:3000'; // change url when uploading to server
 
 const token = sessionStorage.getItem('token');
@@ -6,9 +8,14 @@ const user = sessionStorage.getItem('user');
 const userData = user && JSON.parse(user);
 
 const userName = document.querySelector('.userName span');
+const logOutButton = document.querySelector('#logout');
+logOutButton.addEventListener('click', () => {
+  logOut();
+});
 
 if (token && user) {
   userName.textContent = userData.first_name;
+  logOutButton.classList.remove('disappear');
 }
 
 const getQParam = (param) => {
@@ -71,17 +78,17 @@ const createImageCard = (image) => {
   const imageDate = document.createElement('p');
   const imageDescription = document.createElement('p');
   const artist = document.createElement('h4');
-  
-  img.src = url + "/" + image.image_file;
+
+  img.src = url + '/' + image.image_file;
   img.alt = image.image_title;
-  
+
   imageTitle.innerHTML = image.image_title;
   imageDate.innerHTML = image.image_date.slice(0, 10);
   imageDescription.innerHTML = image.image_description;
   artist.innerHTML = 'Artist: ' + image.first_name + ' ' + image.last_name;
 
   imageTitle.className = 'image-title';
-  imageDate.className = "date";
+  imageDate.className = 'date';
   imageDescription.className = 'image-description';
   artist.className = 'artist';
 
@@ -90,7 +97,6 @@ const createImageCard = (image) => {
   infoDiv.appendChild(artist);
   infoDiv.appendChild(imageDate);
   infoDiv.appendChild(imageDescription);
-
 };
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
