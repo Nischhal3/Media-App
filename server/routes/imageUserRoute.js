@@ -9,7 +9,6 @@ const {
   delete_image,
   update_image,
   get_image_user,
-  add_image,
 } = require('../controllers/imageController');
 const router = express.Router();
 

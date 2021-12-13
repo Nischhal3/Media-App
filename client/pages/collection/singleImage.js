@@ -166,3 +166,20 @@ updateImageForm.addEventListener('submit', async (e) => {
   location.reload();
 });
 
+//Deleting image
+const deleteImage = document.querySelector('#delete');
+deleteImage.addEventListener('click', async () => {
+  const imageId = getQParam('id');
+  console.log('delete',userData.user_id,imageId);
+
+  const fetchOptions = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    },
+  };
+  const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
+  const json = await response.json();
+  alert(json.message);
+});

@@ -72,6 +72,7 @@ const insertImage = async (user_id, image, next) => {
 };
 
 const deleteImage = async (imageId, user_id, role, next) => {
+
   let sql = 'DELETE FROM image_db WHERE image_id = ? AND user_id = ?';
   let params = [imageId, user_id];
 

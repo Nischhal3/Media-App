@@ -80,10 +80,10 @@ const post_image = async (req, res, next) => {
 };
 
 const delete_image = async (req, res, next) => {
-  const image_id = req.params.imageId;
+  const image_id = req.params.id;
   const user_id = req.user.user_id;
   const role = req.user.role;
-  console.log('Image id', image_id);
+  console.log('Image id', image_id, user_id);
   console.log('Id ', role);
   const deleted = await deleteImage(image_id, user_id, role, next);
   res.json({ message: `Image deleted ${deleted}` });
