@@ -27,16 +27,18 @@ const getImage = async (id) => {
     const image = await response.json();
     createPath(image.collection_id, image.collection_title, image.image_title);
     createImageCard(image);
-    console.log(image);
+    console.log('image',image);
+    getId(image.collection_id);
   } catch (e) {
     console.log(e.message);
   }
 };
-
 getImage(getQParam('id'));
 
+let collectionID ;
 const path = document.getElementById('path');
 const createPath = (id, collectionTitle, imageTitle) => {
+  collectionID = id;
   const collectionPath = document.createElement('a');
   collectionPath.href = 'index.html';
   collectionPath.className = 'collection-path';
@@ -170,8 +172,7 @@ updateImageForm.addEventListener('submit', async (e) => {
 const deleteImage = document.querySelector('#delete');
 deleteImage.addEventListener('click', async () => {
   const imageId = getQParam('id');
-  console.log('delete',userData.user_id,imageId);
-
+  console.log("data",collectionID);
   const fetchOptions = {
     method: 'DELETE',
     headers: {
@@ -179,7 +180,12 @@ deleteImage.addEventListener('click', async () => {
       Authorization: 'Bearer ' + token,
     },
   };
+  console.log(fetchOptions);
+ 
+  
   const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
   const json = await response.json();
   alert(json.message);
+  //Redirection to collection page after deleting image
+  location.href = `singleCollection.html?id=${collectionID}`;
 });
