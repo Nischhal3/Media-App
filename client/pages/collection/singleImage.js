@@ -200,9 +200,7 @@ deleteImage.addEventListener('click', async () => {
       //Redirection to collection page after deleting image
       location.href = `singleCollection.html?id=${collectionID}`;
     }
-  } else {
-    alert("You have to log in to do this!")
-  }
+  } 
 });
 
 //Get all the likes from the beginning
