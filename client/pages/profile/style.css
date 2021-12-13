@@ -32,6 +32,7 @@ body {
 .add {
   margin-right: 40px;
   cursor: pointer;
+  font-size: 20px;
 }
 
 .menu {
@@ -182,7 +183,7 @@ body {
 .fa {
   opacity: 0.5;
   margin-top: 3px;
-  font-size: 15px;
+  font-size: 12px;
 }
 
 #collection {
@@ -281,22 +282,26 @@ body {
 .updateProfileOverlay {
   position: absolute;
   top: 20%;
-  left: 40%;
-  width: 20%;
-  flex-direction: column;
+  left: 30%;
+  width: 35%;
+  flex-direction: row;
   z-index: 1;
-  border: 1px solid #ab6909;
+  border: 2px solid #ab6909;
   background: white;
   display: none;
 }
 
-.updateProfileOverlay i {
+#box2 i {
   align-self: flex-end;
-  margin: 1%;
+  margin: 2%;
   cursor: pointer;
 }
 
-.updateProfileOverlay h3 {
+#line {
+  border: 1px solid #ab6909;
+}
+
+.updateProfileOverlay h4 {
   color: black;
   text-align: center;
   margin-top: 20px;
@@ -304,6 +309,12 @@ body {
 
 .updateProfileOverlay form {
   padding: 10%;
+}
+
+#box1, #box2 {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
 #firstName,
@@ -546,6 +557,16 @@ body {
     width: 70%;
     top: 10%;
     left: 15%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #box1, #box2 {
+    width: 100%;
+  } 
+
+  #line {
+    width: 100%;
   }
 
   .updateProfileOverlay i,

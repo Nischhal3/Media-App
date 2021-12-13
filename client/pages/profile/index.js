@@ -66,7 +66,7 @@ const createImageCard = (images) => {
 
     //redirect to single image page with id
     singleImage.addEventListener('click', () => {
-      location.href = `singleImage.html?id=${item.image_id}`;
+      location.href = `../collection/singleImage.html?id=${item.image_id}`;
     });
   });
 };
@@ -151,8 +151,8 @@ editProfilePhone.addEventListener('click', () => {
 
 //update user
 const updateInfoForm = document.querySelector('#updateInfoForm');
-
-updateInfoForm.addEventListener('submit', async () => {
+updateInfoForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
   const data = serializeJson(updateInfoForm);
   for (const [prop, value] of Object.entries(data)) {
     if (value === '') {
@@ -170,13 +170,28 @@ updateInfoForm.addEventListener('submit', async () => {
 
   const response = await fetch(url + `/user/${userData.user_id}`, fetchOptions);
   const json = await response.json();
+  if(json.message) alert(json.message);
+  location.reload();
+});
 
-  if (json.length > 0) {
-    let errors = '';
-    json.forEach((err) => (errors += `${err.msg}\n`));
-    alert(errors);
-    return false;
-  }
+const updatePasswordForm = document.querySelector('#updatePasswordForm');
+updatePasswordForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = serializeJson(updatePasswordForm);
+
+  const fetchOptions = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    },
+    body: JSON.stringify(data),
+  };
+
+  const response = await fetch(url + `/user/`, fetchOptions);
+  const json = await response.json();
+  if(json.message) alert(json.message);
+  location.reload();
 });
 
 //get all collections for options in uploading artwork
