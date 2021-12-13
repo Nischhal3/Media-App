@@ -1,4 +1,5 @@
 'use strict';
+import logOut from '../logout.js';
 const url = 'http://localhost:3000'; // change url when uploading to server
 const appName = document.getElementById('app-name');
 
@@ -115,6 +116,11 @@ if (token && user) {
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
+const logout = document.querySelector('#logout');
+
+if (!token || !user) {
+  logout.className = 'disappear';
+}
 
 //toggle menu
 menu.addEventListener('click', () => {
@@ -136,3 +142,8 @@ loginDiv.addEventListener('click', () => {
     location.href = '../login/index.html';
   }
 });
+
+const logOutButton = document.getElementById('logout');
+logOutButton.addEventListener('click', () => {
+  logOut();
+})

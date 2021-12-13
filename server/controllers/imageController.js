@@ -25,7 +25,6 @@ const get_image_user = async (req, res, next) => {
 
 const get_image_collection = async (req, res, next) => {
   const image = await getImageByCollectionId(req.params.id, next);
-  console.log('Image by collection_id', image);
   if (image) {
     res.json(image);
     return;
@@ -54,7 +53,6 @@ const post_image = async (req, res, next) => {
     return;
   }
 
-  console.log('Posting images', req.file);
   if (!req.file) {
     const err = httpError('Invalid file', 400);
     next(err);
@@ -63,16 +61,13 @@ const post_image = async (req, res, next) => {
   try {
     const thumb = await makeThumbnail(req.file.path, req.file.filename);
     const user_id = req.user.user_id;
-    console.log('Post done by userID', user_id);
     const image = req.body;
     image.file = req.file.filename;
     const id = await insertImage(user_id, image);
-    console.log('Image post', image);
     if (thumb) {
       res.json({ message: `Image added with id: ${id}` });
     }
   } catch (error) {
-    console.log('Add image with thumbnail error', e.message);
     const err = httpError('Error posting image', 400);
     next(err);
     return;
@@ -83,9 +78,11 @@ const delete_image = async (req, res, next) => {
   const image_id = req.params.id;
   const user_id = req.user.user_id;
   const role = req.user.role;
-  console.log('Image id', image_id, user_id);
-  console.log('Id ', role);
   const deleted = await deleteImage(image_id, user_id, role, next);
+  if(!deleted){
+    res.json({ message: `Image deleted ${deleted}. Cannot delete others' image.` });
+    return;
+  }
   res.json({ message: `Image deleted ${deleted}` });
 };
 
@@ -102,9 +99,12 @@ const update_image = async (req, res, next) => {
   }
 
   const update = await updateImage(user_id, req.body, next);
+  if(!update){
+    res.json({ message: `Image update ${update}. Cannot update others' image.` });
+    return;
+  }
   res.json({ message: `Image update: ${update}` });
 };
-
 
 module.exports = {
   get_image_user,

@@ -1,4 +1,6 @@
 'use strict';
+import logOut from '../logout.js';
+const url = "http://localhost:3000";
 
 const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
@@ -115,3 +117,8 @@ const searchDiv = document.querySelector('.search');
 searchDiv.addEventListener('click', () => {
   location.href = '../collection/index.html';
 });
+
+const logOutButton = document.getElementById('logout');
+logOutButton.addEventListener('click', () => {
+  logOut();
+})

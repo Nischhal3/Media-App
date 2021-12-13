@@ -28,10 +28,11 @@ router
   .get(get_image_user)
   .post(
     upload.single('image'),
-    body('image_title').notEmpty(),
-    body('image_description').notEmpty(),
-    post_image)
-
+    body('title').notEmpty(),
+    body('description').notEmpty(),
+    body('date').isDate(),
+    post_image
+  )
   .put(
     body('title').notEmpty(),
     body('description').notEmpty(),
