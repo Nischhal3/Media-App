@@ -35,7 +35,6 @@ const get_image_collection = async (req, res, next) => {
 
 const get_image = async (req, res, next) => {
   const image = await getImage(req.params.id, next);
-  console.log('Image by id', image);
   if (image) {
     res.json(image);
     return;
@@ -47,7 +46,6 @@ const get_image = async (req, res, next) => {
 const post_image = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log('Post image validation: ', errors.array());
     const err = httpError('image post data not valid', errors.array());
     next(err);
     return;
@@ -92,7 +90,6 @@ const update_image = async (req, res, next) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log('Image update validation:', errors.array());
     const err = httpError('Updating data not valid', 400);
     next(err);
     return;
