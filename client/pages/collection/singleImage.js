@@ -18,6 +18,11 @@ if (token && user) {
   logOutButton.classList.remove('disappear');
 }
 
+const appName = document.getElementById('app-name');
+appName.addEventListener('click', () => {
+  location.href = '../front/index.html';
+});
+
 const getQParam = (param) => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
