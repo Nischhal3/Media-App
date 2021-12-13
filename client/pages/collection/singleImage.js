@@ -1,5 +1,6 @@
 'use strict';
 
+import logOut from '../logout.js';
 const url = 'http://localhost:3000'; // change url when uploading to server
 
 const token = sessionStorage.getItem('token');
@@ -7,9 +8,14 @@ const user = sessionStorage.getItem('user');
 const userData = user && JSON.parse(user);
 
 const userName = document.querySelector('.userName span');
+const logOutButton = document.querySelector('#logout');
+logOutButton.addEventListener('click', () => {
+  logOut();
+});
 
 if (token && user) {
   userName.textContent = userData.first_name;
+  logOutButton.classList.remove('disappear');
 }
 
 const getQParam = (param) => {
@@ -196,3 +202,89 @@ deleteImage.addEventListener('click', async () => {
     alert("You have to log in to do this!")
   }
 });
+
+//Get all the likes from the beginning
+const imageId = getQParam('id');
+const likeIcon = document.querySelector('#likeIcon');
+const likeCount = document.querySelector('#likeCount');
+
+async function getAllLikes() {
+  try {
+    const response = await fetch(url + '/like/image/' + imageId);
+    const allLikes = await response.json();
+    updateHeartCount(allLikes.allLikes);
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+// Get like of the user
+async function getLikeOfUser() {
+  try {
+    const fetchOptions = {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+    const response = await fetch(url + '/like/user/' + imageId, fetchOptions);
+    const like = await response.json();
+    updateHeartIcon(like.like);
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+getAllLikes();
+if (user && token) {
+  getLikeOfUser();
+}
+
+//Toggle like and display number of likes
+likeIcon.addEventListener('click', async (event) => {
+  event.preventDefault();
+  if (!token || !user) {
+    alert('You have to log in to like this picture');
+    return false;
+  }
+  const fetchOptions =
+    likeIcon.className === 'far fa-heart'
+      ? {
+          method: 'POST',
+          headers: {
+            Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+          },
+        }
+      : {
+          method: 'DELETE',
+          headers: {
+            Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+          },
+        };
+
+  try {
+    const response = await fetch(url + '/like/user/' + imageId, fetchOptions);
+
+    if (response.status === 200) {
+      getAllLikes();
+      getLikeOfUser();
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+//update UI of heart Icon
+function updateHeartIcon(userLike) {
+  if (userLike > 0) {
+    likeIcon.className = 'fas fa-heart';
+    likeIcon.style.color = 'red';
+  } else {
+    likeIcon.className = 'far fa-heart';
+    likeIcon.style.color = 'black';
+  }
+}
+
+function updateHeartCount(allLikes) {
+  likeCount.textContent = allLikes;
+}
