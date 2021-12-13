@@ -35,7 +35,6 @@ const get_image_collection = async (req, res, next) => {
 
 const get_image = async (req, res, next) => {
   const image = await getImage(req.params.id, next);
-  console.log('Image by id', image);
   if (image) {
     res.json(image);
     return;
@@ -47,7 +46,6 @@ const get_image = async (req, res, next) => {
 const post_image = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log('Post image validation: ', errors.array());
     const err = httpError('image post data not valid', errors.array());
     next(err);
     return;
@@ -75,74 +73,43 @@ const post_image = async (req, res, next) => {
 };
 
 const delete_image = async (req, res, next) => {
-  const image_id = req.params.imageId;
+  const image_id = req.params.id;
   const user_id = req.user.user_id;
   const role = req.user.role;
-  console.log('Image id', image_id);
-  console.log('Id ', role);
   const deleted = await deleteImage(image_id, user_id, role, next);
+  if (!deleted) {
+    res.json({ message: `Cannot delete others' image.` });
+    return;
+  }
   res.json({ message: `Image deleted ${deleted}` });
 };
 
 const update_image = async (req, res, next) => {
-  req.body.id = req.params.imageId;
+  req.body.id = req.params.id;
   const user_id = req.user.user_id;
-  console.log('Image ID:', req.params.imageId);
-  console.log('User ID:', user_id);
-  console.log('Update post: ', req.body);
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log('Image update validation:', errors.array());
     const err = httpError('Updating data not valid', 400);
     next(err);
     return;
   }
 
   const update = await updateImage(user_id, req.body, next);
+  if (!update) {
+    res.json({
+      message: `Cannot update others' image.`,
+    });
+    return;
+  }
   res.json({ message: `Image update: ${update}` });
 };
 
-//To upload images from postman: delete later
-const add_image = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    console.log('Post image validation: ', errors.array());
-    const err = httpError('image post data not valid', errors.array());
-    next(err);
-    return;
-  }
-
-  if (!req.file) {
-    const err = httpError('Invalid file', 400);
-    next(err);
-    return;
-  }
-  try {
-    const thumb = await makeThumbnail(req.file.path, req.file.filename);
-    console.log('user id', req.user.user_id);
-    const user_id = req.user.user_id;
-    console.log('Post done by userID', user_id);
-    const image = req.body;
-    image.file = req.file.filename;
-    const id = await insertImage(user_id, image);
-    console.log('Image post', image);
-    if (thumb) {
-      res.json({ message: `Image added with id: ${id}` });
-    }
-  } catch (error) {
-    console.log('Add image with thumbnail error', e.message);
-    const err = httpError('Error posting image', 400);
-    next(err);
-    return;
-  }
-};
 module.exports = {
   get_image_user,
   post_image,
   delete_image,
   update_image,
   get_image_collection,
-  add_image,
   get_image,
 };
