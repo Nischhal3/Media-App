@@ -12,28 +12,32 @@ const getAllComments = async (req, res) => {
   res.json(rows);
 };
 
-const addComment = async (req, res) => {
-  const result = await insertComment(req.body.id);
+const addComment = async (req, res, next) => {
+  req.body.id = req.params.id;
+  console.log("comment",req.body, req.user.user_id)
+  const user_id = req.user.user_id;
+  const result = await insertComment(req.body,user_id,next);
 
   if (result) {
     res.json(result);
     return;
-  }
+  } 
 
   next(badRequestError('Error adding like'));
 };
 
-const deleteComment = async (req, res) => {
-  const result = await deleteCommentFromDb(req.body.id);
-
-  if (result === 'unauthenticated') next(unauthenticatedError());
+const deleteComment = async (req, res, next) => {
+  const id = req.params.id;
+  const result = await deleteCommentFromDb(id, req.user);
+  
+  if (!result) next(unauthenticatedError());
 
   if (result) {
     res.json({ message: 'Comment has been deleted' });
     return;
   }
 
-  next(badRequestError('Error adding comment'));
+  next(badRequestError('Error deleting comment'));
 };
 
 module.exports = {

@@ -156,14 +156,38 @@ if (!user || !token) {
 
 //get all comments in the begining
 const imageId = getQParam('id');
-async function getAllComments() {
+ async function getAllComments() {
   try {
     const response = await fetch(url + '/comments/image/' + imageId);
     const allComments = await response.json();
-    console.log(allComments);
+    console.log("All comment",allComments);
   } catch (error) {
     alert(error.message);
   }
 }
 
 getAllComments();
+
+//Adding comments
+const input = document.querySelector('#comment-input');
+comments.addEventListener('keypress', async(e)=>{
+  if(e.key === 'Enter'){
+    //converting input comment to json object
+   const data = {
+     comment: input.value
+   }
+
+   const fetchOptions = {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(data),
+    };
+    console.log(fetchOptions);
+    const response = await fetch(url + `/image/comment/${imageId}`,fetchOptions);
+   
+  }
+
+})
