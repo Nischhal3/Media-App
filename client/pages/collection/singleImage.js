@@ -1,4 +1,6 @@
 'use strict';
+
+import logOut from '../logout.js';
 const url = 'http://localhost:3000'; // change url when uploading to server
 
 const token = sessionStorage.getItem('token');
@@ -6,9 +8,14 @@ const user = sessionStorage.getItem('user');
 const userData = user && JSON.parse(user);
 
 const userName = document.querySelector('.userName span');
+const logOutButton = document.querySelector('#logout');
+logOutButton.addEventListener('click', () => {
+  logOut();
+});
 
 if (token && user) {
   userName.textContent = userData.first_name;
+  logOutButton.classList.remove('disappear');
 }
 
 const getQParam = (param) => {

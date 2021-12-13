@@ -38,6 +38,14 @@ body {
   align-items: center;
 }
 
+.disappear {
+  display: none;
+}
+
+#logout {
+  cursor: pointer;
+}
+
 .userName i {
   font-size: 20px;
   margin-left: 5%;
@@ -389,7 +397,6 @@ body {
 
   .menu {
     top: 1%;
-    right: 3%;
   }
 
   .container {
@@ -500,5 +507,9 @@ body {
     width: 80%;
     left: 10%;
     top: 30%;
+  }
+
+  .nav-links {
+    width: 40%;
   }
 }
