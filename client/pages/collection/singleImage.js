@@ -27,7 +27,6 @@ const getImage = async (id) => {
     const image = await response.json();
     createPath(image.collection_id, image.collection_title, image.image_title);
     createImageCard(image);
-    console.log('image', image);
     getId(image.collection_id);
   } catch (e) {
     console.log(e.message);
@@ -150,44 +149,50 @@ const optionCreated = (collections) => {
 //Update image
 const updateImageForm = document.querySelector('.formContent');
 updateImageForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const data = serializeJson(updateImageForm);
-  const imageId = getQParam('id');
-  const fetchOptions = {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
-    },
-    body: JSON.stringify(data),
-  };
+  if (token && user) {
+    e.preventDefault();
+    const data = serializeJson(updateImageForm);
+    const imageId = getQParam('id');
+    const fetchOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(data),
+    };
 
-  const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
-  const json = await response.json();
-  alert(json.message);
-  location.reload();
+    const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
+    const json = await response.json();
+    alert(json.message);
+    
+    location.reload();
+  } else {
+    alert("You have to log in to do this!")
+  }
 });
 
 //Deleting image
 const deleteImage = document.querySelector('#delete');
 deleteImage.addEventListener('click', async () => {
-  if (confirm('Are you sure you want to delete this image?')) {
-    // Save it!
-    const imageId = getQParam('id');
-    console.log('data', collectionID);
-    const fetchOptions = {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
-      },
-    };
-    console.log(fetchOptions);
-
-    const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
-    const json = await response.json();
-    alert(json.message);
-    //Redirection to collection page after deleting image
-    location.href = `singleCollection.html?id=${collectionID}`;
+  if (token && user) {
+    if (confirm('Are you sure you want to delete this image?')) {
+      // Save it!
+      const imageId = getQParam('id');
+      const fetchOptions = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      };
+      const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
+      const json = await response.json();
+      alert(json.message);
+      //Redirection to collection page after deleting image
+      location.href = `singleCollection.html?id=${collectionID}`;
+    }
+  } else {
+    alert("You have to log in to do this!")
   }
 });

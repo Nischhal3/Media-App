@@ -78,9 +78,11 @@ const delete_image = async (req, res, next) => {
   const image_id = req.params.id;
   const user_id = req.user.user_id;
   const role = req.user.role;
-  console.log('Image id', image_id, user_id);
-  console.log('Id ', role);
   const deleted = await deleteImage(image_id, user_id, role, next);
+  if(!deleted){
+    res.json({ message: `Image deleted ${deleted}. Cannot delete others' image.` });
+    return;
+  }
   res.json({ message: `Image deleted ${deleted}` });
 };
 
@@ -97,6 +99,10 @@ const update_image = async (req, res, next) => {
   }
 
   const update = await updateImage(user_id, req.body, next);
+  if(!update){
+    res.json({ message: `Image update ${update}. Cannot update others' image.` });
+    return;
+  }
   res.json({ message: `Image update: ${update}` });
 };
 
