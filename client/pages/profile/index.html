@@ -29,7 +29,7 @@
           <li><a href="../../pages/front/">Home</a></li>
           <li><a href="../../pages/profile/">Profile</a></li>
           <li><a href="../../pages/collection/">Collections</a></li>
-          <li><a>Log out</a></li>
+          <li id="logout"><a>Log out</a></li>
         </ul>
       </div>
     </div>
@@ -72,25 +72,32 @@
       </div>
     </div>
     <div class="overlay">
-      <i class="fas fa-times"></i>
+      <i class="fas fa-times closeIcon"></i>
       <div class="overlay-container">
-        <img src="../../assets/add-post.png" alt="add post picture" />
-        <form class="overlay-info">
-          <label for="title">Title:</label>
-          <input type="text" id="title" name="title" required /><br />
-          <label for="date">Date:</label>
-          <input type="date" id="date" name="date" required /><br />
-          <label for="description">Description:</label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            required
-          /><br />
-          <label for="collection-select">Choose a collection:</label>
-          <select name="collection-select" id="collection-select">
-            <option value="saab">---</option>
-          </select>
+        <form  class="overlay-image" id="post-artwork" enctype="multipart/form-data">
+          <label class="imageLabel" for="imagePosting" >
+            <i class="fas fa-upload" ></i>
+            <input type="file" required name="image" accept="image/*" id='imagePosting'> 
+            <p id="uploadImage">No Image chosen</p>
+          </label>
+          <div class="formContent">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required /><br />
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required /><br />
+            <label for="description">Description:</label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              required
+            /><br />
+            <label for="collection-select">Choose a collection:</label>
+            <select name="collection" id="collection-select">
+              <option value="saab">---</option>
+            </select>
+            <button type="submit" >Submit</button>
+          </div>
         </form>
       </div>
     </div>
@@ -114,7 +121,7 @@
       </form>
     </div>
     <script src="../login/serialize.js"></script>
-    <script src="./index.js"></script>
+    <script type="module" src="./index.js"></script>
   </body>
   </div>
 </html>

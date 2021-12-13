@@ -1,5 +1,5 @@
 'use strict';
-
+import logOut from '../logout.js';
 const url = 'http://localhost:3000';
 
 const token = sessionStorage.getItem('token');
@@ -13,8 +13,8 @@ if (!token && !user) {
 const appName = document.getElementById('app-name');
 
 appName.addEventListener('click', () => {
-    location.href = '../front/index.html';
-  });
+  location.href = '../front/index.html';
+});
 
 //Tabs selection
 const tabs = document.querySelectorAll('[ data-tab-target]');
@@ -44,7 +44,6 @@ const getImageByUser = async (id) => {
     };
     const response = await fetch(url + '/image/user/' + id, fetchOptions);
     const images = await response.json();
-    console.log(images);
     createImageCard(images);
   } catch (e) {
     console.log(e.message);
@@ -56,7 +55,6 @@ getImageByUser(userData.user_id);
 const imageList = document.getElementById('artwork');
 const createImageCard = (images) => {
   images.forEach((item) => {
-    console.log('item', item.image_file);
     const singleImage = document.createElement('div');
     const img = document.createElement('img');
     img.src = url + '/thumbnails/' + item.image_file;
@@ -91,6 +89,13 @@ closeMenuButton.addEventListener('click', () => {
 const add = document.querySelector('.add');
 const addPostOverlay = document.querySelector('.overlay');
 const closeOverlay = document.querySelector('.overlay i');
+
+//append file name into image box
+document.getElementById('imagePosting').onchange = function () {
+  const fileName = this.value.split('\\');
+  document.getElementById('uploadImage').textContent =
+    fileName[fileName.length - 1];
+};
 
 add.addEventListener('click', () => {
   addPostOverlay.classList.add('overlay-open');
@@ -183,7 +188,6 @@ const select = document.getElementById('collection-select');
     };
     const response = await fetch(url + '/collection', fetchOptions);
     const collections = await response.json();
-    console.log(collections);
     optionCreated(collections);
   } catch (e) {
     alert(e.message);
@@ -193,10 +197,30 @@ const select = document.getElementById('collection-select');
 const optionCreated = (collections) => {
   collections.forEach((item) => {
     const option = document.createElement('option');
-    option.key = item.collection_id;
-    option.value = item.collection_title;
+    option.value = item.collection_id;
+    option.key = item.collection_title;
     option.innerHTML = item.collection_title;
 
     select.appendChild(option);
   });
 };
+
+const postArtwork = document.querySelector('#post-artwork');
+postArtwork.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = new FormData(postArtwork);
+
+  const fetchOptions = {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+    body: data,
+  };
+
+  await fetch(url + `/image/user/${userData.user_id}`, fetchOptions);
+});
+const logOutButton = document.getElementById('logout');
+logOutButton.addEventListener('click', () => {
+  logOut();
+});

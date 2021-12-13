@@ -184,8 +184,12 @@ body {
   cursor: pointer;
 }
 
-.noUser {
+.disappear {
   display: none;
+}
+
+#logout {
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 425px) {
