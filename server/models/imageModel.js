@@ -93,6 +93,7 @@ const deleteImage = async (imageId, user_id, role, next) => {
 
 const updateImage = async (user_id, image, next) => {
   console.log('update', user_id, image);
+
   try {
     const [rows] = await promisePool.query(
       'UPDATE image_db SET image_title = ? , image_description = ?,  collection_id = ?, image_date = ? WHERE  image_id = ? AND  user_id =  ?',

@@ -27,7 +27,7 @@ const getImage = async (id) => {
     const image = await response.json();
     createPath(image.collection_id, image.collection_title, image.image_title);
     createImageCard(image);
-    console.log('image',image);
+    console.log('image', image);
     getId(image.collection_id);
   } catch (e) {
     console.log(e.message);
@@ -35,7 +35,7 @@ const getImage = async (id) => {
 };
 getImage(getQParam('id'));
 
-let collectionID ;
+let collectionID;
 const path = document.getElementById('path');
 const createPath = (id, collectionTitle, imageTitle) => {
   collectionID = id;
@@ -171,21 +171,23 @@ updateImageForm.addEventListener('submit', async (e) => {
 //Deleting image
 const deleteImage = document.querySelector('#delete');
 deleteImage.addEventListener('click', async () => {
-  const imageId = getQParam('id');
-  console.log("data",collectionID);
-  const fetchOptions = {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
-    },
-  };
-  console.log(fetchOptions);
- 
-  
-  const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
-  const json = await response.json();
-  alert(json.message);
-  //Redirection to collection page after deleting image
-  location.href = `singleCollection.html?id=${collectionID}`;
+  if (confirm('Are you sure you want to delete this image?')) {
+    // Save it!
+    const imageId = getQParam('id');
+    console.log('data', collectionID);
+    const fetchOptions = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    };
+    console.log(fetchOptions);
+
+    const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
+    const json = await response.json();
+    alert(json.message);
+    //Redirection to collection page after deleting image
+    location.href = `singleCollection.html?id=${collectionID}`;
+  }
 });
