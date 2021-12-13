@@ -22,20 +22,26 @@ body {
   cursor: pointer;
 }
 
-.icons {
-  flex: 1;
+.buttons {
   display: flex;
   justify-content: right;
+  align-items: center;
+  font-size: 24px;
 }
 
-.icons button {
+.add {
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+.menu {
   width: 40px;
   height: 40px;
   border: none;
-  background: #d5b07a;
+  background: transparent;
   border-radius: 50%;
-  margin-left: 10%;
   cursor: pointer;
+  font-size: 24px;
 }
 
 .close-menu {
@@ -434,6 +440,7 @@ body {
   .wrapper {
     position: relative;
     overflow-x: hidden;
+    height: 100vh;
   }
 
   .header {
@@ -444,8 +451,17 @@ body {
     font-size: 24px;
   }
 
-  .icons button {
-    height: 30px;
+  .buttons,
+  .menu {
+    font-size: 20px;
+  }
+
+  .add {
+    margin-right: 20px;
+  }
+
+  .add span {
+    display: none;
   }
 
   .user-profile {
@@ -474,6 +490,7 @@ body {
 
   .user-intro {
     text-align: center;
+    padding-top: 10px;
   }
 
   .tabs {
@@ -501,17 +518,28 @@ body {
     top: 10%;
   }
 
-  .overlay-container {
-    flex-direction: column;
-  }
-
-  .overlay-container img {
-    width: 80%;
-  }
-
   .overlay-container form {
+    display: flex;
+    flex-direction: column;
     margin-right: 0;
     width: 80%;
+  }
+
+  .formContent {
+    margin-top: 30px;
+  }
+
+  .imageLabel {
+    margin: 0;
+  }
+
+  .imageLabel i {
+    padding-top: 20px;
+    font-size: 40px;
+  }
+
+  #uploadImage {
+    padding-bottom: 20px;
   }
 
   .updateProfileOverlay {
@@ -523,5 +551,9 @@ body {
   .updateProfileOverlay i,
   .closeIcon {
     margin-right: 2%;
+  }
+
+  .nav-links {
+    width: 50%;
   }
 }
