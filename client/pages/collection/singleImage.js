@@ -177,10 +177,10 @@ updateImageForm.addEventListener('submit', async (e) => {
     const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
     const json = await response.json();
     alert(json.message);
-    
+
     location.reload();
   } else {
-    alert("You have to log in to do this!")
+    alert('You have to log in to do this!');
   }
 });
 
@@ -198,13 +198,16 @@ deleteImage.addEventListener('click', async () => {
           Authorization: 'Bearer ' + token,
         },
       };
-      const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
+      const response = await fetch(
+        url + `/image/user/${imageId}`,
+        fetchOptions
+      );
       const json = await response.json();
       alert(json.message);
       //Redirection to collection page after deleting image
       location.href = `singleCollection.html?id=${collectionID}`;
     }
-  } 
+  }
 });
 
 //Get all the likes from the beginning
