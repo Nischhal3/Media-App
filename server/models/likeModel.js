@@ -15,6 +15,16 @@ const getAllLikesByImageId = async (imageId) => {
   }
 };
 
+const getAllLikes = async () => {
+  try {
+    const [rows] = await promisePool.execute(
+      'SELECT image_db.image_title, image_db.image_date, image_db.image_description, image_db.image_file, like_db.image_id FROM like_db INNER JOIN image_db ON like_db.image_id = image_db.image_id ORDER BY COUNT(likes) DESC');
+    return rows;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 const getLikeByUserId = async (imageId, userId) => {
   try {
     const [rows] = await promisePool.execute(
@@ -58,4 +68,5 @@ module.exports = {
   getLikeByUserId,
   insertLike,
   deleteLikeByImageId,
+  getAllLikes
 };

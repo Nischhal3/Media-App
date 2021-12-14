@@ -1,8 +1,6 @@
 'use strict';
 import logOut from '../logout.js';
 const url = "http://localhost:3000";
-
-const url = 'http://localhost:3000';
 const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
 const userData = user && JSON.parse(user);
