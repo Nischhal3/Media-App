@@ -15,19 +15,14 @@ const getAllComments = async (req, res) => {
 const addComment = async (req, res, next) => {
   req.body.id = req.params.id;
   const user_id = req.user.user_id;
-  const result = await insertComment(req.body,user_id,next);
-
-  if (result === 1) {
-    return;
-  } 
-
-  next(badRequestError('Error adding like'));
+  const allComments = await insertComment(req.body, user_id, next);
+  res.json(allComments);
 };
 
 const deleteComment = async (req, res, next) => {
   const id = req.params.id;
   const result = await deleteCommentFromDb(id, req.user);
-  
+
   if (!result) next(unauthenticatedError());
 
   if (result) {

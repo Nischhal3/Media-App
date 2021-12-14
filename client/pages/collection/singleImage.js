@@ -28,6 +28,7 @@ const getQParam = (param) => {
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 };
+const imageId = getQParam('id');
 
 const getImage = async (id) => {
   try {
@@ -42,7 +43,7 @@ const getImage = async (id) => {
     console.log(e.message);
   }
 };
-getImage(getQParam('id'));
+getImage(imageId);
 
 //Stroing id for collection to use later after deleting image
 let collectionID;
@@ -164,7 +165,6 @@ updateImageForm.addEventListener('submit', async (e) => {
   if (token && user) {
     e.preventDefault();
     const data = serializeJson(updateImageForm);
-    const imageId = getQParam('id');
     const fetchOptions = {
       method: 'PUT',
       headers: {
@@ -190,7 +190,6 @@ deleteImage.addEventListener('click', async () => {
   if (token && user) {
     if (confirm('Are you sure you want to delete this image?')) {
       // Save it!
-      const imageId = getQParam('id');
       const fetchOptions = {
         method: 'DELETE',
         headers: {
@@ -211,7 +210,6 @@ deleteImage.addEventListener('click', async () => {
 });
 
 //Get all the likes from the beginning
-const imageId = getQParam('id');
 const likeIcon = document.querySelector('#likeIcon');
 const likeCount = document.querySelector('#likeCount');
 
@@ -307,18 +305,59 @@ if (!user || !token) {
 }
 
 //get all comments in the begining
-const imageId = getQParam('id');
 async function getAllComments() {
   try {
     const response = await fetch(url + '/comments/image/' + imageId);
     const allComments = await response.json();
-    console.log('All comment', allComments);
+    displayComments(allComments);
   } catch (error) {
     alert(error.message);
   }
 }
 
 getAllComments();
+
+//Display comment
+const displayComments = (allComments) => {
+  const allCommentsContainer = document.querySelector('.allComments');
+  allCommentsContainer.innerHTML = '';
+
+  allComments.map((cmt) => {
+    const commentContainer = document.createElement('div');
+    const commentContent = document.createElement('div');
+    const name = document.createElement('p');
+    const comment = document.createElement('p');
+    const buttonDelete = document.createElement('button');
+    const trashIcon = '<i class="fas fa-trash"></i>';
+
+    name.innerHTML = cmt.first_name + ' ' + cmt.last_name;
+    comment.innerHTML = cmt.comments;
+    buttonDelete.innerHTML += trashIcon;
+
+    commentContent.appendChild(name);
+    commentContent.appendChild(comment);
+    commentContainer.appendChild(commentContent);
+    if (
+      token &&
+      user &&
+      (cmt.user_id === userData.user_id || userData.role === 0)
+    ) {
+      commentContainer.appendChild(buttonDelete);
+      buttonDelete.addEventListener('click', (event) => {
+        if (confirm('Are you sure you want to delete this comment?')) {
+          deleteComment(cmt.id, event);
+        }
+      });
+    }
+
+    name.className = 'commentUser';
+    comment.className = 'comment';
+    commentContent.className = 'commentContent';
+    commentContainer.className = 'commentBox';
+
+    allCommentsContainer.appendChild(commentContainer);
+  });
+};
 
 //Adding comments
 const input = document.querySelector('#comment-input');
@@ -337,10 +376,37 @@ comments.addEventListener('keypress', async (e) => {
       },
       body: JSON.stringify(data),
     };
-    console.log(fetchOptions);
     const response = await fetch(
       url + `/image/comment/${imageId}`,
       fetchOptions
     );
+    const allComments = await response.json();
+
+    if (allComments.length >= 0) {
+      displayComments(allComments);
+      input.value = '';
+    } else {
+      alert(allComments.message);
+    }
   }
 });
+
+//Delete comment
+const deleteComment = async (commentId, event) => {
+  event.preventDefault();
+  const fetchOptions = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    },
+  };
+  const response = await fetch(
+    url + `/image/comment/${commentId}`,
+    fetchOptions
+  );
+  const json = await response.json();
+  if (json.message === 'Comment has been deleted') {
+    window.location.reload();
+  }
+};
