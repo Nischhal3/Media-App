@@ -4,8 +4,8 @@ const url = 'http://localhost:3000'; // change url when uploading to server
 const appName = document.getElementById('app-name');
 
 appName.addEventListener('click', () => {
-    location.href = '../front/index.html';
-  });
+  location.href = '../front/index.html';
+});
 
 const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
@@ -146,4 +146,4 @@ loginDiv.addEventListener('click', () => {
 const logOutButton = document.getElementById('logout');
 logOutButton.addEventListener('click', () => {
   logOut();
-})
+});
