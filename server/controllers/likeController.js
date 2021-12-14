@@ -1,6 +1,7 @@
 'use strict';
 
 const {
+  getAllLikes,
   getAllLikesByImageId,
   insertLike,
   deleteLikeByImageId,
@@ -8,14 +9,23 @@ const {
 } = require('../models/likeModel');
 const { badRequestError, internalServerError } = require('../utils/error');
 
-const getAllLikes = async (req, res, next) => {
+const getAllLikesByImage = async (req, res, next) => {
   const rows = await getAllLikesByImageId(req.params.id);
-
   if (rows) {
     res.json({ allLikes: rows['COUNT(likes)'] });
     return;
   }
 
+  next(internalServerError());
+};
+
+const get_all_like = async (req, res, next) => {
+  const rows = await getAllLikes();
+  console.log("result in controller", rows);
+  if (rows) {
+    res.json({ rows });
+    return;
+  }
   next(internalServerError());
 };
 
@@ -62,7 +72,8 @@ const deleteLike = async (req, res, next) => {
 };
 
 module.exports = {
-  getAllLikes,
+  get_all_like,
+  getAllLikesByImage,
   getLike,
   addLike,
   deleteLike,

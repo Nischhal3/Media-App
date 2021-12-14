@@ -29,7 +29,9 @@ app.use('/thumbnails', express.static('thumbnails'));
 app.use('/auth', authRoute);
 app.use('/collection', collectionRoute);
 app.use('/image/collection', imageCollectionRoute);
+app.use('/like/image', allLikesRoute);
 app.use('/comments/image', allCommentsRoute);
+
 //Authentication
 app.use(
   '/image/user',
@@ -43,7 +45,6 @@ app.use(
   passport.authenticate('jwt', { session: false }),
   commentRoute
 );
-app.use('/like/image', allLikesRoute);
 app.use(
   '/like/user',
   passport.authenticate('jwt', { session: false }),
