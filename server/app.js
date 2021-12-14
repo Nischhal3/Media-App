@@ -12,7 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const passport = require('./utils/passport');
-
 const authRoute = require('./routes/authRoute.js');
 const userRoute = require('./routes/userRoute');
 const imageCollectionRoute = require('./routes/imageCollectionRoute');
@@ -20,6 +19,8 @@ const collectionRoute = require('./routes/collectionRoute');
 const imageUserRoute = require('./routes/imageUserRoute');
 const allCommentsRoute = require('./routes/allCommentsRoute');
 const commentRoute = require('./routes/commentRoute');
+const allLikesRoute = require('./routes/allLikesRoute');
+const likeRoute = require('./routes/likeRoute');
 
 app.use(passport.initialize());
 app.use(express.static('uploads'));
@@ -41,6 +42,12 @@ app.use(
   '/image/comment',
   passport.authenticate('jwt', { session: false }),
   commentRoute
+);
+app.use('/like/image', allLikesRoute);
+app.use(
+  '/like/user',
+  passport.authenticate('jwt', { session: false }),
+  likeRoute
 );
 
 //error handler

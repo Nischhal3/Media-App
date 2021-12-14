@@ -4,8 +4,8 @@ const url = 'http://localhost:3000'; // change url when uploading to server
 const appName = document.getElementById('app-name');
 
 appName.addEventListener('click', () => {
-    location.href = '../front/index.html';
-  });
+  location.href = '../front/index.html';
+});
 
 const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
@@ -116,6 +116,11 @@ if (token && user) {
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
+const logout = document.querySelector('#logout');
+
+if (!token || !user) {
+  logout.className = 'disappear';
+}
 
 //toggle menu
 menu.addEventListener('click', () => {
@@ -141,4 +146,4 @@ loginDiv.addEventListener('click', () => {
 const logOutButton = document.getElementById('logout');
 logOutButton.addEventListener('click', () => {
   logOut();
-})
+});

@@ -20,9 +20,9 @@ body {
 }
 
 .header h1 {
-    flex-grow: 5;
-    font-family: 'Meddon', 'cursive';
-    cursor: pointer;
+  flex-grow: 5;
+  font-family: 'Meddon', 'cursive';
+  cursor: pointer;
 }
 
 .login {
@@ -98,6 +98,10 @@ body {
   top: 20px;
   right: 5%;
   cursor: pointer;
+}
+
+.disappear {
+  display: none;
 }
 
 #path {
@@ -226,7 +230,9 @@ body {
     margin-top: 10%;
   }
 
-  .collection-path, .stupid, .single-collection-path {
+  .collection-path,
+  .stupid,
+  .single-collection-path {
     font-size: 20px;
   }
 
@@ -255,6 +261,10 @@ body {
     margin-top: 60%;
     padding: 0;
     padding-bottom: 20%;
+  }
+
+  .nav-links {
+    width: 40%;
   }
 }
 

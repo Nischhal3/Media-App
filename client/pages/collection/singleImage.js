@@ -1,4 +1,6 @@
 'use strict';
+
+import logOut from '../logout.js';
 const url = 'http://localhost:3000'; // change url when uploading to server
 
 const token = sessionStorage.getItem('token');
@@ -6,10 +8,20 @@ const user = sessionStorage.getItem('user');
 const userData = user && JSON.parse(user);
 
 const userName = document.querySelector('.userName span');
+const logOutButton = document.querySelector('#logout');
+logOutButton.addEventListener('click', () => {
+  logOut();
+});
 
 if (token && user) {
   userName.textContent = userData.first_name;
+  logOutButton.classList.remove('disappear');
 }
+
+const appName = document.getElementById('app-name');
+appName.addEventListener('click', () => {
+  location.href = '../front/index.html';
+});
 
 const getQParam = (param) => {
   const queryString = window.location.search;
@@ -26,16 +38,18 @@ const getImage = async (id) => {
     const image = await response.json();
     createPath(image.collection_id, image.collection_title, image.image_title);
     createImageCard(image);
-    console.log(image);
   } catch (e) {
     console.log(e.message);
   }
 };
-
 getImage(getQParam('id'));
+
+//Stroing id for collection to use later after deleting image
+let collectionID;
 
 const path = document.getElementById('path');
 const createPath = (id, collectionTitle, imageTitle) => {
+  collectionID = id;
   const collectionPath = document.createElement('a');
   collectionPath.href = 'index.html';
   collectionPath.className = 'collection-path';
@@ -144,7 +158,145 @@ const optionCreated = (collections) => {
   });
 };
 
-//handle normal user can only view comments, not add comments/edit/delete
+//Update image
+const updateImageForm = document.querySelector('.formContent');
+updateImageForm.addEventListener('submit', async (e) => {
+  if (token && user) {
+    e.preventDefault();
+    const data = serializeJson(updateImageForm);
+    const imageId = getQParam('id');
+    const fetchOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(data),
+    };
+
+    const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
+    const json = await response.json();
+    alert(json.message);
+
+    location.reload();
+  } else {
+    alert('You have to log in to do this!');
+  }
+});
+
+//Deleting image
+const deleteImage = document.querySelector('#delete');
+deleteImage.addEventListener('click', async () => {
+  if (token && user) {
+    if (confirm('Are you sure you want to delete this image?')) {
+      // Save it!
+      const imageId = getQParam('id');
+      const fetchOptions = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      };
+      const response = await fetch(
+        url + `/image/user/${imageId}`,
+        fetchOptions
+      );
+      const json = await response.json();
+      alert(json.message);
+      //Redirection to collection page after deleting image
+      location.href = `singleCollection.html?id=${collectionID}`;
+    }
+  }
+});
+
+//Get all the likes from the beginning
+const imageId = getQParam('id');
+const likeIcon = document.querySelector('#likeIcon');
+const likeCount = document.querySelector('#likeCount');
+
+async function getAllLikes() {
+  try {
+    const response = await fetch(url + '/like/image/' + imageId);
+    const allLikes = await response.json();
+    updateHeartCount(allLikes.allLikes);
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+// Get like of the user
+async function getLikeOfUser() {
+  try {
+    const fetchOptions = {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+      },
+    };
+    const response = await fetch(url + '/like/user/' + imageId, fetchOptions);
+    const like = await response.json();
+    updateHeartIcon(like.like);
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+getAllLikes();
+if (user && token) {
+  getLikeOfUser();
+}
+
+//Toggle like and display number of likes
+likeIcon.addEventListener('click', async (event) => {
+  event.preventDefault();
+  if (!token || !user) {
+    alert('You have to log in to like this picture');
+    return false;
+  }
+  const fetchOptions =
+    likeIcon.className === 'far fa-heart'
+      ? {
+          method: 'POST',
+          headers: {
+            Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+          },
+        }
+      : {
+          method: 'DELETE',
+          headers: {
+            Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+          },
+        };
+
+  try {
+    const response = await fetch(url + '/like/user/' + imageId, fetchOptions);
+
+    if (response.status === 200) {
+      getAllLikes();
+      getLikeOfUser();
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+//update UI of heart Icon
+function updateHeartIcon(userLike) {
+  if (userLike > 0) {
+    likeIcon.className = 'fas fa-heart';
+    likeIcon.style.color = 'red';
+  } else {
+    likeIcon.className = 'far fa-heart';
+    likeIcon.style.color = 'black';
+  }
+}
+
+function updateHeartCount(allLikes) {
+  likeCount.textContent = allLikes;
+}
+
+///handle normal user can only view comments, not add comments/edit/delete
 const comments = document.getElementById('comment');
 const edit = document.getElementById('edit');
 const deleteButton = document.getElementById('delete');
@@ -156,11 +308,11 @@ if (!user || !token) {
 
 //get all comments in the begining
 const imageId = getQParam('id');
- async function getAllComments() {
+async function getAllComments() {
   try {
     const response = await fetch(url + '/comments/image/' + imageId);
     const allComments = await response.json();
-    console.log("All comment",allComments);
+    console.log('All comment', allComments);
   } catch (error) {
     alert(error.message);
   }
@@ -170,22 +322,25 @@ getAllComments();
 
 //Adding comments
 const input = document.querySelector('#comment-input');
-comments.addEventListener('keypress', async(e)=>{
-  if(e.key === 'Enter'){
+comments.addEventListener('keypress', async (e) => {
+  if (e.key === 'Enter') {
     //converting input comment to json object
-   const data = {
-     comment: input.value
-   }
+    const data = {
+      comment: input.value,
+    };
 
-   const fetchOptions = {
-     method: 'POST',
-     headers: {
-       'Content-Type': 'application/json',
-       Authorization: 'Bearer ' + token,
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
       },
       body: JSON.stringify(data),
     };
     console.log(fetchOptions);
-    const response = await fetch(url + `/image/comment/${imageId}`,fetchOptions);
+    const response = await fetch(
+      url + `/image/comment/${imageId}`,
+      fetchOptions
+    );
   }
-})
+});

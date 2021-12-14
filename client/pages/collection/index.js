@@ -130,7 +130,7 @@ const closeMenuButton = document.querySelector('.close-menu');
 const logout = document.querySelector('#logout');
 
 if (!token || !user) {
-  logout.className = 'noUser';
+  logout.className = 'disappear';
 }
 
 menu.addEventListener('click', () => {
