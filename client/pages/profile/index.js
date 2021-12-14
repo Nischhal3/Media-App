@@ -16,24 +16,6 @@ appName.addEventListener('click', () => {
   location.href = '../front/index.html';
 });
 
-//Tabs selection
-const tabs = document.querySelectorAll('[ data-tab-target]');
-const tabContents = document.querySelectorAll('[data-tab-content]');
-
-tabs.forEach((tab) => {
-  tab.addEventListener('click', () => {
-    const target = document.querySelector(tab.dataset.tabTarget);
-    tabContents.forEach((tabContent) => {
-      tabContent.classList.remove('active');
-    });
-    tabs.forEach((tab) => {
-      tab.classList.remove('active');
-    });
-    tab.classList.add('active');
-    target.classList.add('active');
-  });
-});
-
 const getImageByUser = async (id) => {
   try {
     const fetchOptions = {
@@ -52,7 +34,7 @@ const getImageByUser = async (id) => {
 
 getImageByUser(userData.user_id);
 
-const imageList = document.getElementById('artwork');
+const imageList = document.getElementById('artwork-content');
 const createImageCard = (images) => {
   images.forEach((item) => {
     const singleImage = document.createElement('div');
