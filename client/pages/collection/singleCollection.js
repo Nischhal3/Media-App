@@ -4,8 +4,8 @@ const url = 'http://localhost:3000'; // change url when uploading to server
 const appName = document.getElementById('app-name');
 
 appName.addEventListener('click', () => {
-    location.href = '../front/index.html';
-  });
+  location.href = '../front/index.html';
+});
 
 const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
@@ -24,7 +24,6 @@ const getImageByCollection = async (id) => {
     };
     const response = await fetch(url + '/image/collection/' + id);
     const images = await response.json();
-    console.log(images);
     createImageCard(images);
   } catch (e) {
     console.log(e.message);
@@ -72,31 +71,27 @@ const createImageCard = (images) => {
     const singleImage = document.createElement('div');
     const img = document.createElement('img');
     const overlay = document.createElement('div');
-    const title = document.createElement('div');
-    const icons = document.createElement('div');
-    const like = document.createElement('a');
-    const save = document.createElement('a');
-    const iconLike = document.createElement('i');
-    const iconSave = document.createElement('i');
-    like.append(iconLike);
-    save.append(iconSave);
-    icons.appendChild(like);
-    icons.appendChild(iconSave);
+    const line = document.createElement('hr');
+    const artist = document.createElement('p')
+    const title = document.createElement('p');
+
     img.src = url + '/thumbnails/' + item.image_file;
     img.alt = item.image_title;
-    title.innerHTML =
-      item.first_name + ' ' + item.last_name + ', ' + `"${item.image_title}"`;
+    artist.innerHTML =
+      item.first_name + ' ' + item.last_name 
+      
+    title.innerHTML = `"${item.image_title}"`;
 
     singleImage.appendChild(img);
+    overlay.appendChild(artist);
+    overlay.appendChild(line);
     overlay.appendChild(title);
-    overlay.appendChild(icons);
     singleImage.append(overlay);
     singleImage.className = 'single-image';
     overlay.className = 'overlay';
+    artist.className = 'artist';
     title.className = 'text';
-    icons.className = 'icons';
-    iconLike.className = 'far fa-heart';
-    iconSave.className = 'far fa-bookmark';
+    line.className = "line";
 
     imageList.appendChild(singleImage);
 
@@ -146,4 +141,4 @@ loginDiv.addEventListener('click', () => {
 const logOutButton = document.getElementById('logout');
 logOutButton.addEventListener('click', () => {
   logOut();
-})
+});

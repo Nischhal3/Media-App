@@ -29,29 +29,15 @@ const addUser = async (user) => {
 };
 
 const updateUser = async (user, userId) => {
-  let isEqual;
-  let newHashedPassword;
   const existingUser = await getUser(userId);
-
-  if (user.password) {
-    const salt = await bcrypt.genSalt(10);
-    newHashedPassword = await bcrypt.hash(user.password, salt);
-    isEqual = await bcrypt.compare(existingUser.password, newHashedPassword);
-  }
-
   try {
     const [rows] = await promisePool.execute(
-      'UPDATE user_db SET first_name = ?, last_name = ?, user_description = ?, password = ? WHERE user_id = ?',
+      'UPDATE user_db SET first_name = ?, last_name = ?, user_description = ? WHERE user_id = ?',
       [
         user.first_name ?? existingUser.first_name,
         user.last_name ?? existingUser.last_name,
         user.updateDescription ?? existingUser.user_description,
-        user.password
-          ? isEqual
-            ? existingUser.password
-            : newHashedPassword
-          : existingUser.password,
-        userId,
+        userId
       ]
     );
     return rows.affectedRows === 1;
@@ -60,17 +46,28 @@ const updateUser = async (user, userId) => {
   }
 };
 
-const deleteUser = async (id) => {
-  if (user.role === 0) {
-    try {
-      const [rows] = await promisePool.execute(
-        'DELETE FROM user_db WHERE user_id = ?',
-        [id]
-      );
-      return rows;
-    } catch (e) {
-      console.error('error', e.message);
-    }
+const updatePassword = async (data, user) => {
+  let isEqual;
+  let newHashedPassword;
+  const existingUser = await getUser(user.user_id);
+
+  if (data.current_password && data.new_password) {
+    const salt = await bcrypt.genSalt(10);
+    newHashedPassword = await bcrypt.hash(data.new_password, salt);
+    isEqual = await bcrypt.compare(data.current_password, existingUser.password);
+  }
+  if(!isEqual) {
+    return "10";
+  }
+
+  try {
+    const [rows] = await promisePool.execute(
+      'UPDATE user_db SET password = ? WHERE user_id = ?',
+      [newHashedPassword, user.user_id]
+    );
+    return rows.affectedRows === 1;
+  } catch (e) {
+    console.error('error', e.message);
   }
 };
 
@@ -104,6 +101,6 @@ module.exports = {
   addUser,
   getUserByEmail,
   updateUser,
-  deleteUser,
   getUserLogIn,
+  updatePassword
 };

@@ -53,11 +53,11 @@ const signup = async (req, res, next) => {
     hashedPassword,
   };
 
-  const token = jwt.sign(JSON.stringify(user), process.env.JWT_SECRET);
   const result = await addUser(user);
   await delete user.hashedPassword;
   if (result.insertId) {
     user.user_id = result.insertId;
+    const token = jwt.sign(JSON.stringify(user), process.env.JWT_SECRET);
     res.json({ token, user });
     return;
   }

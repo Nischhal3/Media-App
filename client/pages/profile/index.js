@@ -16,24 +16,6 @@ appName.addEventListener('click', () => {
   location.href = '../front/index.html';
 });
 
-//Tabs selection
-const tabs = document.querySelectorAll('[ data-tab-target]');
-const tabContents = document.querySelectorAll('[data-tab-content]');
-
-tabs.forEach((tab) => {
-  tab.addEventListener('click', () => {
-    const target = document.querySelector(tab.dataset.tabTarget);
-    tabContents.forEach((tabContent) => {
-      tabContent.classList.remove('active');
-    });
-    tabs.forEach((tab) => {
-      tab.classList.remove('active');
-    });
-    tab.classList.add('active');
-    target.classList.add('active');
-  });
-});
-
 const getImageByUser = async (id) => {
   try {
     const fetchOptions = {
@@ -52,7 +34,7 @@ const getImageByUser = async (id) => {
 
 getImageByUser(userData.user_id);
 
-const imageList = document.getElementById('artwork');
+const imageList = document.getElementById('artwork-content');
 const createImageCard = (images) => {
   images.forEach((item) => {
     const singleImage = document.createElement('div');
@@ -66,12 +48,12 @@ const createImageCard = (images) => {
 
     //redirect to single image page with id
     singleImage.addEventListener('click', () => {
-      location.href = `singleImage.html?id=${item.image_id}`;
+      location.href = `../collection/singleImage.html?id=${item.image_id}`;
     });
   });
 };
 
-const menu = document.querySelector('.menu');
+const menu = document.querySelector('.menu-div');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
 
@@ -109,12 +91,17 @@ closeOverlay.addEventListener('click', () => {
 const updateProfileOverlay = document.querySelector('.updateProfileOverlay');
 const editProfile = document.querySelector('.info-header button');
 const editProfilePhone = document.querySelector('.info-header i');
-const closeUpdateOverlay = document.querySelector('.updateProfileOverlay i');
+const closeUpdateOverlay = document.querySelector('#web');
+const closeUpdateOverlayPhone = document.querySelector('#phone');
 editProfile.addEventListener('click', () => {
   updateProfileOverlay.classList.add('overlay-open');
 });
 
 closeUpdateOverlay.addEventListener('click', () => {
+  updateProfileOverlay.classList.remove('overlay-open');
+});
+
+closeUpdateOverlayPhone.addEventListener('click', () => {
   updateProfileOverlay.classList.remove('overlay-open');
 });
 
@@ -149,10 +136,10 @@ editProfilePhone.addEventListener('click', () => {
   }
 })();
 
-//update user
+//update user info
 const updateInfoForm = document.querySelector('#updateInfoForm');
-
-updateInfoForm.addEventListener('submit', async () => {
+updateInfoForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
   const data = serializeJson(updateInfoForm);
   for (const [prop, value] of Object.entries(data)) {
     if (value === '') {
@@ -170,13 +157,28 @@ updateInfoForm.addEventListener('submit', async () => {
 
   const response = await fetch(url + `/user/${userData.user_id}`, fetchOptions);
   const json = await response.json();
+  if(json.message) alert(json.message);
+  location.reload();
+});
 
-  if (json.length > 0) {
-    let errors = '';
-    json.forEach((err) => (errors += `${err.msg}\n`));
-    alert(errors);
-    return false;
-  }
+//update password
+const updatePasswordForm = document.querySelector('#updatePasswordForm');
+updatePasswordForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = serializeJson(updatePasswordForm);
+  const fetchOptions = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    },
+    body: JSON.stringify(data),
+  };
+
+  const response = await fetch(url + `/user/`, fetchOptions);
+  const json = await response.json();
+  if(json.message) alert(json.message);
+  location.reload();
 });
 
 //get all collections for options in uploading artwork
@@ -218,8 +220,9 @@ postArtwork.addEventListener('submit', async (e) => {
     body: data,
   };
 
-  await fetch(url + `/image/user/${userData.user_id}`, fetchOptions);
+  await fetch(url + '/image/user/', fetchOptions);
 });
+
 const logOutButton = document.getElementById('logout');
 logOutButton.addEventListener('click', () => {
   logOut();

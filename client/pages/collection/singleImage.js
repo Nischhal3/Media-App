@@ -27,11 +27,17 @@ if (!token || !user) {
   });
 }
 
+const appName = document.getElementById('app-name');
+appName.addEventListener('click', () => {
+  location.href = '../front/index.html';
+});
+
 const getQParam = (param) => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 };
+const imageId = getQParam('id');
 
 const getImage = async (id) => {
   try {
@@ -42,12 +48,11 @@ const getImage = async (id) => {
     const image = await response.json();
     createPath(image.collection_id, image.collection_title, image.image_title);
     createImageCard(image);
-    getId(image.collection_id);
   } catch (e) {
     console.log(e.message);
   }
 };
-getImage(getQParam('id'));
+getImage(imageId);
 
 //Stroing id for collection to use later after deleting image
 let collectionID;
@@ -171,7 +176,6 @@ updateImageForm.addEventListener('submit', async (e) => {
   if (token && user) {
     e.preventDefault();
     const data = serializeJson(updateImageForm);
-    const imageId = getQParam('id');
     const fetchOptions = {
       method: 'PUT',
       headers: {
@@ -184,10 +188,10 @@ updateImageForm.addEventListener('submit', async (e) => {
     const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
     const json = await response.json();
     alert(json.message);
-    
+
     location.reload();
   } else {
-    alert("You have to log in to do this!")
+    alert('You have to log in to do this!');
   }
 });
 
@@ -197,7 +201,6 @@ deleteImage.addEventListener('click', async () => {
   if (token && user) {
     if (confirm('Are you sure you want to delete this image?')) {
       // Save it!
-      const imageId = getQParam('id');
       const fetchOptions = {
         method: 'DELETE',
         headers: {
@@ -205,17 +208,19 @@ deleteImage.addEventListener('click', async () => {
           Authorization: 'Bearer ' + token,
         },
       };
-      const response = await fetch(url + `/image/user/${imageId}`, fetchOptions);
+      const response = await fetch(
+        url + `/image/user/${imageId}`,
+        fetchOptions
+      );
       const json = await response.json();
       alert(json.message);
       //Redirection to collection page after deleting image
       location.href = `singleCollection.html?id=${collectionID}`;
     }
-  } 
+  }
 });
 
 //Get all the likes from the beginning
-const imageId = getQParam('id');
 const likeIcon = document.querySelector('#likeIcon');
 const likeCount = document.querySelector('#likeCount');
 
@@ -299,3 +304,120 @@ function updateHeartIcon(userLike) {
 function updateHeartCount(allLikes) {
   likeCount.textContent = allLikes;
 }
+
+///handle normal user can only view comments, not add comments/edit/delete
+const comments = document.getElementById('comment');
+const edit = document.getElementById('edit');
+const deleteButton = document.getElementById('delete');
+if (!user || !token) {
+  comments.style.display = 'none';
+  edit.style.display = 'none';
+  deleteButton.style.display = 'none';
+}
+
+//get all comments in the begining
+async function getAllComments() {
+  try {
+    const response = await fetch(url + '/comments/image/' + imageId);
+    const allComments = await response.json();
+    displayComments(allComments);
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+getAllComments();
+
+//Display comment
+const displayComments = (allComments) => {
+  const allCommentsContainer = document.querySelector('.allComments');
+  allCommentsContainer.innerHTML = '';
+
+  allComments.map((cmt) => {
+    const commentContainer = document.createElement('div');
+    const commentContent = document.createElement('div');
+    const name = document.createElement('p');
+    const comment = document.createElement('p');
+    const buttonDelete = document.createElement('button');
+    const trashIcon = '<i class="fas fa-trash"></i>';
+
+    name.innerHTML = cmt.first_name + ' ' + cmt.last_name;
+    comment.innerHTML = cmt.comments;
+    buttonDelete.innerHTML += trashIcon;
+
+    commentContent.appendChild(name);
+    commentContent.appendChild(comment);
+    commentContainer.appendChild(commentContent);
+    if (
+      token &&
+      user &&
+      (cmt.user_id === userData.user_id || userData.role === 0)
+    ) {
+      commentContainer.appendChild(buttonDelete);
+      buttonDelete.addEventListener('click', (event) => {
+        if (confirm('Are you sure you want to delete this comment?')) {
+          deleteComment(cmt.id, event);
+        }
+      });
+    }
+
+    name.className = 'commentUser';
+    comment.className = 'comment';
+    commentContent.className = 'commentContent';
+    commentContainer.className = 'commentBox';
+
+    allCommentsContainer.appendChild(commentContainer);
+  });
+};
+
+//Adding comments
+const input = document.querySelector('#comment-input');
+comments.addEventListener('keypress', async (e) => {
+  if (e.key === 'Enter') {
+    //converting input comment to json object
+    const data = {
+      comment: input.value,
+    };
+
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(data),
+    };
+    const response = await fetch(
+      url + `/image/comment/${imageId}`,
+      fetchOptions
+    );
+    const allComments = await response.json();
+
+    if (allComments.length >= 0) {
+      displayComments(allComments);
+      input.value = '';
+    } else {
+      alert(allComments.message);
+    }
+  }
+});
+
+//Delete comment
+const deleteComment = async (commentId, event) => {
+  event.preventDefault();
+  const fetchOptions = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    },
+  };
+  const response = await fetch(
+    url + `/image/comment/${commentId}`,
+    fetchOptions
+  );
+  const json = await response.json();
+  if (json.message === 'Comment has been deleted') {
+    window.location.reload();
+  }
+};
