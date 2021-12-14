@@ -15,7 +15,16 @@ logOutButton.addEventListener('click', () => {
 
 if (token && user) {
   userName.textContent = userData.first_name;
+  userName.addEventListener('click', () => {
+    location.href = '../profile/index.html';
+  });
   logOutButton.classList.remove('disappear');
+}
+
+if (!token || !user) {
+  userName.addEventListener('click', () => {
+    location.href = '../login/index.html';
+  });
 }
 
 const appName = document.getElementById('app-name');
@@ -106,6 +115,8 @@ const createImageCard = (image) => {
   infoDiv.appendChild(imageDate);
   infoDiv.appendChild(imageDescription);
 };
+
+//toggle menu
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');

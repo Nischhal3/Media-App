@@ -36,6 +36,8 @@ body {
   flex-grow: 1;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 .disappear {
@@ -54,18 +56,17 @@ body {
 .menu {
   position: absolute;
   right: 5%;
-  top: 2%;
   width: 40px;
   height: 40px;
   border: none;
-  background: #d5b07a;
+  background: transparent;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .menu i {
   margin-right: 2%;
-  font-size: 16px;
+  font-size: 28px;
 }
 
 .nav-links {
