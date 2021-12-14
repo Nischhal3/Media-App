@@ -33,7 +33,6 @@ const getImage = async (id) => {
     const image = await response.json();
     createPath(image.collection_id, image.collection_title, image.image_title);
     createImageCard(image);
-    getId(image.collection_id);
   } catch (e) {
     console.log(e.message);
   }
