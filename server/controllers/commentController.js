@@ -14,12 +14,10 @@ const getAllComments = async (req, res) => {
 
 const addComment = async (req, res, next) => {
   req.body.id = req.params.id;
-  console.log("comment",req.body, req.user.user_id)
   const user_id = req.user.user_id;
   const result = await insertComment(req.body,user_id,next);
 
-  if (result) {
-    res.json(result);
+  if (result === 1) {
     return;
   } 
 

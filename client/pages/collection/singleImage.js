@@ -187,7 +187,5 @@ comments.addEventListener('keypress', async(e)=>{
     };
     console.log(fetchOptions);
     const response = await fetch(url + `/image/comment/${imageId}`,fetchOptions);
-   
   }
-
 })

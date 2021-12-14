@@ -25,7 +25,7 @@ const insertComment = async (body, userId, next) => {
       'INSERT INTO comment_db (comments, comment_date,user_id, image_id) VALUES (?,?,?,?)',
       [body.comment, date, userId, body.id]
     );
-    return rows;
+    return rows.affectedRows;
   } catch (error) {
     console.log(error);
   }
