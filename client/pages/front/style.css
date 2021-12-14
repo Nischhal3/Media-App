@@ -116,14 +116,13 @@ img {
   font-size: 20px;
   line-height: 1.6;
   font-style: italic;
-  font-family: 'Noto Sans', sans-serif;
 }
 
 .greetingBtns {
   display: flex;
-  width: 30%;
+  width: 32%;
   margin: 0 auto;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .text {
@@ -151,6 +150,7 @@ img {
   color: #ab6909;
   text-align: center;
   padding-top: 20px;
+  font-size: 28px;
 }
 
 #artworksContent {
@@ -166,15 +166,19 @@ img {
   display: flex;
   flex-direction: column;
   width: 30%;
+  margin-top: 2%;
 }
 
 .artwork img {
+  height: 80%;
   border-radius: 5px;
+  overflow: hidden;
+  object-fit: cover
 }
 
 .artwork p {
   padding: 15px 0;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .button {
@@ -183,6 +187,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 18px;
 }
 
 .button i {
@@ -207,11 +212,6 @@ img {
   font-family: 'Meddon', 'cursive';
   font-weight: bolder;
   padding: 10px 0;
-  color: #ab6909;
-}
-
-.about h1 {
-  font-family: 'Meddon', cursive;
   color: #ab6909;
 }
 

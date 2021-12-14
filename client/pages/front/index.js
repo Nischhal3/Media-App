@@ -5,16 +5,14 @@ const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
 const userData = user && JSON.parse(user);
 
-//display the fixed artworks
-
-(async function getImageByCollection() {
+(async function getLikeCount() {
   try {
     const fetchOptions = {
       method: 'GET',
     };
-    const response = await fetch(url + '/image/collection/1');
+    const response = await fetch(url + '/like/image', fetchOptions);
     const images = await response.json();
-    displayArtworks(images);
+    displayArtworks(images.rows);
   } catch (e) {
     console.log(e.message);
   }
@@ -22,18 +20,22 @@ const userData = user && JSON.parse(user);
 
 const displayArtworks = (artworks) => {
   const artworksContent = document.getElementById('artworksContent');
-
   artworks.forEach((artwork) => {
     const singleArtwork = document.createElement('div');
     const img = document.createElement('img');
     const title = document.createElement('p');
 
-    img.src = artwork.image_file;
-    title.innerHTML = artwork.image_title;
+    img.src = url + "/" + artwork.image_file;
+    title.innerHTML = `"${artwork.image_title}"`;
 
     const div = document.createElement('div');
     div.innerHTML += `<a>Find out more</a> <span><i class='fas fa-chevron-right'></i></span>`;
     div.className = 'button';
+
+    //redirect to single image page with image id
+    div.addEventListener('click', () => {
+     location.href = `../collection/singleImage.html?id=${artwork.image_id}`;
+    });
 
     singleArtwork.appendChild(img);
     singleArtwork.appendChild(title);
@@ -51,9 +53,9 @@ if (!token && !user) {
 }
 
 if (token && user) {
-  goToLogIn.textContent = 'Contact Artist';
+  goToLogIn.textContent = 'Find out more';
   //will need to display artist contact?
-  goToLogIn.href = '../collection/singleCollection.html';
+  goToLogIn.href = '../collection/singleImage.html?id=106';
 }
 
 //display items for front page header

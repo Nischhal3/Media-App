@@ -23,7 +23,7 @@ const get_all_like = async (req, res, next) => {
   const rows = await getAllLikes();
   console.log("result in controller", rows);
   if (rows) {
-    res.json({ allLikes: rows['COUNT(likes)'] });
+    res.json({ rows });
     return;
   }
   next(internalServerError());

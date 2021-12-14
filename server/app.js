@@ -27,13 +27,13 @@ app.use('/thumbnails', express.static('thumbnails'));
 app.use('/auth', authRoute);
 app.use('/collection', collectionRoute);
 app.use('/image/collection', imageCollectionRoute);
+app.use('/like/image', allLikesRoute);
 app.use(
   '/image/user',
   passport.authenticate('jwt', { session: false }),
   imageUserRoute
 );
 app.use('/user', passport.authenticate('jwt', { session: false }), userRoute);
-app.use('/like/image', allLikesRoute);
 app.use(
   '/like/user',
   passport.authenticate('jwt', { session: false }),
