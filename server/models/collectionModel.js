@@ -1,6 +1,6 @@
 const pool = require('../database/db');
 const promisePool = pool.promise();
-const httpError = require('../utils/error');
+const { internalServerError } = require('../utils/error');
 
 const getAllCollection = async () => {
   try {
@@ -8,7 +8,7 @@ const getAllCollection = async () => {
     return rows;
   } catch (e) {
     console.error('Get all collections', e.message);
-    const err = httpError('Sql error', 500);
+    const err = internalServerError();
     next(err);
   }
 };
@@ -22,7 +22,7 @@ const getCollection = async (id, next) => {
     return rows[0];
   } catch (e) {
     console.error('Get collection by id', e.message);
-    const err = httpError('Sql error', 500);
+    const err = internalServerError();
     next(err);
   }
 };
@@ -36,14 +36,13 @@ const updateCollection = async (image, id, next) => {
     return rows.affectedRows === 1;
   } catch (error) {
     console.error('Update image ', e.message);
-    const err = httpError('Sql error:', 500);
+    const err = internalServerError();
     next(err);
   }
 };
 
-
 module.exports = {
   getAllCollection,
   getCollection,
-  updateCollection
+  updateCollection,
 };

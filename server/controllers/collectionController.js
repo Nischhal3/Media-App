@@ -1,6 +1,6 @@
 'user strict';
 
-const { httpError } = require('../utils/error');
+const { badRequestError } = require('../utils/error');
 
 const {
   getAllCollection,
@@ -16,7 +16,7 @@ const get_collection_list = async (req, res) => {
 const get_collection = async (req, res, next) => {
   const collection = await getCollection(req.params.id, next);
   if (collection.length === 0) {
-    const err = httpError('Collection not found', 400);
+    const err = badRequestError('Collection not found');
     next(err);
     return;
   } else if (collection) {
@@ -24,14 +24,14 @@ const get_collection = async (req, res, next) => {
     return;
   }
 
-  const err = httpError('Collection not found', 400);
+  const err = badRequestError('Collection not found');
   next(err);
 };
 
 //this is to add picture of collection to server using postman after deploy
 const update_collection = async (req, res, next) => {
   if (!req.file) {
-    const err = httpError('Invalid file', 400);
+    const err = badRequestError('Invalid file');
     next(err);
     return;
   }
@@ -39,7 +39,7 @@ const update_collection = async (req, res, next) => {
     const update = await updateCollection(req.file, req.params.id, next);
     res.json({ message: `Image update: ${update}` });
   } catch (error) {
-    const err = httpError('Error uploading image', 400);
+    const err = badRequestError('Error uploading image');
     next(err);
     return;
   }
@@ -48,5 +48,5 @@ const update_collection = async (req, res, next) => {
 module.exports = {
   get_collection_list,
   get_collection,
-  update_collection
+  update_collection,
 };

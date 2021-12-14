@@ -9,7 +9,7 @@ const {
   getImageByCollectionId,
 } = require('../models/imageModel');
 
-const { httpError } = require('../utils/error');
+const { badRequestError, httpError } = require('../utils/error');
 const { validationResult } = require('express-validator');
 const makeThumbnail = require('../utils/resize');
 
@@ -19,7 +19,7 @@ const get_image_user = async (req, res, next) => {
     res.json(images);
     return;
   }
-  const err = httpError('Image not found', 400);
+  const err = badRequestError('Image not found');
   next(err);
 };
 
@@ -29,7 +29,7 @@ const get_image_collection = async (req, res, next) => {
     res.json(image);
     return;
   }
-  const err = httpError('Image not found', 400);
+  const err = badRequestError('Image not found');
   next(err);
 };
 
@@ -39,7 +39,7 @@ const get_image = async (req, res, next) => {
     res.json(image);
     return;
   }
-  const err = httpError('Image not found', 400);
+  const err = badRequestError('Image not found');
   next(err);
 };
 
@@ -52,7 +52,7 @@ const post_image = async (req, res, next) => {
   }
 
   if (!req.file) {
-    const err = httpError('Invalid file', 400);
+    const err = badRequestError('Invalid file');
     next(err);
     return;
   }
@@ -66,7 +66,7 @@ const post_image = async (req, res, next) => {
       res.json({ message: `Image added with id: ${id}` });
     }
   } catch (error) {
-    const err = httpError('Error posting image', 400);
+    const err = badRequestError('Error posting image');
     next(err);
     return;
   }
@@ -90,7 +90,7 @@ const update_image = async (req, res, next) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const err = httpError('Updating data not valid', 400);
+    const err = badRequestError('Updating data not valid');
     next(err);
     return;
   }
