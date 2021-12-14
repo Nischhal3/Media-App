@@ -22,18 +22,22 @@
       <div class="buttons">
         <div class="add">
           <span>Add</span>
-          <i class="fas fa-plus"></i>
+          <i class="far fa-plus-square"></i>
         </div>
         <!-- <button class="add"></i></button> -->
       </div>
-      <button class="menu"><i class="fas fa-bars"></i></button>
-      <ul class="nav-links">
-        <i class="fas fa-times close-menu"></i>
-        <li><a href="../../pages/front/">Home</a></li>
-        <li><a href="../../pages/profile/">Profile</a></li>
-        <li><a href="../../pages/collection/">Collections</a></li>
-        <li id="logout"><a>Log out</a></li>
-      </ul>
+      <div class="menu-div">
+        <span class="menu-text">Menu</span>
+        <button class="menu"><i class="fas fa-bars"></i></button>
+      </div>
+        <ul class="nav-links">
+          <i class="fas fa-times close-menu"></i>
+          <li><a href="../../pages/front/">Home</a></li>
+          <li><a href="../../pages/profile/">Profile</a></li>
+          <li><a href="../../pages/collection/">Collections</a></li>
+          <li id="logout"><a>Log out</a></li>
+        </ul>
+      
     </div>
     <div class="user-profile">
       <div class="imgContainer">
@@ -51,9 +55,6 @@
     <hr class="grey-line" />
 
     <ul class="tabs">
-      <li data-tab-target="#videos" class="tab">
-        videos <span><i class="fa fa-youtube-play"></i></span>
-      </li>
       <li data-tab-target="#artwork" class="active tab">
         artworks <i class="fa fa-folder-open-o"></i>
       </li>
@@ -100,6 +101,7 @@
     </div>
     <div class="updateProfileOverlay">
       <div id="box1">
+        <i class="fas fa-times" id="phone"></i>
         <h4>Update Proflie</h4>
         <form class="update-info" id="updateInfoForm">
           <label for="firstName">first name</label>
@@ -113,14 +115,14 @@
       </div>
       <hr id="line">
       <div id="box2">
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times" id="web"></i>
         <h4>Change password</h4>
         <form class="update-info" id="updatePasswordForm">
-        <label for="current-password">current password</label>
-        <input type="password" id="password" name="current_password" required/><br />
-        <label for="new-password">new password</label>
-        <input type="password" id="password" name="new_password" required/><br />
-        <button class="update" type="submit">Update</button>
+          <label for="current-password">current password</label>
+          <input type="password" id="password" name="current_password" required /><br />
+          <label for="new-password">new password</label>
+          <input type="password" id="password" name="new_password" required /><br />
+          <button class="update" type="submit">Update</button>
         </form>
       </div>
     </div>

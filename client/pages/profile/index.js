@@ -71,7 +71,7 @@ const createImageCard = (images) => {
   });
 };
 
-const menu = document.querySelector('.menu');
+const menu = document.querySelector('.menu-div');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
 
@@ -109,12 +109,17 @@ closeOverlay.addEventListener('click', () => {
 const updateProfileOverlay = document.querySelector('.updateProfileOverlay');
 const editProfile = document.querySelector('.info-header button');
 const editProfilePhone = document.querySelector('.info-header i');
-const closeUpdateOverlay = document.querySelector('.updateProfileOverlay i');
+const closeUpdateOverlay = document.querySelector('#web');
+const closeUpdateOverlayPhone = document.querySelector('#phone');
 editProfile.addEventListener('click', () => {
   updateProfileOverlay.classList.add('overlay-open');
 });
 
 closeUpdateOverlay.addEventListener('click', () => {
+  updateProfileOverlay.classList.remove('overlay-open');
+});
+
+closeUpdateOverlayPhone.addEventListener('click', () => {
   updateProfileOverlay.classList.remove('overlay-open');
 });
 
@@ -149,7 +154,7 @@ editProfilePhone.addEventListener('click', () => {
   }
 })();
 
-//update user
+//update user info
 const updateInfoForm = document.querySelector('#updateInfoForm');
 updateInfoForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -174,11 +179,11 @@ updateInfoForm.addEventListener('submit', async (e) => {
   location.reload();
 });
 
+//update password
 const updatePasswordForm = document.querySelector('#updatePasswordForm');
 updatePasswordForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const data = serializeJson(updatePasswordForm);
-
   const fetchOptions = {
     method: 'PUT',
     headers: {
@@ -235,6 +240,7 @@ postArtwork.addEventListener('submit', async (e) => {
 
   await fetch(url + `/image/user/${userData.user_id}`, fetchOptions);
 });
+
 const logOutButton = document.getElementById('logout');
 logOutButton.addEventListener('click', () => {
   logOut();
