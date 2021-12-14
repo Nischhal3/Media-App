@@ -22,20 +22,36 @@ body {
   cursor: pointer;
 }
 
-.icons {
-  flex: 1;
+.buttons {
+  width: 50%;
   display: flex;
   justify-content: right;
+  align-items: center;
 }
 
-.icons button {
+.add {
+  width: 20%;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.far {
+  font-size: 24px;
+}
+
+.menu-text {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.menu {
   width: 40px;
   height: 40px;
   border: none;
-  background: #d5b07a;
+  background: transparent;
   border-radius: 50%;
-  margin-left: 10%;
   cursor: pointer;
+  font-size: 24px;
 }
 
 .close-menu {
@@ -119,64 +135,38 @@ body {
   border: 1px solid #e7e7e7;
 }
 
-[data-tab-content] {
-  display: none;
-}
-
-.active[data-tab-content] {
-  display: block;
-}
-
-.tabs {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  list-style-type: none;
-}
-
-.tab {
-  cursor: pointer;
-  padding: 10px 20px;
-  font-size: 16px;
-}
-
-.tab:hover {
-  margin-top: -2px;
-  border-top: 2px solid black;
-}
-
-.tab.active {
-  margin-top: -2px;
-  border-top: 2px solid black;
-}
-
-#artwork.active > div {
-  padding: 20px;
+.artwork {
+  padding: 10px;
   text-align: center;
+  font-size: 22px;
+  color: #ab6909;
 }
 
-#artwork.active {
+#artwork-content {
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin: 0 auto;
-  padding: 20px 0;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  margin-bottom: 2%;
+  align-items: center;
+}
+
+.single-image {
+  margin-top: 2%;
 }
 
 .single-image img {
   width: 100%;
   height: 100%;
-  padding: 0;
-  border: 1px solid black;
-  box-shadow: 5px 5px #d4d4d4;
+  border: 2px solid #ab6909;
+  box-shadow: 5px 5px rgb(0 0 0 / 0.2);
+  cursor: pointer;
 }
 
 .fa {
   opacity: 0.5;
   margin-top: 3px;
-  font-size: 15px;
 }
 
 #collection {
@@ -275,22 +265,30 @@ body {
 .updateProfileOverlay {
   position: absolute;
   top: 20%;
-  left: 40%;
-  width: 20%;
-  flex-direction: column;
+  left: 30%;
+  width: 35%;
+  flex-direction: row;
   z-index: 1;
-  border: 1px solid #ab6909;
+  border: 2px solid #ab6909;
   background: white;
   display: none;
 }
 
-.updateProfileOverlay i {
+#box2 i {
   align-self: flex-end;
-  margin: 1%;
+  margin: 2%;
   cursor: pointer;
 }
 
-.updateProfileOverlay h3 {
+#phone {
+  display: none;
+}
+
+#line {
+  border: 1px solid #ab6909;
+}
+
+.updateProfileOverlay h4 {
   color: black;
   text-align: center;
   margin-top: 20px;
@@ -298,6 +296,12 @@ body {
 
 .updateProfileOverlay form {
   padding: 10%;
+}
+
+#box1, #box2 {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
 #firstName,
@@ -434,33 +438,61 @@ body {
   .wrapper {
     position: relative;
     overflow-x: hidden;
+    height: 100vh;
   }
 
   .header {
     margin: 1% auto;
   }
 
-  .header h1 {
+  #app-name {
     font-size: 24px;
   }
 
-  .icons button {
-    height: 30px;
+  .buttons,
+  .menu {
+    width: 20%;
+    font-size: 20px;
+  }
+
+  .menu-text{
+    display: none;
+  }
+
+  .add {
+    margin-right: 20px;
+  }
+
+  .far {
+    font-size: 20px;
+  }
+
+  .add span {
+    display: none;
   }
 
   .user-profile {
-    width: 80%;
-    margin-top: 5%;
+    width: 90%;
+    margin-top: 10%;
   }
 
   .user-profile img {
-    width: 50%;
+    width: 30%;
     margin-right: 0;
     align-self: center;
   }
 
+  .imgContainer{
+    width: 80px;
+    height: 80px;
+  }
+
   .info-header {
     justify-content: center;
+  }
+
+  .info-header p {
+    font-size: 18px;
   }
 
   .info-header button {
@@ -474,6 +506,11 @@ body {
 
   .user-intro {
     text-align: center;
+    padding-top: 10px;
+  }
+
+  .grey-line{
+    margin-top: 10%;
   }
 
   .tabs {
@@ -491,8 +528,8 @@ body {
   .single-image img {
     width: 100%;
     height: 100%;
-    border: 1px solid black;
-    box-shadow: 5px 5px #d4d4d4;
+    border: 2px solid #ab6909;
+    box-shadow: none;
   }
 
   .overlay {
@@ -501,27 +538,62 @@ body {
     top: 10%;
   }
 
-  .overlay-container {
-    flex-direction: column;
-  }
-
-  .overlay-container img {
-    width: 80%;
-  }
-
   .overlay-container form {
+    display: flex;
+    flex-direction: column;
     margin-right: 0;
     width: 80%;
+  }
+
+  .formContent {
+    margin-top: 30px;
+  }
+
+  .imageLabel {
+    margin: 0;
+  }
+
+  .imageLabel i {
+    padding-top: 20px;
+    font-size: 40px;
+  }
+
+  #uploadImage {
+    padding-bottom: 20px;
   }
 
   .updateProfileOverlay {
     width: 70%;
     top: 10%;
     left: 15%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #box1, #box2 {
+    width: 100%;
+  } 
+
+  #phone {
+    display: flex;
+    align-self: flex-end;
+    margin: 2%;
+  }
+  
+  #web {
+    display: none;
+  }
+
+  #line {
+    width: 100%;
   }
 
   .updateProfileOverlay i,
   .closeIcon {
     margin-right: 2%;
+  }
+
+  .nav-links {
+    width: 50%;
   }
 }

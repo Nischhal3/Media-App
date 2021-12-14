@@ -9,7 +9,8 @@ router.get('/token', userController.checkToken);
 router
   .route('/:id')
   .get(userController.user_get)
-  .delete(userController.user_delete)
   .put(userController.user_update_put);
+
+router.route('/').put(userController.user_update_password);
 
 module.exports = router;
