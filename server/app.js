@@ -17,6 +17,8 @@ const userRoute = require('./routes/userRoute');
 const imageCollectionRoute = require('./routes/imageCollectionRoute');
 const collectionRoute = require('./routes/collectionRoute');
 const imageUserRoute = require('./routes/imageUserRoute');
+const allCommentsRoute = require('./routes/allCommentsRoute');
+const commentRoute = require('./routes/commentRoute');
 const allLikesRoute = require('./routes/allLikesRoute');
 const likeRoute = require('./routes/likeRoute');
 
@@ -28,12 +30,21 @@ app.use('/auth', authRoute);
 app.use('/collection', collectionRoute);
 app.use('/image/collection', imageCollectionRoute);
 app.use('/like/image', allLikesRoute);
+app.use('/comments/image', allCommentsRoute);
+
+//Authentication
 app.use(
   '/image/user',
   passport.authenticate('jwt', { session: false }),
   imageUserRoute
 );
+
 app.use('/user', passport.authenticate('jwt', { session: false }), userRoute);
+app.use(
+  '/image/comment',
+  passport.authenticate('jwt', { session: false }),
+  commentRoute
+);
 app.use(
   '/like/user',
   passport.authenticate('jwt', { session: false }),

@@ -1,81 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&family=Meddon&family=Noto+Sans&display=swap"
-    rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/05261cf5d1.js" crossorigin="anonymous"></script>
-  <link href="./singleImage.css" rel="stylesheet" />
-  <title>Single Image</title>
-</head>
-<div class="wrapper">
-
-  <body>
-    <div class="container">
-      <div class="header">
-        <h1 id="app-name">Node Artive</h1>
-        <div class="userName">
-          <span>Log in</span>
-          <i class="far fa-user"></i>
-        </div>
-        <button class="menu"><i class="fas fa-bars"></i></button>
-        <ul class="nav-links">
-          <i class="fas fa-times close-menu"></i>
-          <li><a href="../../pages/front/index.html">Home</a></li>
-          <li><a href="../../pages/profile/index.html">Profile</a></li>
-          <li><a href="../../pages/collection/index.html">Collections</a></li>
-          <li class="disappear" id="logout"><a>Log out</a></li>
-        </ul>
-      </div>
-
-      <div id="path"></div>
-      <div id="image-content">
-        <div id="image"></div>
-        <div id="info"></div>
-      </div>
-      <div id="reaction-content">
-        <div id="reaction">
-          <div class="likeReaction">
-            <i class="far fa-heart" id='likeIcon'></i>
-            <span id="likeCount">5</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&family=Meddon&family=Noto+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/05261cf5d1.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="./singleImage.css" rel="stylesheet" />
+    <title>Single Image</title>
+  </head>
+  <div class="wrapper">
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1 id="app-name">Node Artive</h1>
+          <div class="userName">
+            <span>Log in</span>
+            <i class="far fa-user"></i>
           </div>
-          <!-- <i class="far fa-bookmark" id="save"></i> -->
-          <div id="edit">
-            <i class="far fa-edit"></i>
-            <span id="edit-button">Edit</span>
-          </div>
-          <div id="delete">
-            <i class="far fa-trash-alt"></i>
-            <span id="delete-button">Delete</span>
-          </div>
+          <button class="menu"><i class="fas fa-bars"></i></button>
+          <ul class="nav-links">
+            <i class="fas fa-times close-menu"></i>
+            <li><a href="../../pages/front/index.html">Home</a></li>
+            <li><a href="../../pages/profile/index.html">Profile</a></li>
+            <li><a href="../../pages/collection/index.html">Collections</a></li>
+            <li class="disappear" id="logout"><a>Log out</a></li>
+          </ul>
         </div>
-        <div id="comment">
-          <i class="far fa-user-circle" id="avatar"></i>
-          <input id="comment-input" type="text" placeholder="Leave a comment..." name="comment-input">
+
+        <div id="path"></div>
+        <div id="image-content">
+          <div id="image"></div>
+          <div id="info"></div>
+        </div>
+        <div id="reaction-content">
+          <div id="reaction">
+            <div class="likeReaction">
+              <i class="far fa-heart" id="likeIcon"></i>
+              <span id="likeCount">5</span>
+            </div>
+            <!-- <i class="far fa-bookmark" id="save"></i> -->
+            <div id="edit">
+              <i class="far fa-edit"></i>
+              <span id="edit-button">Edit</span>
+            </div>
+            <div id="delete">
+              <i class="far fa-trash-alt"></i>
+              <span id="delete-button">Delete</span>
+            </div>
+          </div>
+          <div id="comment">
+            <i class="far fa-user-circle" id="avatar"></i>
+            <input
+              id="comment-input"
+              type="text"
+              placeholder="Leave a comment..."
+              name="comment"
+              required
+            />
+          </div>
+          <div class="allComments"></div>
+        </div>
+        <div class="overlay">
+          <i class="fas fa-times closeIcon"></i>
+          <form class="formContent">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required /><br />
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required /><br />
+            <label for="description">Description:</label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              required
+            /><br />
+            <label for="collection-select">Choose a collection:</label>
+            <select name="collection" id="collection-select"></select>
+            <button type="submit">Update</button>
+          </form>
         </div>
       </div>
-      <div class="overlay">
-        <i class="fas fa-times closeIcon"></i>
-        <form class="formContent">
-          <label for="title">Title:</label>
-          <input type="text" id="title" name="title" required/><br />
-          <label for="date">Date:</label>
-          <input type="date" id="date" name="date" required/><br />
-          <label for="description">Description:</label>
-          <input type="text" id="description" name="description" required/><br />
-          <label for="collection-select">Choose a collection:</label>
-          <select name="collection" id="collection-select">
-          </select>
-          <button type="submit">Update</button>
-        </form>
-      </div>
-    </div>
-    <script src="../login/serialize.js"></script>
-    <script type="module" src="./singleImage.js"></script>
-  </body>
-</div>
+      <script src="../login/serialize.js"></script>
+      <script type="module" src="./singleImage.js"></script>
+    </body>
+  </div>
 </html>
