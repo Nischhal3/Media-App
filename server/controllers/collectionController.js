@@ -35,7 +35,6 @@ const update_collection = async (req, res, next) => {
     next(err);
     return;
   }
-  console.log('image for collection', req.file);
   try {
     const update = await updateCollection(req.file, req.params.id, next);
     res.json({ message: `Image update: ${update}` });

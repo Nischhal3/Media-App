@@ -23,5 +23,5 @@ module.exports = {
   badRequestError,
   internalServerError,
   unauthorizedError,
-  unauthorizedError,
+  unauthenticatedError,
 };
