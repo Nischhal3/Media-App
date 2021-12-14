@@ -218,7 +218,7 @@ postArtwork.addEventListener('submit', async (e) => {
     body: data,
   };
 
-  await fetch(url + `/image/user/${userData.user_id}`, fetchOptions);
+  await fetch(url + '/image/user/', fetchOptions);
 });
 const logOutButton = document.getElementById('logout');
 logOutButton.addEventListener('click', () => {

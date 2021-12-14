@@ -26,13 +26,6 @@ const upload = multer({ dest: './uploads/', fileFilter });
 router
   .route('/:id')
   .get(get_image_user)
-  .post(
-    upload.single('image'),
-    body('title').notEmpty(),
-    body('description').notEmpty(),
-    body('date').isDate(),
-    post_image
-  )
   .put(
     body('title').notEmpty(),
     body('description').notEmpty(),
@@ -41,5 +34,15 @@ router
     update_image
   )
   .delete(delete_image);
+
+router
+  .route('/')
+  .post(
+    upload.single('image'),
+    body('title').notEmpty(),
+    body('description').notEmpty(),
+    body('date').isDate(),
+    post_image
+  );
 
 module.exports = router;
