@@ -15,13 +15,11 @@ const getAllLikesByImage = async (req, res, next) => {
     res.json({ allLikes: rows['COUNT(likes)'] });
     return;
   }
-
   next(internalServerError());
 };
 
 const get_all_like = async (req, res, next) => {
   const rows = await getAllLikes();
-  console.log("result in controller", rows);
   if (rows) {
     res.json({ rows });
     return;

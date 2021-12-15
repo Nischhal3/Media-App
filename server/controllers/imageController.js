@@ -81,7 +81,7 @@ const delete_image = async (req, res, next) => {
     res.json({ message: `Cannot delete others' image.` });
     return;
   }
-  res.json({ message: `Image deleted ${deleted}` });
+  res.json({ message: 'Image deleted successfully!' });
 };
 
 const update_image = async (req, res, next) => {
@@ -102,7 +102,7 @@ const update_image = async (req, res, next) => {
     });
     return;
   }
-  res.json({ message: `Image update: ${update}` });
+  res.json({ message: 'Image updated successfully!' });
 };
 
 module.exports = {
