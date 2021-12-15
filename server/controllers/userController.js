@@ -2,36 +2,35 @@
 
 const userModel = require('../models/userModel');
 const { badRequestError } = require('../utils/error');
-const { validationResult } = require('express-validator');
 
 const user_get = async (req, res) => {
   const user_retrieved = await userModel.getUser(req.params.id);
-  delete user_retrieved.password;
   res.json(user_retrieved);
 };
 
-const user_update_put = (req, res, next) => {
-  console.log('here');
-  const errors = validationResult(req);
-  console.log(errors);
-  if (!errors.isEmpty()) {
-    next(badRequestError('Data not valid'));
-  } else {
-    const userId = req.params.id;
-    const user_updated = userModel.updateUser(req.body, userId);
-    if (user_updated) {
-      res.json({ message: 'Update successfully' });
-      return;
-    }
-    res.json({ message: 'Error updating user' });
+const user_update_put = async (req, res, next) => {
+  const userId = req.params.id;
+  const user_updated = await userModel.updateUser(req.body, userId);
+  if (user_updated) {
+    res.json({ message: 'Update successfully' });
     return;
   }
+  next(badRequestError('Error updating user'));
+  return;
 };
 
-const user_delete = (req, res) => {
-  console.log(req.params.id);
-  const user_deleted = userModel.deleteUser(req.params.id);
-  res.json({ message: 'user deleted' });
+const user_update_password = async (req, res, next) => {
+  const user_updated = await userModel.updatePassword(req.body, req.user);
+  if(user_updated === "10") {
+    res.json({ message: 'You have entered the wrong password. Try again!'});
+    return;
+  }
+  if (user_updated) {
+    res.json({ message: 'Update successfully' });
+    return;
+  }
+  next(badRequestError('Error updating user'));
+  return;
 };
 
 const checkToken = (req, res, next) => {
@@ -46,5 +45,5 @@ module.exports = {
   user_get,
   user_update_put,
   checkToken,
-  user_delete,
+  user_update_password
 };

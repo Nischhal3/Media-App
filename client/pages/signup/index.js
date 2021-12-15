@@ -16,7 +16,7 @@ signupForm.addEventListener('submit', async (evt) => {
   };
   const response = await fetch(url + '/auth/register', fetchOptions);
   const json = await response.json();
-  console.log(json);
+
   if (json.token && json.user) {
     // save token
     sessionStorage.setItem('token', json.token);
@@ -36,18 +36,16 @@ signupForm.addEventListener('submit', async (evt) => {
   return false;
 });
 
-const hamburger = document.querySelector('.hamburger');
+const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
+const closeMenuButton = document.querySelector('.close-menu');
 
-hamburger.addEventListener('click', () => {
-  if (navLinks.classList.contains('open')) {
-    navLinks.classList.remove('open');
-    navLinks.classList.add('close');
-    hamburger.classList.remove('hamburgerOpen');
-  } else {
-    navLinks.classList.remove('close');
-    navLinks.classList.add('open');
-    hamburger.classList.add('hamburgerOpen');
-  }
-  return;
+menu.addEventListener('click', () => {
+  navLinks.classList.add('open');
+  navLinks.classList.remove('close');
+});
+
+closeMenuButton.addEventListener('click', () => {
+  navLinks.classList.add('close');
+  navLinks.classList.remove('open');
 });

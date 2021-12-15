@@ -1,99 +1,87 @@
 'use strict';
+import logOut from '../logout.js';
+const url = "http://localhost:3000";
 
 const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
 const userData = user && JSON.parse(user);
 
-//display the fixed artworks
-const artworks = [
-  {
-    id: 1,
-    title: 'Johannes Vermeer, Girl with a Pearl Earring',
-    image: '../../assets/artwork1.svg',
-  },
-  {
-    id: 2,
-    title: 'Gustav Klimt, “The Kiss” oil and gold leaf on canvas',
-    image: '../../assets/artwork2.svg',
-  },
-  {
-    id: 3,
-    title: 'Leonardo da Vinci, “The Mona Lisa”',
-    image: '../../assets/artwork3.svg',
-  },
-];
+(async function getLikeCount() {
+  try {
+    const fetchOptions = {
+      method: 'GET',
+    };
+    const response = await fetch(url + '/like/image', fetchOptions);
+    const images = await response.json();
+    displayArtworks(images.rows);
+  } catch (e) {
+    console.log(e.message);
+  }
+})();
 
-const artworksContent = document.getElementById('artworksContent');
+const displayArtworks = (artworks) => {
+  const artworksContent = document.getElementById('artworksContent');
+  artworks.forEach((artwork) => {
+    const singleArtwork = document.createElement('div');
+    const img = document.createElement('img');
+    const title = document.createElement('p');
 
-artworks.forEach((artwork) => {
-  const singleArtwork = document.createElement('div');
-  const img = document.createElement('img');
-  const title = document.createElement('p');
+    img.src = url + "/" + artwork.image_file;
+    title.innerHTML = `"${artwork.image_title}"`;
 
-  img.src = artwork.image;
-  title.innerHTML = artwork.title;
+    const div = document.createElement('div');
+    div.innerHTML += `<a>Find out more</a> <span><i class='fas fa-chevron-right'></i></span>`;
+    div.className = 'button';
 
-  const div = document.createElement('div');
-  div.innerHTML += `<a>Find out more</a> <span><i class='fas fa-chevron-right'></i></span>`;
-  div.className = 'button';
+    //redirect to single image page with image id
+    div.addEventListener('click', () => {
+     location.href = `../collection/singleImage.html?id=${artwork.image_id}`;
+    });
 
-  singleArtwork.appendChild(img);
-  singleArtwork.appendChild(title);
-  singleArtwork.appendChild(div);
-  singleArtwork.className = 'artwork';
+    singleArtwork.appendChild(img);
+    singleArtwork.appendChild(title);
+    singleArtwork.appendChild(div);
+    singleArtwork.className = 'artwork';
 
-  artworksContent.appendChild(singleArtwork);
-});
+    artworksContent.appendChild(singleArtwork);
+  });
+};
 
-//handle link to login on image overlay and link to contact artist if users logged in
 const goToLogIn = document.querySelector('.imgOverlay a');
-goToLogIn.addEventListener('click', () => {
-  document.location('../login/index.html');
-});
+
+if (!token && !user) {
+  goToLogIn.href = '../login/index.html';
+}
 
 if (token && user) {
-  goToLogIn.textContent = 'Contact Artist';
+  goToLogIn.textContent = 'Find out more';
   //will need to display artist contact?
-  goToLogIn.addEventListener('click', () => {
-    document.location('../collection/index.html');
-  });
+  goToLogIn.href = '../collection/singleImage.html?id=106';
 }
 
 //display items for front page header
-const headerContent = document.querySelector('.headerContent');
 const loginText = document.querySelector('.loginText');
-
-const hamburgerMenu = `<div class="hamburger">
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"></div>
-</div>
-<ul class="nav-links">
-<li><a href="../../pages/front/index.html">Home</a></li>
-<li><a href="../../pages/profile/index.html">Profile</a></li>
-<li><a href="../../pages/collection/index.html">Collections</a></li>
-<li><a>Log out</a></li>
-</ul>`;
+const logout = document.querySelector('#logout');
 
 if (token && user) {
   loginText.innerHTML = userData.first_name;
-  headerContent.innerHTML += hamburgerMenu;
+  logout.classList.remove('disappear');
 }
 
-const hamburger = document.querySelector('.hamburger');
+const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
+const closeMenuButton = document.querySelector('.close-menu');
 
-hamburger &&
-  hamburger.addEventListener('click', () => {
-    if (navLinks.classList.contains('open')) {
-      navLinks.classList.remove('open');
-      navLinks.classList.add('close');
-      hamburger.classList.remove('hamburgerOpen');
-    } else {
-      navLinks.classList.remove('close');
-      navLinks.classList.add('open');
-      hamburger.classList.add('hamburgerOpen');
-    }
+menu &&
+  menu.addEventListener('click', () => {
+    navLinks.classList.add('open');
+    navLinks.classList.remove('close');
+  });
+
+closeMenuButton &&
+  closeMenuButton.addEventListener('click', () => {
+    navLinks.classList.add('close');
+    navLinks.classList.remove('open');
   });
 
 //button of greeting parts
@@ -114,3 +102,23 @@ if (token && user) {
   greeting.appendChild(buttonGroup);
   buttonGroup.className = 'greetingBtns';
 }
+
+//handle redirect login button on header
+const loginDiv = document.querySelector('.login');
+loginDiv.addEventListener('click', () => {
+  if (token && user) {
+    location.href = '../profile/index.html';
+  } else {
+    location.href = '../login/index.html';
+  }
+});
+
+const searchDiv = document.querySelector('.search');
+searchDiv.addEventListener('click', () => {
+  location.href = '../collection/index.html';
+});
+
+const logOutButton = document.getElementById('logout');
+logOutButton.addEventListener('click', () => {
+  logOut();
+});

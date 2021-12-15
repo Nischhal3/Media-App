@@ -1,61 +1,65 @@
 'use strict';
-const collections = [
-  {
-    id: 1,
-    title: 'PAINTINGS',
-    description:
-      'More than 4,000 European and American paintings in our collection, dating from the Renaissance period to the present day.',
-    image: '../../assets/collection1.svg',
-  },
-  {
-    id: 2,
-    title: 'PHOTOGRAPHY',
-    description:
-      'Phoenix Art Museum presents three annual exhibitions of photography to its community, drawn from the  collection of historical and contemporary photography.',
-    image: '../../assets/collection2.svg',
-  },
-  {
-    id: 3,
-    title: 'CONTEMPORARY',
-    description:
-      'The contemporary art collection features cutting-edge contemporary works by living artists, from the mid-20th century to today.',
-    image: '../../assets/collection3.svg',
-  },
-  {
-    id: 4,
-    title: 'NATURE',
-    description:
-      'More than 3,000 European and American nature artwork in our collection, dating from the Renaissance to the present day.',
-    image: '../../assets/collection4.svg',
-  },
-  {
-    id: 5,
-    title: 'SCULPTURES',
-    description:
-      'Sculpture is a medium that brings artist inspiration to life in three dimensional form. NodeArtive is proud to feature internationally renowned sculpture art from various artists in the world.',
-    image: '../../assets/collection5.svg',
-  },
-  {
-    id: 6,
-    title: 'MODERN',
-    description:
-      'The modern art collection features nearly 2,500 objects that capture the progressive, innovative spirit of the early to mid-20th century, from Post Impressionism to the early stages of Abstract Expressionism.',
-    image: '../../assets/collection6.svg',
-  },
-];
+import logOut from '../logout.js';
+const url = 'http://localhost:3000'; // change url when uploading to server
+
+const token = sessionStorage.getItem('token');
+const user = sessionStorage.getItem('user');
 
 const collectionContent = document.getElementById('collectionContent');
+const textNotFound = document.getElementById('not-found');
+const searchCollection = document.getElementById('collection');
+const searchInput = document.getElementById('search-collection');
+const searchButton = document.getElementById('search-button');
+const h2 = document.getElementById('to-collections');
+const appName = document.getElementById('app-name');
 
-collections.forEach((collection) => {
+appName.addEventListener('click', () => {
+    location.href = '../front/index.html';
+  });
+
+h2.addEventListener('click', () => {
+    location.href = 'index.html';
+  });
+
+const createCollectionCards = (collection) => {
+  collection.forEach((item) => {
+    const singleCollection = document.createElement('div');
+    const img = document.createElement('img');
+    const title = document.createElement('h4');
+    const line = document.createElement('hr');
+    const description = document.createElement('p');
+
+    img.src = url + '/' + item.image;
+    img.alt = item.collection_title;
+    title.innerHTML = item.collection_title;
+    description.innerHTML = item.collection_description;
+
+    singleCollection.appendChild(img);
+    singleCollection.appendChild(title);
+    singleCollection.appendChild(line);
+    singleCollection.appendChild(description);
+    singleCollection.className = 'single-collection';
+
+    collectionContent.appendChild(singleCollection);
+
+    //redirect to single collection page with id
+    singleCollection.addEventListener('click', () => {
+      location.href = `singleCollection.html?id=${item.collection_id}`;
+    });
+  });
+};
+
+const createSearchCards = (item) => {
   const singleCollection = document.createElement('div');
   const img = document.createElement('img');
-  const title = document.createElement('p');
+  const title = document.createElement('h4');
   const line = document.createElement('hr');
   const description = document.createElement('p');
 
-  img.src = collection.image;
-  title.innerHTML = collection.title;
-  description.innerHTML = collection.description;
+  img.src = url + '/' + item.image;
+  img.alt = item.collection_title;
+  title.innerHTML = item.collection_title;
+  description.innerHTML = item.collection_description;
 
   singleCollection.appendChild(img);
   singleCollection.appendChild(title);
@@ -63,20 +67,83 @@ collections.forEach((collection) => {
   singleCollection.appendChild(description);
   singleCollection.className = 'single-collection';
 
-  collectionContent.appendChild(singleCollection);
-});
+  searchCollection.appendChild(singleCollection);
+  singleCollection.addEventListener('click', () => {
+    location.href = `singleCollection.html?id=${item.collection_id}`;
+  });
+};
 
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
-
-hamburger.addEventListener('click', () => {
-  if (navLinks.classList.contains('open')) {
-    navLinks.classList.remove('open');
-    navLinks.classList.add('close');
-    hamburger.classList.remove('hamburgerOpen');
-  } else {
-    navLinks.classList.remove('close');
-    navLinks.classList.add('open');
-    hamburger.classList.add('hamburgerOpen');
+const getCollection = async () => {
+  try {
+    const fetchOptions = {
+      method: 'GET',
+    };
+    const response = await fetch(url + '/collection', fetchOptions);
+    const collection = await response.json();
+    createCollectionCards(collection);
+    searchFunction(collection);
+  } catch (e) {
+    console.log(e.message);
   }
+};
+getCollection();
+
+const searchFunction = (collection) => {
+  handleEnter();
+  searchButton.addEventListener('click', () => {
+    searchCollection.innerHTML = '';
+    const input = document.getElementById('search-collection').value;
+    let array = [];
+    for (let i = 0; i < collection.length; i++) {
+      const titles = collection[i].collection_title.toLowerCase();
+      if (titles.includes(input)) {
+        createSearchCards(collection[i]);
+        collectionContent.style.display = 'none';
+        searchCollection.style.display = 'flex';
+        array.push(collection[i]);
+      }
+      if (array.length == 0) {
+        collectionContent.style.display = 'none';
+        textNotFound.style.display = 'block';
+        textNotFound.innerHTML =
+          'Sorry we do not have any collection like that!';
+      } else {
+        textNotFound.style.display = 'none';
+      }
+    }
+    searchInput.value = '';
+  });
+};
+
+const handleEnter = () => {
+  searchInput.addEventListener('keyup', function (event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      searchButton.click();
+    }
+  });
+};
+
+const menu = document.querySelector('.hamburgerMenu');
+const navLinks = document.querySelector('.nav-links');
+const closeMenuButton = document.querySelector('.close-menu');
+const logout = document.querySelector('#logout');
+
+if (!token || !user) {
+  logout.className = 'disappear';
+}
+
+menu.addEventListener('click', () => {
+  navLinks.classList.add('open');
+  navLinks.classList.remove('close');
 });
+
+closeMenuButton.addEventListener('click', () => {
+  navLinks.classList.add('close');
+  navLinks.classList.remove('open');
+});
+
+const logOutButton = document.getElementById('logout');
+logOutButton.addEventListener('click', () => {
+  logOut();
+})

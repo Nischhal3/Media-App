@@ -11,24 +11,45 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const { httpError } = require('./utils/error');
 const passport = require('./utils/passport');
-
 const authRoute = require('./routes/authRoute.js');
 const userRoute = require('./routes/userRoute');
-const imageRoute = require('./routes/imageRoute');
+const imageCollectionRoute = require('./routes/imageCollectionRoute');
+const collectionRoute = require('./routes/collectionRoute');
+const imageUserRoute = require('./routes/imageUserRoute');
+const allCommentsRoute = require('./routes/allCommentsRoute');
+const commentRoute = require('./routes/commentRoute');
+const allLikesRoute = require('./routes/allLikesRoute');
+const likeRoute = require('./routes/likeRoute');
 
 app.use(passport.initialize());
 app.use(express.static('uploads'));
+app.use('/thumbnails', express.static('thumbnails'));
 
 app.use('/auth', authRoute);
-app.use('/', passport.authenticate('jwt', { session: false }), userRoute);
-app.use('/', passport.authenticate('jwt', { session: false }), imageRoute);
+app.use('/collection', collectionRoute);
+app.use('/image/collection', imageCollectionRoute);
+app.use('/like/image', allLikesRoute);
+app.use('/comments/image', allCommentsRoute);
 
-// app.use((req, res, next) => {
-//   const err = httpError('Not found', 404);
-//   next(err);
-// });
+//Authentication
+app.use(
+  '/image/user',
+  passport.authenticate('jwt', { session: false }),
+  imageUserRoute
+);
+
+app.use('/user', passport.authenticate('jwt', { session: false }), userRoute);
+app.use(
+  '/image/comment',
+  passport.authenticate('jwt', { session: false }),
+  commentRoute
+);
+app.use(
+  '/like/user',
+  passport.authenticate('jwt', { session: false }),
+  likeRoute
+);
 
 //error handler
 app.use((err, req, res, next) => {

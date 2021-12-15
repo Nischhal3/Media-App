@@ -1,0 +1,303 @@
+* {
+  font-family: 'Josefin Sans', sans-serif;
+  margin: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.container {
+  height: 100vh;
+}
+
+.header {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header h1 {
+  flex-grow: 5;
+  font-family: 'Meddon', 'cursive';
+  cursor: pointer;
+}
+
+.login {
+  margin-right: 50px;
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.loginText {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.login a {
+  color: black;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.menu-text {
+  font-size: 20px;
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+.menu {
+  position: absolute;
+  right: 5%;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 26px;
+}
+
+.nav-links {
+  position: absolute;
+  right: -100%;
+  top: 0;
+  flex-direction: column;
+  justify-content: space-around;
+  list-style-type: none;
+  width: 30%;
+  height: 300px;
+  background: #d5b07a;
+  z-index: 1;
+}
+
+.open {
+  display: flex;
+  animation: slideFromRight 1s ease;
+  right: 0;
+}
+
+.close {
+  display: flex;
+  animation: slideFromLeft 1s ease;
+  right: -100%;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.close-menu {
+  position: absolute;
+  top: 20px;
+  right: 5%;
+  cursor: pointer;
+}
+
+.disappear {
+  display: none;
+}
+
+#path {
+  margin: 5% 0 0 5%;
+}
+
+.collection-path {
+  text-decoration: none;
+  color: black;
+  font-size: 24px;
+}
+
+.stupid {
+  margin-left: 10px;
+  font-size: 24px;
+  color: #ab6909;
+}
+
+.single-collection-path {
+  margin-left: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+#images {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px 0;
+  justify-content: space-around;
+  text-align: center;
+  flex-wrap: wrap;
+  z-index: 0;
+}
+
+.single-image {
+  margin: 2% 0 2% 0;
+  position: relative;
+  width: 30%;
+  border: 2px solid #ab6909;
+  box-shadow: 5px 5px #d4d4d4;
+  z-index: 0;
+}
+
+.single-image img {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  backface-visibility: hidden;
+}
+
+.overlay {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(252, 252, 252, 0.6);
+  -moz-transition: all 0.5s ease-in-out 0s;
+  -webkit-transition: all 0.5s ease-in-out 0s;
+  -ms-transition: all 0.5s ease-in-out 0s;
+  transition: all 0.5s ease-in-out 0s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.overlay:hover {
+  opacity: 3;
+}
+
+.overlay .text {
+  color: #333333;
+  font-size: 22px;
+  margin-top: 10%;
+}
+
+.overlay .artist {
+  color: #333333;
+  font-size: 26px;
+  align-self: flex-end;
+  margin: 0 5% 2% 0;
+  font-weight: 500;
+}
+
+.overlay .line {
+  width: 60%;
+  align-self: flex-end;
+  border: 3px solid #ab6909;
+  margin: 0 2% 20% 0;
+}
+
+#logout {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 425px) {
+  .wrapper {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .login {
+    display: none;
+  }
+  body {
+    overflow-x: hidden;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .menu-text {
+    display: none;
+  }
+
+  #path {
+    margin-top: 10%;
+  }
+
+  .collection-path,
+  .stupid,
+  .single-collection-path {
+    font-size: 20px;
+  }
+
+  #images {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .single-image {
+    width: 95%;
+    margin-bottom: 10%;
+    align-self: center;
+  }
+  .overlay {
+    opacity: 1;
+    height: 30%;
+    text-align: center;
+  }
+  .overlay .text {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 2%;
+  }
+
+  .overlay .artist {
+    align-self: center;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .overlay .line {
+    display: none;
+  }
+
+  .nav-links {
+    width: 40%;
+  }
+}
+
+@keyframes slideFromRight {
+  0% {
+    right: -100%;
+    opacity: 0;
+  }
+  100% {
+    right: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromLeft {
+  0% {
+    right: 0;
+    opacity: 1;
+  }
+  100% {
+    right: -100%;
+    opacity: 0;
+  }
+}
