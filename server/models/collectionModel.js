@@ -2,7 +2,7 @@ const pool = require('../database/db');
 const promisePool = pool.promise();
 const { internalServerError } = require('../utils/error');
 
-const getAllCollection = async () => {
+const getAllCollection = async (next) => {
   try {
     const [rows] = await promisePool.query('SELECT * from collection_db');
     return rows;

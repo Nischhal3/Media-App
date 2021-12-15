@@ -517,10 +517,11 @@ body {
     padding: 0;
   }
 
-  #artwork.active {
+  #artwork-content {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    width: 90%;
+    margin: 5% auto;
     justify-content: flex-start;
     flex-wrap: nowrap;
   }
@@ -530,6 +531,7 @@ body {
     height: 100%;
     border: 2px solid #ab6909;
     box-shadow: none;
+    margin-bottom: 5%;
   }
 
   .overlay {

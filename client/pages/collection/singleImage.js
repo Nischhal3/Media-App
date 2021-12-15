@@ -100,7 +100,8 @@ const createImageCard = (image) => {
   img.alt = image.image_title;
 
   imageTitle.innerHTML = image.image_title;
-  imageDate.innerHTML = image.image_date.slice(0, 10);
+  const dateFormated = new Date(image.image_date);
+  imageDate.innerHTML = dateFormated.toDateString().slice(4, 15);
   imageDescription.innerHTML = image.image_description;
   artist.innerHTML = 'Artist: ' + image.first_name + ' ' + image.last_name;
 

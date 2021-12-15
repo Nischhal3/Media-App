@@ -459,13 +459,14 @@ body {
 
   #info {
     width: 100%;
+    margin: 0 auto;
     align-self: center;
     text-align: center;
     margin-bottom: 5%;
   }
 
   .image-title {
-    font-size: 20px;
+    font-size: 19px;
   }
 
   .artist,
@@ -477,7 +478,7 @@ body {
     width: 90%;
     align-self: center;
     margin-top: 5%;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   #image {
@@ -495,7 +496,7 @@ body {
   .stupid,
   .single-collection-path,
   .image-path {
-    font-size: 16px;
+    font-size: 18px;
     margin-left: 5px;
   }
 
@@ -504,32 +505,37 @@ body {
   }
 
   #reaction {
-    width: 90%;
+    width: 95%;
     flex: 2;
-    margin: 0 0 0 7%;
+    margin: 0 auto;
     font-size: 22px;
   }
-
-  #ellipsis {
-    margin-left: 65%;
-  }
-
-  #options {
-    margin-left: 20%;
-  }
-
-  #comment {
-    width: 90%;
-    margin-top: 5%;
+  #delete {
     margin-left: 5%;
   }
 
+  #comment {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 6%;
+    align-self: center;
+  }
+
   #comment-input {
+    width: 100%;
+  }
+  
+  .allComments {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .commentBox {
     width: 90%;
   }
 
   #avatar {
-    font-size: 30px;
+    font-size: 35px;
   }
 
   #edit {
