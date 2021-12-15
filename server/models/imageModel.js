@@ -2,18 +2,18 @@
 
 const pool = require('../database/db');
 const promisePool = pool.promise();
-const httpError = require('../utils/error');
+const { internalServerError } = require('../utils/error');
 
-const getAllImages = async () => {
+const getAllImagesByUser = async (id) => {
   try {
     const [rows] = await promisePool.query(
-      'SELECT user_db.first_name, user_db.last_name,image_id, image_title, image_description, image_file, image_price FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id'
+      'SELECT * FROM image_db where user_id = ?',
+      [id]
     );
-    console.log('Get all images', rows);
     return rows;
   } catch (e) {
-    console.error('Get all images', e.message);
-    const err = httpError('Sql error', 500);
+    console.error(' images', e.message);
+    const err = internalServerError();
     next(err);
   }
 };
@@ -21,36 +21,49 @@ const getAllImages = async () => {
 const getImage = async (imageId, next) => {
   try {
     const [rows] = await promisePool.query(
-      'SELECT user_db.first_name, user_db.last_name, image_title, image_description, image_file FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id WHERE image_id = ?',
+      'SELECT collection_db.collection_id, collection_db.collection_title, user_db.first_name, user_db.last_name, image_title, image_date, image_description, image_file FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id INNER JOIN collection_db on collection_db.collection_id = image_db.collection_id WHERE image_db.image_id = ?',
       [imageId]
     );
-    console.log('Get image by id', rows[0]);
     return rows[0];
   } catch (e) {
     console.error('Get image by id', e.message);
-    const err = httpError('Sql error', 500);
+    const err = internalServerError();
     next(err);
   }
 };
 
+const getImageByCollectionId = async (id, next) => {
+  try {
+    const [rows] = await promisePool.query(
+      'SELECT collection_db.collection_id, user_db.first_name, user_db.last_name, image_id, image_title, image_file FROM image_db INNER JOIN user_db on user_db.user_id = image_db.user_id INNER JOIN collection_db on collection_db.collection_id = image_db.collection_id WHERE image_db.collection_id = ?',
+      [id]
+    );
+    return rows;
+  } catch (e) {
+    console.error('Get image by id', e.message);
+    const err = internalServerError();
+    next(err);
+  }
+};
+
+//change collection_id after finishing frontend
 const insertImage = async (user_id, image, next) => {
   try {
     const [rows] = await promisePool.query(
-      'INSERT INTO image_db ( user_id, collection_id, image_title, image_description, image_file, image_price) VALUES (?,?,?,?,?,?)',
+      'INSERT INTO image_db (user_id, collection_id, image_title, image_description, image_file, image_date) VALUES (?,?,?,?,?,?)',
       [
         user_id,
-        1,
-        image.image_title,
-        image.image_description,
+        image.collection,
+        image.title,
+        image.description,
         image.file,
-        image.image_price,
+        image.date,
       ]
     );
-    console.log('Insert image', rows);
     return rows.affectedRows;
   } catch (e) {
     console.error('Insert image', e.message);
-    const err = httpError('Sql error', 500);
+    const err = internalServerError();
     next(err);
   }
 };
@@ -65,34 +78,42 @@ const deleteImage = async (imageId, user_id, role, next) => {
 
   try {
     const [rows] = await promisePool.execute(sql, params);
-    console.log('Delete image ', rows);
     return rows.affectedRows === 1;
   } catch (e) {
     console.error('Delete image', e.message);
-    const err = httpError('Sql error', 500);
+    const err = internalServerError();
     next(err);
   }
 };
 
 const updateImage = async (user_id, image, next) => {
-  let sql =
-    'UPDATE image_db SET image_title = ?, image_description = ? WHERE image_id = ? AND user_id = ? ';
-  let params = [image.image_title, image.image_description, image.id, user_id];
+  console.log('update', user_id, image);
+
   try {
-    const [rows] = await promisePool.execute(sql, params);
-    console.log('Update image ', rows);
+    const [rows] = await promisePool.query(
+      'UPDATE image_db SET image_title = ? , image_description = ?,  collection_id = ?, image_date = ? WHERE  image_id = ? AND  user_id =  ?',
+      [
+        image.title,
+        image.description,
+        image.collection,
+        image.date,
+        image.id,
+        user_id,
+      ]
+    );
     return rows.affectedRows === 1;
   } catch (e) {
     console.error('Update image ', e.message);
-    const err = httpError('Sql error:', 500);
+    const err = internalServerError();
     next(err);
   }
 };
 
 module.exports = {
-  getAllImages,
+  getAllImagesByUser,
   getImage,
   insertImage,
   deleteImage,
   updateImage,
+  getImageByCollectionId,
 };

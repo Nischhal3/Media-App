@@ -1,92 +1,115 @@
 'user strict';
 
 const {
-  getAllImages,
+  getAllImagesByUser,
   getImage,
   insertImage,
   deleteImage,
   updateImage,
+  getImageByCollectionId,
 } = require('../models/imageModel');
 
-const { httpError } = require('../utils/error');
+const { badRequestError, httpError } = require('../utils/error');
 const { validationResult } = require('express-validator');
+const makeThumbnail = require('../utils/resize');
 
-const get_image_list = async (req, res) => {
-  const images = await getAllImages();
-  res.json(images);
+const get_image_user = async (req, res, next) => {
+  const images = await getAllImagesByUser(req.params.id, next);
+  if (images) {
+    res.json(images);
+    return;
+  }
+  const err = badRequestError('Image not found');
+  next(err);
 };
 
-const get_image = async (req, res, next) => {
-  const image = await getImage(req.params.imageId, next, next);
-  console.log('Image by id', image);
+const get_image_collection = async (req, res, next) => {
+  const image = await getImageByCollectionId(req.params.id, next);
   if (image) {
     res.json(image);
     return;
   }
+  const err = badRequestError('Image not found');
+  next(err);
+};
 
-  const err = httpError('Image not found', 400);
+const get_image = async (req, res, next) => {
+  const image = await getImage(req.params.id, next);
+  if (image) {
+    res.json(image);
+    return;
+  }
+  const err = badRequestError('Image not found');
   next(err);
 };
 
 const post_image = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log('Post image validation: ', errors.array());
     const err = httpError('image post data not valid', errors.array());
     next(err);
     return;
   }
 
-  console.log('Posting images', req.file);
   if (!req.file) {
-    const err = httpError('Invalid file', 400);
+    const err = badRequestError('Invalid file');
     next(err);
     return;
   }
-
-  const user_id = req.user.user_id;
-  console.log('Post done by userID', user_id);
-  const image = req.body;
-  image.file = req.file.filename;
-  console.log('Image post', image);
-
-  const id = await insertImage(user_id, image);
-  res.json({ message: `Image added with id: ${id}` });
+  try {
+    const thumb = await makeThumbnail(req.file.path, req.file.filename);
+    const user_id = req.user.user_id;
+    const image = req.body;
+    image.file = req.file.filename;
+    const id = await insertImage(user_id, image);
+    if (thumb) {
+      res.json({ message: `Image added with id: ${id}` });
+    }
+  } catch (error) {
+    const err = badRequestError('Error posting image');
+    next(err);
+    return;
+  }
 };
 
 const delete_image = async (req, res, next) => {
-  const image_id = req.params.imageId;
+  const image_id = req.params.id;
   const user_id = req.user.user_id;
   const role = req.user.role;
-  console.log('Image id', image_id);
-  console.log('Id ', role);
   const deleted = await deleteImage(image_id, user_id, role, next);
-  res.json({ message: `Image deleted ${deleted}` });
+  if (!deleted) {
+    res.json({ message: `Cannot delete others' image.` });
+    return;
+  }
+  res.json({ message: 'Image deleted successfully!' });
 };
 
 const update_image = async (req, res, next) => {
-  req.body.id = req.params.imageId;
+  req.body.id = req.params.id;
   const user_id = req.user.user_id;
-  console.log('Image ID:', req.params.imageId);
-  console.log('User ID:', user_id);
-  console.log('Update post: ', req.body);
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log('Image update validation:', errors.array());
-    const err = httpError('Updating data not valid', 400);
+    const err = badRequestError('Updating data not valid');
     next(err);
     return;
   }
 
   const update = await updateImage(user_id, req.body, next);
-  res.json({ message: `Image update: ${update}` });
+  if (!update) {
+    res.json({
+      message: `Cannot update others' image.`,
+    });
+    return;
+  }
+  res.json({ message: 'Image updated successfully!' });
 };
 
 module.exports = {
-  get_image_list,
-  get_image,
+  get_image_user,
   post_image,
   delete_image,
   update_image,
+  get_image_collection,
+  get_image,
 };

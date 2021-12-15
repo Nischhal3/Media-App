@@ -11,60 +11,61 @@
       rel="stylesheet"
     />
     <link href="./style.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/635b5f77f3.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Sign up page</title>
   </head>
-
-  <body>
-    <div class="container">
-      <div class="box1">
-        <img src="../../assets/login-signup.png" />
-      </div>
-      <div class="box2">
-        <div class="hamburger">
-          <div class="line"></div>
-          <div class="line"></div>
-          <div class="line"></div>
+  <div class="wrapper">
+    <body>
+      <div class="container">
+        <div class="box1">
+          <img src="../../assets/login-signup.png" />
         </div>
-        <ul class="nav-links">
-          <li><a href="../../pages/front/index.html">Home</a></li>
-          <li><a href="../../pages/profile/index.html">Profile</a></li>
-          <li><a href="../../pages/collection/index.html">Collections</a></li>
-          <li><a>Log out</a></li>
-        </ul>
-        <h1>Sign up</h1>
-        <p class="signup-p">Join the artists community.</p>
-        <form
-          id="signup-form"
-          action="http://localhost:3000/auth/register"
-          method="post"
-        >
-          <section>
-            <label for="first-name">First Name</label> <br />
-            <input class="form" type="text" name="firstname" required />
-          </section>
-          <section>
-            <label for="last-name">Last Name</label> <br />
-            <input class="form" type="text" name="lastname" required />
-          </section>
-          <section>
-            <label for="email">Email</label> <br />
-            <input class="form" type="email" name="email" required />
-          </section>
-          <section>
-            <label for="password">Password</label> <br />
-            <input
-              class="form"
-              type="password"
-              name="password"
-              minlength="8"
-              required
-            />
-          </section>
-          <button class="button">Sign up</button>
-        </form>
+        <div class="box2">
+          <button class="menu"><i class="fas fa-bars"></i></button>
+          <ul class="nav-links">
+            <i class="fas fa-times close-menu"></i>
+            <li><a href="../../pages/front/index.html">Home</a></li>
+            <li><a href="../../pages/profile/index.html">Profile</a></li>
+            <li><a href="../../pages/collection/index.html">Collections</a></li>
+          </ul>
+          <h1>Sign up</h1>
+          <p class="signup-p">Join the artists community.</p>
+          <form
+            id="signup-form"
+            action="http://localhost:3000/auth/register"
+            method="post"
+          >
+            <section>
+              <label for="first-name">First Name</label> <br />
+              <input class="form" type="text" name="firstname" required />
+            </section>
+            <section>
+              <label for="last-name">Last Name</label> <br />
+              <input class="form" type="text" name="lastname" required />
+            </section>
+            <section>
+              <label for="email">Email</label> <br />
+              <input class="form" type="email" name="email" required />
+            </section>
+            <section>
+              <label for="password">Password</label> <br />
+              <input
+                class="form"
+                type="password"
+                name="password"
+                minlength="8"
+                required
+              />
+            </section>
+            <button class="button">Sign up</button>
+          </form>
+        </div>
       </div>
-    </div>
-    <script src="../login/serialize.js"></script>
-    <script src="./index.js"></script>
-  </body>
+      <script src="../login/serialize.js"></script>
+      <script src="./index.js"></script>
+    </body>
+  </div>
 </html>

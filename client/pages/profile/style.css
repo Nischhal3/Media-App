@@ -16,25 +16,42 @@ body {
   justify-content: space-between;
 }
 
-.header h2 {
+.header h1 {
   flex-grow: 5;
   font-family: 'Meddon', 'cursive';
+  cursor: pointer;
 }
 
-.icons {
-  flex: 1;
+.buttons {
+  width: 50%;
   display: flex;
   justify-content: right;
+  align-items: center;
 }
 
-.icons button {
+.add {
+  width: 20%;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.far {
+  font-size: 24px;
+}
+
+.menu-text {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.menu {
   width: 40px;
   height: 40px;
   border: none;
-  background: #d5b07a;
+  background: transparent;
   border-radius: 50%;
-  margin-left: 10%;
   cursor: pointer;
+  font-size: 24px;
 }
 
 .close-menu {
@@ -118,41 +135,38 @@ body {
   border: 1px solid #e7e7e7;
 }
 
-.tabs {
+.artwork {
+  padding: 10px;
+  text-align: center;
+  font-size: 22px;
+  color: #ab6909;
+}
+
+#artwork-content {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  list-style-type: none;
+  width: 100%;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 2%;
+  align-items: center;
 }
 
-.tab {
+.single-image {
+  margin-top: 2%;
+}
+
+.single-image img {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #ab6909;
+  box-shadow: 5px 5px rgb(0 0 0 / 0.2);
   cursor: pointer;
-  padding: 10px 20px;
-  font-size: 16px;
-}
-
-.tab:hover {
-  margin-top: -2px;
-  border-top: 2px solid black;
-}
-
-.tab.active {
-  margin-top: -2px;
-  border-top: 2px solid black;
-}
-
-[data-tab-content] {
-  display: none;
-}
-
-.active[data-tab-content] {
-  display: block;
 }
 
 .fa {
   opacity: 0.5;
   margin-top: 3px;
-  font-size: 15px;
 }
 
 #collection {
@@ -176,7 +190,7 @@ body {
   display: none;
 }
 
-.overlay i {
+.closeIcon {
   align-self: flex-end;
   margin: 1%;
   cursor: pointer;
@@ -190,17 +204,45 @@ body {
 }
 
 .overlay-container img {
-  width: 40%;
-  margin: 0 20px;
+  width: 90%;
+  cursor: pointer;
 }
 
-form {
+.overlay-image {
   width: 100%;
-  margin-right: 10%;
+  margin-right: 20px;
+  display: flex;
 }
 
-.overlay-info {
-  padding: 20px 0;
+.imageLabel {
+  flex: 1.2;
+  margin-left: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+  border: 5px solid #d5b07a;
+  border-style: dashed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #d5b07a;
+  font-size: 80px;
+}
+
+#imagePosting {
+  display: none;
+}
+
+#uploadImage {
+  padding-top: 10px;
+  font-size: 14px;
+  color: black;
+}
+
+.formContent {
+  flex: 2;
+  padding-bottom: 20px;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -217,28 +259,36 @@ form {
   border: 1px solid #ab6909;
   border-radius: 5px;
   width: 100%;
-  padding: 5px;
+  padding: 10px;
 }
 
 .updateProfileOverlay {
   position: absolute;
   top: 20%;
-  left: 40%;
-  width: 20%;
-  flex-direction: column;
+  left: 30%;
+  width: 35%;
+  flex-direction: row;
   z-index: 1;
-  border: 1px solid #ab6909;
+  border: 2px solid #ab6909;
   background: white;
   display: none;
 }
 
-.updateProfileOverlay i {
+#box2 i {
   align-self: flex-end;
-  margin: 1%;
+  margin: 2%;
   cursor: pointer;
 }
 
-.updateProfileOverlay h3 {
+#phone {
+  display: none;
+}
+
+#line {
+  border: 1px solid #ab6909;
+}
+
+.updateProfileOverlay h4 {
   color: black;
   text-align: center;
   margin-top: 20px;
@@ -246,6 +296,12 @@ form {
 
 .updateProfileOverlay form {
   padding: 10%;
+}
+
+#box1, #box2 {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
 #firstName,
@@ -257,11 +313,12 @@ form {
   margin-bottom: 20px;
 }
 
-.updateProfileOverlay button {
+.updateProfileOverlay button,
+.overlay-image button {
   width: 50%;
   background: #d5b07a;
   border: none;
-  padding: 5px;
+  padding: 8px;
   font-size: 16px;
   margin: 0 auto;
   cursor: pointer;
@@ -269,6 +326,12 @@ form {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 5px;
+}
+
+.overlay-image button {
+  margin-top: 20px;
+  width: 100%;
 }
 
 .overlay-open {
@@ -282,7 +345,7 @@ form {
   flex-direction: column;
   justify-content: space-around;
   list-style-type: none;
-  width: 50%;
+  width: 30%;
   height: 300px;
   background: #d5b07a;
   z-index: 1;
@@ -345,6 +408,10 @@ form {
   top: 10px;
 }
 
+#logout {
+  cursor: pointer;
+}
+
 @keyframes slideFromRight {
   0% {
     right: -100%;
@@ -368,31 +435,64 @@ form {
 }
 
 @media only screen and (max-width: 425px) {
+  .wrapper {
+    position: relative;
+    overflow-x: hidden;
+    height: 100vh;
+  }
+
   .header {
     margin: 1% auto;
   }
 
-  .header h2 {
+  #app-name {
+    font-size: 24px;
+  }
+
+  .buttons,
+  .menu {
+    width: 20%;
     font-size: 20px;
   }
 
-  .icons button {
-    height: 30px;
+  .menu-text{
+    display: none;
+  }
+
+  .add {
+    margin-right: 20px;
+  }
+
+  .far {
+    font-size: 20px;
+  }
+
+  .add span {
+    display: none;
   }
 
   .user-profile {
-    width: 80%;
-    flex-direction: column;
+    width: 90%;
+    margin-top: 10%;
   }
 
   .user-profile img {
-    width: 50%;
+    width: 30%;
     margin-right: 0;
     align-self: center;
   }
 
+  .imgContainer{
+    width: 80px;
+    height: 80px;
+  }
+
   .info-header {
     justify-content: center;
+  }
+
+  .info-header p {
+    font-size: 18px;
   }
 
   .info-header button {
@@ -406,10 +506,32 @@ form {
 
   .user-intro {
     text-align: center;
+    padding-top: 10px;
+  }
+
+  .grey-line{
+    margin-top: 10%;
   }
 
   .tabs {
     padding: 0;
+  }
+
+  #artwork-content {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 5% auto;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+  }
+
+  .single-image img {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #ab6909;
+    box-shadow: none;
+    margin-bottom: 5%;
   }
 
   .overlay {
@@ -418,27 +540,62 @@ form {
     top: 10%;
   }
 
-  .overlay-container {
-    flex-direction: column;
-  }
-
-  .overlay-container img {
-    width: 80%;
-  }
-
   .overlay-container form {
+    display: flex;
+    flex-direction: column;
     margin-right: 0;
     width: 80%;
+  }
+
+  .formContent {
+    margin-top: 30px;
+  }
+
+  .imageLabel {
+    margin: 0;
+  }
+
+  .imageLabel i {
+    padding-top: 20px;
+    font-size: 40px;
+  }
+
+  #uploadImage {
+    padding-bottom: 20px;
   }
 
   .updateProfileOverlay {
     width: 70%;
     top: 10%;
     left: 15%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #box1, #box2 {
+    width: 100%;
+  } 
+
+  #phone {
+    display: flex;
+    align-self: flex-end;
+    margin: 2%;
+  }
+  
+  #web {
+    display: none;
+  }
+
+  #line {
+    width: 100%;
   }
 
   .updateProfileOverlay i,
-  .overlay i {
+  .closeIcon {
     margin-right: 2%;
+  }
+
+  .nav-links {
+    width: 50%;
   }
 }
