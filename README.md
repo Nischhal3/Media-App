@@ -1,19 +1,19 @@
 # Node Artive
-## A digital exhibition - A place for art lovers
+## A digital exhibition - A home for art lovers
 
-Node Artive is a website, where artists can share their artwork and discuss art with other people. It supports the artists to 
-approach art lovers easier. On the other hand, art lovers can also reach wonderful artworks wherever and whenever they have free time. It brings benefits for all the users using our website.
+Node Artive is where artists share their artworks and sentiment through art. Our desire is to connect artists and art enthusiasts to form a cultural context for how art is created, discovered, and shared.  We help artists find their identity through self-expression and we believe that art is for everyone.
 
 [Live demo](https://10.114.32.123/~artive/NodeArtive/client/pages/front/index.html)
+
 VPN is needed to open the page.
 
 ## Features
 
-- As an anonymous user, you can only view the collection, all artworks search collections by name. 
-- As a log-in user (whether you are artist or visitor), in addition to those above features, you can add new artworks, edit and delete them. You can also like/dislike the artworks, write comments. Besides, in your profile page, you can update your name, description and change password. 
-- As a admin, you have the right to delete the image and comments that are again the law and rules of the website. 
+- As an anonymous user, you can view the collection, all artworks and search collections by name. 
+- As a log-in user (whether you are artist or visitor), in addition to above features, you can add new artworks, edit and delete them. You can also like the artworks, write comments. Besides, in your profile page, you can update your information and change password. 
+- As a admin, you have the right to delete images and comments that are against the rules and policy of the website. 
 
-## First look
+## A hint of NodeArtive
 
 Home page: 
 
@@ -25,13 +25,13 @@ Collection page:
 
 ## How to use
 
-- The website contains 5 main pages: Front page, Profile page, Collection page, Single Collection page and Single Image Details page. 
-- On Front page, you can view the 3 most popular artworks, arranged based on the number of likes for each image. If you log in, you can see your name on the top right of the page. There is also a menu, which can direct you to wherever you want.
-- On Profile page, you can add artwork and it will display in the artwork section. You can also update your profile name, change password on this page.
+- The website contains 5 main pages: Front page, Profile page, Collection page, Single Collection page and Image Details page. 
+- On Front page, you can view the 3 most popular artworks, arranged based on the number of likes for each image. If you log in, you can see your name on the top right of the page. 
+- On Profile page, you can upload your artwork and it will be displayed in the artwork section. You can also update your profile and change your password on this page.
 - On Collection page, you can search for collection name within our wide range of collections.
-- On Single Collection page, you can view all the artwork that belongs to this collection.
-- On Single Image Details page, you can edit the artwork's title/date/description/collection, delete the artwork, like/dislike the artwork add comments below it. 
-- On the menu, there is a logout button, which you can use end your session. Next time, you will need to login again.
+- On Single Collection page, you can view all the artwork that belongs to this collection. Hover on each image to see artwork's name and artist.
+- On Image Details page, you can edit the artwork's title/date/description/collection, delete the artwork, like the artwork add comments below it. 
+- On every page, there is also menu button which direct you to wherever you want. At the bottom of the menu is logout button which you can use to end your session. Next time, you will need to login again.
 
 ## Stack
 
@@ -57,7 +57,7 @@ npm install
 
 Create and .env file with the following content: 
 ```
-DB_HOST=127.0.0.1
+DB_HOST=mysql.metropolia.fi
 DB_USER=<your-db-user>
 DB_PASS=<your-db-user_password>
 DB_NAME=<your-db-name>
@@ -83,9 +83,12 @@ To run front-end: You can open the client/pages/front/index.html on VSCode/WebSt
 - multer
 - dotenv
 - express-validator
+- bcryptjs
+- jsonwebtoken
+- sharp
 - npm i mysql2
 - npm install express-validator
-- npm i passport passport-local
+- npm i passport passport-local passport-jwt
 - npm i exif
 
 ## Contributors
