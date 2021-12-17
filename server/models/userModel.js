@@ -49,17 +49,21 @@ const updateUser = async (user, userId) => {
 const updatePassword = async (data, user) => {
   let isEqual;
   let newHashedPassword;
+  //get existing user in db to check password
   const existingUser = await getUser(user.user_id);
 
+  //check if user inputs right current password
   if (data.current_password && data.new_password) {
     const salt = await bcrypt.genSalt(10);
     newHashedPassword = await bcrypt.hash(data.new_password, salt);
     isEqual = await bcrypt.compare(data.current_password, existingUser.password);
   }
+  //if current password is not right, return immediately to controller
   if(!isEqual) {
     return "10";
   }
 
+  //if current password is right
   try {
     const [rows] = await promisePool.execute(
       'UPDATE user_db SET password = ? WHERE user_id = ?',
@@ -71,6 +75,7 @@ const updatePassword = async (data, user) => {
   }
 };
 
+//get user by email to use in sign up function
 const getUserByEmail = async (params) => {
   try {
     const [rows] = await promisePool.execute(

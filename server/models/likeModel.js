@@ -15,6 +15,7 @@ const getAllLikesByImageId = async (imageId) => {
   }
 };
 
+//get 3 images with most liked count order by like count descending
 const getAllLikes = async () => {
   try {
     const [rows] = await promisePool.execute(

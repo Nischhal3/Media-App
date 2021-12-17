@@ -18,6 +18,7 @@ const getAllImagesByUser = async (id) => {
   }
 };
 
+//get one image by its id
 const getImage = async (imageId, next) => {
   try {
     const [rows] = await promisePool.query(
@@ -46,7 +47,6 @@ const getImageByCollectionId = async (id, next) => {
   }
 };
 
-//change collection_id after finishing frontend
 const insertImage = async (user_id, image, next) => {
   try {
     const [rows] = await promisePool.query(
@@ -72,6 +72,7 @@ const deleteImage = async (imageId, user_id, role, next) => {
   let sql = 'DELETE FROM image_db WHERE image_id = ? AND user_id = ?';
   let params = [imageId, user_id];
 
+  //check if user is admin
   if (role === 0) {
     (sql = 'DELETE FROM image_db WHERE image_id = ?'), (params = [imageId]);
   }
