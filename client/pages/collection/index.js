@@ -13,10 +13,12 @@ const searchButton = document.getElementById('search-button');
 const h2 = document.getElementById('to-collections');
 const appName = document.getElementById('app-name');
 
+//redirect to front page when click on app name
 appName.addEventListener('click', () => {
     location.href = '../front/index.html';
   });
 
+//redirect to collection page when click on Collection header
 h2.addEventListener('click', () => {
     location.href = 'index.html';
   });
@@ -73,6 +75,7 @@ const createSearchCards = (item) => {
   });
 };
 
+//get all collections to display
 const getCollection = async () => {
   try {
     const fetchOptions = {
@@ -115,6 +118,7 @@ const searchFunction = (collection) => {
   });
 };
 
+//check if user press enter for search
 const handleEnter = () => {
   searchInput.addEventListener('keyup', function (event) {
     if (event.keyCode === 13) {
@@ -129,6 +133,7 @@ const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
 const logout = document.querySelector('#logout');
 
+//disable logout button on menu when not log in
 if (!token || !user) {
   logout.className = 'disappear';
 }
