@@ -1,0 +1,667 @@
+swagger: "2.0"
+info:
+  description: "A digital art exhibition where artists display their art pieces. Others can come to enjoy, leave impressions and buy art products."
+  version: "1.0.0"
+  title: "Node Artive"
+tags:
+- name: "art"
+  description: "Web based Technologies"
+schemes:
+- "https"
+- "http"
+paths:
+  /collection:
+    get:
+      tags:
+      - "all collections"
+      summary: "Get all collections"
+      description: ""
+      operationId: "getCollections"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        "200":
+          description: "Ok"
+        "404":
+          description: "Collections not found"
+  /collection/{id}:
+    get:
+      tags:
+      - "single collection"
+      summary: "Get one collection byId"
+      description: ""
+      operationId: "get single collection"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of the collection"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "Ok"
+        "404":
+          description: "Collections not found"
+  /image/collection/{id}:
+    get:
+      tags:
+      - "images by collection"
+      summary: "Finds images by collectionID"
+      description: ""
+      operationId: "findImagesByCollectionID"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of the collection"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "Ok"
+        "404":
+          description: "Images not found"
+        "400":
+          description: "Invalid file"
+  /image/user/{id}:
+    post:
+      tags:
+      - "image"
+      summary: "Upload image by userId"
+      description: ""
+      operationId: "AddImageByUserId"
+      produces:
+      - "application/xml"
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      - "multipart/form-data"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: ""
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "image_title"
+        in: "formData"
+        description: ""
+        required: true
+        type: "string"
+        format: "string"
+      - name: "image_description"
+        in: "formData"
+        description: ""
+        required: true
+        type: "string"
+        format: "string"
+      - name: "image_date"
+        in: "formData"
+        description: ""
+        required: true
+        type: "string"
+        format: "string"
+      - name: "image"
+        in: "formData"
+        description: ""
+        required: true
+        type: "file"
+        format: "file"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "Invalid file"
+        "404":
+          description: "Image not found"
+      security:
+        - token:
+          - "read:images"
+          - "write:images"
+    get:
+      tags:
+      - "all images by user"
+      summary: "Get all images by userID"
+      description: "Returns all images"
+      operationId: "getImageByUserId"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: ""
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "OK"
+        "404":
+          description: "Images not found"
+    delete:
+      tags:
+      - "image"
+      summary: "Delete an image"
+      description: ""
+      operationId: "deleteImage"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "OK"
+        "404":
+          description: "Image not found"
+      security:
+      - token:
+        - "write:images"
+        - "read:images"
+    put:
+      tags:
+      - "image"
+      summary: "Update image by userId"
+      description: ""
+      operationId: "UpdateImageByUserId"
+      produces:
+      - "application/xml"
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      - "multipart/form-data"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: ""
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "image_title"
+        in: "formData"
+        description: ""
+        required: true
+        type: "string"
+        format: "string"
+      - name: "image_description"
+        in: "formData"
+        description: ""
+        required: true
+        type: "string"
+        format: "string"
+      - name: "image_date"
+        in: "formData"
+        description: ""
+        required: true
+        type: "string"
+        format: "string"
+      - name: "image"
+        in: "formData"
+        description: ""
+        required: true
+        type: "file"
+        format: "file"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "Invalid file"
+        "404":
+          description: "Image not found"
+      security:
+        - token:
+          - "write:images"
+          - "read:images"
+  /auth/login:
+    post:
+      tags:
+      - "login"
+      summary: "Logs user into the system"
+      description: ""
+      operationId: "loginUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      - "multipart/form-data"
+      parameters:
+      - name: "email"
+        in: "formData"
+        description: "The email for login"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        description: "The password for login in clear text"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "Invalid email/password"
+  /auth/register:
+    post:
+      tags:
+      - "register"
+      summary: "Register user into the system"
+      description: ""
+      operationId: "registerUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      - "multipart/form-data"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "create user object"
+        required: true
+        schema:
+          items:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "Email already taken"
+  /auth/logout:
+    get:
+      tags:
+      - "logout"
+      summary: "Logs out current logged in user session"
+      description: ""
+      operationId: "logoutUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+        "500":
+          description: "Internal server error"
+  /user/{id}:
+    get:
+      tags:
+      - "user"
+      summary: "Get user by id"
+      description: ""
+      operationId: "getUserById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: ""
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/User"
+        "400":
+          description: "Invalid id"
+        "404":
+          description: "User not found"
+    put:
+      tags:
+      - "user"
+      summary: "Updated user"
+      description: "This can only be done by the logged in user."
+      operationId: "updateUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      - "multipart/form-data"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "user id"
+        required: true
+        type: "integer"
+      - name: "firstName"
+        in: "formData"
+        description: "name that need to be updated"
+        required: true
+        type: "string"
+      - name: "lastName"
+        in: "formData"
+        description: "name that need to be updated"
+        required: true
+        type: "string"
+      - name: "email"
+        in: "formData"
+        description: "The email for update user"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        description: "The password for update user"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Invalid user supplied"
+        "404":
+          description: "User not found"
+    delete:
+      tags:
+      - "user"
+      summary: "Delete user"
+      description: "This can only be done by the logged in user."
+      operationId: "deleteUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id that needs to be deleted"
+        required: true
+        type: "integer"
+      responses:
+        "400":
+          description: "Invalid id"
+        "404":
+          description: "User not found"
+  /like/image:
+    get:
+      tags:
+      - "like"
+      summary: "Get all like"
+      description: ""
+      operationId: "getAllLikes"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        "200":
+          description: "OK"
+        "500":
+          description: "Internal server error"
+  /like/image/{id}:
+    get:
+      tags:
+      - "like by image"
+      summary: "Get like by image id"
+      description: ""
+      operationId: "getAllLikesByImage"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "image id to get all likes"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "OK"
+        "500":
+          description: "Internal server error"
+  /like/user/{id}:
+    get:
+      tags:
+      - "like by user"
+      summary: "Get like by user id"
+      description: ""
+      operationId: "getLikeByUserId"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "user id to get like"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "OK"
+        "500":
+          description: "Internal server error"
+      security:
+      - token:
+        - "read:like"
+    post:
+      tags:
+      - "like"
+      summary: "Add like by image id and user id"
+      description: ""
+      operationId: "insertLike"
+      produces:
+      - "application/xml"
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      - "multipart/form-data"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "image id to add like"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "userId"
+        in: "formData"
+        description: "user id to add like"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "You can only like once"
+      security:
+        - token:
+          - "read:like"
+          - "write:like"
+    delete:
+      tags:
+      - "like"
+      summary: "delete like by image id and user id"
+      description: ""
+      operationId: "deleteLike"
+      produces:
+      - "application/xml"
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      - "multipart/form-data"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "image id to delete like"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "userId"
+        in: "formData"
+        description: "user id to delete like"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "You can not unlike artwork anymore."
+      security:
+        - token:
+          - "read:like"
+          - "write:like"
+  /commnets/image/{id}:
+    get:
+      tags:
+      - "comment"
+      summary: "Get all comments"
+      description: ""
+      operationId: "getAllComments"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "image id to get comment"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "OK"
+  /image/comment/{id}:
+    post:
+      tags:
+      - "comment"
+      summary: "Add comment by image id and user id"
+      description: ""
+      operationId: "insertComment"
+      produces:
+      - "application/xml"
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      - "multipart/form-data"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "image id to add comment"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "userId"
+        in: "formData"
+        description: "user id to add comment"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "OK"
+      security:
+        - token:
+          - "read:comments"
+          - "write:comments"
+    delete:
+      tags:
+      - "comment"
+      summary: "Add comment by image id and user id"
+      description: ""
+      operationId: "deleteComment"
+      produces:
+      - "application/xml"
+      - "application/json"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      - "multipart/form-data"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "image id to delete comment"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "userId"
+        in: "formData"
+        description: "user id to delete comment"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "Error deleting comment"
+      security:
+        - token:
+          - "read:comments"
+          - "write:comments"
+securityDefinitions:
+  token:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:images: "modify images in your account"
+      read:images: "read your images"
+      read:like: "read users' like"
+      write:like: "modify like"
+      read:comments: "read comments"
+      write:comments: "write comment"
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+    xml:
+      name: "User"
+  Image:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      image_title:
+        type: "string"
+      image_description:
+        type: "string"
+      image_date:
+        type: "string"
+      image:
+        type: "string"
+    xml:
+      name: "Image"
+  Collection:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      collection_title:
+        type: "string"
+      collection_description:
+        type: "string"
+      image:
+        type: "string"
+    xml:
+      name: "User"
