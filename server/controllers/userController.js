@@ -3,11 +3,13 @@
 const userModel = require('../models/userModel');
 const { badRequestError } = require('../utils/error');
 
+// get one user by id
 const user_get = async (req, res) => {
   const user_retrieved = await userModel.getUser(req.params.id);
   res.json(user_retrieved);
 };
 
+//update information of user
 const user_update_put = async (req, res, next) => {
   const userId = req.params.id;
   const user_updated = await userModel.updateUser(req.body, userId);
@@ -19,6 +21,7 @@ const user_update_put = async (req, res, next) => {
   return;
 };
 
+//update password
 const user_update_password = async (req, res, next) => {
   const user_updated = await userModel.updatePassword(req.body, req.user);
   if(user_updated === "10") {
