@@ -6,6 +6,7 @@ const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
 const userData = user && JSON.parse(user);
 
+//if user does not login yet, redirect back to login page
 if (!token && !user) {
   location.href = '../login/index.html';
 }
@@ -160,7 +161,7 @@ updateInfoForm.addEventListener('submit', async (e) => {
 
   const response = await fetch(url + `/user/${userData.user_id}`, fetchOptions);
   const json = await response.json();
-  if(json.message) alert(json.message);
+  if (json.message) alert(json.message);
   location.reload();
 });
 
@@ -180,7 +181,7 @@ updatePasswordForm.addEventListener('submit', async (e) => {
 
   const response = await fetch(url + `/user/`, fetchOptions);
   const json = await response.json();
-  if(json.message) alert(json.message);
+  if (json.message) alert(json.message);
   location.reload();
 });
 

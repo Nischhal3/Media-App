@@ -35,6 +35,7 @@ const get_image_collection = async (req, res, next) => {
   next(err);
 };
 
+//get a single image
 const get_image = async (req, res, next) => {
   const image = await getImage(req.params.id, next);
   if (image) {
@@ -45,6 +46,7 @@ const get_image = async (req, res, next) => {
   next(err);
 };
 
+//add an image
 const post_image = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -75,6 +77,7 @@ const post_image = async (req, res, next) => {
   }
 };
 
+//delete image
 const delete_image = async (req, res, next) => {
   const image_id = req.params.id;
   const user_id = req.user.user_id;
@@ -87,6 +90,7 @@ const delete_image = async (req, res, next) => {
   res.json({ message: 'Image deleted successfully!' });
 };
 
+//update image
 const update_image = async (req, res, next) => {
   req.body.id = req.params.id;
   const user_id = req.user.user_id;

@@ -13,6 +13,7 @@ const errorCode = {
   403: 'Unauthenticated',
 };
 
+//specific error, so we do not need to repeat httErrors and write the same error code again and again
 const badRequestError = (message) => httpError(400, message ?? errorCode[400]);
 const internalServerError = () => httpError(500, errorCode[500]);
 const unauthorizedError = () => httpError(401, errorCode[401]);

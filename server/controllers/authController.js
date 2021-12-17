@@ -67,6 +67,7 @@ const signup = async (req, res, next) => {
   next(internalServerError());
 };
 
+//end the session
 const logout = async (req, res) => {
   await req.logout();
   res.json({ message: 'logout' });

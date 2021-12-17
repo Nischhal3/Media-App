@@ -25,6 +25,7 @@ signupForm.addEventListener('submit', async (evt) => {
     return;
   }
 
+  //alert the errors from validation
   if (json.length > 0) {
     let errors = '';
     json.forEach((err) => (errors += `${err.msg}\n`));
@@ -32,6 +33,7 @@ signupForm.addEventListener('submit', async (evt) => {
     return false;
   }
 
+  //alert errors from backend
   alert(json.message);
   return false;
 });

@@ -2,6 +2,7 @@ const pool = require('../database/db');
 const promisePool = pool.promise();
 const { internalServerError } = require('../utils/error');
 
+//get all collections
 const getAllCollection = async (next) => {
   try {
     const [rows] = await promisePool.query('SELECT * from collection_db');
@@ -13,6 +14,7 @@ const getAllCollection = async (next) => {
   }
 };
 
+//get a single collection
 const getCollection = async (id, next) => {
   try {
     const [rows] = await promisePool.query(
@@ -27,6 +29,7 @@ const getCollection = async (id, next) => {
   }
 };
 
+//update a collection
 const updateCollection = async (image, id, next) => {
   try {
     const [rows] = await promisePool.query(

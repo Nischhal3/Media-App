@@ -15,14 +15,15 @@ const appName = document.getElementById('app-name');
 
 //redirect to front page when click on app name
 appName.addEventListener('click', () => {
-    location.href = '../front/index.html';
-  });
+  location.href = '../front/index.html';
+});
 
 //redirect to collection page when click on Collection header
 h2.addEventListener('click', () => {
-    location.href = 'index.html';
-  });
+  location.href = 'index.html';
+});
 
+//create collection card to display on front end
 const createCollectionCards = (collection) => {
   collection.forEach((item) => {
     const singleCollection = document.createElement('div');
@@ -51,6 +52,7 @@ const createCollectionCards = (collection) => {
   });
 };
 
+//display search content on front
 const createSearchCards = (item) => {
   const singleCollection = document.createElement('div');
   const img = document.createElement('img');
@@ -138,6 +140,7 @@ if (!token || !user) {
   logout.className = 'disappear';
 }
 
+//toggle menu
 menu.addEventListener('click', () => {
   navLinks.classList.add('open');
   navLinks.classList.remove('close');
@@ -148,7 +151,8 @@ closeMenuButton.addEventListener('click', () => {
   navLinks.classList.remove('open');
 });
 
+//logout function
 const logOutButton = document.getElementById('logout');
 logOutButton.addEventListener('click', () => {
   logOut();
-})
+});

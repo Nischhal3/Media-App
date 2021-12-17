@@ -78,14 +78,13 @@ const createImageCard = (images) => {
     const img = document.createElement('img');
     const overlay = document.createElement('div');
     const line = document.createElement('hr');
-    const artist = document.createElement('p')
+    const artist = document.createElement('p');
     const title = document.createElement('p');
 
     img.src = url + '/thumbnails/' + item.image_file;
     img.alt = item.image_title;
-    artist.innerHTML =
-      item.first_name + ' ' + item.last_name 
-      
+    artist.innerHTML = item.first_name + ' ' + item.last_name;
+
     title.innerHTML = `"${item.image_title}"`;
 
     singleImage.appendChild(img);
@@ -97,7 +96,7 @@ const createImageCard = (images) => {
     overlay.className = 'overlay';
     artist.className = 'artist';
     title.className = 'text';
-    line.className = "line";
+    line.className = 'line';
 
     imageList.appendChild(singleImage);
 
@@ -110,6 +109,7 @@ const createImageCard = (images) => {
 
 const userName = document.querySelector('.loginText');
 
+//display user name
 if (token && user) {
   userName.textContent = userData.first_name;
 }
@@ -119,6 +119,7 @@ const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
 const logout = document.querySelector('#logout');
 
+//hide the logout when user is not logged in
 if (!token || !user) {
   logout.className = 'disappear';
 }
@@ -144,6 +145,7 @@ loginDiv.addEventListener('click', () => {
   }
 });
 
+//logout function
 const logOutButton = document.getElementById('logout');
 logOutButton.addEventListener('click', () => {
   logOut();
