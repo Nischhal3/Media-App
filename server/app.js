@@ -8,6 +8,17 @@ const port = 3000;
 const cors = require('cors');
 app.use(cors());
 
+//Force redirection from http to https on server
+app.enable('trust proxy');
+app.use((req, res, next) => {
+  if (req.secure) {
+    next();
+  } else {
+    const proxypath = process.env.PROXY_PASS || ''
+    res.redirect(301, `https://${req.headers.host}${proxypath}${req.url}`);
+  }
+});
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
