@@ -36,6 +36,7 @@ signupForm.addEventListener('submit', async (evt) => {
   return false;
 });
 
+//handle hamburger menu
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
