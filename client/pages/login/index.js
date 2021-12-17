@@ -30,6 +30,7 @@ loginForm.addEventListener('submit', async (evt) => {
   alert(json.message);
 });
 
+//handle hamburger menu
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');

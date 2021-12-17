@@ -8,11 +8,13 @@ const {
   updateCollection,
 } = require('../models/collectionModel');
 
+// get all collections
 const get_collection_list = async (req, res, next) => {
   const collection = await getAllCollection(next);
   res.json(collection);
 };
 
+//get one collection by its id
 const get_collection = async (req, res, next) => {
   const collection = await getCollection(req.params.id, next);
   if (collection.length === 0) {
@@ -23,7 +25,6 @@ const get_collection = async (req, res, next) => {
     res.json(collection);
     return;
   }
-
   const err = badRequestError('Collection not found');
   next(err);
 };

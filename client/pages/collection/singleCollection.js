@@ -3,6 +3,7 @@ import logOut from '../logout.js';
 const url = 'http://localhost:3000'; // change url when uploading to server
 const appName = document.getElementById('app-name');
 
+//redirect to front page when click on app name
 appName.addEventListener('click', () => {
   location.href = '../front/index.html';
 });
@@ -11,12 +12,14 @@ const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
 const userData = user && JSON.parse(user);
 
+//get id on url
 const getQParam = (param) => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 };
 
+//get all images belong to a collection
 const getImageByCollection = async (id) => {
   try {
     const fetchOptions = {
@@ -30,12 +33,13 @@ const getImageByCollection = async (id) => {
   }
 };
 
+//get one collection with collection id
 const getOneCollection = async (id) => {
   try {
     const fetchOptions = {
       method: 'GET',
     };
-    const response = await fetch(url + '/collection/' + id);
+    const response = await fetch(url + '/collection/' + id, fetchOptions);
     const collection = await response.json();
     createPath(getQParam('id'), collection.collection_title);
   } catch (e) {
@@ -46,6 +50,7 @@ const getOneCollection = async (id) => {
 getImageByCollection(getQParam('id'));
 getOneCollection(getQParam('id'));
 
+//Display the path to the collection
 const path = document.getElementById('path');
 const createPath = (id, title) => {
   const collectionPath = document.createElement('a');
@@ -65,6 +70,7 @@ const createPath = (id, title) => {
   path.append(singleCollectionPath);
 };
 
+//display all images of the collection
 const imageList = document.getElementById('images');
 const createImageCard = (images) => {
   images.forEach((item) => {
@@ -72,14 +78,13 @@ const createImageCard = (images) => {
     const img = document.createElement('img');
     const overlay = document.createElement('div');
     const line = document.createElement('hr');
-    const artist = document.createElement('p')
+    const artist = document.createElement('p');
     const title = document.createElement('p');
 
     img.src = url + '/thumbnails/' + item.image_file;
     img.alt = item.image_title;
-    artist.innerHTML =
-      item.first_name + ' ' + item.last_name 
-      
+    artist.innerHTML = item.first_name + ' ' + item.last_name;
+
     title.innerHTML = `"${item.image_title}"`;
 
     singleImage.appendChild(img);
@@ -91,7 +96,7 @@ const createImageCard = (images) => {
     overlay.className = 'overlay';
     artist.className = 'artist';
     title.className = 'text';
-    line.className = "line";
+    line.className = 'line';
 
     imageList.appendChild(singleImage);
 
@@ -104,6 +109,7 @@ const createImageCard = (images) => {
 
 const userName = document.querySelector('.loginText');
 
+//display user name
 if (token && user) {
   userName.textContent = userData.first_name;
 }
@@ -113,6 +119,7 @@ const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
 const logout = document.querySelector('#logout');
 
+//hide the logout when user is not logged in
 if (!token || !user) {
   logout.className = 'disappear';
 }
@@ -138,6 +145,7 @@ loginDiv.addEventListener('click', () => {
   }
 });
 
+//logout function
 const logOutButton = document.getElementById('logout');
 logOutButton.addEventListener('click', () => {
   logOut();

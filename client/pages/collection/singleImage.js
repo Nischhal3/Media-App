@@ -13,6 +13,7 @@ logOutButton.addEventListener('click', () => {
   logOut();
 });
 
+//change log in text to user's name when logged in
 if (token && user) {
   userName.textContent = userData.first_name;
   userName.addEventListener('click', () => {
@@ -27,11 +28,13 @@ if (!token || !user) {
   });
 }
 
+//redirect  to front page when click on app name
 const appName = document.getElementById('app-name');
 appName.addEventListener('click', () => {
   location.href = '../front/index.html';
 });
 
+//get param id on url
 const getQParam = (param) => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -39,12 +42,13 @@ const getQParam = (param) => {
 };
 const imageId = getQParam('id');
 
+//get image by image id
 const getImage = async (id) => {
   try {
     const fetchOptions = {
       method: 'GET',
     };
-    const response = await fetch(url + '/image/collection/image/' + id);
+    const response = await fetch(url + '/image/collection/image/' + id, fetchOptions);
     const image = await response.json();
     createPath(image.collection_id, image.collection_title, image.image_title);
     createImageCard(image);
@@ -57,6 +61,7 @@ getImage(imageId);
 //Stroing id for collection to use later after deleting image
 let collectionID;
 
+//display path to the image for user to easily come back
 const path = document.getElementById('path');
 const createPath = (id, collectionTitle, imageTitle) => {
   collectionID = id;
@@ -85,6 +90,7 @@ const createPath = (id, collectionTitle, imageTitle) => {
   path.append(imagePath);
 };
 
+//display image and info of image
 const imageContent = document.getElementById('image-content');
 const createImageCard = (image) => {
   const imageDiv = document.getElementById('image');

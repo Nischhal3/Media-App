@@ -34,6 +34,7 @@ const signup = async (req, res, next) => {
     return;
   }
 
+  //get existing emails to check if email taken
   const email = await getUserByEmail(req.body.email);
   const arr = Array.from(email);
 
@@ -53,6 +54,8 @@ const signup = async (req, res, next) => {
     hashedPassword,
   };
 
+  /* add user to database and generate token
+  for new user so that they don't have to log in again */
   const result = await addUser(user);
   await delete user.hashedPassword;
   if (result.insertId) {
@@ -64,6 +67,7 @@ const signup = async (req, res, next) => {
   next(internalServerError());
 };
 
+//end the session
 const logout = async (req, res) => {
   await req.logout();
   res.json({ message: 'logout' });

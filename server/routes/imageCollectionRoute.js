@@ -19,8 +19,8 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ dest: './uploads/', fileFilter });
 
-router.route('/:id').get(get_image_collection);
+router.route('/:id').get(get_image_collection); //get all the images of a collection
 
-router.route('/image/:id').get(get_image);
+router.route('/image/:id').get(get_image); //get an image of a collection
 
 module.exports = router;

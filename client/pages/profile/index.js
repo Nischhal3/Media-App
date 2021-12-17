@@ -6,16 +6,18 @@ const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
 const userData = user && JSON.parse(user);
 
+//if user does not login yet, redirect back to login page
 if (!token && !user) {
   location.href = '../login/index.html';
 }
 
+//redirection to front page when click on app name
 const appName = document.getElementById('app-name');
-
 appName.addEventListener('click', () => {
   location.href = '../front/index.html';
 });
 
+//get image by user id
 const getImageByUser = async (id) => {
   try {
     const fetchOptions = {
@@ -34,6 +36,7 @@ const getImageByUser = async (id) => {
 
 getImageByUser(userData.user_id);
 
+//display image uploaded by user
 const imageList = document.getElementById('artwork-content');
 const createImageCard = (images) => {
   images.forEach((item) => {
@@ -53,6 +56,7 @@ const createImageCard = (images) => {
   });
 };
 
+//handle hamburger menu
 const menu = document.querySelector('.menu-div');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
@@ -157,7 +161,7 @@ updateInfoForm.addEventListener('submit', async (e) => {
 
   const response = await fetch(url + `/user/${userData.user_id}`, fetchOptions);
   const json = await response.json();
-  if(json.message) alert(json.message);
+  if (json.message) alert(json.message);
   location.reload();
 });
 
@@ -177,7 +181,7 @@ updatePasswordForm.addEventListener('submit', async (e) => {
 
   const response = await fetch(url + `/user/`, fetchOptions);
   const json = await response.json();
-  if(json.message) alert(json.message);
+  if (json.message) alert(json.message);
   location.reload();
 });
 
@@ -207,6 +211,7 @@ const optionCreated = (collections) => {
   });
 };
 
+//post image
 const postArtwork = document.querySelector('#post-artwork');
 postArtwork.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -223,6 +228,7 @@ postArtwork.addEventListener('submit', async (e) => {
   await fetch(url + '/image/user/', fetchOptions);
 });
 
+//handle logout button clicked
 const logOutButton = document.getElementById('logout');
 logOutButton.addEventListener('click', () => {
   logOut();

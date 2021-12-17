@@ -2,6 +2,7 @@
 const pool = require('../database/db');
 const promisePool = pool.promise();
 
+//get all the comments for an image
 const getComments = async (imageId) => {
   try {
     const [rows] = await promisePool.execute(
@@ -14,6 +15,7 @@ const getComments = async (imageId) => {
   }
 };
 
+//add a comment for an image
 const insertComment = async (body, userId) => {
   const today = new Date();
   const date =
@@ -33,8 +35,10 @@ const insertComment = async (body, userId) => {
   }
 };
 
+//delete a comment. There are 2 cases: when the user is the owner of a comment and when the user is an admin
 const deleteCommentFromDb = async (commentId, user) => {
   try {
+    //for an admin
     if (user.role === 0) {
       const [rows] = await promisePool.execute(
         'DELETE FROM comment_db WHERE id = ?',
@@ -43,6 +47,7 @@ const deleteCommentFromDb = async (commentId, user) => {
       return rows.affectedRows === 1;
     }
 
+    //for the owner of the users
     const [rows] = await promisePool.execute(
       'DELETE FROM comment_db WHERE id = ? AND user_id = ?',
       [commentId, user.user_id]

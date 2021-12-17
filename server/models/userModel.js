@@ -3,6 +3,7 @@ const pool = require('../database/db');
 const bcrypt = require('bcryptjs');
 const promisePool = pool.promise();
 
+//get the info of the user
 const getUser = async (id) => {
   try {
     const [rows] = await promisePool.execute(
@@ -15,6 +16,7 @@ const getUser = async (id) => {
   }
 };
 
+//add user, used for signing up
 const addUser = async (user) => {
   try {
     const [rows] = await promisePool.execute(
@@ -28,16 +30,18 @@ const addUser = async (user) => {
   }
 };
 
+//update profile
 const updateUser = async (user, userId) => {
   const existingUser = await getUser(userId);
   try {
     const [rows] = await promisePool.execute(
       'UPDATE user_db SET first_name = ?, last_name = ?, user_description = ? WHERE user_id = ?',
+      //all fields are not required, if user doesn't fill in, we will take the own data in the db
       [
         user.first_name ?? existingUser.first_name,
         user.last_name ?? existingUser.last_name,
         user.updateDescription ?? existingUser.user_description,
-        userId
+        userId,
       ]
     );
     return rows.affectedRows === 1;
@@ -49,17 +53,24 @@ const updateUser = async (user, userId) => {
 const updatePassword = async (data, user) => {
   let isEqual;
   let newHashedPassword;
+  //get existing user in db to check password
   const existingUser = await getUser(user.user_id);
 
+  //check if user inputs right current password
   if (data.current_password && data.new_password) {
     const salt = await bcrypt.genSalt(10);
     newHashedPassword = await bcrypt.hash(data.new_password, salt);
-    isEqual = await bcrypt.compare(data.current_password, existingUser.password);
+    isEqual = await bcrypt.compare(
+      data.current_password,
+      existingUser.password
+    );
   }
-  if(!isEqual) {
-    return "10";
+  //if current password is not right, return immediately to controller
+  if (!isEqual) {
+    return '10';
   }
 
+  //if current password is right
   try {
     const [rows] = await promisePool.execute(
       'UPDATE user_db SET password = ? WHERE user_id = ?',
@@ -71,6 +82,7 @@ const updatePassword = async (data, user) => {
   }
 };
 
+//get user by email to use in sign up function
 const getUserByEmail = async (params) => {
   try {
     const [rows] = await promisePool.execute(
@@ -84,6 +96,7 @@ const getUserByEmail = async (params) => {
   }
 };
 
+//check if the email exists or not
 const getUserLogIn = async (params) => {
   try {
     const [rows] = await promisePool.execute(
@@ -102,5 +115,5 @@ module.exports = {
   getUserByEmail,
   updateUser,
   getUserLogIn,
-  updatePassword
+  updatePassword,
 };

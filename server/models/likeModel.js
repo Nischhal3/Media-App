@@ -3,6 +3,7 @@
 const pool = require('../database/db');
 const promisePool = pool.promise();
 
+//get all the likes of an image
 const getAllLikesByImageId = async (imageId) => {
   try {
     const [rows] = await promisePool.execute(
@@ -15,16 +16,19 @@ const getAllLikesByImageId = async (imageId) => {
   }
 };
 
+//get 3 images with most liked count order by like count descending
 const getAllLikes = async () => {
   try {
     const [rows] = await promisePool.execute(
-      'SELECT image_db.image_title, image_db.image_file, like_db.image_id, COUNT(likes) FROM image_db INNER JOIN like_db ON image_db.image_id = like_db.image_id GROUP BY image_id ORDER BY COUNT(likes) DESC LIMIT 3');
+      'SELECT image_db.image_title, image_db.image_file, like_db.image_id, COUNT(likes) FROM image_db INNER JOIN like_db ON image_db.image_id = like_db.image_id GROUP BY image_id ORDER BY COUNT(likes) DESC LIMIT 3'
+    );
     return rows;
   } catch (error) {
     console.log(error.message);
   }
 };
 
+//get the like of a user for an image to check if it is liked or not
 const getLikeByUserId = async (imageId, userId) => {
   try {
     const [rows] = await promisePool.execute(
@@ -37,6 +41,7 @@ const getLikeByUserId = async (imageId, userId) => {
   }
 };
 
+//for inserting a like
 const insertLike = async (imageId, userId) => {
   try {
     const [rows] = await promisePool.execute(
@@ -49,6 +54,7 @@ const insertLike = async (imageId, userId) => {
   }
 };
 
+//for unliking an image
 const deleteLikeByImageId = async (imageId, userId) => {
   try {
     const [rows] = await promisePool.execute(
@@ -68,5 +74,5 @@ module.exports = {
   getLikeByUserId,
   insertLike,
   deleteLikeByImageId,
-  getAllLikes
+  getAllLikes,
 };

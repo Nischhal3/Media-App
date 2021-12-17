@@ -4,6 +4,7 @@ const pool = require('../database/db');
 const promisePool = pool.promise();
 const { internalServerError } = require('../utils/error');
 
+//get all the images of a user to display on artwork section
 const getAllImagesByUser = async (id) => {
   try {
     const [rows] = await promisePool.query(
@@ -18,6 +19,7 @@ const getAllImagesByUser = async (id) => {
   }
 };
 
+//get one image by its id
 const getImage = async (imageId, next) => {
   try {
     const [rows] = await promisePool.query(
@@ -32,6 +34,7 @@ const getImage = async (imageId, next) => {
   }
 };
 
+//get the image by the collection
 const getImageByCollectionId = async (id, next) => {
   try {
     const [rows] = await promisePool.query(
@@ -46,7 +49,7 @@ const getImageByCollectionId = async (id, next) => {
   }
 };
 
-//change collection_id after finishing frontend
+//add image
 const insertImage = async (user_id, image, next) => {
   try {
     const [rows] = await promisePool.query(
@@ -68,10 +71,12 @@ const insertImage = async (user_id, image, next) => {
   }
 };
 
+//delete image. There are also 2 cases: when the user is an admin and when the user is the owner of the pic
 const deleteImage = async (imageId, user_id, role, next) => {
   let sql = 'DELETE FROM image_db WHERE image_id = ? AND user_id = ?';
   let params = [imageId, user_id];
 
+  //check if user is admin
   if (role === 0) {
     (sql = 'DELETE FROM image_db WHERE image_id = ?'), (params = [imageId]);
   }
@@ -86,6 +91,7 @@ const deleteImage = async (imageId, user_id, role, next) => {
   }
 };
 
+//update a picture
 const updateImage = async (user_id, image, next) => {
   console.log('update', user_id, image);
 

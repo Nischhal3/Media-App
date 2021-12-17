@@ -37,13 +37,15 @@ app.use(passport.initialize());
 app.use(express.static('uploads'));
 app.use('/thumbnails', express.static('thumbnails'));
 
+/* We have diffirent routes for image, comment and like 
+since we do the get function without authentication but not post/put and delete */
 app.use('/auth', authRoute);
 app.use('/collection', collectionRoute);
 app.use('/image/collection', imageCollectionRoute);
 app.use('/like/image', allLikesRoute);
 app.use('/comments/image', allCommentsRoute);
 
-//Authentication
+//Routes with authentication
 app.use(
   '/image/user',
   passport.authenticate('jwt', { session: false }),

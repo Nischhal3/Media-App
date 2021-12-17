@@ -11,9 +11,8 @@ const {
 
 const upload = multer({ dest: './uploads/' });
 
-router.route('/').get(get_collection_list);
+router.route('/').get(get_collection_list); //get all collection
 
-router.route('/:id')
-  .get(get_collection)
+router.route('/:id').get(get_collection); //get a single collection
 
 module.exports = router;

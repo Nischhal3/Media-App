@@ -1,11 +1,12 @@
 'use strict';
 import logOut from '../logout.js';
-const url = "http://localhost:3000";
+const url = 'http://localhost:3000';
 
 const token = sessionStorage.getItem('token');
 const user = sessionStorage.getItem('user');
 const userData = user && JSON.parse(user);
 
+//get all the likes of all the artworks
 (async function getLikeCount() {
   try {
     const fetchOptions = {
@@ -19,6 +20,7 @@ const userData = user && JSON.parse(user);
   }
 })();
 
+//display most-liked artworks
 const displayArtworks = (artworks) => {
   const artworksContent = document.getElementById('artworksContent');
   artworks.forEach((artwork) => {
@@ -26,7 +28,7 @@ const displayArtworks = (artworks) => {
     const img = document.createElement('img');
     const title = document.createElement('p');
 
-    img.src = url + "/" + artwork.image_file;
+    img.src = url + '/' + artwork.image_file;
     title.innerHTML = `"${artwork.image_title}"`;
 
     const div = document.createElement('div');
@@ -35,7 +37,7 @@ const displayArtworks = (artworks) => {
 
     //redirect to single image page with image id
     div.addEventListener('click', () => {
-     location.href = `../collection/singleImage.html?id=${artwork.image_id}`;
+      location.href = `../collection/singleImage.html?id=${artwork.image_id}`;
     });
 
     singleArtwork.appendChild(img);
@@ -47,6 +49,7 @@ const displayArtworks = (artworks) => {
   });
 };
 
+//when user clicks on the button, navigate to log in
 const goToLogIn = document.querySelector('.imgOverlay a');
 
 if (!token && !user) {
@@ -68,6 +71,7 @@ if (token && user) {
   logout.classList.remove('disappear');
 }
 
+//toggle menu
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
@@ -118,6 +122,7 @@ searchDiv.addEventListener('click', () => {
   location.href = '../collection/index.html';
 });
 
+//logout function
 const logOutButton = document.getElementById('logout');
 logOutButton.addEventListener('click', () => {
   logOut();

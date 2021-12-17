@@ -25,15 +25,15 @@ const upload = multer({ dest: './uploads/', fileFilter });
 
 router
   .route('/:id')
-  .get(get_image_user)
+  .get(get_image_user) //get all the images to display in the profile page
   .put(
     body('title').notEmpty(),
     body('description').notEmpty(),
     body('date').notEmpty(),
     body('collection').notEmpty(),
     update_image
-  )
-  .delete(delete_image);
+  ) //edit the image with the corret owner
+  .delete(delete_image); //delete the image with the correct owner
 
 router
   .route('/')
@@ -43,6 +43,6 @@ router
     body('description').notEmpty(),
     body('date').isDate(),
     post_image
-  );
+  ); //add an image
 
 module.exports = router;

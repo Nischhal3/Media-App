@@ -9,6 +9,7 @@ const {
 } = require('../models/likeModel');
 const { badRequestError, internalServerError } = require('../utils/error');
 
+//get all the likes of an image
 const getAllLikesByImage = async (req, res, next) => {
   const rows = await getAllLikesByImageId(req.params.id);
   if (rows) {
@@ -18,6 +19,7 @@ const getAllLikesByImage = async (req, res, next) => {
   next(internalServerError());
 };
 
+//get and arrange the top 3 most-liked image
 const get_all_like = async (req, res, next) => {
   const rows = await getAllLikes();
   if (rows) {
@@ -27,6 +29,7 @@ const get_all_like = async (req, res, next) => {
   next(internalServerError());
 };
 
+//check if user has liked the image or not
 const getLike = async (req, res, next) => {
   const rows = await getLikeByUserId(req.params.id, req.user.user_id);
 
@@ -43,6 +46,7 @@ const getLike = async (req, res, next) => {
   next(internalServerError());
 };
 
+//insert a like
 const addLike = async (req, res, next) => {
   const isAdded = await insertLike(req.params.id, req.user.user_id);
 
@@ -54,6 +58,7 @@ const addLike = async (req, res, next) => {
   next(badRequestError('You can only like once'));
 };
 
+//unlike an image
 const deleteLike = async (req, res, next) => {
   const isDeleted = await deleteLikeByImageId(req.params.id, req.user.user_id);
 

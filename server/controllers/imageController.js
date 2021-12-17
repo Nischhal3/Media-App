@@ -13,6 +13,7 @@ const { badRequestError, httpError } = require('../utils/error');
 const { validationResult } = require('express-validator');
 const makeThumbnail = require('../utils/resize');
 
+// get all images by one user
 const get_image_user = async (req, res, next) => {
   const images = await getAllImagesByUser(req.params.id, next);
   if (images) {
@@ -23,6 +24,7 @@ const get_image_user = async (req, res, next) => {
   next(err);
 };
 
+//get all images by a collection
 const get_image_collection = async (req, res, next) => {
   const image = await getImageByCollectionId(req.params.id, next);
   if (image) {
@@ -33,6 +35,7 @@ const get_image_collection = async (req, res, next) => {
   next(err);
 };
 
+//get a single image
 const get_image = async (req, res, next) => {
   const image = await getImage(req.params.id, next);
   if (image) {
@@ -43,6 +46,7 @@ const get_image = async (req, res, next) => {
   next(err);
 };
 
+//add an image
 const post_image = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -57,6 +61,7 @@ const post_image = async (req, res, next) => {
     return;
   }
   try {
+    // resize image with thumbnails
     const thumb = await makeThumbnail(req.file.path, req.file.filename);
     const user_id = req.user.user_id;
     const image = req.body;
@@ -72,6 +77,7 @@ const post_image = async (req, res, next) => {
   }
 };
 
+//delete image
 const delete_image = async (req, res, next) => {
   const image_id = req.params.id;
   const user_id = req.user.user_id;
@@ -84,6 +90,7 @@ const delete_image = async (req, res, next) => {
   res.json({ message: 'Image deleted successfully!' });
 };
 
+//update image
 const update_image = async (req, res, next) => {
   req.body.id = req.params.id;
   const user_id = req.user.user_id;

@@ -25,6 +25,7 @@ signupForm.addEventListener('submit', async (evt) => {
     return;
   }
 
+  //alert the errors from validation
   if (json.length > 0) {
     let errors = '';
     json.forEach((err) => (errors += `${err.msg}\n`));
@@ -32,10 +33,12 @@ signupForm.addEventListener('submit', async (evt) => {
     return false;
   }
 
+  //alert errors from backend
   alert(json.message);
   return false;
 });
 
+//handle hamburger menu
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
 const closeMenuButton = document.querySelector('.close-menu');
